@@ -4,9 +4,9 @@ import { httpService } from './http.service'
 import { utilService } from './util.service'
 
 
-const STORAGE_KEY = 'car'
+const STORAGE_KEY = 'station'
 
-export const carService = {
+export const stationService = {
     query,
     getById,
     save,
@@ -14,7 +14,7 @@ export const carService = {
     getEmptyCar,
     addCarMsg
 }
-window.cs = carService
+window.cs = stationService
 
 
 async function query(filterBy = { txt: '', price: 0 }) {
