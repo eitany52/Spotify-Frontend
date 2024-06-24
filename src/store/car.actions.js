@@ -1,10 +1,10 @@
-import { carService } from '../services/car.service.local'
+import { stationService } from '../services/station.service.local'
 import { store } from '../store/store'
 import { ADD_CAR, REMOVE_CAR, SET_CARS, SET_CAR, UPDATE_CAR, ADD_CAR_MSG } from './car.reducer'
 
 export async function loadCars() {
     try {
-        const cars = await carService.query()
+        const cars = await stationService.query()
         console.log('Cars from DB:', cars)
         store.dispatch(getCmdSetCars(cars))
     } catch (err) {
@@ -15,7 +15,7 @@ export async function loadCars() {
 
 export async function loadCar(carId) {
     try {
-        const car = await carService.getById(carId)
+        const car = await stationService.getById(carId)
         console.log('Car from DB:', car)
         store.dispatch(getCmdSetCar(car))
     } catch (err) {
@@ -27,7 +27,7 @@ export async function loadCar(carId) {
 
 export async function removeCar(carId) {
     try {
-        await carService.remove(carId)
+        await stationService.remove(carId)
         store.dispatch(getCmdRemoveCar(carId))
     } catch (err) {
         console.log('Cannot remove car', err)
@@ -37,7 +37,7 @@ export async function removeCar(carId) {
 
 export async function addCar(car) {
     try {
-        const savedCar = await carService.save(car)
+        const savedCar = await stationService.save(car)
         console.log('Added Car', savedCar)
         store.dispatch(getCmdAddCar(savedCar))
         return savedCar
@@ -49,7 +49,7 @@ export async function addCar(car) {
 
 export async function updateCar(car) {
     try {
-        const savedCar = await carService.save(car)
+        const savedCar = await stationService.save(car)
         console.log('Updated Car:', savedCar)
         store.dispatch(getCmdUpdateCar(savedCar))
         return savedCar
@@ -61,7 +61,7 @@ export async function updateCar(car) {
 
 export async function addCarMsg(carId, txt) {
     try {
-        const msg = await carService.addCarMsg(carId, txt)
+        const msg = await stationService.addCarMsg(carId, txt)
         console.log('Added Car message', msg)
         store.dispatch(getCmdAddCarMsg(msg))
         return msg
@@ -112,7 +112,7 @@ function getCmdAddCarMsg(msg) {
 // unitTestActions()
 async function unitTestActions() {
     await loadCars()
-    await addCar(carService.getEmptyCar())
+    await addCar(stationService.getEmptyCar())
     await updateCar({
         _id: 'm1oC7',
         title: 'Car-Good',
