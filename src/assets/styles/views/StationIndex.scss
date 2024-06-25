@@ -1,0 +1,31 @@
+.station-index {
+    display: grid;
+    grid-template-columns: 0.7fr 1.3fr;
+    grid-template-rows: 0.4fr 2.3fr 0.3fr;
+    grid-template-areas:
+        "a h"
+        "a m"
+        "f f";
+    gap: 10px;
+    height: 100%;
+}
+
+.station-index header {
+    grid-area: h;
+}
+
+.station-index main {
+    grid-area: m;
+}
+
+.station-index aside {
+    grid-area: a;
+}
+
+.station-index footer {
+    grid-area: f;
+}
+
+.station-index>*:not(footer) {
+    background-color: #121212;
+}

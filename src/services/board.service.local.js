@@ -2,6 +2,7 @@
 import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
 import { userService } from './user.service'
+import  station  from '../../data/station.json'
 
 const STORAGE_KEY = 'board'
 
@@ -288,4 +289,8 @@ function _toMiniTask(task) {
 
 
 // TEST DATA
+
+(() => {
+    utilService.saveToStorage('station_db', station)
+})()
 // storageService.post(STORAGE_KEY, board).then(savedBoard => console.log('Added board', savedBoard))

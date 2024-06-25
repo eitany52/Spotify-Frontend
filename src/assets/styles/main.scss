@@ -13,23 +13,17 @@
 
 
 // Views
+@import "views/StationIndex";
 @import "views/AboutUs";
-// @import "views/HomePage";
 @import "views/CarIndex";
 @import "views/ReviewIndex";
-@import "views/UserDetails";
 @import "views/BoardIndex";
 @import "views/BoardDetails";
 @import "views/TaskDetails";
+// @import "views/HomePage";
 
 // Components
+@import "cmps/UserDetails";
 @import "cmps/AppHeader";
 @import "cmps/AppFooter";
 @import "cmps/UserMsg";
-
-
-
-
-
-
-
