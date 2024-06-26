@@ -14,12 +14,11 @@
     ],
     "songs": [
         {
-            "id": "s1001",
+            "id": "j4jtIDaeaWI",
             "title": "The Meters - Cissy Strut",
             "url": "youtube/song.mp4",
             "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
             "addedBy": {},
-
             "addedAt": 162521765262
         },
         {
@@ -27,6 +26,48 @@
             "title": "The JB's - Pass The Peas",
             "url": "youtube/song.mp4",
             "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+
+            "addedBy": {}
+        }
+    ]
+}, 
+{
+    "_id": "wwwsxjas89xjsa8xjsa8jxs09",
+    "name": "best songs",
+    "tags": [
+        "Funk",
+        "Happy"
+    ],
+    "createdBy": {
+        "_id": "u101",
+        "fullname": "Puki Ben Meir",
+        "imgUrl": "http://some-photo/"
+    },
+    "likedByUsers": [
+    ],
+    "songs": [
+        {
+            "id": "j4jtIDaeaWI",
+            "title": "The Meters - Cissy Strut",
+            "url": "youtube/song.mp4",
+            "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+            "addedBy": {},
+            "addedAt": 162521765262
+        },
+        {
+            "id": "mUkfiLjooxs",
+            "title": "The JB's - Pass The Peas",
+            "url": "youtube/song.mp4",
+            "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+
+            "addedBy": {}
+        },
+        {
+            "id": "VZt7J0iaUD0",
+            "title": "Suzanne Vega - Luka",
+            "url": "https://www.youtube.com/watch?v=VZt7J0iaUD0",
+            "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
+
             "addedBy": {}
         }
     ]
