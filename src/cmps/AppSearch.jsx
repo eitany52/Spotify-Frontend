@@ -1,4 +1,4 @@
-import searchRes from './../../data/serch.json'
+import searchRes from '../../data/search.json'
 
 
 export const AppSearch = () => {
@@ -17,17 +17,13 @@ export const AppSearch = () => {
     }
 
     return (
-        <div>
-            <header>
-                <form className="search-form" onSubmit={onSearch}>
-                    <label className="icon-search"></label>
-                    <input
-                        type="text"
-                        placeholder="What do you want to play?" />
-                </form>
-            </header>
-            {/* <RecentSearches/> */}
-            {/* Browse all */}
-        </div>
+        <header>
+            <form className="search-form" onSubmit={onSearch}>
+                <label className="icon-search"></label>
+                <input
+                    type="text"
+                    placeholder="What do you want to play?" />
+            </form>
+        </header>
     )
 }

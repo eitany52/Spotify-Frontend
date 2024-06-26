@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react"
-import { Link, Outlet, useLocation, useParams } from "react-router-dom"
+import { Link, Outlet, useLocation } from "react-router-dom"
 import { AppSearch } from "../cmps/AppSearch"
 
 export const StationIndex = () => {
 
-    const params = useParams()
     const location = useLocation()
     const [isSearchDisplayed, setIsSearchDisplayed] = useState(false)
 
@@ -27,6 +26,7 @@ export const StationIndex = () => {
 
     return (
         <div className="station-index">
+            {console.log("rendered")}
             <header>
                 {isSearchDisplayed && <AppSearch />}
                 <button>Back</button>

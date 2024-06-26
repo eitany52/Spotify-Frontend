@@ -20,12 +20,26 @@
 
 .station-index aside {
     grid-area: a;
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+}
+
+.station-index aside nav {
+    grid-area: 1 / 1;
+}
+
+.station-index aside .library {
+    grid-area: 2 / 2;
 }
 
 .station-index footer {
     grid-area: f;
 }
 
-.station-index>*:not(footer) {
+.station-index header,
+.station-index main,
+.station-index aside nav,
+.station-index aside .library {
     background-color: #121212;
 }

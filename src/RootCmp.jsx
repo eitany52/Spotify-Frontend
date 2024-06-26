@@ -1,9 +1,9 @@
 import { Routes, Route } from 'react-router'
-import { AppSearch } from './cmps/AppSearch'
 import { StationDetails } from './cmps/StationDetails'
 import { UserDetails } from './cmps/UserDetails'
 import { ArtistDetails } from './cmps/ArtistDetails'
 import { StationIndex } from './pages/StationIndex.jsx'
+import { SearchResult } from './cmps/SearchResult.jsx'
 
 
 export function RootCmp() {
@@ -11,7 +11,7 @@ export function RootCmp() {
         <>
             <Routes>
                 <Route path="/" element={<StationIndex />}>
-                    <Route path="/search" element={<AppSearch />} />
+                    <Route path="/search" element={<SearchResult />} />
                     <Route path="/station/:id" element={<StationDetails />} />
                     <Route path="/artist/:id" element={<ArtistDetails />} />
                     <Route path="/user/:id" element={<UserDetails />} />
