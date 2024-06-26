@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import searchRes from '../../data/search.json'
-=======
-import searchRes from "./../../data/search.json";
->>>>>>> 64ef7d877be9f6adeff41710c86a40b775ac3c2c
 
 import { stationService } from "../services/station.service.local";
 import { userService } from "../services/user.service.local";
@@ -86,42 +82,13 @@ export const AppSearch = () => {
           <label className="icon-search"></label>
           <input type="text" placeholder="What do you want to play?" />
         </form>
-        <button onClick={onAddStation}>add station</button>
-
-<<<<<<< HEAD
-    console.log(searchRes);
-
-
-    async function onSearch(ev) {
-        ev.preventDefault()
-        console.log(searchRes);
-        // const searchTerm = 'rap-song'
-        // const res = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&key=AIzaSyCUE7BdmEO9uF_gWcV5yY5O3eqyINxdavo`)
-        // const data = await res.json()
-        // console.log(data);
-    }
-
-    return (
-        <header>
-            <form className="search-form" onSubmit={onSearch}>
-                <label className="icon-search"></label>
-                <input
-                    type="text"
-                    placeholder="What do you want to play?" />
-            </form>
-        </header>
-    )
-}
-=======
         <ul>
           {stations.map((station) => (
             <li key={station._id}>{station.name}</li>
           ))}
         </ul>
+        <button onClick={onAddStation}>add station</button>
       </header>
-      {/* <RecentSearches/> */}
-      {/* Browse all */}
     </div>
-  );
-};
->>>>>>> 64ef7d877be9f6adeff41710c86a40b775ac3c2c
+  )
+}
