@@ -1,6 +1,6 @@
-import { boardService } from '../services/board.service.local'
-import { store } from '../store/store'
-import { ADD_BOARD, REMOVE_BOARD, SET_BOARDS, SET_BOARD, UPDATE_BOARD, ADD_BOARD_MSG, UPDATE_TASK } from './board.reducer'
+import { boardService } from '../../services/board.service.local'
+import { store } from '../store'
+import { ADD_BOARD, REMOVE_BOARD, SET_BOARDS, SET_BOARD, UPDATE_BOARD, ADD_BOARD_MSG, UPDATE_TASK } from '../reducers/board.reducer'
 
 export async function loadBoards() {
     try {

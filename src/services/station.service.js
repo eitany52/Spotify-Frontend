@@ -14,7 +14,7 @@ export const stationService = {
     getEmptyCar,
     addCarMsg
 }
-window.cs = stationService
+window.ss = stationService
 
 
 async function query(filterBy = { txt: '', price: 0 }) {
