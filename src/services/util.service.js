@@ -5,7 +5,8 @@ export const utilService = {
     debounce,
     randomPastTime,
     saveToStorage,
-    loadFromStorage
+    loadFromStorage,
+    formatDate
 }
 
 function makeId(length = 6) {
@@ -62,3 +63,27 @@ function loadFromStorage(key) {
     return (data) ? JSON.parse(data) : undefined
 }
 
+
+function formatDate(timestamp) {
+    const now = new Date();
+    const date = new Date(timestamp);
+  
+    const msPerDay = 24 * 60 * 60 * 1000;
+    const msPerWeek = 7 * msPerDay;
+  
+    const timeDifference = now - date;
+    const daysDifference = Math.floor(timeDifference / msPerDay);
+    const weeksDifference = Math.floor(timeDifference / msPerWeek);
+  
+    if (daysDifference < 7) {
+      return `${daysDifference} days ago`;
+    } else if (daysDifference < 30) {
+      return `${weeksDifference} weeks ago`;
+    } else {
+      const options = { month: 'short', day: 'numeric', year: 'numeric' };
+      const formattedDate = date.toLocaleDateString('en-US', options);
+      const formattedDateWithoutDot = formattedDate.replace('.', '');
+      return formattedDateWithoutDot;
+    }
+  }
+  

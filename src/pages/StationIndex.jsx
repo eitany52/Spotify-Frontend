@@ -1,23 +1,21 @@
-import { useEffect, useState } from "react"
-import { Link, Outlet, useLocation } from "react-router-dom"
-import { AppSearch } from "../cmps/AppSearch"
-import { StationList } from "../cmps/StationList"
+import { useEffect, useState } from "react";
+import { Link, Outlet, useLocation } from "react-router-dom";
+import { AppSearch } from "../cmps/AppSearch";
+import { StationList } from "../cmps/StationList";
 
 export const StationIndex = () => {
-
-  const location = useLocation()
-  const [isSearchDisplayed, setIsSearchDisplayed] = useState(false)
+  const location = useLocation();
+  const [isSearchDisplayed, setIsSearchDisplayed] = useState(false);
 
   useEffect(() => {
     getLocation()
   }, [location])
 
   function getLocation() {
-    if (location.pathname.includes('search')) {
-      setIsSearchDisplayed(true)
-    }
-    else {
-      setIsSearchDisplayed(false)
+    if (location.pathname.includes("search")) {
+      setIsSearchDisplayed(true);
+    } else {
+      setIsSearchDisplayed(false);
     }
   }
 
@@ -63,9 +61,7 @@ export const StationIndex = () => {
       <main>
         <Outlet />
       </main>
-      <footer>
-        {/* <AppPlayer/> */}
-      </footer>
-    </div >
-  )
-}
+      <footer>{/* <AppPlayer/> */}</footer>
+    </div>
+  );
+};

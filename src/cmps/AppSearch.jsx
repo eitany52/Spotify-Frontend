@@ -1,6 +1,9 @@
-import searchRes from '../../data/search.json'
-import { userService } from "../services/user.service.local"
-import { useEffect } from "react";
+import searchRes from "../../data/search.json";
+
+import { stationService } from "../services/station.service.local";
+import { userService } from "../services/user.service.local";
+
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { loadStations, addStation } from "../store/actions/station.actions";
 
@@ -70,6 +73,7 @@ export const AppSearch = () => {
   }
 
   if (!stations) return <div>Loading...</div>;
+
   return (
     <div>
       <header>
@@ -86,5 +90,5 @@ export const AppSearch = () => {
         <button onClick={onAddStation}>add station</button>
       </header>
     </div>
-  )
-}
+  );
+};

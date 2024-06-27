@@ -3,22 +3,18 @@ export const ADD_STATION = 'ADD_STATION'
 export const REMOVE_STATION = 'REMOVE_STATION'
 export const SET_STATIONS = 'SET_STATIONS'
 export const UPDATE_STATION = 'UPDATE_STATION'
-
-// export const ADD_SONG_TO_STATION = 'ADD_SONG_TO_STATION'
-// export const REMOVE_SONG_FROM_STATION = 'REMOVE_SONG_FROM_STATION'
-// export const ADD_USER_LIKED_TO_STATION ='ADD_USER_LIKED_TO_STATION'
+export const SET_STATION = 'SET_STATION'
 
 
 // export const SET_CARS = 'SET_CARS'
-// export const SET_CAR = 'SET_CAR'
 // export const UPDATE_CAR = 'UPDATE_CAR'
 // export const ADD_CAR_MSG = 'ADD_CAR_MSG'
 
 
 
 const initialState = {
-    stations: []
-    // car: null
+    stations: [],
+    station : null
 }
 
 export function stationReducer(state = initialState, action) {
@@ -28,9 +24,9 @@ export function stationReducer(state = initialState, action) {
         // case SET_CARS:
         //     newState = { ...state, cars: action.cars }
         //     break
-        // case SET_CAR:
-        //     newState = { ...state, car: action.car }
-        //     break
+        case SET_STATION:
+            newState = { ...state, station: action.station }
+            break
         case SET_STATIONS:
             newState = { ...state, stations: action.stations }
             break
