@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { AppSearch } from "../cmps/AppSearch";
+import { StationList } from "../cmps/StationList";
 
 export const StationIndex = () => {
   const location = useLocation();
@@ -37,7 +38,26 @@ export const StationIndex = () => {
           <Link to="/">Home</Link>
           <Link to="/search">Search</Link>
         </nav>
-        <section className="library"></section>
+        <section className="library">
+          <div>
+            <button title="Collapse Your Library">Your Library</button>
+            <button title="Create playlist or folder">Create</button>
+            <button title="Show more">Show more</button>
+          </div>
+          <div>
+            <button>Playlists</button>
+            <button>Artists</button>
+            <button>Albums</button>
+          </div>
+          <div>
+            <form>
+              <label>Search</label>
+              <input type="text" />
+            </form>
+            <button>Recents</button>
+          </div>
+          <StationList />
+        </section>
       </aside>
       <main>
         <Outlet />

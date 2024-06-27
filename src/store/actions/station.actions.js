@@ -10,14 +10,18 @@ import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS}
 
 export async function loadStations() {
     try {
-        store.dispatch({ type: LOADING_START })
+        // store.dispatch({ type: LOADING_START })
         const stations = await stationService.getStations()
+        console.log("stations in loadStations:", stations);
         store.dispatch({ type: SET_STATIONS, stations })
     } catch (err) {
         console.log('UserActions: err in loadStations', err)
     } finally {
         store.dispatch({ type: LOADING_DONE })
     }
+    // finally {
+    //     store.dispatch({ type: LOADING_DONE })
+    // }
 }
 
 

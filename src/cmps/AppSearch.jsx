@@ -5,7 +5,6 @@ import { userService } from "../services/user.service.local";
 
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-
 import { loadStations, addStation } from "../store/actions/station.actions";
 
 export const AppSearch = () => {
@@ -80,7 +79,7 @@ export const AppSearch = () => {
       <header>
         {currentUser.name}
         <form className="search-form" onSubmit={onSearch}>
-          <label className="icon-search"></label>
+          <label className="icon-search">Search</label>
           <input type="text" placeholder="What do you want to play?" />
         </form>
         <ul>

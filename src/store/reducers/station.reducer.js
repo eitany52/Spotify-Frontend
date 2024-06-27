@@ -18,8 +18,8 @@ const initialState = {
 }
 
 export function stationReducer(state = initialState, action) {
-    var newState = state
-    var stations
+    let newState = state
+    let stations
     switch (action.type) {
         // case SET_CARS:
         //     newState = { ...state, cars: action.cars }
@@ -40,7 +40,7 @@ export function stationReducer(state = initialState, action) {
             break
         case UPDATE_STATION:
             stations = state.stations.map(station => station._id == action.station._id ? action.station : station)
-            newState = { ...state, stations}
+            newState = { ...state, stations }
             break
         // case ADD_SONG_TO_STATION:
         //     break
