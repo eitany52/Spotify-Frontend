@@ -3,7 +3,7 @@ import { store } from '../store'
 import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
 
 // import { ADD_CAR, REMOVE_CAR, SET_CARS, SET_CAR, UPDATE_CAR, ADD_CAR_MSG } from './station.reducer'
-import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATIONS} from '../reducers/station.reducer'
+import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS} from '../reducers/station.reducer'
 
 
 
@@ -20,6 +20,17 @@ export async function loadStations() {
     }
 }
 
+
+export async function loadStation(stationId) {
+    try {
+        const station = await stationService.getById(stationId)
+        console.log('Station from DB:', station)
+        store.dispatch({ type: SET_STATION, station })
+    } catch (err) {
+        console.log('Cannot load station', err)
+        throw err
+    }
+}
 
 export async function addStation(station) {
     try {
@@ -173,24 +184,6 @@ export async function removeUserLikedFromStation(stationId, userId) {
 //     }
 // }
 
-function getCmdAddSongToStation(station) {
-    return {
-        type: ADD_SONG_TO_STATION,
-        station
-    }
-}
-function getCmdRemoveSongFromStation(station) {
-    return {
-        type: REMOVE_SONG_FROM_STATION,
-        station
-    }
-}
-function getCmdAddUserLikedToStation(station) {
-    return {
-        type: ADD_USER_LIKED_TO_STATION,
-        station
-    }
-}
 
 
 

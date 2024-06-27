@@ -13,11 +13,11 @@ export const userService = {
     save,
     remove,
     getLogedonUser,
-    login
+    //login
     // logout,
     // signup,
-    // getLoggedinUser,
-    // saveLocalUser,
+    getLoggedinUser,
+    saveLocalUser,
     // getUsers,
     // update,
     // changeScore
@@ -60,14 +60,23 @@ async function save(user) {
     return savedUser
 }
 
-
-
-async function login(userCred) {
-    // const users = await storageService.query(STORAGE_KEY)
-    // const user = users.find(user => user.username === userCred.username)
-    // // const user = await httpService.post('auth/login', userCred)
-    // if (user) return saveLocalUser(user)
+function saveLocalUser(user) {
+    user = { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, score: user.score, isAdmin : user.isAdmin }
+    sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
+    return user
 }
+
+function getLoggedinUser() {
+    return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+}
+
+
+// async function login(userCred) {
+//     // const users = await storageService.query(STORAGE_KEY)
+//     // const user = users.find(user => user.username === userCred.username)
+//     // // const user = await httpService.post('auth/login', userCred)
+//     // if (user) return saveLocalUser(user)
+// }
 
 const defaultLogedOnUser = {  _id: 'u1001',    name: 'avi', }
 

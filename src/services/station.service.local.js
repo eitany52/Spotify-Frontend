@@ -2,7 +2,7 @@
 import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
 import { userService } from './user.service.local'
-import  initialStations  from '../../data/station.json'
+import  initialStations  from '../../data/stations.json'
 
 
 const STORAGE_KEY = 'station_db'

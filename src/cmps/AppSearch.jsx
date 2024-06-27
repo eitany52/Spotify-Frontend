@@ -76,18 +76,20 @@ export const AppSearch = () => {
   if (!stations) return <div>Loading...</div>;
 
   return (
-    <header>
-      {currentUser.name}
-      <form className="search-form" onSubmit={onSearch}>
-        <label className="icon-search"></label>
-        <input type="text" placeholder="What do you want to play?" />
-      </form>
-      <ul>
-        {stations.map((station) => (
-          <li key={station._id}>{station.name}</li>
-        ))}
-      </ul>
-      <button onClick={onAddStation}>add station</button>
-    </header>
+    <div>
+      <header>
+        {currentUser.name}
+        <form className="search-form" onSubmit={onSearch}>
+          <label className="icon-search"></label>
+          <input type="text" placeholder="What do you want to play?" />
+        </form>
+        <ul>
+          {stations.map((station) => (
+            <li key={station._id}>{station.name}</li>
+          ))}
+        </ul>
+        <button onClick={onAddStation}>add station</button>
+      </header>
+    </div>
   );
 };
