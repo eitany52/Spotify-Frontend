@@ -3,21 +3,23 @@ import { store } from '../store'
 import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
 
 // import { ADD_CAR, REMOVE_CAR, SET_CARS, SET_CAR, UPDATE_CAR, ADD_CAR_MSG } from './station.reducer'
-import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATIONS} from '../reducers/station.reducer'
+import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATIONS } from '../reducers/station.reducer'
 
 
 
 
 export async function loadStations() {
     try {
-        store.dispatch({ type: LOADING_START })
+        // store.dispatch({ type: LOADING_START })
         const stations = await stationService.getStations()
+        console.log("stations in loadStations:", stations);
         store.dispatch({ type: SET_STATIONS, stations })
     } catch (err) {
         console.log('UserActions: err in loadStations', err)
-    } finally {
-        store.dispatch({ type: LOADING_DONE })
     }
+    // finally {
+    //     store.dispatch({ type: LOADING_DONE })
+    // }
 }
 
 
