@@ -10,8 +10,6 @@ export const StationIndex = () => {
 
   useEffect(() => {
     getLocation()
-    console.log(location);
-
   }, [location])
 
   function getLocation() {
