@@ -112,9 +112,10 @@ export async function setCurrentSong(songId) {
     }
 }
 
-export async function setPlayPause() {
+export async function setPlayPause(ip) {
     try {
-        store.dispatch({ type: SET_PLAY_PAUSE})
+        console.log('actions setPlayPause:', ip)
+        store.dispatch({ type: SET_PLAY_PAUSE, ip})
     } catch (err) {
         console.log('Cannot start play', err)
         throw err

@@ -15,29 +15,39 @@ export function PlayBtn(songId) {
     (storeState) => storeState.stationModule.isPlaying
   );
 
-  // console.log("playBtn songId:", songId.songId);
+  console.log("playBtn songId:", songId.songId);
   // console.log("playBtn currentSong:", currentSong);
+  console.log("playBtn isPlaying:", isPlaying);
 
   function playSong() {
-    console.log("PlayBtn playSong");
-    setCurrentSong(songId.songId);
-    setPlayPause();
+    console.log("PlayBtn playSong --------");
+    if (currentSong !== songId) {
+      console.log("change song");
+      setCurrentSong(songId.songId);
+    }
+    setPlayPause(true);
   }
 
   function pauseSong() {
     console.log("PlayBtn pauseSong");
-    setCurrentSong(songId.songId);
-    setPlayPause();
+    //setCurrentSong(songId.songId);
+    setPlayPause(false);
   }
+
+  const pauseDisplay =
+    currentSong === songId.songId && isPlaying ? true : false;
+
   return (
     <>
-      <button onClick={playSong}>
-        <SvgIcon iconName="play" />
-      </button>
-
-      <button onClick={pauseSong}>
-        <SvgIcon iconName="pause" />
-      </button>
+      {pauseDisplay == true ? (
+        <button onClick={pauseSong}>
+          <SvgIcon iconName="pause" />
+        </button>
+      ) : (
+        <button onClick={playSong}>
+          <SvgIcon iconName="play" />
+        </button>
+      )}
     </>
   );
 }
