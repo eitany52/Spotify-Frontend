@@ -8,14 +8,10 @@ import { useSelector } from "react-redux";
 import { loadStations, addStation } from "../store/actions/station.actions";
 
 export const AppSearch = () => {
-  //   const [stations, setStations] = useState(null);
-
-  const stations = useSelector(
-    (storeState) => storeState.stationModule.stations
-  );
+  const stations = useSelector(storeState => storeState.stationModule.stations)
+  
 
   useEffect(() => {
-    loadStations();
   }, []);
 
   //   async function loadStations() {
@@ -30,7 +26,6 @@ export const AppSearch = () => {
   //   }
 
   console.log(searchRes);
-  const currentUser = userService.getLogedonUser();
 
   async function onSearch(ev) {
     ev.preventDefault();
@@ -41,53 +36,17 @@ export const AppSearch = () => {
     // console.log(data);
   }
 
-  function onAddStation() {
-    addStation({
-      name: "bluz",
-      tags: ["bluz", "Happy"],
-      createdBy: {
-        _id: "u101",
-        fullname: "Puki Ben Meir",
-        imgUrl: "http://some-photo/",
-      },
-      likedByUsers: [],
-      songs: [
-        {
-          id: "j4jtIDaeaWI",
-          title: "The Meters - Cissy Strut",
-          url: "youtube/song.mp4",
-          imgUrl: "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
-          addedBy: {},
-          addedAt: 162521765262,
-        },
-        {
-          id: "mUkfiLjooxs",
-          title: "The JB's - Pass The Peas",
-          url: "youtube/song.mp4",
-          imgUrl: "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-
-          addedBy: {},
-        },
-      ],
-    });
-  }
+ 
 
   if (!stations) return <div>Loading...</div>;
 
   return (
     <div>
       <header>
-        {currentUser.name}
         <form className="search-form" onSubmit={onSearch}>
           <label className="icon-search">Search</label>
           <input type="text" placeholder="What do you want to play?" />
         </form>
-        <ul>
-          {stations.map((station) => (
-            <li key={station._id}>{station.name}</li>
-          ))}
-        </ul>
-        <button onClick={onAddStation}>add station</button>
       </header>
     </div>
   );

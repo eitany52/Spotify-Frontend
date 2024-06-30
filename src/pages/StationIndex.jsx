@@ -1,21 +1,31 @@
 import { useEffect, useState } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useSearchParams } from "react-router-dom";
 import { AppSearch } from "../cmps/AppSearch";
 import { StationList } from "../cmps/StationList";
+import { SvgIcon } from "../cmps/SvgIcon";
 
 export const StationIndex = () => {
   const location = useLocation();
   const [isSearchDisplayed, setIsSearchDisplayed] = useState(false);
+  const [isHomePageDisplayed, setIsHomePageDisplayed] = useState(true);
 
-  useEffect(() => {
+
+
+  useEffect(() => {  
     getLocation()
   }, [location])
 
   function getLocation() {
     if (location.pathname.includes("search")) {
-      setIsSearchDisplayed(true);
+      setIsSearchDisplayed(true)
     } else {
-      setIsSearchDisplayed(false);
+      setIsSearchDisplayed(false)
+    }
+    if(location.pathname === "/") {
+      setIsHomePageDisplayed(true)
+    }
+    else {
+      setIsHomePageDisplayed(false)
     }
   }
 
@@ -24,8 +34,9 @@ export const StationIndex = () => {
       {console.log("rendered")}
       <header>
         {isSearchDisplayed && <AppSearch />}
-        <button>Back</button>
-        <button>Forward</button>
+        <SvgIcon iconName={"back"}/>
+        {/* <button>Back</button>
+        <button>Forward</button> */}
         <div>
           <button>Settings</button>
           <button>More</button>
@@ -59,7 +70,8 @@ export const StationIndex = () => {
         </section>
       </aside>
       <main>
-        <Outlet />
+        {isHomePageDisplayed && <StationList/>}
+        {!isHomePageDisplayed && <Outlet />}
       </main>
       <footer>{/* <AppPlayer/> */}</footer>
     </div>
