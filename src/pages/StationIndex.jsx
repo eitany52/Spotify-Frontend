@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useSearchParams } from "react-router-dom";
 import { AppSearch } from "../cmps/AppSearch";
+import { AppPlayer } from "../cmps/AppPlayer";
+
 import { StationList } from "../cmps/StationList";
 import { SvgIcon } from "../cmps/SvgIcon";
 
@@ -45,8 +47,12 @@ export const StationIndex = () => {
       </header>
       <aside>
         <nav>
-          <Link to="/">Home</Link>
-          <Link to="/search">Search</Link>
+          <Link to="/" className="btn">
+            Home
+          </Link>
+          <Link to="/search" className="btn active">
+            Search
+          </Link>
         </nav>
         <section className="library">
           <div>
@@ -73,7 +79,7 @@ export const StationIndex = () => {
         {isHomePageDisplayed && <StationList/>}
         {!isHomePageDisplayed && <Outlet />}
       </main>
-      <footer>{/* <AppPlayer/> */}</footer>
+      <footer>{<AppPlayer />}</footer>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { store } from '../store'
 import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
 
 // import { ADD_CAR, REMOVE_CAR, SET_CARS, SET_CAR, UPDATE_CAR, ADD_CAR_MSG } from './station.reducer'
-import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS} from '../reducers/station.reducer'
+import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE} from '../reducers/station.reducer'
 
 
 
@@ -102,7 +102,24 @@ export async function removeUserLikedFromStation(stationId, userId) {
 }
 
 
+export async function setCurrentSong(songId) {
+    try {
+        console.log('actions songId:', songId)
+        store.dispatch({ type: SET_CURRENT_SONG, songId })
+    } catch (err) {
+        console.log('Cannot set current song', err)
+        throw err
+    }
+}
 
+export async function setPlayPause() {
+    try {
+        store.dispatch({ type: SET_PLAY_PAUSE})
+    } catch (err) {
+        console.log('Cannot start play', err)
+        throw err
+    }
+}
 
 // export async function loadCars() {
 //     try {

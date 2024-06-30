@@ -38,3 +38,7 @@
 .portrait-ratio {
     @include aspect-ratio(9, 16);
 }
+
+// .bigger {
+//     transform: scale(1.04);
+// }
