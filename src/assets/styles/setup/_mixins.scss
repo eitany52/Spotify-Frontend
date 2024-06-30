@@ -56,3 +56,65 @@
         }
     }
   }
+
+
+
+
+  @mixin btn{
+    background-color: $clr3;
+    border-radius: 2em;
+    border: none;
+    color: $clr4;
+    line-height: 2em;
+    padding: 0 10px;
+    margin:5px;
+  }
+ 
+  @mixin blockBtn( $type : "reguler") {
+   
+    @if $type == "active" {
+        background-color: $clr4;
+        color: $clr3;
+    }
+
+    @if $type == "hover" {
+        background-color: lighten($clr3, 5%);  
+    }
+
+ 
+
+  }
+
+
+
+
+ @mixin icon {
+    width: 20px;
+    height: 20px;
+    display: block;
+    border-radius:50%;
+    fill: $clr6;
+ }
+
+  @mixin iconBlock(  $color: "light") {
+
+    @if $color == "dark" {
+        fill: $clr3;
+    }
+
+  }
+
+
+  @mixin svgBig (){
+    width: 50px;
+    height: 50px;
+    background: $clr5;
+    border-radius:50%;
+    padding:15px;
+   }
+  
+
+ @mixin bigger {
+    transform: scale(1.04);
+   }
+  

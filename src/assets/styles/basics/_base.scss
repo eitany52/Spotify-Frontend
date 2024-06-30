@@ -67,3 +67,22 @@ a:hover {
 //     max-width: 1024px;
 //     margin: auto;
 // }
+
+
+
+button, .btn {
+    @include btn;
+    &.active {  @include blockBtn($type: 'active'); }
+    &:not(.active):hover {  @include blockBtn($type: 'hover'); } 
+}
+
+i {
+    @include icon;
+    &.dark { @include iconBlock($color: "dark")}
+    &:hover { @include bigger }
+}
+
+.svg-big {
+    @include svgBig;
+    &:hover { @include bigger}
+}

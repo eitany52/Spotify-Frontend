@@ -1,9 +1,9 @@
 import React from "react";
 import { svgService } from "../services/svg.service.js";
 
-export function SvgIcon(iconName) {
-  const svg = svgService.getSVG(iconName.iconName);
-  return <i dangerouslySetInnerHTML={{ __html: svg }}></i>;
+export function SvgIcon({ iconName, style }) {
+  const svg = svgService.getSVG(iconName);
+  return <i dangerouslySetInnerHTML={{ __html: svg }} className={style}></i>;
 }
 
 export function AllIcons() {
