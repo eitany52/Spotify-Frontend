@@ -4,14 +4,12 @@ import { useEffect } from "react"
 import { loadStations } from "../store/actions/station.actions"
 
 export const StationList = () => {
-    const stations = useSelector(storeState => storeState.stations)
+    const stations = useSelector(storeState => storeState.stationModule.stations)
 
     useEffect(() => {
-        console.log("Entered useEffect in StationList");
         loadStations()
     }, [stations])
 
-    console.log("stations in StationList:", stations);
     if (!stations) return
     return (
         <ul className="station-list">

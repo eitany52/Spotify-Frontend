@@ -12,7 +12,6 @@ export async function loadStations() {
     try {
         // store.dispatch({ type: LOADING_START })
         const stations = await stationService.getStations()
-        console.log("stations in loadStations:", stations);
         store.dispatch({ type: SET_STATIONS, stations })
     } catch (err) {
         console.log('UserActions: err in loadStations', err)

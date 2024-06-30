@@ -2,10 +2,7 @@
 import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
 import { userService } from './user.service.local'
-import  initialStations  from '../../data/stations.json'
-
-
-const STORAGE_KEY = 'station_db'
+import initialStations from '../../data/stations.json'
 
 export const stationService = {
     query,
@@ -21,6 +18,8 @@ export const stationService = {
     // addCarMsg
 }
 window.ss = stationService
+const STORAGE_KEY = 'station_db'
+_createStations()
 
 
 async function query(filterBy = { txt: '', price: 0 }) {
@@ -33,7 +32,7 @@ async function query(filterBy = { txt: '', price: 0 }) {
     // if (filterBy.price) {
     //     cars = cars.filter(car => car.price <= filterBy.price)
     // }
-    
+
     // Return just preview info about the boards
     // cars = cars.map(({ _id, vendor, price, owner }) => ({ _id, vendor, price, owner }))
     return stations
@@ -54,23 +53,23 @@ async function remove(stationId) {
 }
 
 async function save(station) {
-    
+
     var savedStation
     if (station._id) {
         const stationToSave = {
-            _id : station._id,
-            name : station.name,
-            tags : station.tags,
-            createdBy : station.createdBy,
-            likedByUsers : station.likedByUsers,
+            _id: station._id,
+            name: station.name,
+            tags: station.tags,
+            createdBy: station.createdBy,
+            likedByUsers: station.likedByUsers,
             songs: station.songs
         }
         savedStation = await storageService.put(STORAGE_KEY, stationToSave)
     } else {
         // Later, owner is set by the backend
         const stationToSave = {
-            name : station.name,
-            createdBy : userService.getLogedonUser(),
+            name: station.name,
+            createdBy: userService.getLogedonUser(),
         }
         savedStation = await storageService.post(STORAGE_KEY, stationToSave)
     }
@@ -142,20 +141,14 @@ async function removeUserLikedFromStation(stationId, userId) {
 
 
 
-// TEST DATA
-// (() => {
-//     utilService.saveToStorage('station', station)
-// })()
 
-_createStations()
 
 function _createStations() {
     let stations = utilService.loadFromStorage(STORAGE_KEY)
     if (!stations || !stations.length) {
         utilService.saveToStorage(STORAGE_KEY, initialStations)
-    } 
+    }
 }
-
 
 
 // storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))

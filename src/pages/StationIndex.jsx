@@ -10,9 +10,8 @@ export const StationIndex = () => {
   const [isSearchDisplayed, setIsSearchDisplayed] = useState(false);
 
   useEffect(() => {
-    getLocation();
-    console.log(location);
-  }, [location]);
+    getLocation()
+  }, [location])
 
   function getLocation() {
     if (location.pathname.includes("search")) {
