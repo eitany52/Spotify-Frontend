@@ -4,7 +4,7 @@ export const REMOVE_STATION = 'REMOVE_STATION'
 export const SET_STATIONS = 'SET_STATIONS'
 export const UPDATE_STATION = 'UPDATE_STATION'
 export const SET_STATION = 'SET_STATION'
-export const SET_CURRENT_SONG ='SET_CURRENT_SONG'
+export const SET_CURRENT_SONG = 'SET_CURRENT_SONG'
 export const SET_PLAY_PAUSE = 'SET_PLAY_PAUSE'
 
 
@@ -17,7 +17,7 @@ export const SET_PLAY_PAUSE = 'SET_PLAY_PAUSE'
 const initialState = {
     stations: [],
     station : null,
-    currentSong: null,
+    currentSong: {'id': null},
     isPlaying: false
 }
 
@@ -25,9 +25,7 @@ export function stationReducer(state = initialState, action) {
     let newState = state
     let stations
     switch (action.type) {
-        // case SET_CARS:
-        //     newState = { ...state, cars: action.cars }
-        //     break
+     
         case SET_STATION:
             newState = { ...state, station: action.station }
             break
@@ -47,26 +45,12 @@ export function stationReducer(state = initialState, action) {
             newState = { ...state, stations }
             break
         case SET_CURRENT_SONG:
-            newState = { ...state, currentSong: action.songId }
+            newState = { ...state, currentSong: action.song }
             break
         case SET_PLAY_PAUSE:
-            newState = { ...state, isPlaying: !state.isPlaying }
+            newState = { ...state, isPlaying: action.ip }
             break
-        // case ADD_SONG_TO_STATION:
-        //     break
-        // case REMOVE_SONG_FROM_STATION:
-        //     newState = state.stations.map(station => station._id == action.station._id ? action.station : station)
-        //     break
-        // case ADD_USER_LIKED_TO_STATION:
-        //     newState = state.stations.map(station => station._id == action.station._id ? action.station : station)
-        //     break
-        // case UPDATE_CAR:
-        //     cars = state.cars.map(car => (car._id === action.car._id) ? action.car : car)
-        //     newState = { ...state, cars }
-        //     break
-        // case ADD_CAR_MSG:
-        //     newState = { ...state, car: { ...state.car, msgs: [...state.car.msgs || [], action.msg] } }
-        //     break
+        
         default:
     }
     return newState

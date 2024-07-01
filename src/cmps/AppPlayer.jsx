@@ -1,60 +1,76 @@
-import { useRef, useEffect } from "react";
-import YouTube2 from "react-youtube";
+import { useState, useRef, useEffect } from "react";
+import YouTube from "react-youtube";
 
 import { SvgIcon } from "./SvgIcon.jsx";
 import { useSelector } from "react-redux";
-import { setPlayPause } from "../store/actions/station.actions";
+import { setCurrentSong } from "../store/actions/station.actions";
 
-export function AppPlayer() {
-  return (
-    <div>
-      AppPlayer
-      <SvgIcon iconName="play" />
-      <SvgIcon iconName="pause" />
-      <YouTubePlayer2 />
-    </div>
-  );
-}
-
-const YouTubePlayer2 = () => {
+export const AppPlayer = () => {
   const playerRef = useRef(null);
 
-  const currentSong = useSelector(
-    (storeState) => storeState.stationModule.currentSong
-  );
+  const [isSongLoaded, setIsSongLoaded] = useState(false);
 
-  const isPlaying = useSelector(
-    (storeState) => storeState.stationModule.isPlaying
-  );
+  const stationModul = useSelector((storeState) => storeState.stationModule);
+
+  const { currentSong, isPlaying, station } = stationModul;
 
   useEffect(() => {
-    if (isPlaying == true) {
-      playVideo();
+    if (isSongLoaded) {
+      if (isPlaying == true) {
+        playVideo();
+      }
+      if (isPlaying == false) {
+        pauseVideo();
+      }
     }
-    if (isPlaying == false) {
-      pauseVideo();
-    }
-  }, [isPlaying]);
+  }, [isPlaying, isSongLoaded]);
 
-  // console.log("YouTubePlayer2 isPlaying", isPlaying);
+  useEffect(() => {
+    setIsSongLoaded(false);
+  }, [currentSong]);
 
   const onReady = (event) => {
     // שומר את רפרנס ה-Player instance
     playerRef.current = event.target;
     playerRef.current.setPlaybackQuality("small"); // מגדיר איכות נמוכה כדי להפחית את הצריכה
-    //playerRef.current.mute(); // משתיק את הווידאו כדי שיהיה רק שמע
+    // setIsPlayerReady(true);
   };
 
   const playVideo = () => {
+    //console.log("playVideo");
     if (playerRef.current) {
       playerRef.current.playVideo();
     }
   };
 
   const pauseVideo = () => {
+    //console.log("pauseVideo");
     if (playerRef.current) {
       playerRef.current.pauseVideo();
     }
+  };
+
+  const onStateChange = (event) => {
+    if (event.data === window.YT.PlayerState.CUED) {
+      setIsSongLoaded(true);
+    }
+  };
+
+  const onNext = () => {
+    //console.log("station.songs:", station.songs);
+    const currentIndex = station.songs.findIndex(
+      (song) => song.id === currentSong.id
+    );
+
+    //console.log("currentIndex:", currentIndex);
+    if (currentIndex === -1) {
+      console.log("error onNext");
+      return null;
+    }
+    const nextIndex = (currentIndex + 1) % station.songs.length;
+    //console.log("nextIndex:", nextIndex);
+    setCurrentSong(station.songs[nextIndex]);
+    setIsSongLoaded(false);
   };
 
   const opts = {
@@ -69,11 +85,37 @@ const YouTubePlayer2 = () => {
 
   return (
     <div>
-      <YouTube2 videoId={currentSong} opts={opts} onReady={onReady} />
-      <button onClick={playVideo}>Play</button>
-      <button onClick={pauseVideo}>Pause</button>
+      <YouTube
+        videoId={currentSong.id}
+        opts={opts}
+        onReady={onReady}
+        onStateChange={onStateChange}
+      />
+
+      <span>{currentSong.title}</span>
+      <img
+        src={currentSong.imgUrl}
+        style={{
+          maxWidth: "100px",
+          maxHeight: "100px",
+          display: "block",
+        }}
+      />
+      <button onClick={playVideo}>
+        {" "}
+        <SvgIcon iconName="play" />
+      </button>
+      <button onClick={pauseVideo}>
+        {" "}
+        <SvgIcon iconName="pause" />
+      </button>
+
+      <button onClick={onNext}>
+        {" "}
+        <SvgIcon iconName="forward" />
+      </button>
     </div>
   );
 };
 
-export default YouTubePlayer2;
+export default AppPlayer;

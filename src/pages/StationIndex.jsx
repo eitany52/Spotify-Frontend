@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useSearchParams } from "react-router-dom";
 import { AppSearch } from "../cmps/AppSearch";
 import { AppPlayer } from "../cmps/AppPlayer";
-
 import { StationList } from "../cmps/StationList";
 import { SvgIcon } from "../cmps/SvgIcon";
 
@@ -14,8 +13,8 @@ export const StationIndex = () => {
 
 
   useEffect(() => {
-    getLocation()
-  }, [location])
+    getLocation();
+  }, [location]);
 
   function getLocation() {
     if (location.pathname.includes("search")) {
