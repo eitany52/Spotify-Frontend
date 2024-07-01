@@ -12,7 +12,7 @@ export const userService = {
     getById,
     save,
     remove,
-    getLogedonUser,
+    getLoggedOnUser,
     //login
     // logout,
     // signup,
@@ -85,7 +85,7 @@ const userArray = [defaultLogedOnUser,
     {  _id: 'u1003',name: 'yossi' }, 
 ]
 
-function getLogedonUser() {
+function getLoggedOnUser() {
     return utilService.loadFromStorage(STORAGE_KEY_LOGEDON_USER)
 }
 

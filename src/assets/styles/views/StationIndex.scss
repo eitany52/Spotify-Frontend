@@ -11,6 +11,40 @@
 
     header {
         grid-area: h;
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-auto-flow: column;
+        justify-content: start;
+        gap: 5px;
+
+        .icons-back-forward {
+            display: grid;
+            grid-auto-flow: column;
+            justify-content: start;
+            align-content: center;
+            width: max-content;
+        }
+
+        form {
+            display: grid;
+            grid-auto-flow: column;
+            justify-content: start;
+            align-content: center;
+            width: 100%;
+
+            .icon-search {
+                width: max-content;
+                align-self: center;
+            }
+
+            input {
+                background-color: $bgc-search;
+                border-radius: 500px;
+                border: 0;
+                height: 48px;
+                color: white;
+            }
+        }
     }
 
     main {

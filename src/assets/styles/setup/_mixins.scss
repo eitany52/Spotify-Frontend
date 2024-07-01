@@ -57,9 +57,6 @@
     }
   }
 
-
-
-
   @mixin btn{
     background-color: $clr3;
     border-radius: 2em;
@@ -80,9 +77,6 @@
     @if $type == "hover" {
         background-color: lighten($clr3, 5%);  
     }
-
- 
-
   }
 
 
@@ -97,11 +91,9 @@
  }
 
   @mixin iconBlock(  $color: "light") {
-
     @if $color == "dark" {
         fill: $clr3;
     }
-
   }
 
 

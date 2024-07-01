@@ -13,7 +13,7 @@ export const StationIndex = () => {
 
 
 
-  useEffect(() => {  
+  useEffect(() => {
     getLocation()
   }, [location])
 
@@ -23,7 +23,7 @@ export const StationIndex = () => {
     } else {
       setIsSearchDisplayed(false)
     }
-    if(location.pathname === "/") {
+    if (location.pathname === "/") {
       setIsHomePageDisplayed(true)
     }
     else {
@@ -35,15 +35,18 @@ export const StationIndex = () => {
     <div className="station-index">
       {console.log("rendered")}
       <header>
+        <section className="icons-back-forward">
+          <SvgIcon iconName={"back"} />
+          <SvgIcon iconName={"forward"} />
+        </section>
         {isSearchDisplayed && <AppSearch />}
-        <SvgIcon iconName={"back"}/>
         {/* <button>Back</button>
         <button>Forward</button> */}
-        <div>
+        {/* <div>
           <button>Settings</button>
           <button>More</button>
-          {/* <UserPreview/> */}
-        </div>
+          <UserPreview/>
+        </div> */}
       </header>
       <aside>
         <nav>
@@ -72,11 +75,11 @@ export const StationIndex = () => {
             </form>
             <button>Recents</button>
           </div>
-          <StationList />
+          <StationList location="library" />
         </section>
       </aside>
       <main>
-        {isHomePageDisplayed && <StationList/>}
+        {isHomePageDisplayed && <StationList location="main" />}
         {!isHomePageDisplayed && <Outlet />}
       </main>
       <footer>{<AppPlayer />}</footer>

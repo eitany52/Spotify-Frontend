@@ -80,3 +80,7 @@ export async function loadUser(userId) {
         console.log('Cannot load user', err)
     }
 }
+
+export function getLoggedOnUser() {
+    return userService.getLoggedOnUser()
+}

@@ -1,13 +1,16 @@
 import { storageService } from './async-storage.service'
 import { httpService } from './http.service'
+import { utilService } from './util.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
+const STORAGE_KEY_LOGEDON_USER = 'logedon_user'
 
 export const userService = {
     login,
     logout,
     signup,
     getLoggedinUser,
+    getLoggedOnUser,
     saveLocalUser,
     getUsers,
     getById,
@@ -79,7 +82,7 @@ async function changeScore(by) {
 
 
 function saveLocalUser(user) {
-    user = { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, score: user.score, isAdmin : user.isAdmin }
+    user = { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, score: user.score, isAdmin: user.isAdmin }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
 }
@@ -87,6 +90,11 @@ function saveLocalUser(user) {
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
 }
+
+function getLoggedOnUser() {
+    return utilService.loadFromStorage(STORAGE_KEY_LOGEDON_USER)
+}
+
 
 
 // ;(async ()=>{

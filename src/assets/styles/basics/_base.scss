@@ -49,11 +49,14 @@ p {
 
 a {
     text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
-a:hover {
-    text-decoration: underline;
-}
+// span {
+//     margin: 0;
+// }
 
 // html {
 //     font-family: montserrat;

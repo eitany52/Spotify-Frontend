@@ -1,74 +1,112 @@
-[{
-    "_id": "5cksxjas89xjsa8xjsa8jxs09",
-    "name": "Funky Monks",
-    "tags": [
-        "Funk",
-        "Happy"
-    ],
-    "createdBy": {
-        "_id": "u101",
-        "fullname": "Puki Ben David",
-        "imgUrl": "http://some-photo/"
+[
+    {
+        "_id": "g5dfcksxjafgfs89xjsa8xjsa8jxs09234",
+        "name": "Liked Songs",
+        "summary": null,
+        "tags": [
+            "Funk",
+            "Happy"
+        ],
+        "createdBy": {
+            "_id": "u1001",
+            "fullname": "avi",
+            "imgUrl": "http://some-photo/"
+        },
+        "savedBy": [],
+        "likedByUsers": [],
+        "songs": [
+            {
+                "id": "j4jtIDaeaWI",
+                "title": "The Meters - Cissy Strut",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+                "addedBy": {},
+                "addedAt": 1719168000000
+            },
+            {
+                "id": "mUkfiLjooxs",
+                "title": "The JB's - Pass The Peas",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+                "addedBy": {},
+                "addedAt": 1698230400000
+            }
+        ]
     },
-    "likedByUsers": [
-    ],
-    "songs": [
-        {
-            "id": "j4jtIDaeaWI",
-            "title": "The Meters - Cissy Strut",
-            "url": "youtube/song.mp4",
-            "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
-            "addedBy": {},
-            "addedAt": 1719168000000
+    {
+        "_id": "5cksxjas89xjsa8xjsa8jxs09",
+        "name": "Funky Monks",
+        "summary": "This is the best playlist ever. You will love this playlist.",
+        "tags": [
+            "Funk",
+            "Happy"
+        ],
+        "createdBy": {
+            "_id": "u101",
+            "fullname": "Puki Ben David",
+            "imgUrl": "http://some-photo/"
         },
-        {
-            "id": "mUkfiLjooxs",
-            "title": "The JB's - Pass The Peas",
-            "url": "youtube/song.mp4",
-            "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-            "addedBy": {},
-            "addedAt": 1698230400000     
-        }
-    ]
-}, 
-{
-    "_id": "wwwsxjas89xjsa8xjsa8jxs09",
-    "name": "best songs",
-    "tags": [
-        "Funk",
-        "Happy"
-    ],
-    "createdBy": {
-        "_id": "u101",
-        "fullname": "Puki Ben Meir",
-        "imgUrl": "http://some-photo/"
+        "savedBy": [],
+        "likedByUsers": [],
+        "songs": [
+            {
+                "id": "j4jtIDaeaWI",
+                "title": "The Meters - Cissy Strut",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+                "addedBy": {},
+                "addedAt": 1719168000000
+            },
+            {
+                "id": "mUkfiLjooxs",
+                "title": "The JB's - Pass The Peas",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+                "addedBy": {},
+                "addedAt": 1698230400000
+            }
+        ]
     },
-    "likedByUsers": [
-    ],
-    "songs": [
-        {
-            "id": "j4jtIDaeaWI",
-            "title": "The Meters - Cissy Strut",
-            "url": "youtube/song.mp4",
-            "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
-            "addedBy": {},
-            "addedAt": 162521765262
+    {
+        "_id": "wwwsxjas89xjsa8xjsa8jxs09",
+        "name": "best songs",
+        "summary": "Chill music that will calm you down.",
+        "tags": [
+            "Funk",
+            "Happy"
+        ],
+        "createdBy": {
+            "_id": "u101",
+            "fullname": "Puki Ben David",
+            "imgUrl": "http://some-photo/"
         },
-        {
-            "id": "mUkfiLjooxs",
-            "title": "The JB's - Pass The Peas",
-            "url": "youtube/song.mp4",
-            "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-            "addedAt": 1698230400000, 
-            "addedBy": {}
-        },
-        {
-            "id": "VZt7J0iaUD0",
-            "title": "Suzanne Vega - Luka",
-            "url": "https://www.youtube.com/watch?v=VZt7J0iaUD0",
-            "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
-            "addedAt": 1719168000000,
-            "addedBy": {}
-        }
-    ]
-}]
+        "savedBy": [],
+        "likedByUsers": [],
+        "songs": [
+            {
+                "id": "j4jtIDaeaWI",
+                "title": "The Meters - Cissy Strut",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+                "addedBy": {},
+                "addedAt": 162521765262
+            },
+            {
+                "id": "mUkfiLjooxs",
+                "title": "The JB's - Pass The Peas",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+                "addedAt": 1698230400000,
+                "addedBy": {}
+            },
+            {
+                "id": "VZt7J0iaUD0",
+                "title": "Suzanne Vega - Luka",
+                "url": "https://www.youtube.com/watch?v=VZt7J0iaUD0",
+                "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
+                "addedAt": 1719168000000,
+                "addedBy": {}
+            }
+        ]
+    }
+]
