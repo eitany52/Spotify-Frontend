@@ -2,7 +2,6 @@ import { stationService } from '../../services/station.service.local'
 import { store } from '../store'
 import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
 
-// import { ADD_CAR, REMOVE_CAR, SET_CARS, SET_CAR, UPDATE_CAR, ADD_CAR_MSG } from './station.reducer'
 import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE} from '../reducers/station.reducer'
 
 
@@ -102,15 +101,17 @@ export async function removeUserLikedFromStation(stationId, userId) {
 }
 
 
-export async function setCurrentSong(songId) {
+export async function setCurrentSong(song) {
     try {
-        console.log('actions songId:', songId)
-        store.dispatch({ type: SET_CURRENT_SONG, songId })
+        //console.log('actions setCurrentSong songId:', song.id)
+        store.dispatch({ type: SET_CURRENT_SONG, song })
     } catch (err) {
         console.log('Cannot set current song', err)
         throw err
     }
 }
+
+
 
 export async function setPlayPause(ip) {
     try {

@@ -3,21 +3,16 @@ import YouTube from "react-youtube";
 
 import { SvgIcon } from "./SvgIcon.jsx";
 import { useSelector } from "react-redux";
+import { setCurrentSong } from "../store/actions/station.actions";
 
 export const AppPlayer = () => {
   const playerRef = useRef(null);
-  // const [isPlayerReady, setIsPlayerReady] = useState(false);
+
   const [isSongLoaded, setIsSongLoaded] = useState(false);
 
-  const currentSong = useSelector(
-    (storeState) => storeState.stationModule.currentSong
-  );
+  const stationModul = useSelector((storeState) => storeState.stationModule);
 
-  console.log("AppPlayer currentSong:", currentSong);
-
-  const isPlaying = useSelector(
-    (storeState) => storeState.stationModule.isPlaying
-  );
+  const { currentSong, isPlaying, station } = stationModul;
 
   useEffect(() => {
     if (isSongLoaded) {
@@ -42,14 +37,14 @@ export const AppPlayer = () => {
   };
 
   const playVideo = () => {
-    console.log("playVideo");
+    //console.log("playVideo");
     if (playerRef.current) {
       playerRef.current.playVideo();
     }
   };
 
   const pauseVideo = () => {
-    console.log("pauseVideo");
+    //console.log("pauseVideo");
     if (playerRef.current) {
       playerRef.current.pauseVideo();
     }
@@ -59,6 +54,23 @@ export const AppPlayer = () => {
     if (event.data === window.YT.PlayerState.CUED) {
       setIsSongLoaded(true);
     }
+  };
+
+  const onNext = () => {
+    //console.log("station.songs:", station.songs);
+    const currentIndex = station.songs.findIndex(
+      (song) => song.id === currentSong.id
+    );
+
+    //console.log("currentIndex:", currentIndex);
+    if (currentIndex === -1) {
+      console.log("error onNext");
+      return null;
+    }
+    const nextIndex = (currentIndex + 1) % station.songs.length;
+    //console.log("nextIndex:", nextIndex);
+    setCurrentSong(station.songs[nextIndex]);
+    setIsSongLoaded(false);
   };
 
   const opts = {
@@ -74,13 +86,21 @@ export const AppPlayer = () => {
   return (
     <div>
       <YouTube
-        videoId={currentSong}
+        videoId={currentSong.id}
         opts={opts}
         onReady={onReady}
         onStateChange={onStateChange}
       />
 
-      <span>{currentSong}</span>
+      <span>{currentSong.title}</span>
+      <img
+        src={currentSong.imgUrl}
+        style={{
+          maxWidth: "100px",
+          maxHeight: "100px",
+          display: "block",
+        }}
+      />
       <button onClick={playVideo}>
         {" "}
         <SvgIcon iconName="play" />
@@ -88,6 +108,11 @@ export const AppPlayer = () => {
       <button onClick={pauseVideo}>
         {" "}
         <SvgIcon iconName="pause" />
+      </button>
+
+      <button onClick={onNext}>
+        {" "}
+        <SvgIcon iconName="forward" />
       </button>
     </div>
   );

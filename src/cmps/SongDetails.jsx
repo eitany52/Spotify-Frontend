@@ -10,8 +10,6 @@ export function SongDetails({ song, index }) {
     (storeState) => storeState.stationModule.currentSong
   );
 
-  //console.log("currentSong:", currentSong);
-
   return (
     <div
       className="song-details"
@@ -33,7 +31,8 @@ export function SongDetails({ song, index }) {
       <span>{song.title}</span>
       <span>{utilService.formatDate(song.addedAt)}</span>
       <SvgIcon iconName="plus" />
-      <section>{<PlayBtn songId={song.id} />}</section>
+      {/* <section>{<PlayBtn songId={song.id} />}</section> */}
+      <section>{<PlayBtn song={song} />}</section>
     </div>
   );
 }

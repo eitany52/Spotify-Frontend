@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { SvgIcon } from "./SvgIcon";
 import { setCurrentSong, setPlayPause } from "../store/actions/station.actions";
 
-export function PlayBtn(songId) {
+export function PlayBtn({ song }) {
   const currentSong = useSelector(
     (storeState) => storeState.stationModule.currentSong
   );
@@ -15,27 +15,18 @@ export function PlayBtn(songId) {
     (storeState) => storeState.stationModule.isPlaying
   );
 
-  console.log("playBtn songId:", songId.songId);
-  // console.log("playBtn currentSong:", currentSong);
-  console.log("playBtn isPlaying:", isPlaying);
-
   function playSong() {
-    console.log("PlayBtn playSong --------");
-    if (currentSong !== songId) {
-      console.log("change song");
-      setCurrentSong(songId.songId);
+    if (currentSong !== song) {
+      setCurrentSong(song);
     }
     setPlayPause(true);
   }
 
   function pauseSong() {
-    console.log("PlayBtn pauseSong");
-    //setCurrentSong(songId.songId);
     setPlayPause(false);
   }
 
-  const pauseDisplay =
-    currentSong === songId.songId && isPlaying ? true : false;
+  const pauseDisplay = currentSong.id === song.id && isPlaying ? true : false;
 
   return (
     <>
