@@ -8,7 +8,7 @@ import { loadStation } from "../store/actions/station.actions.js";
 import { utilService } from "../services/util.service.js";
 import { SongDetails } from "./SongDetails.jsx";
 
-import { SvgIcon } from "./SvgIcon.jsx";
+import { SvgIcon, AllIcons } from "./SvgIcon.jsx";
 
 export function StationDetails() {
   const { id } = useParams();
@@ -18,16 +18,6 @@ export function StationDetails() {
     loadStation(id);
   }, [id, location]);
 
-  //   async function onAddCarMsg(carId) {
-  //     try {
-  //         await addCarMsg(carId, 'bla bla ' + parseInt(Math.random()*10))
-  //         showSuccessMsg(`Car msg added`)
-  //     } catch (err) {
-  //         showErrorMsg('Cannot add car msg')
-  //     }
-
-  // }
-
   if (!station) return <div>Loading...</div>;
   return (
     <section className="station-details">
@@ -35,6 +25,7 @@ export function StationDetails() {
         Back Home
       </Link>
 
+      {/* <AllIcons /> */}
       {station && (
         <div>
           <span>playlist</span>

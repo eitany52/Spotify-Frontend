@@ -2,17 +2,24 @@ import { useState, useRef, useEffect } from "react";
 import YouTube from "react-youtube";
 
 import { SvgIcon } from "./SvgIcon.jsx";
+import { utilService } from "../services/util.service.js";
+
 import { useSelector } from "react-redux";
-import { setCurrentSong } from "../store/actions/station.actions";
+import {
+  setCurrentSong,
+  setPlayPause,
+  setIsShuffle,
+} from "../store/actions/station.actions";
 
 export const AppPlayer = () => {
   const playerRef = useRef(null);
 
   const [isSongLoaded, setIsSongLoaded] = useState(false);
+  // const [isShuffleLocal, setIsShuffleLocal] = useState(false);
 
   const stationModul = useSelector((storeState) => storeState.stationModule);
 
-  const { currentSong, isPlaying, station } = stationModul;
+  const { currentSong, isPlaying, station, isShuffle } = stationModul;
 
   useEffect(() => {
     if (isSongLoaded) {
@@ -38,8 +45,11 @@ export const AppPlayer = () => {
 
   const playVideo = () => {
     //console.log("playVideo");
-    if (playerRef.current) {
+    if (playerRef.current && currentSong.id) {
       playerRef.current.playVideo();
+      if (isPlaying == false) {
+        setPlayPause(true);
+      }
     }
   };
 
@@ -47,6 +57,9 @@ export const AppPlayer = () => {
     //console.log("pauseVideo");
     if (playerRef.current) {
       playerRef.current.pauseVideo();
+      if (isPlaying == true) {
+        setPlayPause(false);
+      }
     }
   };
 
@@ -57,20 +70,56 @@ export const AppPlayer = () => {
   };
 
   const onNext = () => {
-    //console.log("station.songs:", station.songs);
+    let nextIndex;
     const currentIndex = station.songs.findIndex(
       (song) => song.id === currentSong.id
     );
 
-    //console.log("currentIndex:", currentIndex);
-    if (currentIndex === -1) {
-      console.log("error onNext");
-      return null;
+    if (isShuffle) {
+      nextIndex = utilService.getRandomExcludingY(
+        station.songs.length,
+        currentIndex
+      );
+      console.log("onNext Shuffle nextIndex:", nextIndex);
+    } else {
+      if (currentIndex === -1) {
+        console.log("error onNext");
+        return null;
+      }
+      nextIndex = (currentIndex + 1) % station.songs.length;
     }
-    const nextIndex = (currentIndex + 1) % station.songs.length;
-    //console.log("nextIndex:", nextIndex);
+
     setCurrentSong(station.songs[nextIndex]);
     setIsSongLoaded(false);
+  };
+
+  const onPrev = () => {
+    let prevIndex;
+    const currentIndex = station.songs.findIndex(
+      (song) => song.id === currentSong.id
+    );
+
+    if (isShuffle) {
+      prevIndex = utilService.getRandomExcludingY(
+        station.songs.length,
+        currentIndex
+      );
+    } else {
+      if (currentIndex === -1) {
+        console.log("error onPrev");
+        return null;
+      }
+
+      prevIndex =
+        currentIndex == 0 ? station.songs.length - 1 : currentIndex - 1;
+    }
+    setCurrentSong(station.songs[prevIndex]);
+    setIsSongLoaded(false);
+  };
+
+  const onShuffle = () => {
+    //setIsShuffle((prevShuffle) => !prevShuffle);
+    setIsShuffle(!isShuffle);
   };
 
   const opts = {
@@ -101,18 +150,32 @@ export const AppPlayer = () => {
           display: "block",
         }}
       />
-      <button onClick={playVideo}>
+
+      <button onClick={onShuffle}>
         {" "}
-        <SvgIcon iconName="play" />
+        <SvgIcon iconName="shuffle" style={`${isShuffle ? "active" : null}`} />
       </button>
-      <button onClick={pauseVideo}>
+
+      <button onClick={onPrev}>
         {" "}
-        <SvgIcon iconName="pause" />
+        <SvgIcon iconName="skipback" />
       </button>
+
+      {isPlaying ? (
+        <button onClick={pauseVideo}>
+          {" "}
+          <SvgIcon iconName="pause" />
+        </button>
+      ) : (
+        <button onClick={playVideo}>
+          {" "}
+          <SvgIcon iconName="play" />
+        </button>
+      )}
 
       <button onClick={onNext}>
         {" "}
-        <SvgIcon iconName="forward" />
+        <SvgIcon iconName="skipforward" />
       </button>
     </div>
   );

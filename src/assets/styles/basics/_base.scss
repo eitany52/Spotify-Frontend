@@ -82,6 +82,22 @@ button, .btn {
 i {
     @include icon;
     &.dark { @include iconBlock($color: "dark")}
+    &.active { @include iconBlock($color: "active") ;
+        &::after {
+            //background-color: currentcolor;
+            border-radius: 50%;
+            bottom: 10px;
+            content: ".";
+            display: block;
+            height: 9px;
+            left: 50%;
+            position: absolute;
+            -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+            width: 9px;
+            color: $clr5;
+        }
+    }
     &:hover { @include bigger }
 }
 

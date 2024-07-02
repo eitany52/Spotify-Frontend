@@ -2,7 +2,7 @@ import { stationService } from '../../services/station.service.local'
 import { store } from '../store'
 import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
 
-import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE} from '../reducers/station.reducer'
+import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE, SET_SHUFFLE} from '../reducers/station.reducer'
 
 
 
@@ -118,10 +118,23 @@ export async function setPlayPause(ip) {
         console.log('actions setPlayPause:', ip)
         store.dispatch({ type: SET_PLAY_PAUSE, ip})
     } catch (err) {
-        console.log('Cannot start play', err)
+        console.log('Cannot set play pause', err)
         throw err
     }
 }
+
+
+export async function setIsShuffle(isShuffle) {
+    try {
+        console.log('actions setIsShuffle:', isShuffle)
+        store.dispatch({ type: SET_SHUFFLE, isShuffle})
+    } catch (err) {
+        console.log('Cannot set shuffle', err)
+        throw err
+    }
+}
+
+
 
 // export async function loadCars() {
 //     try {
