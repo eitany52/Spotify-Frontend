@@ -7,6 +7,7 @@ export const SET_STATION = 'SET_STATION'
 export const SET_CURRENT_SONG = 'SET_CURRENT_SONG'
 export const SET_PLAY_PAUSE = 'SET_PLAY_PAUSE'
 export const SET_SHUFFLE = 'SET_SHUFFLE'
+export const DISPLAY_HIDE_CARD = 'DISPLAY_HIDE_CARD'
 
 
 // export const SET_CARS = 'SET_CARS'
@@ -20,7 +21,8 @@ const initialState = {
     station : null,
     currentSong: {'id': null},
     isPlaying: false,
-    isShuffle: false
+    isShuffle: false,
+    displayCard : false
 }
 
 export function stationReducer(state = initialState, action) {
@@ -55,7 +57,9 @@ export function stationReducer(state = initialState, action) {
           case  SET_SHUFFLE:
             newState = { ...state, isShuffle: action.isShuffle }
             break
-        
+        case DISPLAY_HIDE_CARD:
+            newState = { ...state, displayCard: action.cardStatus }
+            break
         default:
     }
     return newState

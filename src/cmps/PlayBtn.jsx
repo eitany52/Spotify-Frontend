@@ -31,13 +31,13 @@ export function PlayBtn({ song }) {
   return (
     <>
       {pauseDisplay == true ? (
-        <button onClick={pauseSong}>
+        <span onClick={pauseSong}>
           <SvgIcon iconName="pause" />
-        </button>
+        </span>
       ) : (
-        <button onClick={playSong}>
+        <span onClick={playSong}>
           <SvgIcon iconName="play" />
-        </button>
+        </span>
       )}
     </>
   );

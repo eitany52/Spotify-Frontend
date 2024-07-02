@@ -42,16 +42,11 @@ export function StationDetails() {
 
           {
             <ul>
-              <li
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "0.5fr 1fr 2fr 1fr",
-                  alignItems: "start",
-                }}
-              >
+              <li className="song-details-grid">
                 <label>#</label>
                 <label>img</label>
                 <label>name</label>
+                <label>add</label>
                 <label>Date added</label>
               </li>
             </ul>
