@@ -11,12 +11,12 @@ import { SongDetails } from "./SongDetails.jsx";
 import { SvgIcon } from "./SvgIcon.jsx";
 
 export function StationDetails() {
-  const { id } = useParams();
-  const station = useSelector((storeState) => storeState.stationModule.station);
+  const { stationId } = useParams();
+  const station = useSelector(storeState => storeState.stationModule.station);
 
   useEffect(() => {
-    loadStation(id);
-  }, [id, location]);
+    loadStation(stationId);
+  }, [stationId, location]);
 
   //   async function onAddCarMsg(carId) {
   //     try {

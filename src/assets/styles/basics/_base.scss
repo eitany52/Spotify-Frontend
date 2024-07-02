@@ -32,6 +32,10 @@ h6 {
     line-height: 1;
 }
 
+li {
+    list-style-type: none;
+}
+
 
 // section,
 // main,
@@ -49,6 +53,7 @@ p {
 
 a {
     text-decoration: none;
+
     &:hover {
         text-decoration: underline;
     }
@@ -73,19 +78,35 @@ a {
 
 
 
-button, .btn {
+button,
+.btn {
     @include btn;
-    &.active {  @include blockBtn($type: 'active'); }
-    &:not(.active):hover {  @include blockBtn($type: 'hover'); } 
+
+    &.active {
+        @include blockBtn($type: 'active');
+    }
+
+    &:not(.active):hover {
+        @include blockBtn($type: 'hover');
+    }
 }
 
 i {
     @include icon;
-    &.dark { @include iconBlock($color: "dark")}
-    &:hover { @include bigger }
+
+    &.dark {
+        @include iconBlock($color: "dark")
+    }
+
+    &:hover {
+        @include bigger
+    }
 }
 
 .svg-big {
     @include svgBig;
-    &:hover { @include bigger}
+
+    &:hover {
+        @include bigger
+    }
 }
