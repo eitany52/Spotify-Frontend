@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
 import searchRes from "../../data/search.json"
-import { getLoggedOnUser } from "../store/actions/user.actions"
-import { addSongToStation } from "../store/actions/station.actions"
-import { useSelector } from "react-redux"
+// import { getLoggedOnUser } from "../store/actions/user.actions"
+// import { addSongToStation } from "../store/actions/station.actions"
+// import { useSelector } from "react-redux"
 
 export const SearchResult = () => {
     const params = useParams()
@@ -39,7 +39,7 @@ export const SearchResult = () => {
     //     }
     //     addSongToStation(likedSongsStationId, songToAdd)
     // }
-    //
+    
 
 
     return (

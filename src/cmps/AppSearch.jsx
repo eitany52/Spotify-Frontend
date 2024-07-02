@@ -1,11 +1,11 @@
-import searchRes from "../../data/search.json";
+// import searchRes from "../../data/search.json";
 
-import { stationService } from "../services/station.service.local";
-import { userService } from "../services/user.service.local";
+// import { stationService } from "../services/station.service.local";
+// import { userService } from "../services/user.service.local";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { loadStations, addStation } from "../store/actions/station.actions";
+// import { loadStations, addStation } from "../store/actions/station.actions";
 import { SvgIcon } from "./SvgIcon";
 import { useNavigate } from "react-router";
 
