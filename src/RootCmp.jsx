@@ -10,7 +10,7 @@ export function RootCmp() {
     <>
       <Routes>
         <Route path="/" element={<StationIndex />}>
-          <Route path="/search" element={<SearchResult />} />
+          <Route path="/search/:userInput?" element={<SearchResult />} />
           <Route path="/station/:id" element={<StationDetails />} />
           <Route path="/artist/:id" element={<ArtistDetails />} />
           <Route path="/user/:id" element={<UserDetails />} />
