@@ -39,6 +39,7 @@ export const AppSearch = () => {
     // const res = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&key=AIzaSyCUE7BdmEO9uF_gWcV5yY5O3eqyINxdavo`)
     // const data = await res.json()
     // console.log(data);
+    //
   }
 
 
