@@ -77,7 +77,7 @@ export const AppPlayer = () => {
 
     if (isShuffle) {
       nextIndex = utilService.getRandomExcludingY(
-        station.songs.length,
+        station.songs.length - 1,
         currentIndex
       );
       console.log("onNext Shuffle nextIndex:", nextIndex);
@@ -101,7 +101,7 @@ export const AppPlayer = () => {
 
     if (isShuffle) {
       prevIndex = utilService.getRandomExcludingY(
-        station.songs.length,
+        station.songs.length - 1,
         currentIndex
       );
     } else {
