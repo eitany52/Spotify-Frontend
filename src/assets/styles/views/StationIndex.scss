@@ -1,14 +1,19 @@
 .station-index {
     display: grid;
-    grid-template-columns: 0.7fr 1.3fr;
+    grid-template-columns: 0.7fr 1.3fr 0px;
     grid-template-rows: 0.4fr 2.3fr 0.3fr;
     grid-template-areas:
-        "a h"
-        "a m"
-        "f f";
+        "a h c"
+        "a m c"
+        "f f f";
     gap: 0 10px;
     height: 100%;
 
+
+    &.display-card {
+        grid-template-columns: 0.7fr 0.8fr 0.5fr;
+    }
+    
     header {
         grid-area: h;
         display: grid;
@@ -71,7 +76,14 @@
     footer {
         grid-area: f;
     }
+
+    
+ .card {
+    grid-area: c;
+
 }
+}
+
 
 .station-index header,
 .station-index main,

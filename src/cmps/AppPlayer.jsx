@@ -9,17 +9,21 @@ import {
   setCurrentSong,
   setPlayPause,
   setIsShuffle,
+  setDisplayHideCard,
 } from "../store/actions/station.actions";
 
 export const AppPlayer = () => {
   const playerRef = useRef(null);
+
+  const [currentTime, setCurrentTime] = useState(0);
 
   const [isSongLoaded, setIsSongLoaded] = useState(false);
   // const [isShuffleLocal, setIsShuffleLocal] = useState(false);
 
   const stationModul = useSelector((storeState) => storeState.stationModule);
 
-  const { currentSong, isPlaying, station, isShuffle } = stationModul;
+  const { currentSong, isPlaying, station, isShuffle, displayCard } =
+    stationModul;
 
   useEffect(() => {
     if (isSongLoaded) {
@@ -35,6 +39,15 @@ export const AppPlayer = () => {
   useEffect(() => {
     setIsSongLoaded(false);
   }, [currentSong]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (playerRef.current) {
+        setCurrentTime(playerRef.current.getCurrentTime());
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   const onReady = (event) => {
     // שומר את רפרנס ה-Player instance
@@ -64,8 +77,17 @@ export const AppPlayer = () => {
   };
 
   const onStateChange = (event) => {
+    setCurrentTime(playerRef.current.getCurrentTime());
     if (event.data === window.YT.PlayerState.CUED) {
       setIsSongLoaded(true);
+    }
+  };
+
+  const handleRangeChange = (event) => {
+    const time = parseFloat(event.target.value);
+    setCurrentTime(time);
+    if (playerRef.current) {
+      playerRef.current.seekTo(time, true);
     }
   };
 
@@ -118,8 +140,11 @@ export const AppPlayer = () => {
   };
 
   const onShuffle = () => {
-    //setIsShuffle((prevShuffle) => !prevShuffle);
     setIsShuffle(!isShuffle);
+  };
+
+  const onDisplayCard = () => {
+    setDisplayHideCard(!displayCard);
   };
 
   const opts = {
@@ -133,7 +158,7 @@ export const AppPlayer = () => {
   };
 
   return (
-    <div>
+    <div className="app-player">
       <YouTube
         videoId={currentSong.id}
         opts={opts}
@@ -141,42 +166,60 @@ export const AppPlayer = () => {
         onStateChange={onStateChange}
       />
 
-      <span>{currentSong.title}</span>
-      <img
-        src={currentSong.imgUrl}
-        style={{
-          maxWidth: "100px",
-          maxHeight: "100px",
-          display: "block",
-        }}
-      />
+      <section className="current-song-details">
+        <img src={currentSong.imgUrl} />
+        <span>{currentSong.title}</span>
+      </section>
 
-      <button onClick={onShuffle}>
-        {" "}
-        <SvgIcon iconName="shuffle" style={`${isShuffle ? "active" : null}`} />
-      </button>
+      <section className="control-pannel">
+        <section className="controls">
+          <span onClick={onShuffle}>
+            {" "}
+            <SvgIcon
+              iconName="shuffle"
+              style={`${isShuffle ? "active" : null}`}
+            />
+          </span>
 
-      <button onClick={onPrev}>
-        {" "}
-        <SvgIcon iconName="skipback" />
-      </button>
+          <span onClick={onPrev}>
+            {" "}
+            <SvgIcon iconName="skipback" />
+          </span>
 
-      {isPlaying ? (
-        <button onClick={pauseVideo}>
-          {" "}
-          <SvgIcon iconName="pause" />
-        </button>
-      ) : (
-        <button onClick={playVideo}>
-          {" "}
-          <SvgIcon iconName="play" />
-        </button>
-      )}
+          {isPlaying ? (
+            <span onClick={pauseVideo}>
+              {" "}
+              <SvgIcon iconName="pause" />
+            </span>
+          ) : (
+            <span onClick={playVideo}>
+              {" "}
+              <SvgIcon iconName="play" />
+            </span>
+          )}
 
-      <button onClick={onNext}>
-        {" "}
-        <SvgIcon iconName="skipforward" />
-      </button>
+          <span onClick={onNext}>
+            {" "}
+            <SvgIcon iconName="skipforward" />
+          </span>
+        </section>
+        <section className="trace">
+          <input
+            type="range"
+            min="0"
+            max={playerRef.current ? playerRef.current.getDuration() : 100}
+            step="0.1"
+            value={currentTime}
+            onChange={handleRangeChange}
+          />
+        </section>
+      </section>
+
+      <section className="extra-controls">
+        <span onClick={onDisplayCard}>
+          <SvgIcon iconName="nowPlaying" />
+        </span>
+      </section>
     </div>
   );
 };

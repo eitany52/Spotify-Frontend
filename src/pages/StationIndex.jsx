@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, Outlet, useLocation, useSearchParams } from "react-router-dom";
 import { AppSearch } from "../cmps/AppSearch";
 import { AppPlayer } from "../cmps/AppPlayer";
 import { StationList } from "../cmps/StationList";
+import { CurrentSongCard } from "../cmps/CurrentSongCard";
 import { SvgIcon } from "../cmps/SvgIcon";
 
 export const StationIndex = () => {
   const location = useLocation();
+
   const [isSearchDisplayed, setIsSearchDisplayed] = useState(false);
   const [isHomePageDisplayed, setIsHomePageDisplayed] = useState(true);
 
-
+  const displayCard = useSelector(
+    (storeState) => storeState.stationModule.displayCard
+  );
 
   useEffect(() => {
     getLocation();
@@ -18,20 +23,19 @@ export const StationIndex = () => {
 
   function getLocation() {
     if (location.pathname.includes("search")) {
-      setIsSearchDisplayed(true)
+      setIsSearchDisplayed(true);
     } else {
-      setIsSearchDisplayed(false)
+      setIsSearchDisplayed(false);
     }
     if (location.pathname === "/") {
-      setIsHomePageDisplayed(true)
-    }
-    else {
-      setIsHomePageDisplayed(false)
+      setIsHomePageDisplayed(true);
+    } else {
+      setIsHomePageDisplayed(false);
     }
   }
 
   return (
-    <div className="station-index">
+    <div className={`station-index  ${displayCard ? "display-card" : null}  `}>
       {console.log("rendered")}
       <header>
         <section className="icons-back-forward">
@@ -81,6 +85,11 @@ export const StationIndex = () => {
         {isHomePageDisplayed && <StationList location="main" />}
         {!isHomePageDisplayed && <Outlet />}
       </main>
+      {displayCard && (
+        <section className="card">
+          <CurrentSongCard />
+        </section>
+      )}
       <footer>{<AppPlayer />}</footer>
     </div>
   );

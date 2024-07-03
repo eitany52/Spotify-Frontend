@@ -1,3 +1,5 @@
-.station-details {
-    
+.station-details .song-details-grid {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 2fr 1fr 1fr;
+    align-items: start;
 }
