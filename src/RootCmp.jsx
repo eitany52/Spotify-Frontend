@@ -4,6 +4,7 @@ import { UserDetails } from "./cmps/UserDetails";
 import { ArtistDetails } from "./cmps/ArtistDetails";
 import { StationIndex } from "./pages/StationIndex.jsx";
 import { SearchResult } from "./cmps/SearchResult.jsx";
+import { DynamicModal } from "./cmps/DynamicModal";
 
 export function RootCmp() {
   return (
@@ -18,6 +19,7 @@ export function RootCmp() {
           {/* <Route path="/recent-searches" element={} /> */}
         </Route>
       </Routes>
+      <DynamicModal />
     </>
   );
 

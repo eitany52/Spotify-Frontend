@@ -45,7 +45,7 @@ export function stationReducer(state = initialState, action) {
             newState = { ...state, stations, lastRemovedStation }
             break
         case UPDATE_STATION:
-            stations = state.stations.map(station => station._id == action.station._id ? action.station : station)
+            stations = state.stations.map(station => (station._id == action.updatedStation._id) ? action.updatedStation : station)
             newState = { ...state, stations }
             break
         case SET_CURRENT_SONG:
