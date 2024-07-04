@@ -51,7 +51,7 @@ export const SearchResult = () => {
         <div>
             
             {/* <RecentSearches/> */}
-            {params.userInput &&
+            {params.userInput && songs &&
                 <section>
                     <div>
                         <button>All</button>
