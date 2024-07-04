@@ -32,7 +32,7 @@ export const StationIndex = () => {
 
   return (
     <div className="station-index">
-      {console.log("rendered")}
+      {console.log("rendered StationIndex")}
       <header>
         <section className="icons-back-forward">
           <SvgIcon iconName={"back"} />
@@ -81,7 +81,7 @@ export const StationIndex = () => {
         {isHomePageDisplayed && <StationList location="main" />}
         {!isHomePageDisplayed && <Outlet />}
       </main>
-      <footer>{<AppPlayer />}</footer>
+      <footer><AppPlayer /></footer>
     </div>
   );
 };

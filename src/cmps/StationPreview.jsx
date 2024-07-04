@@ -10,8 +10,8 @@ export const StationPreview = ({ station, location }) => {
     }
     const numOfSongs = station.songs.length
     const profileName = station.createdBy.fullname
-    const isUserStation = getLoggedOnUser()._id === station.createdBy._id
-    const isSavedStation = station.savedBy.some(user => user._id === getLoggedOnUser()._id)
+    const isUserStation = getLoggedOnUser()._id === station.createdBy.id
+    const isSavedStation = station.savedBy.some(user => user.id === getLoggedOnUser()._id)
     return (
         <li onClick={onGoToStationDetails} className="station-preview">
             {location === "library" && (isUserStation || isSavedStation) &&
@@ -19,14 +19,14 @@ export const StationPreview = ({ station, location }) => {
                     {/* <img src={station.img}/> */}
                     <h5>{station.name}</h5>
                     <span>
-                        Playlist · {station.name === "Liked Songs" ? `${numOfSongs} songs` : profileName}
+                        Playlist · {station.type === "liked" ? `${numOfSongs} songs` : profileName}
                     </span>
                 </section>}
             {location === "main" &&
                 <section>
                     {/* <img src={station.img}/> */}
                     <h5>{station.name}</h5>
-                    <span>{station.summary}</span>
+                    <span>{station.description}</span>
                 </section>}
         </li>
     )

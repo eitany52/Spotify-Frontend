@@ -2,9 +2,7 @@ import { stationService } from '../../services/station.service.local'
 import { store } from '../store'
 import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
 
-import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE} from '../reducers/station.reducer'
-
-
+import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE } from '../reducers/station.reducer'
 
 
 export async function loadStations() {
@@ -31,6 +29,15 @@ export async function loadStation(stationId) {
     } catch (err) {
         console.log('Cannot load station', err)
         throw err
+    }
+}
+
+export async function loadLikedSongsStation() {
+    try {
+        const likedSongsStation = await stationService.getLikedSongsStation()
+        store.dispatch({ type: SET_STATION, station: likedSongsStation })
+    } catch (err) {
+        console.log("Cannot load Liked Songs Station", err)
     }
 }
 
@@ -116,11 +123,15 @@ export async function setCurrentSong(song) {
 export async function setPlayPause(ip) {
     try {
         console.log('actions setPlayPause:', ip)
-        store.dispatch({ type: SET_PLAY_PAUSE, ip})
+        store.dispatch({ type: SET_PLAY_PAUSE, ip })
     } catch (err) {
         console.log('Cannot start play', err)
         throw err
     }
+}
+
+export function formatSong(song) {
+    return stationService.formatSong(song)
 }
 
 // export async function loadCars() {

@@ -1,17 +1,29 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
 import searchRes from "../../data/search.json"
+import { addSongToStation, formatSong, loadLikedSongsStation, loadStation } from "../store/actions/station.actions"
+import { useSelector } from "react-redux"
+import { useEffectUpdate } from "../customHooks/useEffectUpdate"
 // import { getLoggedOnUser } from "../store/actions/user.actions"
 // import { addSongToStation } from "../store/actions/station.actions"
-// import { useSelector } from "react-redux"
 
 export const SearchResult = () => {
     const params = useParams()
     const [songs, setSongs] = useState(null)
-    // const likedSongsStationId = useSelector(storeState =>
-    //     storeState.stationModule.likedSongsStation._id)
+    const likedSongsStation = useSelector(storeState =>
+        storeState.stationModule.station)
+
 
     useEffect(() => {
+        loadLikedSongsStation()
+    }, [])
+
+    // useEffect(() => {
+    //     setIsSongAdded(false)
+    // }, [isSongAdded])
+
+
+    useEffectUpdate(() => {
         loadSongsFromYoutube()
     }, [params])
 
@@ -22,28 +34,22 @@ export const SearchResult = () => {
         // const data = await res.json()
     }
 
-    // function onAddToLikedSongs(song) {
-    //     // "id": "j4jtIDaeaWI",
-    //     // "title": "The Meters - Cissy Strut",
-    //     // "url": "youtube/song.mp4",
-    //     // "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
-    //     // "addedBy": {},
-    //     // "addedAt": 1719168000000
-    //     const songToAdd = {
-    //         id: song.video.id,
-    //         title: song.snippet.title,
-    //         url: `https://youtube.com/watch?v=${song.id.videoId}`,
-    //         imgUrl: song.snippet.thumbnails.default.url,
-    //         addedBy: getLoggedOnUser(),
-    //         addedAt: Date.now()
-    //     }
-    //     addSongToStation(likedSongsStationId, songToAdd)
-    // }
-    
+    function isSongSavedInStation(song) {
+        return likedSongsStation.songs.some(_song => _song.id === song.id)
+    }
 
+    async function onAddToLikedSongs(songToAdd) {
+        try {
+            await addSongToStation(likedSongsStation._id, songToAdd)
+            loadLikedSongsStation()
+        } catch (error) {
+            console.log("Having issues with saving this song")
+        }
+    }
 
     return (
         <div>
+            {console.log("SearchResult rendered")}
             {/* <RecentSearches/> */}
             {params.userInput && songs &&
                 <section>
@@ -63,12 +69,13 @@ export const SearchResult = () => {
                     <div>
                         <h2>Songs</h2>
                         <ul>
-                            {songs.map(song => {
-                                const songImg = song.snippet.thumbnails.default.url
-                                const songName = song.snippet.title
-                                const artistName = song.snippet.channelTitle
+                            {songs.map(_song => {
+                                const song = formatSong(_song)
+                                const songImg = song.imgUrl
+                                const songName = song.title
+                                const artistName = song.channelTitle
                                 return (
-                                    <li key={song.id.videoId}>
+                                    <li key={song.id}>
                                         <img
                                             style={{ width: "40px", height: "40px" }}
                                             src={songImg} />
@@ -77,7 +84,7 @@ export const SearchResult = () => {
                                         <button
                                             title="Add to Liked Songs"
                                             onClick={() => onAddToLikedSongs(song)}>
-                                            Add
+                                            {isSongSavedInStation(song) ? "Added" : "Add"}
                                         </button>
                                     </li>
                                 )
