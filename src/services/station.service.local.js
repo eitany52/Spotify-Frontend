@@ -5,6 +5,8 @@ import { userService } from './user.service.local'
 import initialStations from '../../data/stations.json'
 import { getLoggedOnUser } from '../store/actions/user.actions'
 
+//Checked - All looks good.
+
 export const stationService = {
     query,
     getById,
@@ -181,13 +183,4 @@ function _createStations() {
 
 
 // storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
-
-
-
-
-//crud_eitan:
-
-
-
-
 
