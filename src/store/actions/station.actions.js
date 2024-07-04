@@ -4,14 +4,13 @@ import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
 
 import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE, SET_SHUFFLE, DISPLAY_HIDE_CARD } from '../reducers/station.reducer'
 
-
+//Checked - All looks good.
 
 
 export async function loadStations() {
     try {
         // store.dispatch({ type: LOADING_START })
         const stations = await stationService.getStations()
-        console.log(stations);
         store.dispatch({ type: SET_STATIONS, stations })
     } catch (err) {
         console.log('UserActions: err in loadStations', err)
@@ -27,8 +26,6 @@ export async function loadStations() {
 export async function loadStation(stationId) {
     try {
         const station = await stationService.getById(stationId)
-
-        console.log('Station from DB:', station)
         store.dispatch({ type: SET_STATION, station })
     } catch (err) {
         console.log('Cannot load station', err)
@@ -297,9 +294,3 @@ export async function setDisplayHideCard(cardStatus) {
 //     await removeCar('m1oC7')
 //     // TODO unit test addCarMsg
 // }
-
-
-
-
-
-//crud_eitan:
