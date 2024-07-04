@@ -4,11 +4,46 @@ import { utilService } from "../services/util.service.js";
 import { SvgIcon } from "./SvgIcon";
 import { useSelector } from "react-redux";
 import { PlayBtn } from "../cmps/PlayBtn";
+import { SongFloatingMenu } from "../cmps/SongFloatingMenu";
+import { AddFloatingMenu } from "../cmps/AddFloatingMenu";
+
+import { onToggleModal } from "../store/actions/app.actions.js";
 
 export function SongDetails({ song, index }) {
   const currentSong = useSelector(
     (storeState) => storeState.stationModule.currentSong
   );
+
+  const station = useSelector((storeState) => storeState.stationModule.station);
+
+  function onClickMore() {
+    console.log("more.......");
+    onToggleModal({
+      cmp: SongFloatingMenu,
+      props: {
+        stationId: station._id,
+        songId: song.id,
+        onDone() {
+          onToggleModal(null);
+        },
+      },
+      style: { border: "2px solid white", left: "100px" },
+    });
+  }
+
+  function onClickAdd() {
+    console.log("Add.......");
+    onToggleModal({
+      cmp: AddFloatingMenu,
+      props: {
+        stationId: station._id,
+        songId: song.id,
+        onDone() {
+          onToggleModal(null);
+        },
+      },
+    });
+  }
 
   return (
     <div className="song-details song-details-grid">
@@ -17,8 +52,14 @@ export function SongDetails({ song, index }) {
       </section>
       <img src={song.imgUrl} />
       <span>{song.title}</span>
-      <SvgIcon iconName="plus" />
+      <span onClick={onClickAdd}>
+        <SvgIcon iconName="tick" style="active" />
+      </span>
+
       <span>{utilService.formatDate(song.addedAt)}</span>
+      <span onClick={onClickMore}>
+        <SvgIcon iconName="more" />
+      </span>
     </div>
   );
 }

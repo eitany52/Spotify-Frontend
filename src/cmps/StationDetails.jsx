@@ -13,24 +13,15 @@ import { SvgIcon, AllIcons } from "./SvgIcon.jsx";
 //Checked - All looks good.
 
 export function StationDetails() {
-  const { stationId } = useParams()
-  const station = useSelector(storeState => storeState.stationModule.station)
+  const { stationId } = useParams();
+  const station = useSelector((storeState) => storeState.stationModule.station);
+  const stations = useSelector(
+    (storeState) => storeState.stationModule.stations
+  );
 
   useEffect(() => {
     loadStation(stationId);
-  }, [stationId, location]);
-
-  //   async function onAddCarMsg(carId) {
-  //     try {
-  //         await addCarMsg(carId, 'bla bla ' + parseInt(Math.random()*10))
-  //         showSuccessMsg(`Car msg added`)
-  //     } catch (err) {
-  //         showErrorMsg('Cannot add car msg')
-  //     }
-
-  // }
-  //
-  //
+  }, [stationId, stations]);
 
   if (!station) return <div>Loading...</div>;
   return (
@@ -48,7 +39,9 @@ export function StationDetails() {
             {station.createdBy.fullname} |{" "}
             {station.songs && station.songs.length} songs{" "}
           </h4>
-          {station.songs && <img src={station.songs[0].imgUrl} />}
+          {station.songs && station.songs.length && (
+            <img src={station.songs[0].imgUrl} />
+          )}
 
           <section className="svg-big bigger">
             <SvgIcon iconName="play" style="dark" />
@@ -62,12 +55,14 @@ export function StationDetails() {
                 <label>name</label>
                 <label>add</label>
                 <label>Date added</label>
+                <label></label>
               </li>
             </ul>
           }
 
           <ul>
             {station.songs &&
+              station.songs.length &&
               station.songs.map((song, index) => (
                 <li key={song.id}>
                   <SongDetails song={song} index={index} />

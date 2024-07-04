@@ -1,0 +1,21 @@
+.song-floating-menu {
+
+    ul li ul.station-list {
+       
+        display:none;
+    }
+    
+    ul li h3 {
+        display:none;
+    }
+
+    ul li:hover ul.station-list {
+        display:block;
+        position:absolute;
+        right: 70%;
+        top: 0;
+        width: 300px;
+    }
+
+
+}

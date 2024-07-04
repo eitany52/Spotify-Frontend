@@ -101,9 +101,13 @@ async function addSongToStation(stationId, song) {
 
 
 async function removeSongFromStation(stationId, songId) {
-    const station = await getById(stationId)
+    console.log('station.service removeSongFromStation stationId:',stationId)
+    console.log('station.service removeSongFromStation songId:',songId)
 
-    station.songs.filter((song) => song.id == songId)
+    const station = await getById(stationId)
+    console.log('station.service removeSongFromStation station:', station)
+    station.songs = station.songs.filter((song) => song.id !== songId)
+    console.log('station.service removeSongFromStation updatedStation after filter:', station)
     await storageService.put(STORAGE_KEY, station)
 
     return station // ?
