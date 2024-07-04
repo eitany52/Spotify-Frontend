@@ -9,7 +9,12 @@ export const StationList = ({ location }) => {
 
     useEffect(() => {
         loadStations()
+        console.log(stations);
     }, [])
+
+    useEffect(() => {
+        console.log(stations);
+    }, [stations])
 
     if (!stations) return
     return (

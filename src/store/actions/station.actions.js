@@ -2,7 +2,7 @@ import { stationService } from '../../services/station.service.local'
 import { store } from '../store'
 import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
 
-import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE, SET_SHUFFLE, DISPLAY_HIDE_CARD} from '../reducers/station.reducer'
+import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE, SET_SHUFFLE, DISPLAY_HIDE_CARD } from '../reducers/station.reducer'
 
 
 
@@ -11,6 +11,7 @@ export async function loadStations() {
     try {
         // store.dispatch({ type: LOADING_START })
         const stations = await stationService.getStations()
+        console.log(stations);
         store.dispatch({ type: SET_STATIONS, stations })
     } catch (err) {
         console.log('UserActions: err in loadStations', err)
@@ -26,6 +27,7 @@ export async function loadStations() {
 export async function loadStation(stationId) {
     try {
         const station = await stationService.getById(stationId)
+
         console.log('Station from DB:', station)
         store.dispatch({ type: SET_STATION, station })
     } catch (err) {
@@ -140,7 +142,7 @@ export function formatSong(song) {
 export async function setIsShuffle(isShuffle) {
     try {
         console.log('actions setIsShuffle:', isShuffle)
-        store.dispatch({ type: SET_SHUFFLE, isShuffle})
+        store.dispatch({ type: SET_SHUFFLE, isShuffle })
     } catch (err) {
         console.log('Cannot set shuffle', err)
         throw err
@@ -150,7 +152,7 @@ export async function setIsShuffle(isShuffle) {
 
 export async function setDisplayHideCard(cardStatus) {
     try {
-        store.dispatch({ type: DISPLAY_HIDE_CARD, cardStatus})
+        store.dispatch({ type: DISPLAY_HIDE_CARD, cardStatus })
     } catch (err) {
         console.log('Cannot set shuffle', err)
         throw err

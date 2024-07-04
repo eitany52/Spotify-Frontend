@@ -46,12 +46,12 @@ export const SearchResult = () => {
             console.log("Having issues with saving this song")
         }
     }
-
+    console.log("SearchResult rendered")
     return (
         <div>
-            {console.log("SearchResult rendered")}
+            
             {/* <RecentSearches/> */}
-            {params.name &&
+            {params.userInput &&
                 <section>
                     <div>
                         <button>All</button>
