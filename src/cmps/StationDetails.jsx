@@ -10,9 +10,11 @@ import { SongDetails } from "./SongDetails.jsx";
 
 import { SvgIcon, AllIcons } from "./SvgIcon.jsx";
 
+//Checked - All looks good.
+
 export function StationDetails() {
-  const { stationId } = useParams();
-  const station = useSelector((storeState) => storeState.stationModule.station);
+  const { stationId } = useParams()
+  const station = useSelector(storeState => storeState.stationModule.station)
 
   useEffect(() => {
     loadStation(stationId);
@@ -80,6 +82,3 @@ export function StationDetails() {
     </section>
   );
 }
-
-// crud_eitan: 
-
