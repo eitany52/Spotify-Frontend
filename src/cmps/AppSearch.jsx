@@ -9,6 +9,9 @@ import { useSelector } from "react-redux";
 import { SvgIcon } from "./SvgIcon";
 import { useNavigate } from "react-router";
 
+
+// Checked - All looks good.
+
 export const AppSearch = () => {
   const navigate = useNavigate()
   const stations = useSelector(storeState => storeState.stationModule.stations)
@@ -27,12 +30,11 @@ export const AppSearch = () => {
   //       showUserMsg("Problem!");
   //     }
   //   }
-  
+
   async function onSearch(ev) {
     ev.preventDefault()
     const userInput = ev.target.txt.value
     navigate(`/search/${userInput}`)
-    // console.log("AppSearch searchRes:", searchRes)
     // const searchTerm = 'rap-song'
     // const res = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&key=AIzaSyCUE7BdmEO9uF_gWcV5yY5O3eqyINxdavo`)
     // const data = await res.json()
@@ -52,8 +54,3 @@ export const AppSearch = () => {
     </form>
   );
 };
-
-
-
-// crud_eitan:
-
