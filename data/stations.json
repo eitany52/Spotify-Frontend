@@ -4,6 +4,7 @@
         "name": "Liked Songs",
         "type": "liked",
         "description": null,
+        "imgUrl" : "https://misc.scdn.co/liked-songs/liked-songs-64.png",
         "tags": [
             "Funk",
             "Happy"
@@ -39,6 +40,8 @@
         "name": "Funky Monks",
         "type": "normal",
         "description": "This is the best playlist ever. You will love this playlist.",
+        "imgUrl" : "https://mosaic.scdn.co/60/ab67616d00001e020633b57b08b40f3e776e7151ab67616d00001e0257a97b3bfb918c3748d0f930ab67616d00001e026a0b525ea5e6146f7f33369fab67616d00001e02ba630a902f9d9de95572f29d",
+
         "tags": [
             "Funk",
             "Happy"
@@ -111,6 +114,52 @@
         "name": "best songs",
         "type": "normal",
         "description": "Chill music that will calm you down.",
+        "imgUrl" : "https://mosaic.scdn.co/60/ab67616d00001e0215cbb8e7932fef1b84ff0ea6ab67616d00001e028af0f4a492b52f8fd0f65359ab67616d00001e02a5436a2f32552a10f780fb29ab67616d00001e02fe3c23625fcd72e2d40ac923",
+
+        "tags": [
+            "Funk",
+            "Happy"
+        ],
+        "createdBy": {
+            "id": "u101",
+            "fullname": "Puki Ben David",
+            "imgUrl": "http://some-photo/"
+        },
+        "savedBy": [],
+        "likedByUsers": [],
+        "songs": [
+            {
+                "id": "MXI5Nuz6OHg",
+                "title": "The Meters - Cissy Strut",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+                "addedBy": {},
+                "addedAt": 162521765262
+            },
+            {
+                "id": "mUkfiLjooxs",
+                "title": "The JB's - Pass The Peas",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+                "addedAt": 1698230400000,
+                "addedBy": {}
+            },
+            {
+                "id": "VZt7J0iaUD0",
+                "title": "Suzanne Vega - Luka",
+                "url": "https://www.youtube.com/watch?v=VZt7J0iaUD0",
+                "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
+                "addedAt": 1719168000000,
+                "addedBy": {}
+            }
+        ]
+    },  {
+        "_id": "xxssxjas8967sa8xjsa8jxs09",
+        "name": "classic",
+        "type": "normal",
+        "description": "classic music to here before sleeping.",
+        "imgUrl" : "https://mosaic.scdn.co/60/ab67616d00001e021a9673b219934cd31b939341ab67616d00001e02211e59e901d643169ce3f447ab67616d00001e02f7481a5eed4e919ccd0391a3ab67616d00001e02ff9238eec8ea47fc4c341755",
+
         "tags": [
             "Funk",
             "Happy"

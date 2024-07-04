@@ -1,0 +1,16 @@
+.station-list {
+    &.library {
+        img {max-width:50px;}
+    }
+
+    &.main {
+        display:grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap:10px;
+        img {max-width:200px;}
+    }
+
+    &.modal {
+        img {display:none;}
+    }
+}
