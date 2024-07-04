@@ -6,16 +6,18 @@ import { StationIndex } from "./pages/StationIndex.jsx";
 import { SearchResult } from "./cmps/SearchResult.jsx";
 import { DynamicModal } from "./cmps/DynamicModal";
 
+// Checked - All looks good.
+
 export function RootCmp() {
   return (
     <>
       <Routes>
         <Route path="/" element={<StationIndex />}>
-          <Route path="/search" element={<SearchResult />} />
-          <Route path="/station/:id" element={<StationDetails />} />
-          <Route path="/artist/:id" element={<ArtistDetails />} />
-          <Route path="/user/:id" element={<UserDetails />} />
-          {/* <Route path="/genre/:id" element={} /> */}
+          <Route path="/search/:userInput?" element={<SearchResult />} />
+          <Route path="/station/:stationId" element={<StationDetails />} />
+          <Route path="/artist/:artistId" element={<ArtistDetails />} />
+          <Route path="/user/:userId" element={<UserDetails />} />
+          {/* <Route path="/genre/:genreId" element={} /> */}
           {/* <Route path="/recent-searches" element={} /> */}
         </Route>
       </Routes>

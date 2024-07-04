@@ -2,13 +2,14 @@
     {
         "_id": "g5dfcksxjafgfs89xjsa8xjsa8jxs09234",
         "name": "Liked Songs",
-        "summary": null,
+        "type": "liked",
+        "description": null,
         "tags": [
             "Funk",
             "Happy"
         ],
         "createdBy": {
-            "_id": "u1001",
+            "id": "u1001",
             "fullname": "avi",
             "imgUrl": "http://some-photo/"
         },
@@ -35,15 +36,16 @@
     },
     {
         "_id": "5cksxjas89xjsa8xjsa8jxs09",
-        "name": "womans sing",
-        "summary": "This is the best playlist ever. You will love this playlist.",
+        "name": "Funky Monks",
+        "type": "normal",
+        "description": "This is the best playlist ever. You will love this playlist.",
         "tags": [
             "Funk",
             "Happy"
         ],
         "createdBy": {
-            "_id": "u101",
-            "fullname": "Alice cohen",
+            "id": "u101",
+            "fullname": "Puki Ben David",
             "imgUrl": "http://some-photo/"
         },
         "savedBy": [],
@@ -107,13 +109,14 @@
     {
         "_id": "wwwsxjas89xjsa8xjsa8jxs09",
         "name": "best songs",
-        "summary": "Chill music that will calm you down.",
+        "type": "normal",
+        "description": "Chill music that will calm you down.",
         "tags": [
             "Funk",
             "Happy"
         ],
         "createdBy": {
-            "_id": "u101",
+            "id": "u101",
             "fullname": "Puki Ben David",
             "imgUrl": "http://some-photo/"
         },

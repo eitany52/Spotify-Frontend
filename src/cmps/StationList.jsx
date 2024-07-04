@@ -4,6 +4,8 @@ import { useEffect } from "react"
 import { loadStations } from "../store/actions/station.actions"
 import { getLoggedOnUser } from "../store/actions/user.actions"
 
+// Checked - All looks good.
+
 export const StationList = ({ location }) => {
     const stations = useSelector(storeState => storeState.stationModule.stations)
 

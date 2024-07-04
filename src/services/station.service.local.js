@@ -3,6 +3,9 @@ import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
 import { userService } from './user.service.local'
 import initialStations from '../../data/stations.json'
+import { getLoggedOnUser } from '../store/actions/user.actions'
+
+//Checked - All looks good.
 
 export const stationService = {
     query,
@@ -13,7 +16,9 @@ export const stationService = {
     addSongToStation,
     removeSongFromStation,
     addUserLikedToStation,
-    removeUserLikedFromStation
+    removeUserLikedFromStation,
+    getLikedSongsStation,
+    formatSong
     // getEmptyCar,
     // addCarMsg
 }
@@ -41,6 +46,12 @@ async function query(filterBy = { txt: '', price: 0 }) {
 
 function getStations() {
     return storageService.query(STORAGE_KEY)
+}
+
+async function getLikedSongsStation() {
+    const stations = await getStations()
+    const likedSongsStation = stations.find(station => station.type === 'liked')
+    return likedSongsStation
 }
 
 function getById(stationId) {
@@ -120,6 +131,22 @@ async function removeUserLikedFromStation(stationId, userId) {
     return station // ?
 }
 
+function formatSong(song) {
+    const user = {
+        id: getLoggedOnUser()._id,
+        name: getLoggedOnUser().name
+    }
+    return {
+        id: song.id.videoId,
+        title: song.snippet.title,
+        channelTitle: song.snippet.channelTitle,
+        url: `https://youtube.com/watch?v=${song.id.videoId}`,
+        imgUrl: song.snippet.thumbnails.default.url,
+        addedBy: user,
+        addedAt: Date.now()
+    }
+}
+
 
 
 
@@ -160,7 +187,4 @@ function _createStations() {
 
 
 // storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
-
-
-
 
