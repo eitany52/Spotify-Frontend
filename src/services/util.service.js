@@ -6,7 +6,8 @@ export const utilService = {
     randomPastTime,
     saveToStorage,
     loadFromStorage,
-    formatDate
+    formatDate,
+    getRandomExcludingY
 }
 
 function makeId(length = 6) {
@@ -87,3 +88,15 @@ function formatDate(timestamp) {
     }
   }
   
+
+
+  function getRandomExcludingY(x, y) {
+    if (x === 0) throw new Error("x must be greater than 0");
+
+    let randomNum;
+    do {
+        randomNum = Math.floor(Math.random() * (x + 1));
+    } while (randomNum === y);
+
+    return randomNum;
+}

@@ -11,28 +11,14 @@ export function SongDetails({ song, index }) {
   );
 
   return (
-    <div
-      className="song-details"
-      style={{
-        display: "grid",
-        gridTemplateColumns: "0.5fr 1fr 2fr 1fr",
-        alignItems: "start",
-      }}
-    >
-      <span>{index + 1}</span>
-      <img
-        src={song.imgUrl}
-        style={{
-          maxWidth: "100px",
-          maxHeight: "100px",
-          display: "block",
-        }}
-      />
+    <div className="song-details song-details-grid">
+      <section>
+        <span>{index + 1}</span> {<PlayBtn song={song} />}
+      </section>
+      <img src={song.imgUrl} />
       <span>{song.title}</span>
-      <span>{utilService.formatDate(song.addedAt)}</span>
       <SvgIcon iconName="plus" />
-      {/* <section>{<PlayBtn songId={song.id} />}</section> */}
-      <section>{<PlayBtn song={song} />}</section>
+      <span>{utilService.formatDate(song.addedAt)}</span>
     </div>
   );
 }

@@ -8,11 +8,11 @@ import { loadStation } from "../store/actions/station.actions.js";
 // import { utilService } from "../services/util.service.js";
 import { SongDetails } from "./SongDetails.jsx";
 
-import { SvgIcon } from "./SvgIcon.jsx";
+import { SvgIcon, AllIcons } from "./SvgIcon.jsx";
 
 export function StationDetails() {
   const { stationId } = useParams();
-  const station = useSelector(storeState => storeState.stationModule.station);
+  const station = useSelector((storeState) => storeState.stationModule.station);
 
   useEffect(() => {
     loadStation(stationId);
@@ -37,6 +37,7 @@ export function StationDetails() {
         Back Home
       </Link>
 
+      {/* <AllIcons /> */}
       {station && (
         <div>
           <span>playlist</span>
@@ -53,16 +54,11 @@ export function StationDetails() {
 
           {
             <ul>
-              <li
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "0.5fr 1fr 2fr 1fr",
-                  alignItems: "start",
-                }}
-              >
+              <li className="song-details-grid">
                 <label>#</label>
                 <label>img</label>
                 <label>name</label>
+                <label>add</label>
                 <label>Date added</label>
               </li>
             </ul>

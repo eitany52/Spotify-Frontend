@@ -51,7 +51,7 @@ export const SearchResult = () => {
         <div>
             {console.log("SearchResult rendered")}
             {/* <RecentSearches/> */}
-            {params.userInput && songs &&
+            {params.name &&
                 <section>
                     <div>
                         <button>All</button>

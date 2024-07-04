@@ -65,7 +65,6 @@
     line-height: 2em;
     padding: 0 10px;
     margin:5px;
-    cursor: pointer;
   }
  
   @mixin blockBtn( $type : "reguler") {
@@ -85,7 +84,7 @@
 
  @mixin icon {
     width: 20px;
-    height: 20px;
+    //height: 20px;
     display: block;
     border-radius:50%;
     fill: $clr6;
@@ -94,6 +93,9 @@
   @mixin iconBlock(  $color: "light") {
     @if $color == "dark" {
         fill: $clr3;
+    }
+    @if $color == "active" {
+      fill: $clr5;
     }
   }
 
