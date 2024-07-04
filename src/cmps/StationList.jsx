@@ -4,17 +4,14 @@ import { useEffect } from "react"
 import { loadStations } from "../store/actions/station.actions"
 import { getLoggedOnUser } from "../store/actions/user.actions"
 
+// Checked - All looks good.
+
 export const StationList = ({ location }) => {
     const stations = useSelector(storeState => storeState.stationModule.stations)
 
     useEffect(() => {
         loadStations()
-        console.log(stations);
     }, [])
-
-    useEffect(() => {
-        console.log(stations);
-    }, [stations])
 
     if (!stations) return
     return (
@@ -28,7 +25,3 @@ export const StationList = ({ location }) => {
         </>
     )
 }
-
-// crud_eitan:
-
-
