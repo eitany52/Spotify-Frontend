@@ -7,6 +7,9 @@ import { useEffectUpdate } from "../customHooks/useEffectUpdate"
 // import { getLoggedOnUser } from "../store/actions/user.actions"
 // import { addSongToStation } from "../store/actions/station.actions"
 
+
+//Checked - All looks good.
+
 export const SearchResult = () => {
     const params = useParams()
     const [songs, setSongs] = useState(null)
