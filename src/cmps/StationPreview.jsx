@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router"
 import { getLoggedOnUser } from "../store/actions/user.actions"
 
+
+// Checked - All looks good.
+
 export const StationPreview = ({ station, location }) => {
     const navigate = useNavigate()
 
@@ -31,9 +34,3 @@ export const StationPreview = ({ station, location }) => {
         </li>
     )
 }
-
-
-// crud_eitan:
-
-
-
