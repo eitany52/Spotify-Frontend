@@ -73,7 +73,8 @@ async function save(station) {
             tags: station.tags,
             createdBy: station.createdBy,
             likedByUsers: station.likedByUsers,
-            songs: station.songs
+            songs: station.songs,
+            imgUrl: station.imgUrl
         }
         savedStation = await storageService.put(STORAGE_KEY, stationToSave)
     } else {
