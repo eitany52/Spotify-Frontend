@@ -5,6 +5,8 @@ import { ArtistDetails } from "./cmps/ArtistDetails";
 import { StationIndex } from "./pages/StationIndex.jsx";
 import { SearchResult } from "./cmps/SearchResult.jsx";
 
+// Checked - All looks good.
+
 export function RootCmp() {
   return (
     <>
@@ -12,9 +14,9 @@ export function RootCmp() {
         <Route path="/" element={<StationIndex />}>
           <Route path="/search/:userInput?" element={<SearchResult />} />
           <Route path="/station/:stationId" element={<StationDetails />} />
-          <Route path="/artist/:id" element={<ArtistDetails />} />
-          <Route path="/user/:id" element={<UserDetails />} />
-          {/* <Route path="/genre/:id" element={} /> */}
+          <Route path="/artist/:artistId" element={<ArtistDetails />} />
+          <Route path="/user/:userId" element={<UserDetails />} />
+          {/* <Route path="/genre/:genreId" element={} /> */}
           {/* <Route path="/recent-searches" element={} /> */}
         </Route>
       </Routes>
@@ -64,8 +66,3 @@ export function RootCmp() {
   //     </div>
   // )
 }
-
-
-// crud_eitan:
-
-
