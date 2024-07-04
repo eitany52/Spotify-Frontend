@@ -10,6 +10,9 @@ export const SET_SHUFFLE = 'SET_SHUFFLE'
 export const DISPLAY_HIDE_CARD = 'DISPLAY_HIDE_CARD'
 
 
+//Checked - All looks good.
+
+
 // export const SET_CARS = 'SET_CARS'
 // export const UPDATE_CAR = 'UPDATE_CAR'
 // export const ADD_CAR_MSG = 'ADD_CAR_MSG'
@@ -91,8 +94,4 @@ export function stationReducer(state = initialState, action) {
 //     state = carReducer(state, { type: REMOVE_CAR, carId: car1._id })
 //     console.log('After REMOVE_CAR:', state)
 // }
-
-
-
-// crud_eitan: 
 
