@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import { getLoggedOnUser } from "../store/actions/user.actions";
 import { onToggleModal } from "../store/actions/app.actions.js";
 import { FloatingMenuStation } from "../cmps/FloatingMenuStation";
+import { EditStationDetails } from "../cmps/EditStationDetails";
 
 // Checked - All looks good.
 
@@ -20,6 +21,13 @@ export const StationPreview = ({ station, location }) => {
         stationId: station._id,
         onDone() {
           onToggleModal(null);
+        },
+        onOpenStationDetails() {
+          onToggleModal(null);
+          onToggleModal({
+            cmp: EditStationDetails,
+            props: { stationToEdit: station },
+          });
         },
       },
       style: { border: "2px solid white", left: "100px" },
