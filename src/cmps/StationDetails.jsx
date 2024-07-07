@@ -9,6 +9,8 @@ import { loadStation } from "../store/actions/station.actions.js";
 import { SongDetails } from "./SongDetails.jsx";
 
 import { SvgIcon, AllIcons } from "./SvgIcon.jsx";
+import { getLoggedOnUser } from "../store/actions/user.actions.js";
+import { AppSearch } from "./AppSearch.jsx";
 
 //Checked - All looks good.
 
@@ -24,6 +26,9 @@ export function StationDetails() {
   }, [stationId, stations]);
 
   if (!station) return <div>Loading...</div>;
+
+  const isUserStation = getLoggedOnUser()._id === station.createdBy.id
+
   return (
     <section className="station-details">
       <Link to="/" className="btn">
@@ -69,7 +74,8 @@ export function StationDetails() {
                 </li>
               ))}
           </ul>
-
+          {isUserStation && station.type === 'normal' &&
+            <AppSearch />}
           {/* <pre> {JSON.stringify(car, null, 2)} </pre> */}
         </div>
       )}

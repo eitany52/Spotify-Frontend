@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
-import searchRes from "../../data/search.json"
-import { addSongToStation, formatSong, loadLikedSongsStation, loadStation } from "../store/actions/station.actions"
+import { addSongToStation, formatSong, getSongsFromYoutube, loadLikedSongsStation, loadStation } from "../store/actions/station.actions"
 import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../customHooks/useEffectUpdate"
 // import { getLoggedOnUser } from "../store/actions/user.actions"
@@ -27,14 +26,12 @@ export const SearchResult = () => {
 
 
     useEffectUpdate(() => {
-        loadSongsFromYoutube()
+        loadSongs()
     }, [params])
 
-    function loadSongsFromYoutube() {
-        setSongs(searchRes[0].items)
-        // const searchTerm = 'rap-song'
-        // const res = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&key=AIzaSyCUE7BdmEO9uF_gWcV5yY5O3eqyINxdavo`)
-        // const data = await res.json()
+    function loadSongs() {
+        const songs = getSongsFromYoutube()
+        setSongs(songs)
     }
 
     function isSongSavedInStation(song) {

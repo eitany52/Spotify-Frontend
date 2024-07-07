@@ -33,6 +33,23 @@ export async function loadStation(stationId) {
     }
 }
 
+export async function getSongsFromYoutube() {
+    return stationService.getSongsFromYoutube()
+}
+
+export async function createEmptyStation() {
+    try {
+        const station = stationService.createEmptyStation()
+        const savedStation = await stationService.save(station)
+        store.dispatch({type: ADD_STATION, savedStation })
+        return savedStation
+    } catch (err) {
+        console.log("Having issues with saving this station", err)
+        throw err
+    }
+
+}
+
 export async function loadLikedSongsStation() {
     try {
         const likedSongsStation = await stationService.getLikedSongsStation()
