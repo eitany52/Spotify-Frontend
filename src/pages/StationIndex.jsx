@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, Outlet, useLocation, useSearchParams } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { AppSearch } from "../cmps/AppSearch";
 import { AppPlayer } from "../cmps/AppPlayer";
 import { StationList } from "../cmps/StationList";
 import { CurrentSongCard } from "../cmps/CurrentSongCard";
 import { SvgIcon } from "../cmps/SvgIcon";
+import { createEmptyStation } from "../store/actions/station.actions";
 
 export const StationIndex = () => {
   const location = useLocation();
+  const navigate = useNavigate()
 
   const [isSearchDisplayed, setIsSearchDisplayed] = useState(false);
   const [isHomePageDisplayed, setIsHomePageDisplayed] = useState(true);
@@ -31,6 +33,15 @@ export const StationIndex = () => {
       setIsHomePageDisplayed(true);
     } else {
       setIsHomePageDisplayed(false);
+    }
+  }
+
+  async function onCreateEmptyStation() {
+    try {
+      const emptyStation = await createEmptyStation()
+      navigate(`/station/${emptyStation._id}`)
+    } catch (err) {
+      console.log("Creating new playlist failed, please try again later", err)
     }
   }
 
@@ -63,7 +74,7 @@ export const StationIndex = () => {
         <section className="library">
           <div>
             <button title="Collapse Your Library">Your Library</button>
-            <button title="Create playlist or folder">Create</button>
+            <button onClick={onCreateEmptyStation} title="Create playlist">Create</button>
             <button title="Show more">Show more</button>
           </div>
           <div>
