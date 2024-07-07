@@ -18,6 +18,7 @@ export const stationService = {
     addUserLikedToStation,
     removeUserLikedFromStation,
     getLikedSongsStation,
+    isLikedSongStation,
     formatSong,
     createEmptyStation,
     getSongsFromYoutube,
@@ -57,8 +58,18 @@ async function getLikedSongsStation() {
     return likedSongsStation
 }
 
-function getById(stationId) {
-    return storageService.get(STORAGE_KEY, stationId)
+async function isLikedSongStation(stationId){
+    console.log('stationId:', stationId)
+    const station = await getById(stationId)
+    console.log('station:', station)
+    const islikedSongsStation = (station.type === 'liked')
+    console.log('islikedSongsStation:', islikedSongsStation)
+    
+    return islikedSongsStation
+}
+
+async function getById(stationId) {
+    return await storageService.get(STORAGE_KEY, stationId)
 }
 
 async function remove(stationId) {
@@ -168,6 +179,8 @@ async function updateStationDetails(stationToSave) {
     return station // ?)
    
 }
+
+
 
 function formatSong(song) {
     const user = {

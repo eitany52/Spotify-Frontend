@@ -16,7 +16,7 @@ export function SongDetails({ song, index }) {
 
   const station = useSelector((storeState) => storeState.stationModule.station);
 
-  function onClickMore() {
+  function onClickMore(event) {
     console.log("more.......");
     onToggleModal({
       cmp: SongFloatingMenu,
@@ -27,7 +27,12 @@ export function SongDetails({ song, index }) {
           onToggleModal(null);
         },
       },
-      style: { border: "2px solid white", left: "100px" },
+      style: {
+        border: "2px solid white",
+        width: "25vw",
+        left: `${event.clientX - 300}px`,
+        top: `${event.clientY - 200}px`,
+      },
     });
   }
 
