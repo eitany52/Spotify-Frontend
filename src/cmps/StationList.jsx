@@ -6,7 +6,7 @@ import { getLoggedOnUser } from "../store/actions/user.actions";
 
 // Checked - All looks good.
 
-export const StationList = ({ location }) => {
+export const StationList = ({ location, songToAdd = {} }) => {
   const stations = useSelector(
     (storeState) => storeState.stationModule.stations
   );
@@ -25,6 +25,7 @@ export const StationList = ({ location }) => {
             key={station._id}
             station={station}
             location={location}
+            songToAdd={songToAdd}
           />
         ))}
       </ul>

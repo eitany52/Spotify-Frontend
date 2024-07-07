@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 // import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { loadStation } from "../store/actions/station.actions.js";
 // import { utilService } from "../services/util.service.js";
-import { SongDetails } from "./SongDetails.jsx";
+import { SongDetails } from "./SongPreview.jsx";
 
 import { SvgIcon, AllIcons } from "./SvgIcon.jsx";
 import { getLoggedOnUser } from "../store/actions/user.actions.js";
@@ -27,7 +27,7 @@ export function StationDetails() {
 
   if (!station) return <div>Loading...</div>;
 
-  const isUserStation = getLoggedOnUser()._id === station.createdBy.id
+  const isUserStation = getLoggedOnUser()._id === station.createdBy.id;
 
   return (
     <section className="station-details">
@@ -74,8 +74,7 @@ export function StationDetails() {
                 </li>
               ))}
           </ul>
-          {isUserStation && station.type === 'normal' &&
-            <AppSearch />}
+          {isUserStation && station.type === "normal" && <AppSearch />}
           {/* <pre> {JSON.stringify(car, null, 2)} </pre> */}
         </div>
       )}
