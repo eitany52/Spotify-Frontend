@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
 import { utilService } from "../services/util.service.js";
-import { SvgIcon } from "./SvgIcon";
+import { SvgIcon } from "./SvgIcon.jsx";
 import { useSelector } from "react-redux";
-import { PlayBtn } from "../cmps/PlayBtn";
+import { PlayBtn } from "./PlayBtn.jsx";
 import { SongFloatingMenu } from "./FloatingMenuSong.jsx";
 import { AddFloatingMenu } from "./FloatingMenuSongAdd.jsx";
 
@@ -26,10 +26,11 @@ export function SongDetails({ song, index }) {
         onDone() {
           onToggleModal(null);
         },
+        song: song,
       },
       style: {
-        border: "2px solid white",
-        width: "25vw",
+        alignItems: "start",
+        width: "20vw",
         left: `${event.clientX - 300}px`,
         top: `${event.clientY - 200}px`,
       },

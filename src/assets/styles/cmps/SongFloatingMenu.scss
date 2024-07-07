@@ -1,5 +1,16 @@
 .song-floating-menu {
 
+  
+
+    ul {
+        list-style:none;
+        padding-left:0;
+    }
+
+    ul li {
+        padding:10px;
+    }
+
     ul li ul.station-list {
        
         display:none;
@@ -10,12 +21,17 @@
     }
 
     ul li:hover ul.station-list {
+        padding:20px;
         display:block;
         position:absolute;
-        right: 70%;
+        right: 100%;
         top: 0;
-        width: 300px;
+        width: 200px;
+        background:$clr3;
     }
 
+
+
+    
 
 }

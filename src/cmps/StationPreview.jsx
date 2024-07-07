@@ -1,19 +1,33 @@
 import { useNavigate } from "react-router";
 import { getLoggedOnUser } from "../store/actions/user.actions";
 import { onToggleModal } from "../store/actions/app.actions.js";
+import { addSongToStation } from "../store/actions/station.actions.js";
+
 import { FloatingMenuStation } from "../cmps/FloatingMenuStation";
 import { EditStationDetails } from "../cmps/EditStationDetails";
 
 // Checked - All looks good.
 
-export const StationPreview = ({ station, location }) => {
+export const StationPreview = ({ station, location, songToAdd }) => {
   const navigate = useNavigate();
+
+  function onClickStation() {
+    if (location === "modal") {
+      console.log("onClickStation modal");
+      songToAdd.addedAt = Date.now();
+      addSongToStation(station._id, songToAdd);
+      onToggleModal(null);
+    } else {
+      onGoToStationDetails();
+    }
+  }
 
   function onGoToStationDetails() {
     navigate(`/station/${station._id}`);
   }
 
   function handleRightClick(event) {
+    if (location === "modal") return;
     event.preventDefault();
     onToggleModal({
       cmp: FloatingMenuStation,
@@ -28,7 +42,6 @@ export const StationPreview = ({ station, location }) => {
             cmp: EditStationDetails,
             props: { stationToEdit: station },
             style: {
-              border: "2px solid red",
               margin: "auto",
               width: "25vw",
             },
@@ -36,7 +49,6 @@ export const StationPreview = ({ station, location }) => {
         },
       },
       style: {
-        border: "2px solid green",
         width: "25vw",
         left: `${event.clientX}px`,
         top: `${event.clientY}px`,
@@ -52,7 +64,7 @@ export const StationPreview = ({ station, location }) => {
   );
   return (
     <li
-      onClick={onGoToStationDetails}
+      onClick={onClickStation}
       onContextMenu={handleRightClick}
       className="station-preview"
     >

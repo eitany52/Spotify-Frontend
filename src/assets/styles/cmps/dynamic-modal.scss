@@ -16,16 +16,25 @@
     inset: 0;
     width: 40vw; 
     height: fit-content;
-    padding: 20px;
-    background-color: black;
+    padding: 20px 0px;
+    background:$clr3;
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 10px;
+    // border-radius: 10px;
     justify-content: space-evenly;
     // margin: auto;
     z-index: 3;
+
+    ul {
+        list-style:none;
+        padding-left:0;
+    }
+
+    ul li {
+        padding:10px;
+    }
 
     .close-btn {
         position: absolute;

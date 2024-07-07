@@ -1,6 +1,6 @@
 .app-player {
     display:grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 0 1fr 1fr 1fr;
 }
 
 .app-player .current-song-details {
