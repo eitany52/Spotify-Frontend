@@ -13,6 +13,8 @@ export function DynamicModal() {
   const Cmp = modalData?.cmp || (() => "");
   const props = modalData?.props || {};
   const style = modalData?.style || {};
+
+  console.log(style);
   return (
     <>
       <section onClick={onCloseModal} className="modal-backdrop"></section>

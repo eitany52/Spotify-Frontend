@@ -27,10 +27,20 @@ export const StationPreview = ({ station, location }) => {
           onToggleModal({
             cmp: EditStationDetails,
             props: { stationToEdit: station },
+            style: {
+              border: "2px solid red",
+              margin: "auto",
+              width: "25vw",
+            },
           });
         },
       },
-      style: { border: "2px solid white", left: "100px" },
+      style: {
+        border: "2px solid green",
+        width: "25vw",
+        left: `${event.clientX}px`,
+        top: `${event.clientY}px`,
+      },
     });
   }
 

@@ -10,10 +10,11 @@
 }
 
 .modal-content {
-    position: fixed;
+    //position: fixed;
+    position:absolute;
     font-size: 1.1em;
     inset: 0;
-    width: 40vw;
+    width: 40vw; 
     height: fit-content;
     padding: 20px;
     background-color: black;
@@ -23,7 +24,7 @@
     align-items: center;
     border-radius: 10px;
     justify-content: space-evenly;
-    margin: auto;
+    // margin: auto;
     z-index: 3;
 
     .close-btn {
