@@ -6,32 +6,33 @@ import { useEffectUpdate } from "../customHooks/useEffectUpdate"
 // import { getLoggedOnUser } from "../store/actions/user.actions"
 // import { addSongToStation } from "../store/actions/station.actions"
 
-
 //Checked - All looks good.
 
 export const SearchResult = () => {
-    const params = useParams()
-    const [songs, setSongs] = useState(null)
-    const likedSongsStation = useSelector(storeState =>
-        storeState.stationModule.station)
-
+    const params = useParams();
+    const [songs, setSongs] = useState(null);
+    const likedSongsStation = useSelector(
+        (storeState) => storeState.stationModule.station
+    );
 
     useEffect(() => {
-        loadLikedSongsStation()
-    }, [])
+        loadLikedSongsStation();
+    }, []);
 
     // useEffect(() => {
     //     setIsSongAdded(false)
     // }, [isSongAdded])
 
+    useEffectUpdate(() => {
+        loadSongs();
+    }, [params]);
 
     useEffectUpdate(() => {
         loadSongs()
     }, [params])
 
     function loadSongs() {
-        const songs = getSongsFromYoutube()
-        setSongs(songs)
+        setSongs(getSongsFromYoutube())
     }
 
     function isSongSavedInStation(song) {
@@ -40,18 +41,17 @@ export const SearchResult = () => {
 
     async function onAddToLikedSongs(songToAdd) {
         try {
-            await addSongToStation(likedSongsStation._id, songToAdd)
-            loadLikedSongsStation()
+            await addSongToStation(likedSongsStation._id, songToAdd);
+            loadLikedSongsStation();
         } catch (error) {
-            console.log("Having issues with saving this song")
+            console.log("Having issues with saving this song");
         }
     }
-    console.log("SearchResult rendered")
+    console.log("SearchResult rendered");
     return (
         <div>
-            
             {/* <RecentSearches/> */}
-            {params.userInput && songs &&
+            {params.userInput && songs && (
                 <section>
                     <div>
                         <button>All</button>
@@ -69,30 +69,33 @@ export const SearchResult = () => {
                     <div>
                         <h2>Songs</h2>
                         <ul>
-                            {songs.map(_song => {
-                                const song = formatSong(_song)
-                                const songImg = song.imgUrl
-                                const songName = song.title
-                                const artistName = song.channelTitle
+                            {songs.map((_song) => {
+                                const song = formatSong(_song);
+                                const songImg = song.imgUrl;
+                                const songName = song.title;
+                                const artistName = song.channelTitle;
                                 return (
                                     <li key={song.id}>
                                         <img
                                             style={{ width: "40px", height: "40px" }}
-                                            src={songImg} />
+                                            src={songImg}
+                                        />
                                         <span>{songName}</span>
                                         <span>{artistName}</span>
                                         <button
                                             title="Add to Liked Songs"
-                                            onClick={() => onAddToLikedSongs(song)}>
+                                            onClick={() => onAddToLikedSongs(song)}
+                                        >
                                             {isSongSavedInStation(song) ? "Added" : "Add"}
                                         </button>
                                     </li>
-                                )
+                                );
                             })}
                         </ul>
                     </div>
-                </section>}
+                </section>
+            )}
             <h1>Suggestions</h1>
         </div>
-    )
-}
+    );
+};

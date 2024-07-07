@@ -4,8 +4,8 @@ import { utilService } from "../services/util.service.js";
 import { SvgIcon } from "./SvgIcon";
 import { useSelector } from "react-redux";
 import { PlayBtn } from "../cmps/PlayBtn";
-import { SongFloatingMenu } from "../cmps/SongFloatingMenu";
-import { AddFloatingMenu } from "../cmps/AddFloatingMenu";
+import { SongFloatingMenu } from "./FloatingMenuSong.jsx";
+import { AddFloatingMenu } from "./FloatingMenuSongAdd.jsx";
 
 import { onToggleModal } from "../store/actions/app.actions.js";
 

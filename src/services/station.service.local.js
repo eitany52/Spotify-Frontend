@@ -20,7 +20,8 @@ export const stationService = {
     getLikedSongsStation,
     formatSong,
     createEmptyStation,
-    getSongsFromYoutube
+    getSongsFromYoutube,
+    updateStationDetails
     // getEmptyCar,
     // addCarMsg
 }
@@ -153,6 +154,19 @@ async function removeUserLikedFromStation(stationId, userId) {
     await storageService.put(STORAGE_KEY, station)
 
     return station // ?
+}
+
+
+async function updateStationDetails(stationToSave) {
+
+    const station = await getById(stationToSave._id)
+
+    station.name = stationToSave.name;
+    station.description = stationToSave.description;
+    await storageService.put(STORAGE_KEY, station)
+
+    return station // ?)
+   
 }
 
 function formatSong(song) {

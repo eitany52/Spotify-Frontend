@@ -33,7 +33,7 @@ export async function loadStation(stationId) {
     }
 }
 
-export async function getSongsFromYoutube() {
+export function getSongsFromYoutube() {
     return stationService.getSongsFromYoutube()
 }
 
@@ -120,11 +120,22 @@ export async function removeUserLikedFromStation(stationId, userId) {
         const updatedStation = await stationService.removeUserLikedFromStation(stationId, userId)
         store.dispatch({ type: UPDATE_STATION, updatedStation })
     } catch (err) {
-        console.log('Cannot add user liked to station', err)
+        console.log('Cannot remove user liked from station', err)
         throw err
     }
 }
 
+
+
+export async function updateStationDetails(station) {
+    try {
+        const updatedStation = await stationService.updateStationDetails(station)
+        store.dispatch({ type: UPDATE_STATION, updatedStation })
+    } catch (err) {
+        console.log('Cannot update station details', err)
+        throw err
+    }
+}
 
 export async function setCurrentSong(song) {
     try {

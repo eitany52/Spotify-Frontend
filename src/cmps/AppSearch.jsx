@@ -10,6 +10,7 @@ import { SvgIcon } from "./SvgIcon";
 import { useLocation, useNavigate } from "react-router";
 import { getSongsFromYoutube } from "../store/actions/station.actions";
 import { useEffectUpdate } from "../customHooks/useEffectUpdate";
+import { SongList } from "./SongList";
 
 
 // Checked - All looks good.
@@ -19,6 +20,7 @@ export const AppSearch = () => {
   const navigate = useNavigate()
   const [isUserAtStation, setIsUserAtStation] = useState(false)
   const [userInput, setUserInput] = useState(null)
+  const [songs, setSongs] = useState(null)
 
 
   useEffect(() => {
@@ -29,7 +31,7 @@ export const AppSearch = () => {
     if (!userInput) return
 
     if (isUserAtStation) {
-      getSongsFromYoutube()
+      setSongs(getSongsFromYoutube())
     }
     else {
       navigate(`/search/${userInput}`)
@@ -58,13 +60,15 @@ export const AppSearch = () => {
 
 
   return (
-    <form className="search-form" onSubmit={onSearch}>
-      <span className="icon-search"><SvgIcon iconName={"search"} /></span>
-      <input
-        type="text"
-        name="txt"
-        placeholder={isUserAtStation ? "Search for songs" : "What do you want to play?"} />
-    </form>
-    // {isUserAtStation && userInput && <SongList/>}
+    <div className="app-search">
+      <form className="search-form" onSubmit={onSearch}>
+        <span className="icon-search"><SvgIcon iconName={"search"} /></span>
+        <input
+          type="text"
+          name="txt"
+          placeholder={isUserAtStation ? "Search for songs" : "What do you want to play?"} />
+      </form>
+      {isUserAtStation && userInput && songs && <SongList songs={songs}/>}
+    </div>
   );
 };

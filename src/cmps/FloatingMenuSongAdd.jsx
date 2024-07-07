@@ -1,9 +1,8 @@
 import React from "react";
-import { StationList } from "../cmps/StationList";
-
 import { removeSongFromStation } from "../store/actions/station.actions.js";
+import { StationList } from "./StationList.jsx";
 
-export const SongFloatingMenu = ({ stationId, songId, onDone }) => {
+export const AddFloatingMenu = ({ stationId, songId, onDone }) => {
   // console.log("SongFloatingMenu stationId:", stationId);
   // console.log("SongFloatingMenu songId:", songId);
 
@@ -13,14 +12,12 @@ export const SongFloatingMenu = ({ stationId, songId, onDone }) => {
     onDone();
   }
   return (
-    <div className="song-floating-menu">
+    <div className="add-floating-menu">
       <ul>
-        <li>
-          Add To Playlist
-          <StationList location="main" />
-        </li>
-        <li onClick={onRemove}>Remove From This Playlist</li>
-        <li>Remove From Your Liked Songs</li>
+        {/* <li>Add To Playlist</li> */}
+
+        <StationList location="modal" />
+        {/* <li>Remove From Your Liked Songs</li> */}
       </ul>
     </div>
   );
