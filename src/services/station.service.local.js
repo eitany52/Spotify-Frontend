@@ -1,8 +1,8 @@
-
 import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
 import { userService } from './user.service.local'
 import initialStations from '../../data/stations.json'
+import searchRes from "../../data/search.json"
 import { getLoggedOnUser } from '../store/actions/user.actions'
 
 //Checked - All looks good.
@@ -19,8 +19,10 @@ export const stationService = {
     removeUserLikedFromStation,
     getLikedSongsStation,
     isLikedSongStation,
-    updateStationDetails,
-    formatSong
+    formatSong,
+    createEmptyStation,
+    getSongsFromYoutube,
+    updateStationDetails
     // getEmptyCar,
     // addCarMsg
 }
@@ -75,29 +77,50 @@ async function remove(stationId) {
     await storageService.remove(STORAGE_KEY, stationId)
 }
 
-async function save(station) {
+function createEmptyStation() {
+    return {
+        _id: "",
+        name: "My Playlist",
+        type: "normal",
+        description: null,
+        tags: [],
+        createdBy: {},
+        savedBy: [],
+        songs: []
+    }
+}
 
-    var savedStation
+async function save(station) {
+    let savedStation
     if (station._id) {
-        const stationToSave = {
-            _id: station._id,
-            name: station.name,
-            tags: station.tags,
-            createdBy: station.createdBy,
-            likedByUsers: station.likedByUsers,
-            songs: station.songs,
-            imgUrl: station.imgUrl
-        }
-        savedStation = await storageService.put(STORAGE_KEY, stationToSave)
+        // const stationToSave = {
+        //     _id: station._id,
+        //     name: station.name,
+        //     tags: station.tags,
+        //     createdBy: station.createdBy,
+        //     likedByUsers: station.likedByUsers,
+        //     songs: station.songs
+        // }
+        savedStation = await storageService.put(STORAGE_KEY, station)
     } else {
         // Later, owner is set by the backend
+        const user = {
+            id: getLoggedOnUser()._id,
+            name: getLoggedOnUser().name
+        }
         const stationToSave = {
-            name: station.name,
-            createdBy: userService.getLogedonUser(),
+            ...station, createdBy: user
         }
         savedStation = await storageService.post(STORAGE_KEY, stationToSave)
     }
     return savedStation
+}
+
+function getSongsFromYoutube() {
+    return searchRes[0].items
+    // const searchTerm = 'rap-song'
+    // const res = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&key=AIzaSyCUE7BdmEO9uF_gWcV5yY5O3eqyINxdavo`)
+    // const data = await res.json()
 }
 
 
@@ -114,8 +137,8 @@ async function addSongToStation(stationId, song) {
 
 
 async function removeSongFromStation(stationId, songId) {
-    console.log('station.service removeSongFromStation stationId:',stationId)
-    console.log('station.service removeSongFromStation songId:',songId)
+    console.log('station.service removeSongFromStation stationId:', stationId)
+    console.log('station.service removeSongFromStation songId:', songId)
 
     const station = await getById(stationId)
     console.log('station.service removeSongFromStation station:', station)
