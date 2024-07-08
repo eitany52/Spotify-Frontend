@@ -80,6 +80,19 @@ button, .btn {
     &:not(.active):hover {  @include blockBtn($type: 'hover'); } 
 }
 
+
+
+
+    .btn-icon {
+        display:grid;
+        grid-template-columns: auto auto;
+       align-items:center;
+       gap:20px;
+      
+    }
+    
+
+
 i {
     @include icon;
     &.dark { @include iconBlock($color: "dark")}
@@ -105,4 +118,12 @@ i {
 .svg-big {
     @include svgBig;
     &:hover { @include bigger}
+}
+
+
+input { 
+    background-color:$clr3;
+    color:$clr6;
+    border: none;
+    line-height: 2em;
 }

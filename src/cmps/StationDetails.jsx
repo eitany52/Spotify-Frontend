@@ -26,7 +26,6 @@ export function StationDetails() {
     loadStation(stationId);
   }, [stationId, stations]);
 
-
   function onMoreOptions(ev, song) {
     console.log("song:", song);
     console.log("ev:", ev);
@@ -39,8 +38,8 @@ export function StationDetails() {
         onDone() {
           onToggleModal(null);
         },
-        song:song,
-        class:"floating-menu-song"
+        song: song,
+        class: "floating-menu-song",
       },
       style: {
         left: `${ev.clientX - 300}px`,
@@ -59,7 +58,7 @@ export function StationDetails() {
         onDone() {
           onToggleModal(null);
         },
-        class:"floating-menu-song-add"
+        class: "floating-menu-song-add",
       },
       style: {
         left: `${ev.clientX - 300}px`,
@@ -67,7 +66,6 @@ export function StationDetails() {
       },
     });
   }
-
 
   function onClickMore(event) {
     onToggleModal({
@@ -105,9 +103,6 @@ export function StationDetails() {
       },
     });
   }
-
-
-
 
   if (!station) return <div>Loading...</div>;
 
@@ -147,9 +142,9 @@ export function StationDetails() {
             songs={station.songs}
             onAddToStation={onAddToStation}
             onMoreOptions={onMoreOptions}
-            type='station' />
-          {isUserStation && station.type === 'normal' &&
-            <AppSearch />}
+            type="station"
+          />
+          {isUserStation && station.type === "normal" && <AppSearch />}
         </div>
       )}
     </section>

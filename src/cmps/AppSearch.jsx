@@ -8,79 +8,84 @@ import { useSelector } from "react-redux";
 // import { loadStations, addStation } from "../store/actions/station.actions";
 import { SvgIcon } from "./SvgIcon";
 import { useLocation, useNavigate } from "react-router";
-import { addSongToStation, getSongsFromYoutube, removeSongFromStation } from "../store/actions/station.actions";
+import {
+  addSongToStation,
+  getSongsFromYoutube,
+  removeSongFromStation,
+} from "../store/actions/station.actions";
 import { SongList } from "./SongList";
-
 
 // Checked - All looks good.
 
 export const AppSearch = () => {
-  const location = useLocation()
-  const navigate = useNavigate()
-  const [isUserAtStation, setIsUserAtStation] = useState(false)
-  const [userInput, setUserInput] = useState(null)
-  const [songs, setSongs] = useState(null)
-  const station = useSelector(storeState => storeState.stationModule.station)
-
-
-  useEffect(() => {
-    getLocation()
-  }, [location])
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [isUserAtStation, setIsUserAtStation] = useState(false);
+  const [userInput, setUserInput] = useState(null);
+  const [songs, setSongs] = useState(null);
+  const station = useSelector((storeState) => storeState.stationModule.station);
 
   useEffect(() => {
-    if (!userInput) return
+    getLocation();
+  }, [location]);
+
+  useEffect(() => {
+    if (!userInput) return;
 
     if (isUserAtStation) {
-      setSongs(getSongsFromYoutube())
+      setSongs(getSongsFromYoutube());
+    } else {
+      navigate(`/search/${userInput}`);
     }
-    else {
-      navigate(`/search/${userInput}`)
-    }
-  }, [userInput])
-
+  }, [userInput]);
 
   function getLocation() {
-    if (location.pathname.includes('station')) {
-      setIsUserAtStation(true)
-    }
-    else {
-      setIsUserAtStation(false)
+    if (location.pathname.includes("station")) {
+      setIsUserAtStation(true);
+    } else {
+      setIsUserAtStation(false);
     }
   }
 
   async function onSearch(ev) {
-    ev.preventDefault()
-    setUserInput(ev.target.txt.value)
+    ev.preventDefault();
+    setUserInput(ev.target.txt.value);
   }
 
   function onToggleAddToStation(song) {
-    if(isSongSavedAtStation(song)) {
-      removeSongFromStation(station.id, song.id)
-    }
-    else {
-      addSongToStation(station.id, song.id)
+    if (isSongSavedAtStation(song)) {
+      removeSongFromStation(station.id, song.id);
+    } else {
+      addSongToStation(station.id, song.id);
     }
   }
 
   function isSongSavedAtStation(song) {
-      return station.songs.some(_song => _song.id === song.id)
+    return station.songs.some((_song) => _song.id === song.id);
   }
 
   return (
     <div className="app-search">
       <form className="search-form" onSubmit={onSearch}>
-        <span className="icon-search"><SvgIcon iconName={"search"} /></span>
+        <span className="icon-search">
+          <SvgIcon iconName={"search"} />
+        </span>
         <input
           type="text"
           name="txt"
-          placeholder={isUserAtStation ? "Search for songs" : "What do you want to play?"} />
+          placeholder={
+            isUserAtStation ? "Search for songs" : "What do you want to play?"
+          }
+        />
       </form>
-      {isUserAtStation && userInput && songs &&
+      {isUserAtStation && userInput && songs && (
         <SongList
           songs={songs}
           onAddToStation={onToggleAddToStation}
           isSongSavedAtStation={isSongSavedAtStation}
-          type='searchAtStation' />}
+          type="searchAtStation"
+        />
+      )}
     </div>
   );
 };

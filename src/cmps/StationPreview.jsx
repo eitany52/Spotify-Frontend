@@ -49,7 +49,6 @@ export const StationPreview = ({ station, location, songToAdd }) => {
         },
       },
       style: {
-        // width: "25vw",
         left: `${event.clientX}px`,
         top: `${event.clientY}px`,
       },
