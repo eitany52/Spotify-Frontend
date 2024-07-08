@@ -1,11 +1,17 @@
 .station-list {
     &.library {
         img {max-width:50px;}
+
+        & { 
+            padding-left:0;
+            & li {margin:20px }
+        }
+
     }
 
     &.main {
         display:grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap:10px;
         img {max-width:200px;}
     }

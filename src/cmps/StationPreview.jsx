@@ -36,20 +36,20 @@ export const StationPreview = ({ station, location, songToAdd }) => {
         onDone() {
           onToggleModal(null);
         },
+        class: "floating-menu-station",
         onOpenStationDetails() {
           onToggleModal(null);
           onToggleModal({
             cmp: EditStationDetails,
-            props: { stationToEdit: station },
-            style: {
-              margin: "auto",
-              width: "25vw",
+            props: {
+              stationToEdit: station,
+              class: "floating-edit-station-details",
             },
           });
         },
       },
       style: {
-        width: "25vw",
+        // width: "25vw",
         left: `${event.clientX}px`,
         top: `${event.clientY}px`,
       },
@@ -63,28 +63,53 @@ export const StationPreview = ({ station, location, songToAdd }) => {
     (user) => user.id === getLoggedOnUser()._id
   );
   return (
+    // <li
+    //   onClick={onClickStation}
+    //   onContextMenu={handleRightClick}
+    //   className="station-preview"
+    // >
+    //   {location === "library" && (isUserStation || isSavedStation) && (
+    //     <section>
+    //       <img src={station.img} />
+    //       <h5>{station.name}</h5>
+    //       <span>
+    //         {/* Playlist ·{" "} */}
+    //         {station.type === "liked" ? `${numOfSongs} songs` : profileName}
+    //       </span>
+    //     </section>
+    //   )}
+    //   {/* {location !== "main" && ( */}
+    //   <section>
+    //     <img src={station.imgUrl} />
+    //     <h5>{station.name}</h5>
+    //     {location === "main" && <span>{station.description}</span>}
+    //   </section>
+    //   {/* )} */}
+    // </li>
+
     <li
       onClick={onClickStation}
       onContextMenu={handleRightClick}
-      className="station-preview"
+      className={`station-preview   ${location} `}
     >
-      {location === "library" && (isUserStation || isSavedStation) && (
-        <section>
-          {/* <img src={station.img}/> */}
-          <h5>{station.name}</h5>
-          <span>
-            Playlist ·{" "}
-            {station.type === "liked" ? `${numOfSongs} songs` : profileName}
-          </span>
+      {station.type === "liked" ? (
+        <section className="intro">
+          <img src={station.imgUrl} />
+          <section>
+            <h5>{station.name}</h5>
+            {location !== "modal" && <span> {numOfSongs} songs </span>}
+          </section>
+        </section>
+      ) : (
+        <section className="intro">
+          <img src={station.imgUrl} />
+          <section>
+            <h5>{station.name}</h5>
+            {location !== "modal" && <span> {profileName} </span>}
+            {location === "main" && <span>{station.description}</span>}
+          </section>
         </section>
       )}
-      {/* {location === "main" && ( */}
-      <section>
-        <img src={station.imgUrl} />
-        <h5>{station.name}</h5>
-        {location === "main" && <span>{station.description}</span>}
-      </section>
-      {/* )} */}
     </li>
   );
 };

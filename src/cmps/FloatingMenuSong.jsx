@@ -3,7 +3,7 @@ import { StationList } from "./StationList.jsx";
 
 import { removeSongFromStation } from "../store/actions/station.actions.js";
 
-export const SongFloatingMenu = ({ stationId, songId, onDone, song }) => {
+export const FloatingMenuSong = ({ stationId, songId, onDone, song }) => {
   // console.log("SongFloatingMenu stationId:", stationId);
   // console.log("SongFloatingMenu songId:", songId);
 

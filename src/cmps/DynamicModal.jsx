@@ -1,4 +1,6 @@
 import { useSelector } from "react-redux";
+import { SvgIcon } from "./SvgIcon.jsx";
+
 import { onToggleModal } from "../store/actions/app.actions.js";
 
 export function DynamicModal() {
@@ -17,12 +19,12 @@ export function DynamicModal() {
   console.log(style);
   return (
     <>
-      <section onClick={onCloseModal} className="modal-backdrop"></section>
-      <section style={style} className="modal-content">
+      {/* <section onClick={onCloseModal} className="modal-backdrop"></section> */}
+      <section style={style} className={`modal-content  ${props.class}`}>
         <Cmp {...props} />
-        <button className="btn close-btn" onClick={onCloseModal}>
-          X
-        </button>
+        <span className="btn close-btn" onClick={onCloseModal}>
+          <SvgIcon iconName="close" />
+        </span>
       </section>
     </>
   );

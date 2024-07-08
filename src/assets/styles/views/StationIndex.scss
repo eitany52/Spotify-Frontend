@@ -54,7 +54,13 @@
 
     main {
         grid-area: m;
-        overflow-x: auto;
+        overflow: hidden;
+        transition: overflow 0.3s ease;
+
+        &:hover{
+            overflow: auto;
+        }
+
     }
 
     aside {

@@ -31,23 +31,30 @@ export function StationDetails() {
 
   return (
     <section className="station-details">
-      <Link to="/" className="btn">
+      {/* <Link to="/" className="btn">
         Back Home
-      </Link>
+      </Link> */}
 
       {/* <AllIcons /> */}
       {station && (
         <div>
-          <span>playlist</span>
-          <h3>{station.name}</h3>
-          <h4>
-            {station.createdBy.fullname} |{" "}
-            {station.songs && station.songs.length} songs{" "}
-          </h4>
-          {station.songs && station.songs.length && (
-            <img src={station.songs[0].imgUrl} />
-          )}
+          <header>
+            <span>playlist</span>
+            <section className="intro">
+              <img src={station.imgUrl} />
+              <section>
+                <h2>{station.name}</h2>
+                <h3>
+                  {station.createdBy.fullname} |{" "}
+                  {station.songs && station.songs.length} songs{" "}
+                </h3>
+              </section>
+            </section>
 
+            {/* {station.songs && station.songs.length && (
+            <img src={station.songs[0].imgUrl} />
+          )} */}
+          </header>
           <section className="svg-big bigger">
             <SvgIcon iconName="play" style="dark" />
           </section>
