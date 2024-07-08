@@ -6,11 +6,14 @@ import { Link } from "react-router-dom";
 // import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { loadStation } from "../store/actions/station.actions.js";
 // import { utilService } from "../services/util.service.js";
-import { SongDetails } from "./SongDetails.jsx";
-
+import { SongPreview } from "./SongPreview.jsx"
 import { SvgIcon, AllIcons } from "./SvgIcon.jsx";
 import { getLoggedOnUser } from "../store/actions/user.actions.js";
 import { AppSearch } from "./AppSearch.jsx";
+import { SongList } from "./SongList.jsx";
+import { AddFloatingMenu } from "./FloatingMenuSongAdd.jsx";
+import { onToggleModal } from "../store/actions/app.actions.js";
+import { SongFloatingMenu } from "./FloatingMenuSong.jsx";
 
 //Checked - All looks good.
 
@@ -24,6 +27,46 @@ export function StationDetails() {
   useEffect(() => {
     loadStation(stationId);
   }, [stationId, stations]);
+
+
+  function onMoreOptions(ev, song) {
+    console.log("song:", song);
+    console.log("ev:", ev);
+    console.log("more.......");
+    onToggleModal({
+      cmp: SongFloatingMenu,
+      props: {
+        stationId: station._id,
+        songId: song.id,
+        onDone() {
+          onToggleModal(null);
+        },
+      },
+      style: {
+        border: "2px solid white",
+        width: "25vw",
+        left: `${ev.clientX - 300}px`,
+        top: `${ev.clientY - 200}px`,
+      },
+    });
+  }
+
+  function onAddToStation(ev, song) {
+    console.log("Add.......");
+    onToggleModal({
+      cmp: AddFloatingMenu,
+      props: {
+        stationId: station._id,
+        songId: song.id,
+        onDone() {
+          onToggleModal(null);
+        },
+      },
+    });
+  }
+
+
+
 
   if (!station) return <div>Loading...</div>;
 
@@ -52,34 +95,15 @@ export function StationDetails() {
             <SvgIcon iconName="play" style="dark" />
           </section>
 
-          {
-            <ul>
-              <li className="song-details-grid">
-                <label>#</label>
-                <label>img</label>
-                <label>name</label>
-                <label>add</label>
-                <label>Date added</label>
-                <label></label>
-              </li>
-            </ul>
-          }
-
-          <ul>
-            {station.songs &&
-              station.songs.length &&
-              station.songs.map((song, index) => (
-                <li key={song.id}>
-                  <SongDetails song={song} index={index} />
-                </li>
-              ))}
-          </ul>
+          <SongList
+            songs={station.songs}
+            onAddToStation={onAddToStation}
+            onMoreOptions={onMoreOptions}
+            type='station' />
           {isUserStation && station.type === 'normal' &&
             <AppSearch />}
-          {/* <pre> {JSON.stringify(car, null, 2)} </pre> */}
         </div>
       )}
-      {/* <button onClick={() => { onAddCarMsg(car._id) }}>Add car msg</button> */}
     </section>
   );
 }

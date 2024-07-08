@@ -8,8 +8,7 @@ import { useSelector } from "react-redux";
 // import { loadStations, addStation } from "../store/actions/station.actions";
 import { SvgIcon } from "./SvgIcon";
 import { useLocation, useNavigate } from "react-router";
-import { getSongsFromYoutube } from "../store/actions/station.actions";
-import { useEffectUpdate } from "../customHooks/useEffectUpdate";
+import { addSongToStation, getSongsFromYoutube, removeSongFromStation } from "../store/actions/station.actions";
 import { SongList } from "./SongList";
 
 
@@ -21,6 +20,7 @@ export const AppSearch = () => {
   const [isUserAtStation, setIsUserAtStation] = useState(false)
   const [userInput, setUserInput] = useState(null)
   const [songs, setSongs] = useState(null)
+  const station = useSelector(storeState => storeState.stationModule.station)
 
 
   useEffect(() => {
@@ -51,13 +51,20 @@ export const AppSearch = () => {
   async function onSearch(ev) {
     ev.preventDefault()
     setUserInput(ev.target.txt.value)
-    // const searchTerm = 'rap-song'
-    // const res = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&key=AIzaSyCUE7BdmEO9uF_gWcV5yY5O3eqyINxdavo`)
-    // const data = await res.json()
-    // console.log(data);
-    //
   }
 
+  function onToggleAddToStation(song) {
+    if(isSongSavedAtStation(song)) {
+      removeSongFromStation(station.id, song.id)
+    }
+    else {
+      addSongToStation(station.id, song.id)
+    }
+  }
+
+  function isSongSavedAtStation(song) {
+      return station.songs.some(_song => _song.id === song.id)
+  }
 
   return (
     <div className="app-search">
@@ -68,7 +75,12 @@ export const AppSearch = () => {
           name="txt"
           placeholder={isUserAtStation ? "Search for songs" : "What do you want to play?"} />
       </form>
-      {isUserAtStation && userInput && songs && <SongList songs={songs}/>}
+      {isUserAtStation && userInput && songs &&
+        <SongList
+          songs={songs}
+          onAddToStation={onToggleAddToStation}
+          isSongSavedAtStation={isSongSavedAtStation}
+          type='searchAtStation' />}
     </div>
   );
 };
