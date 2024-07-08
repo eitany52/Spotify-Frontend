@@ -4,8 +4,8 @@ import { utilService } from "../services/util.service.js";
 import { SvgIcon } from "./SvgIcon.jsx";
 import { useSelector } from "react-redux";
 import { PlayBtn } from "./PlayBtn.jsx";
-import { SongFloatingMenu } from "./FloatingMenuSong.jsx";
-import { AddFloatingMenu } from "./FloatingMenuSongAdd.jsx";
+import { FloatingMenuSong } from "./FloatingMenuSong.jsx";
+import { FloatingMenuSongAdd } from "./FloatingMenuSongAdd.jsx";
 
 import { onToggleModal } from "../store/actions/app.actions.js";
 
@@ -17,9 +17,8 @@ export function SongDetails({ song, index }) {
   const station = useSelector((storeState) => storeState.stationModule.station);
 
   function onClickMore(event) {
-    console.log("more.......");
     onToggleModal({
-      cmp: SongFloatingMenu,
+      cmp: FloatingMenuSong,
       props: {
         stationId: station._id,
         songId: song.id,
@@ -27,26 +26,29 @@ export function SongDetails({ song, index }) {
           onToggleModal(null);
         },
         song: song,
+        class: "floating-menu-song",
       },
       style: {
-        alignItems: "start",
-        width: "20vw",
         left: `${event.clientX - 300}px`,
         top: `${event.clientY - 200}px`,
       },
     });
   }
 
-  function onClickAdd() {
-    console.log("Add.......");
+  function onClickAdd(event) {
     onToggleModal({
-      cmp: AddFloatingMenu,
+      cmp: FloatingMenuSongAdd,
       props: {
         stationId: station._id,
         songId: song.id,
         onDone() {
           onToggleModal(null);
         },
+        class: "floating-menu-song-add",
+      },
+      style: {
+        left: `${event.clientX - 300}px`,
+        top: `${event.clientY - 200}px`,
       },
     });
   }

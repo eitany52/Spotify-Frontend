@@ -2,7 +2,7 @@ import React from "react";
 import { removeSongFromStation } from "../store/actions/station.actions.js";
 import { StationList } from "./StationList.jsx";
 
-export const AddFloatingMenu = ({ stationId, songId, onDone }) => {
+export const FloatingMenuSongAdd = ({ stationId, songId, onDone }) => {
   // console.log("SongFloatingMenu stationId:", stationId);
   // console.log("SongFloatingMenu songId:", songId);
 
@@ -12,7 +12,7 @@ export const AddFloatingMenu = ({ stationId, songId, onDone }) => {
     onDone();
   }
   return (
-    <div className="add-floating-menu">
+    <div className="floating-menu-song-add">
       <ul>
         {/* <li>Add To Playlist</li> */}
 

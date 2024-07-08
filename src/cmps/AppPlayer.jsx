@@ -144,7 +144,9 @@ export const AppPlayer = () => {
   };
 
   const onDisplayCard = () => {
-    setDisplayHideCard(!displayCard);
+    if (currentSong.id) {
+      setDisplayHideCard(!displayCard);
+    }
   };
 
   const opts = {
