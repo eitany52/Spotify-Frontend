@@ -83,7 +83,7 @@ function createEmptyStation() {
         name: "My Playlist",
         type: "normal",
         description: null,
-        imgUrl: null,
+        imgUrl: 'https://www.greencode.co.il/wp-content/uploads/2024/07/station-thumb-default.jpg',
         tags: [],
         createdBy: {},
         savedBy: [],

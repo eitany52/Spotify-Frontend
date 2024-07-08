@@ -3,10 +3,17 @@ import { SvgIcon } from "./SvgIcon.jsx";
 import { useSelector } from "react-redux";
 import { PlayBtn } from "./PlayBtn.jsx";
 
-
-export function SongPreview({ song, onAddToStation, onMoreOptions, isSongSavedAtStation, type, index }) {
-  const currentSong = useSelector(storeState =>
-    storeState.stationModule.currentSong)
+export function SongPreview({
+  song,
+  onAddToStation,
+  onMoreOptions,
+  isSongSavedAtStation,
+  type,
+  index,
+}) {
+  const currentSong = useSelector(
+    (storeState) => storeState.stationModule.currentSong
+  );
 
   const songImg = song.imgUrl;
   const songName = song.title;
@@ -14,12 +21,9 @@ export function SongPreview({ song, onAddToStation, onMoreOptions, isSongSavedAt
 
   return (
     <li className="song-preview song-preview-grid">
-      {type === 'search' &&
+      {type === "search" && (
         <section>
-          <img
-            style={{ width: "40px", height: "40px" }}
-            src={songImg}
-          />
+          <img style={{ width: "40px", height: "40px" }} src={songImg} />
           <span>{songName}</span>
           <span>{artistName}</span>
           <button
@@ -28,36 +32,34 @@ export function SongPreview({ song, onAddToStation, onMoreOptions, isSongSavedAt
           >
             {isSongSavedAtStation(song) ? "Added" : "Add"}
           </button>
-        </section>}
-      {type === 'station' &&
-        <section>
+        </section>
+      )}
+      {type === "station" && (
+        <>
           <div>
             <span>{index + 1}</span> {<PlayBtn song={song} />}
           </div>
           <img src={songImg} />
           <span>{songName}</span>
-          <span onClick={ev => onAddToStation(ev, song)}>
+          <span onClick={(ev) => onAddToStation(ev, song)}>
             <SvgIcon iconName="tick" style="active" />
           </span>
           <span>{utilService.formatDate(song.addedAt)}</span>
-          <span onClick={ev => onMoreOptions(ev, song)}>
+          <span onClick={(ev) => onMoreOptions(ev, song)}>
             <SvgIcon iconName="more" />
           </span>
-        </section>}
-      {type === 'searchAtStation' &&
+        </>
+      )}
+      {type === "searchAtStation" && (
         <section>
-          <img
-            style={{ width: "40px", height: "40px" }}
-            src={songImg}
-          />
+          <img style={{ width: "40px", height: "40px" }} src={songImg} />
           <span>{songName}</span>
           <span>{artistName}</span>
-          <button
-            onClick={() => onAddToStation(song)}
-          >
+          <button onClick={() => onAddToStation(song)}>
             {isSongSavedAtStation(song) ? "Added" : "Add"}
           </button>
-        </section>}
+        </section>
+      )}
     </li>
   );
 }
