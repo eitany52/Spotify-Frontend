@@ -8,3 +8,20 @@
 @function em($pixels, $context: 16px) {
     @return calc(($pixels/$context) * 1em);
 }
+
+
+@function random-color($colors) {
+    $index: random(length($colors));
+    @return nth($colors, $index);
+}
+
+
+$colors: (
+    #c6887b,
+    #42824e,
+    #325669,
+    #b67397,
+    #A133FF,
+    #8ca77e,
+    #6874a8
+);

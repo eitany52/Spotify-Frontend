@@ -144,12 +144,14 @@ export const AppPlayer = () => {
   };
 
   const onDisplayCard = () => {
-    setDisplayHideCard(!displayCard);
+    if (currentSong.id) {
+      setDisplayHideCard(!displayCard);
+    }
   };
 
   const opts = {
-    height: "100", // גובה ורוחב אפס כדי להסתיר את הוידאו
-    width: "100",
+    height: "0", // גובה ורוחב אפס כדי להסתיר את הוידאו
+    width: "0",
     playerVars: {
       autoplay: 0,
       controls: 0,

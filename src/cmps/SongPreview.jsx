@@ -7,7 +7,6 @@ import { PlayBtn } from "./PlayBtn.jsx";
 export function SongPreview({ song, onAddToStation, onMoreOptions, isSongSavedAtStation, type, index }) {
   const currentSong = useSelector(storeState =>
     storeState.stationModule.currentSong)
- 
 
   const songImg = song.imgUrl;
   const songName = song.title;

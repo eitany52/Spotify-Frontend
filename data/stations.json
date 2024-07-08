@@ -4,7 +4,7 @@
         "name": "Liked Songs",
         "type": "liked",
         "description": null,
-        "imgUrl" : "https://misc.scdn.co/liked-songs/liked-songs-64.png",
+        "imgUrl" : "https://misc.scdn.co/liked-songs/liked-songs-300.png",
         "tags": [
             "Funk",
             "Happy"
@@ -40,7 +40,7 @@
         "name": "Funky Monks",
         "type": "normal",
         "description": "This is the best playlist ever. You will love this playlist.",
-        "imgUrl" : "https://mosaic.scdn.co/60/ab67616d00001e020633b57b08b40f3e776e7151ab67616d00001e0257a97b3bfb918c3748d0f930ab67616d00001e026a0b525ea5e6146f7f33369fab67616d00001e02ba630a902f9d9de95572f29d",
+        "imgUrl" : "https://www.greencode.co.il/wp-content/uploads/2024/07/station-thumb1.jpg",
 
         "tags": [
             "Funk",
@@ -114,7 +114,7 @@
         "name": "best songs",
         "type": "normal",
         "description": "Chill music that will calm you down.",
-        "imgUrl" : "https://mosaic.scdn.co/60/ab67616d00001e0215cbb8e7932fef1b84ff0ea6ab67616d00001e028af0f4a492b52f8fd0f65359ab67616d00001e02a5436a2f32552a10f780fb29ab67616d00001e02fe3c23625fcd72e2d40ac923",
+        "imgUrl" : "https://www.greencode.co.il/wp-content/uploads/2024/07/station-thumb9.jpg",
 
         "tags": [
             "Funk",
@@ -158,7 +158,7 @@
         "name": "classic",
         "type": "normal",
         "description": "classic music to here before sleeping.",
-        "imgUrl" : "https://mosaic.scdn.co/60/ab67616d00001e021a9673b219934cd31b939341ab67616d00001e02211e59e901d643169ce3f447ab67616d00001e02f7481a5eed4e919ccd0391a3ab67616d00001e02ff9238eec8ea47fc4c341755",
+        "imgUrl" : "https://www.greencode.co.il/wp-content/uploads/2024/07/station-thumb10.jpg",
 
         "tags": [
             "Funk",

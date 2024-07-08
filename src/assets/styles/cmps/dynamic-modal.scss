@@ -2,7 +2,7 @@
 .modal-backdrop {
     position: fixed;
     background-color: rgba(0, 0, 0, 0.5); 
-    backdrop-filter: blur(2px);
+    //backdrop-filter: blur(2px);
     inset: 0;
     height: 100vh;
     width: 100vw;
@@ -16,16 +16,25 @@
     inset: 0;
     width: 40vw; 
     height: fit-content;
-    padding: 20px;
-    background-color: black;
+    padding: 20px 0px;
+    background:$clr3;
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 10px;
+    // border-radius: 10px;
     justify-content: space-evenly;
     // margin: auto;
     z-index: 3;
+
+    ul {
+        list-style:none;
+        padding-left:0;
+    }
+
+    ul li {
+        padding:10px;
+    }
 
     .close-btn {
         position: absolute;
@@ -37,6 +46,31 @@
         text-align: center;
         margin: 15px;
     }
+
+
+
+    &.floating-menu-song {
+        align-items: start;
+         width: 20vw;
+    }
+
+    &.floating-menu-song-add {
+        align-items: start;
+        width: 20vw;
+        height: 200px;
+        overflow-y: scroll;
+    }
+
+   &.floating-edit-station-details {
+    margin: auto;
+    width: 25vw;
+   }
+
+   &.floating-menu-station {
+   width: 25vw;
+   }
+
+   
 }
 
 
