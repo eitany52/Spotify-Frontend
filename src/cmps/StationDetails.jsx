@@ -1,16 +1,17 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 // import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { loadStation } from "../store/actions/station.actions.js";
 // import { utilService } from "../services/util.service.js";
-import { SongDetails } from "./SongPreview.jsx";
-
 import { SvgIcon, AllIcons } from "./SvgIcon.jsx";
 import { getLoggedOnUser } from "../store/actions/user.actions.js";
 import { AppSearch } from "./AppSearch.jsx";
+import { SongList } from "./SongList.jsx";
+import { FloatingMenuSongAdd } from "./FloatingMenuSongAdd.jsx";
+import { onToggleModal } from "../store/actions/app.actions.js";
+import { FloatingMenuSong } from "./FloatingMenuSong.jsx";
 
 //Checked - All looks good.
 
@@ -24,6 +25,89 @@ export function StationDetails() {
   useEffect(() => {
     loadStation(stationId);
   }, [stationId, stations]);
+
+
+  function onMoreOptions(ev, song) {
+    console.log("song:", song);
+    console.log("ev:", ev);
+    console.log("more.......");
+    onToggleModal({
+      cmp: FloatingMenuSong,
+      props: {
+        stationId: station._id,
+        songId: song.id,
+        onDone() {
+          onToggleModal(null);
+        },
+        song:song,
+        class:"floating-menu-song"
+      },
+      style: {
+        left: `${ev.clientX - 300}px`,
+        top: `${ev.clientY - 200}px`,
+      },
+    });
+  }
+
+  function onAddToStation(ev, song) {
+    console.log("Add.......");
+    onToggleModal({
+      cmp: FloatingMenuSongAdd,
+      props: {
+        stationId: station._id,
+        songId: song.id,
+        onDone() {
+          onToggleModal(null);
+        },
+        class:"floating-menu-song-add"
+      },
+      style: {
+        left: `${ev.clientX - 300}px`,
+        top: `${ev.clientY - 200}px`,
+      },
+    });
+  }
+
+
+  function onClickMore(event) {
+    onToggleModal({
+      cmp: FloatingMenuSong,
+      props: {
+        stationId: station._id,
+        songId: song.id,
+        onDone() {
+          onToggleModal(null);
+        },
+        song: song,
+        class: "floating-menu-song",
+      },
+      style: {
+        left: `${event.clientX - 300}px`,
+        top: `${event.clientY - 200}px`,
+      },
+    });
+  }
+
+  function onClickAdd(event) {
+    onToggleModal({
+      cmp: FloatingMenuSongAdd,
+      props: {
+        stationId: station._id,
+        songId: song.id,
+        onDone() {
+          onToggleModal(null);
+        },
+        class: "floating-menu-song-add",
+      },
+      style: {
+        left: `${event.clientX - 300}px`,
+        top: `${event.clientY - 200}px`,
+      },
+    });
+  }
+
+
+
 
   if (!station) return <div>Loading...</div>;
 
@@ -59,33 +143,15 @@ export function StationDetails() {
             <SvgIcon iconName="play" style="dark" />
           </section>
 
-          {
-            <ul>
-              <li className="song-details-grid">
-                <label>#</label>
-                <label>img</label>
-                <label>name</label>
-                <label>add</label>
-                <label>Date added</label>
-                <label></label>
-              </li>
-            </ul>
-          }
-
-          <ul>
-            {station.songs &&
-              station.songs.length &&
-              station.songs.map((song, index) => (
-                <li key={song.id}>
-                  <SongDetails song={song} index={index} />
-                </li>
-              ))}
-          </ul>
-          {isUserStation && station.type === "normal" && <AppSearch />}
-          {/* <pre> {JSON.stringify(car, null, 2)} </pre> */}
+          <SongList
+            songs={station.songs}
+            onAddToStation={onAddToStation}
+            onMoreOptions={onMoreOptions}
+            type='station' />
+          {isUserStation && station.type === 'normal' &&
+            <AppSearch />}
         </div>
       )}
-      {/* <button onClick={() => { onAddCarMsg(car._id) }}>Add car msg</button> */}
     </section>
   );
 }

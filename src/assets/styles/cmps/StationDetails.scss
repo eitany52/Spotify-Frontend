@@ -1,21 +1,22 @@
-.station-details  {
-
+.station-details {
     & header {
-        display:grid;
-        gap:10px;
+        display: grid;
+        gap: 10px;
         grid-template-rows: repeat(3, auto);
         background: random-color($colors);
-        padding:10px;
+        padding: 10px;
     }
 
-    & .intro{
-        
-        display:grid;
+    & .intro {
+
+        display: grid;
         grid-template-columns: auto 1fr;
         justify-content: start;
-        gap:10px;
+        gap: 10px;
 
-        img { width:150px;}
+        img {
+            width: 150px;
+        }
 
         & section {
             display: grid;
@@ -23,12 +24,11 @@
         }
 
         & h2 {
-            font-size:5em;
+            font-size: 5em;
         }
     }
 
-
-    & .song-details-grid {
+    & .song-preview-grid {
         display: grid;
         grid-template-columns: 0.5fr 1fr 2fr 1fr 1fr 0.5fr;
         align-items: start;

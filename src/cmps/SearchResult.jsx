@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
-import { addSongToStation, formatSong, getSongsFromYoutube, loadLikedSongsStation, loadStation } from "../store/actions/station.actions"
+import { addSongToStation, getSongsFromYoutube, loadLikedSongsStation } from "../store/actions/station.actions"
 import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../customHooks/useEffectUpdate"
-// import { getLoggedOnUser } from "../store/actions/user.actions"
-// import { addSongToStation } from "../store/actions/station.actions"
+import { SongList } from "./SongList"
 
 //Checked - All looks good.
 
@@ -19,14 +18,6 @@ export const SearchResult = () => {
         loadLikedSongsStation();
     }, []);
 
-    // useEffect(() => {
-    //     setIsSongAdded(false)
-    // }, [isSongAdded])
-
-    useEffectUpdate(() => {
-        loadSongs();
-    }, [params]);
-
     useEffectUpdate(() => {
         loadSongs()
     }, [params])
@@ -35,7 +26,7 @@ export const SearchResult = () => {
         setSongs(getSongsFromYoutube())
     }
 
-    function isSongSavedInStation(song) {
+    function isSongSavedAtLikedSongs(song) {
         return likedSongsStation.songs.some(_song => _song.id === song.id)
     }
 
@@ -47,6 +38,11 @@ export const SearchResult = () => {
             console.log("Having issues with saving this song");
         }
     }
+
+    function onMoreOptions() {
+
+    }
+
     console.log("SearchResult rendered");
     return (
         <div>
@@ -66,33 +62,12 @@ export const SearchResult = () => {
                         <h1>Hip-Hop</h1>
                         <span>Genre</span>
                     </div>
-                    <div>
-                        <h2>Songs</h2>
-                        <ul>
-                            {songs.map((_song) => {
-                                const song = formatSong(_song);
-                                const songImg = song.imgUrl;
-                                const songName = song.title;
-                                const artistName = song.channelTitle;
-                                return (
-                                    <li key={song.id}>
-                                        <img
-                                            style={{ width: "40px", height: "40px" }}
-                                            src={songImg}
-                                        />
-                                        <span>{songName}</span>
-                                        <span>{artistName}</span>
-                                        <button
-                                            title="Add to Liked Songs"
-                                            onClick={() => onAddToLikedSongs(song)}
-                                        >
-                                            {isSongSavedInStation(song) ? "Added" : "Add"}
-                                        </button>
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                    </div>
+                    <SongList
+                        songs={songs}
+                        onAddToStation={onAddToLikedSongs}
+                        onMoreOptions={onMoreOptions}
+                        isSongSavedAtStation={isSongSavedAtLikedSongs}
+                        type="search" />
                 </section>
             )}
             <h1>Suggestions</h1>
