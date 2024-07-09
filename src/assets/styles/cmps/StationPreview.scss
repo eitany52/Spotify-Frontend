@@ -2,16 +2,6 @@
     list-style-type: none;
     cursor: pointer;
 
-    &.library .intro {
-        display:grid;
-        grid-template-columns: auto 1fr;
-        justify-content: start;
-        gap:10px;
-        
-        & section {
-            display: grid;
-            align-content: space-evenly;
-        }
-    }
+   
     
 }

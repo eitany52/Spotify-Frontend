@@ -1,7 +1,7 @@
 .app-search {
     display: grid;
     align-content: center;
-    width: 34%;
+
 
     .search-form {
         display: grid;
@@ -13,6 +13,7 @@
         background-color: $bgc-search;
         border-radius: 500px;
         padding-inline-start: 10px;
+        width: 34%;
 
         .icon-search {
             width: max-content;

@@ -3,34 +3,30 @@
         display: grid;
         gap: 10px;
         grid-template-rows: repeat(3, auto);
+        grid-template-columns: 1fr;
         background: random-color($colors);
         padding: 10px;
     }
 
-    & .intro {
 
-        display: grid;
-        grid-template-columns: auto 1fr;
-        justify-content: start;
-        gap: 10px;
+    & .intro-outer {
 
-        img {
-            width: 150px;
-        }
-
-        & section {
-            display: grid;
-            align-content: space-between;
-        }
-
+        // img {
+        //     width: 150px;
+        // }
+      
         & h2 {
             font-size: 5em;
         }
     }
 
-    & .song-preview-grid {
-        display: grid;
-        grid-template-columns: 0.5fr 1fr 2fr 1fr 1fr 0.5fr;
-        align-items: start;
+
+    &.intro-inner.sb {
+        align-content: space-between;
     }
+
+
+
+    & .svg-big {margin:20px;}
+
 }

@@ -69,12 +69,12 @@
 
     main {
         grid-area: m;
-        overflow: hidden;
+        overflow: auto; //hidden
         transition: overflow 0.3s ease;
 
-        &:hover {
-            overflow: auto;
-        }
+        // &:hover{
+        //     overflow: auto;
+        // }
 
     }
 
@@ -85,12 +85,46 @@
         grid-template-rows: subgrid;
         gap: 10px;
 
+        & > * { padding:20px; }
+
+       
+
         nav {
             grid-area: 1 / 1;
+
+            display:grid;
+            grid-template-rows: auto auto;
+            justify-content: start;
+            align-items:center;
+            gap:10px;
+          
+           
         }
 
         .library {
             grid-area: 2 / 2;
+
+
+
+            & .library-pannel {
+                display:grid;
+                grid-template-columns: 1fr auto auto;
+                justify-items: start;
+            }
+
+            & .search-in-lib{
+                position:relative;
+                & .btn-icon {width:40px; transition:all 500ms; height:3em;}
+                &:hover .btn-icon {width:250px;}
+
+                & form {display:none; position:absolute; left:50px; top:0px;}
+                &:hover form {display:block;}
+
+                display:grid;
+                grid-template-columns:  auto auto;
+                justify-items: start;
+            }
+            
         }
     }
 

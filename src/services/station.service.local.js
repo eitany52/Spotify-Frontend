@@ -191,7 +191,7 @@ function formatSong(song) {
     }
     return {
         id: song.id.videoId,
-        title: song.snippet.title,
+        title: getSubstringBeforePipe(song.snippet.title),
         channelTitle: song.snippet.channelTitle,
         url: `https://youtube.com/watch?v=${song.id.videoId}`,
         imgUrl: song.snippet.thumbnails.default.url,
@@ -200,6 +200,17 @@ function formatSong(song) {
     }
 }
 
+function getSubstringBeforePipe(str) {
+    // בדוק אם המחרוזת מכילה את התו '|'
+    const pipeIndex = str.indexOf('|');
+    
+    // אם אין את התו '|', החזר את המחרוזת כולה
+    if (pipeIndex === -1) {
+        return str;
+    } 
+    // אחרת, החזר את החלק של המחרוזת עד ל-| הראשון (לא כולל)
+    return str.substring(0, pipeIndex);
+}
 
 
 
