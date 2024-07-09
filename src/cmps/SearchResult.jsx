@@ -45,20 +45,20 @@ export const SearchResult = () => {
 
     console.log("SearchResult rendered");
     return (
-        <div>
+        <div className="search-result">
             {/* <RecentSearches/> */}
             {params.userInput && songs && (
-                <section>
-                    <div>
+                <section className="search-result-container">
+                    <div className="btns-container">
                         <button>All</button>
                         <button>Playlists</button>
                         <button>Songs</button>
                         <button>Artists</button>
                         <button>Genres</button>
                     </div>
-                    <div>
+                    <div className="top-result-container">
                         <h2>Top result</h2>
-                        <img src="" />
+                        <img style={{width: '80px', height: '80px'}} src="../../public/img/Rap.PNG" />
                         <h1>Hip-Hop</h1>
                         <span>Genre</span>
                     </div>

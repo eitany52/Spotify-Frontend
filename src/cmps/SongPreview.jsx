@@ -50,7 +50,7 @@ export function SongPreview({
           </span>
         </>
       )}
-      {type === "searchAtStation" && (
+      {type === "search-at-station" && (
         <section>
           <img style={{ width: "40px", height: "40px" }} src={songImg} />
           <span>{songName}</span>

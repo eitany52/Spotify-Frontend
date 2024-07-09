@@ -80,7 +80,7 @@ export const AppSearch = () => {
           songs={songs}
           onAddToStation={onToggleAddToStation}
           isSongSavedAtStation={isSongSavedAtStation}
-          type='searchAtStation' />}
+          type='search-at-station' />}
     </div>
   );
 };

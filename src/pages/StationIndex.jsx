@@ -70,7 +70,7 @@ export const StationIndex = () => {
       </header>
       <aside>
         <nav>
-          <Link to="/" className="btn">
+          <Link to="/">
             Home
           </Link>
           <Link to="/search" className="btn active">
@@ -95,7 +95,7 @@ export const StationIndex = () => {
               <label>Search</label>
               <input type="text" />
             </form>
-            <button>Recents</button>
+            <button> Recents</button>
           </div>
           <StationList location="library" />
         </section>

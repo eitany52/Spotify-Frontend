@@ -1,0 +1,19 @@
+.search-result {
+    .search-result-container {
+        display: grid;
+        grid-template-rows: auto auto auto;
+        grid-template-columns: auto 1fr;
+
+        .btns-container {
+            grid-area: 1 / 1 / span 1 / span 2;
+        }
+
+        .top-result-container {
+            grid-area: 2/1;
+        }
+
+        .song-list {
+            grid-area: 2 /2;
+        }
+    }
+}
