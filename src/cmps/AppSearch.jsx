@@ -54,16 +54,16 @@ export const AppSearch = () => {
   }
 
   function onToggleAddToStation(song) {
-    if(isSongSavedAtStation(song)) {
-      removeSongFromStation(station.id, song.id)
+    if (isSongSavedAtStation(song)) {
+      removeSongFromStation(station._id, song.id)
     }
     else {
-      addSongToStation(station.id, song.id)
+      addSongToStation(station._id, song)
     }
   }
 
   function isSongSavedAtStation(song) {
-      return station.songs.some(_song => _song.id === song.id)
+    return station.songs.some(_song => _song.id === song.id)
   }
 
   return (
