@@ -19,7 +19,7 @@
 
 
 
-  &.station {
+  &.song-preview-station-grid {
     & .number .play{ display:none;}
     &:hover .number  {
       & .play{ display:block;}
@@ -35,7 +35,6 @@
 
 
   }
-
 
   &.search-at-station {
     display:grid;
@@ -55,5 +54,27 @@
           &:hover .play {display:flex;}
       }
     }
+  }
+
+
+
+  &.search {
+    display:grid;
+    grid-template-columns: 2fr 0.2fr 0.2fr;
+    align-items: center;
+    padding: 0 10px;
+
+    & .add {display:none;}
+    & .more {display:none;}
+    &:hover .add {display:block;}
+    &:hover .more {display:block;}
+
+    & .square-ratio {
+        
+      & .play {display:none; 
+        align-items: center;
+        justify-content: center;}
+      &:hover .play {display:flex;}
+   }
   }
 }

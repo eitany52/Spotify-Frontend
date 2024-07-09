@@ -12,7 +12,7 @@ export const SongList = ({
   return (
     <ul className="song-list">
       {type === "station" && songs.length ? (
-        <li className="song-preview-grid">
+        <li className="song-preview-station-grid">
           <label>#</label>
           <label>Title</label>
           <label>Date added</label>
