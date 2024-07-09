@@ -49,7 +49,6 @@ export const StationPreview = ({ station, location, songToAdd }) => {
         },
       },
       style: {
-        // width: "25vw",
         left: `${event.clientX}px`,
         top: `${event.clientY}px`,
       },
@@ -93,17 +92,21 @@ export const StationPreview = ({ station, location, songToAdd }) => {
       className={`station-preview   ${location} `}
     >
       {station.type === "liked" ? (
-        <section className="intro">
+        <section className={` ${location === "library" ? "intro-outer" : ""} `}>
           <img src={station.imgUrl} />
-          <section>
+          <section
+            className={`${location === "library" ? "intro-inner" : ""} `}
+          >
             <h5>{station.name}</h5>
             {location !== "modal" && <span> {numOfSongs} songs </span>}
           </section>
         </section>
       ) : (
-        <section className="intro">
+        <section className={` ${location === "library" ? "intro-outer" : ""} `}>
           <img src={station.imgUrl} />
-          <section>
+          <section
+            className={` ${location === "library" ? "intro-inner" : ""} `}
+          >
             <h5>{station.name}</h5>
             {location !== "modal" && <span> {profileName} </span>}
             {location === "main" && <span>{station.description}</span>}

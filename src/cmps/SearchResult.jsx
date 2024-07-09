@@ -1,47 +1,49 @@
-import { useEffect, useState } from "react"
-import { useParams } from "react-router"
-import { addSongToStation, getSongsFromYoutube, loadLikedSongsStation } from "../store/actions/station.actions"
-import { useSelector } from "react-redux"
-import { useEffectUpdate } from "../customHooks/useEffectUpdate"
-import { SongList } from "./SongList"
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import {
+  addSongToStation,
+  getSongsFromYoutube,
+  loadLikedSongsStation,
+} from "../store/actions/station.actions";
+import { useSelector } from "react-redux";
+import { useEffectUpdate } from "../customHooks/useEffectUpdate";
+import { SongList } from "./SongList";
 
 //Checked - All looks good.
 
 export const SearchResult = () => {
-    const params = useParams();
-    const [songs, setSongs] = useState(null);
-    const likedSongsStation = useSelector(
-        (storeState) => storeState.stationModule.station
-    );
+  const params = useParams();
+  const [songs, setSongs] = useState(null);
+  const likedSongsStation = useSelector(
+    (storeState) => storeState.stationModule.station
+  );
 
-    useEffect(() => {
-        loadLikedSongsStation();
-    }, []);
+  useEffect(() => {
+    loadLikedSongsStation();
+  }, []);
 
-    useEffectUpdate(() => {
-        loadSongs()
-    }, [params])
+  useEffectUpdate(() => {
+    loadSongs();
+  }, [params]);
 
-    function loadSongs() {
-        setSongs(getSongsFromYoutube())
+  function loadSongs() {
+    setSongs(getSongsFromYoutube());
+  }
+
+  function isSongSavedAtLikedSongs(song) {
+    return likedSongsStation.songs.some((_song) => _song.id === song.id);
+  }
+
+  async function onAddToLikedSongs(songToAdd) {
+    try {
+      await addSongToStation(likedSongsStation._id, songToAdd);
+      loadLikedSongsStation();
+    } catch (error) {
+      console.log("Having issues with saving this song");
     }
+  }
 
-    function isSongSavedAtLikedSongs(song) {
-        return likedSongsStation.songs.some(_song => _song.id === song.id)
-    }
-
-    async function onAddToLikedSongs(songToAdd) {
-        try {
-            await addSongToStation(likedSongsStation._id, songToAdd);
-            loadLikedSongsStation();
-        } catch (error) {
-            console.log("Having issues with saving this song");
-        }
-    }
-
-    function onMoreOptions() {
-
-    }
+  function onMoreOptions() {}
 
     console.log("SearchResult rendered");
     return (

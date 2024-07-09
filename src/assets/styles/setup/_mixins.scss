@@ -66,8 +66,13 @@
     padding: 0 10px;
     margin:5px;
   }
+
+
+
+
+
  
-  @mixin blockBtn( $type : "reguler") {
+  @mixin blockBtn( $type : "regular") {
    
     @if $type == "active" {
         background-color: $clr4;
@@ -88,6 +93,7 @@
     display: block;
     border-radius:50%;
     fill: $clr6;
+    line-height: normal;
  }
 
   @mixin iconBlock(  $color: "light") {

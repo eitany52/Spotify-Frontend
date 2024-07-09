@@ -26,7 +26,6 @@ export function StationDetails() {
     loadStation(stationId);
   }, [stationId, stations]);
 
-
   function onMoreOptions(ev, song) {
     console.log("song:", song);
     console.log("ev:", ev);
@@ -39,8 +38,8 @@ export function StationDetails() {
         onDone() {
           onToggleModal(null);
         },
-        song:song,
-        class:"floating-menu-song"
+        song: song,
+        class: "floating-menu-song",
       },
       style: {
         left: `${ev.clientX - 300}px`,
@@ -59,7 +58,7 @@ export function StationDetails() {
         onDone() {
           onToggleModal(null);
         },
-        class:"floating-menu-song-add"
+        class: "floating-menu-song-add",
       },
       style: {
         left: `${ev.clientX - 300}px`,
@@ -83,9 +82,9 @@ export function StationDetails() {
         <div>
           <header>
             <span>playlist</span>
-            <section className="intro">
+            <section className="intro-outer">
               <img src={station.imgUrl} />
-              <section>
+              <section className="intro-inner sb">
                 <h2>{station.name}</h2>
                 <h3>
                   {station.createdBy.fullname} |{" "}
@@ -93,10 +92,6 @@ export function StationDetails() {
                 </h3>
               </section>
             </section>
-
-            {/* {station.songs && station.songs.length && (
-            <img src={station.songs[0].imgUrl} />
-          )} */}
           </header>
           <section className="svg-big bigger">
             <SvgIcon iconName="play" style="dark" />
@@ -106,9 +101,9 @@ export function StationDetails() {
             songs={station.songs}
             onAddToStation={onAddToStation}
             onMoreOptions={onMoreOptions}
-            type='station' />
-          {isUserStation && station.type === 'normal' &&
-            <AppSearch />}
+            type="station"
+          />
+          {isUserStation && station.type === "normal" && <AppSearch />}
         </div>
       )}
     </section>
