@@ -40,13 +40,15 @@ export function SongPreview({
             <span className="num">{index + 1}</span>
             <span className="play"> {<PlayBtn song={song} />}</span>
           </div>
-          <section className="song-details-col1">
+          <section className="intro-outer">
             <div className="square-ratio">
               {" "}
               <img src={songImg} />
             </div>
-
-            <span className="song-details-inner">{songName}</span>
+            <div className="intro-inner">
+              <span>{songName}</span>
+              <span>{artistName}</span>
+            </div>
           </section>
 
           <span>{utilService.formatDate(song.addedAt)}</span>
@@ -58,21 +60,21 @@ export function SongPreview({
           </span>
         </section>
       )}
-      {type === "searchAtStation" && (
+      {type === "search-at-station" && (
         <>
-          <section className="song-details-col1">
+          <section className="intro-outer">
             <div className="square-ratio">
               {" "}
               <img src={songImg} />
               <span className="play"> {<PlayBtn song={song} />}</span>
             </div>
-            <div className="song-details-inner">
+            <div className="intro-inner">
               <span>{songName}</span>
               <span>{artistName}</span>
             </div>
           </section>
           <section>album</section>
-          <button onClick={() => onAddToStation(song)}>
+          <button onClick={() => onAddToStation(song)} className="btn">
             {isSongSavedAtStation(song) ? "Added" : "Add"}
           </button>
         </>

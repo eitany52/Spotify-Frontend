@@ -1,0 +1,29 @@
+.app-search {
+    display: grid;
+    align-content: center;
+
+
+    .search-form {
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: start;
+        gap: 5px;
+        align-content: center;
+        height: 48px;
+        background-color: $bgc-search;
+        border-radius: 500px;
+        padding-inline-start: 10px;
+        width: 34%;
+
+        .icon-search {
+            width: max-content;
+        }
+
+        input {
+            background-color: $bgc-search;
+            border-radius: 500px;
+            border: 0;
+            color: white;
+        }
+    }
+}

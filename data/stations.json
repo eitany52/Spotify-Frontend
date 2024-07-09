@@ -23,7 +23,8 @@
                 "url": "youtube/song.mp4",
                 "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
                 "addedBy": {},
-                "addedAt": 1719168000000
+                "addedAt": 1719168000000,
+                "channelTitle": "songer1"
             },
             {
                 "id": "mUkfiLjooxs",
@@ -31,7 +32,8 @@
                 "url": "youtube/song.mp4",
                 "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
                 "addedBy": {},
-                "addedAt": 1698230400000
+                "addedAt": 1698230400000,
+                "channelTitle": "songer2"
             }
         ]
     },
@@ -60,7 +62,8 @@
                 "url": "youtube/song.mp4",
                 "imgUrl":  "https://de.rarevinyl.com/cdn/shop/products/suzanne-vega-tom-s-diner-uk-12-inch-vinyl-single-maxi-amy592-81160_1200x600_crop_center.jpg?v=1705451152",
                 "addedBy": {},
-                "addedAt": 1719168000000
+                "addedAt": 1719168000000,
+                "channelTitle": "songer1"
             },
             {
                 "id": "0-EF60neguk",
@@ -68,7 +71,8 @@
                 "url": "youtube/song.mp4",
                 "imgUrl": "https://media.newyorker.com/photos/590968a1c14b3c606c106d52/master/pass/Larson-Nothing-Compares-2-Sinead.jpg",
                 "addedBy": {},
-                "addedAt": 1719168000000
+                "addedAt": 1719168000000,
+                "channelTitle": "songer1"
             },
             {
                 "id": "VZt7J0iaUD0",
@@ -76,7 +80,8 @@
                 "url": "https://www.youtube.com/watch?v=VZt7J0iaUD0",
                 "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
                 "addedAt": 1719168000000,
-                "addedBy": {}
+                "addedBy": {},
+                "channelTitle": "songer1"
             },
             {
                 "id": "CziHrYYSyPc",
@@ -84,7 +89,8 @@
                 "url": "youtube/song.mp4",
                 "imgUrl": "https://wp.inews.co.uk/wp-content/uploads/2018/05/Eurovision-2018-Netta-credit-eurovision-e1526220429455.jpg?w=960&h=638&crop=1",
                 "addedBy": {},
-                "addedAt": 1698230400000
+                "addedAt": 1698230400000,
+                "channelTitle": "songer1"
             },
             {
                 "id": "lJYn09tuPw4",
@@ -92,7 +98,8 @@
                 "url": "youtube/song.mp4",
                 "imgUrl": "https://escbubble.com/wp-content/uploads/2024/02/Eden-Golan.jpg",
                 "addedBy": {},
-                "addedAt": 1698230400000
+                "addedAt": 1698230400000,
+                "channelTitle": "songer1"
             },
             {
                 "id": "Z3mIcCllJXY",
@@ -100,7 +107,8 @@
                 "url": "youtube/song.mp4",
                 "imgUrl": "https://pix.eurovisionworld.com/pix/israel-2023-noa-kirel-8.jpg",
                 "addedBy": {},
-                "addedAt": 1698230400000
+                "addedAt": 1698230400000,
+                "channelTitle": "songer1"
             }
 
 
@@ -134,7 +142,8 @@
                 "url": "youtube/song.mp4",
                 "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
                 "addedBy": {},
-                "addedAt": 162521765262
+                "addedAt": 162521765262,
+                "channelTitle": "songer1"
             },
             {
                 "id": "mUkfiLjooxs",
@@ -142,7 +151,8 @@
                 "url": "youtube/song.mp4",
                 "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
                 "addedAt": 1698230400000,
-                "addedBy": {}
+                "addedBy": {},
+                "channelTitle": "songer1"
             },
             {
                 "id": "VZt7J0iaUD0",
@@ -150,7 +160,8 @@
                 "url": "https://www.youtube.com/watch?v=VZt7J0iaUD0",
                 "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
                 "addedAt": 1719168000000,
-                "addedBy": {}
+                "addedBy": {},
+                "channelTitle": "songer1"
             }
         ]
     },  {
@@ -178,7 +189,8 @@
                 "url": "youtube/song.mp4",
                 "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
                 "addedBy": {},
-                "addedAt": 162521765262
+                "addedAt": 162521765262,
+                "channelTitle": "songer1"
             },
             {
                 "id": "mUkfiLjooxs",
@@ -186,7 +198,8 @@
                 "url": "youtube/song.mp4",
                 "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
                 "addedAt": 1698230400000,
-                "addedBy": {}
+                "addedBy": {},
+                "channelTitle": "songer1"
             },
             {
                 "id": "VZt7J0iaUD0",
@@ -194,7 +207,8 @@
                 "url": "https://www.youtube.com/watch?v=VZt7J0iaUD0",
                 "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
                 "addedAt": 1719168000000,
-                "addedBy": {}
+                "addedBy": {},
+                "channelTitle": "songer1"
             }
         ]
     }

@@ -67,43 +67,6 @@ export function StationDetails() {
     });
   }
 
-  function onClickMore(event) {
-    onToggleModal({
-      cmp: FloatingMenuSong,
-      props: {
-        stationId: station._id,
-        songId: song.id,
-        onDone() {
-          onToggleModal(null);
-        },
-        song: song,
-        class: "floating-menu-song",
-      },
-      style: {
-        left: `${event.clientX - 300}px`,
-        top: `${event.clientY - 200}px`,
-      },
-    });
-  }
-
-  function onClickAdd(event) {
-    onToggleModal({
-      cmp: FloatingMenuSongAdd,
-      props: {
-        stationId: station._id,
-        songId: song.id,
-        onDone() {
-          onToggleModal(null);
-        },
-        class: "floating-menu-song-add",
-      },
-      style: {
-        left: `${event.clientX - 300}px`,
-        top: `${event.clientY - 200}px`,
-      },
-    });
-  }
-
   if (!station) return <div>Loading...</div>;
 
   const isUserStation = getLoggedOnUser()._id === station.createdBy.id;
@@ -119,9 +82,9 @@ export function StationDetails() {
         <div>
           <header>
             <span>playlist</span>
-            <section className="intro">
+            <section className="intro-outer">
               <img src={station.imgUrl} />
-              <section>
+              <section className="intro-inner">
                 <h2>{station.name}</h2>
                 <h3>
                   {station.createdBy.fullname} |{" "}
@@ -129,10 +92,6 @@ export function StationDetails() {
                 </h3>
               </section>
             </section>
-
-            {/* {station.songs && station.songs.length && (
-            <img src={station.songs[0].imgUrl} />
-          )} */}
           </header>
           <section className="svg-big bigger">
             <SvgIcon iconName="play" style="dark" />

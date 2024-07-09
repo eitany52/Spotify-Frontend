@@ -56,8 +56,12 @@ export const StationIndex = () => {
       {console.log("rendered")}
       <header>
         <section className="icons-back-forward">
-          <SvgIcon iconName={"back"} />
-          <SvgIcon iconName={"forward"} />
+          <button>
+            <SvgIcon iconName={"back"} />
+          </button>
+          <button>
+            <SvgIcon iconName={"forward"} />
+          </button>
         </section>
         {isSearchDisplayed && <AppSearch />}
         {/* <button>Back</button>
@@ -79,22 +83,26 @@ export const StationIndex = () => {
         </nav>
         <section className="library">
           <div className="library-pannel">
-            <button title="Collapse Your Library" className="btn-icon">
+            <button title="Collapse Your Library" className="btn btn-icon">
               {" "}
               <SvgIcon iconName="library" />
               Your Library
             </button>
-            <button onClick={onCreateEmptyStation} title="Create playlist">
+            <button
+              onClick={onCreateEmptyStation}
+              title="Create playlist"
+              className="btn"
+            >
               <SvgIcon iconName="plus" />
             </button>
-            <button title="Show more">
+            <button title="Show more" className="btn">
               <SvgIcon iconName="more" />
             </button>
           </div>
           <div>
-            <button>Playlists</button>
-            <button>Artists</button>
-            <button>Albums</button>
+            <button className="btn">Playlists</button>
+            <button className="btn">Artists</button>
+            <button className="btn">Albums</button>
           </div>
           <div className="search-in-lib">
             <button title="Search in your Library" className="btn btn-icon">

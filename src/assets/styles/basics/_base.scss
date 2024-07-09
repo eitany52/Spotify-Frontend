@@ -74,7 +74,7 @@ a {
 
 
 
-button, .btn {
+.btn {
     @include btn;
     &.active {  @include blockBtn($type: 'active'); }
     &:not(.active):hover {  @include blockBtn($type: 'hover'); } 
@@ -126,6 +126,22 @@ input {
     color:$clr6;
     border: none;
     line-height: 2em;
+}
+
+
+
+
+
+.intro-outer {
+    display:grid;
+    grid-template-columns: auto 1fr;
+    justify-content: start;
+    gap:10px;
+    
+    & .intro-inner {
+        display: grid;
+        align-content: space-evenly;
+    }
 }
 
 
