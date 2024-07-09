@@ -11,20 +11,18 @@
 
     & .intro-outer {
 
-        // img {
-        //     width: 150px;
-        // }
+        & > img {
+            width:150px;
+        }
       
         & h2 {
             font-size: 5em;
         }
+
+        & .intro-inner.sb {
+            align-content: space-between;
+        }
     }
-
-
-    &.intro-inner.sb {
-        align-content: space-between;
-    }
-
 
 
     & .svg-big {margin:20px;}

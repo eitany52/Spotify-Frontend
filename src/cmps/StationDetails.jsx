@@ -84,7 +84,7 @@ export function StationDetails() {
             <span>playlist</span>
             <section className="intro-outer">
               <img src={station.imgUrl} />
-              <section className="intro-inner">
+              <section className="intro-inner sb">
                 <h2>{station.name}</h2>
                 <h3>
                   {station.createdBy.fullname} |{" "}
