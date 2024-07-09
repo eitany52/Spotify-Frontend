@@ -13,43 +13,58 @@
     &.display-card {
         grid-template-columns: 0.7fr 0.8fr 0.5fr;
     }
-    
+
     header {
         grid-area: h;
         display: grid;
-        grid-template-columns: auto auto;
-        grid-auto-flow: column;
-        justify-content: start;
+        grid-template-columns: auto 1fr;
+        // align-content: center;
+        // grid-auto-flow: column;
+        // justify-content: start;
         gap: 5px;
 
         .icons-back-forward {
             display: grid;
             grid-auto-flow: column;
-            justify-content: start;
             align-content: center;
-            width: max-content;
-        }
+            gap: 5px;
+            margin-inline-start: 15px;
+            button {
+                display: grid;
+                place-content: center;
+                background-color: black;
+                border-radius: 50%;
+                height: 32px;
+                width: 32px;
 
-        form {
-            display: grid;
-            grid-auto-flow: column;
-            justify-content: start;
-            align-content: center;
-            width: 100%;
 
-            .icon-search {
-                width: max-content;
-                align-self: center;
-            }
 
-            input {
-                background-color: $bgc-search;
-                border-radius: 500px;
-                border: 0;
-                height: 48px;
-                color: white;
+                line-height: 0;
+                padding: 0;
+                margin: 0;
             }
         }
+
+        // form {
+        //     display: grid;
+        //     grid-auto-flow: column;
+        //     justify-content: start;
+        //     align-content: center;
+        //     width: 100%;
+
+        //     .icon-search {
+        //         width: max-content;
+        //         align-self: center;
+        //     }
+
+        //     input {
+        //         background-color: $bgc-search;
+        //         border-radius: 500px;
+        //         border: 0;
+        //         height: 48px;
+        //         color: white;
+        //     }
+        // }
     }
 
     main {
@@ -57,7 +72,7 @@
         overflow: hidden;
         transition: overflow 0.3s ease;
 
-        &:hover{
+        &:hover {
             overflow: auto;
         }
 
@@ -83,11 +98,11 @@
         grid-area: f;
     }
 
-    
- .card {
-    grid-area: c;
 
-}
+    .card {
+        grid-area: c;
+
+    }
 }
 
 

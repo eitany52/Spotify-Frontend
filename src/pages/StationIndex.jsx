@@ -56,8 +56,8 @@ export const StationIndex = () => {
       {console.log("rendered")}
       <header>
         <section className="icons-back-forward">
-          <SvgIcon iconName={"back"} />
-          <SvgIcon iconName={"forward"} />
+          <button><SvgIcon iconName={"back"} /></button>
+          <button><SvgIcon iconName={"forward"} /></button>
         </section>
         {isSearchDisplayed && <AppSearch />}
         {/* <button>Back</button>

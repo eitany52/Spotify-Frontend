@@ -85,6 +85,7 @@ export async function removeStation(stationId) {
 
 export async function addSongToStation(stationId, song) {
     try {
+        console.log("stationId:", stationId);
         const updatedStation = await stationService.addSongToStation(stationId, song)
         store.dispatch({ type: UPDATE_STATION, updatedStation })
     } catch (err) {
