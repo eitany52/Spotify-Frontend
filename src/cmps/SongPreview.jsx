@@ -66,7 +66,7 @@ export function SongPreview({
               <img src={songImg} />
               <span className="play"> {<PlayBtn song={song} />}</span>
             </div>
-            <div classNAme="song-details-inner">
+            <div className="song-details-inner">
               <span>{songName}</span>
               <span>{artistName}</span>
             </div>

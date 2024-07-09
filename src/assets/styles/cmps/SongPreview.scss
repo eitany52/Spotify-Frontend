@@ -52,9 +52,8 @@
 
   &.searchAtStation {
     display:grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 2fr 1fr auto;
     align-items: center;
-    justify-items: center;
     padding: 0 10px;
 
 
@@ -66,6 +65,7 @@
       
       & .song-details-inner {
           display: grid;
+          grid-template-rows: 1fr 1fr;
           align-content: space-evenly;
       }
 
