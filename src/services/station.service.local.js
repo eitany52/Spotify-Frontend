@@ -118,7 +118,7 @@ async function save(station) {
 }
 
 function getSongsFromYoutube() {
-    return searchRes[0].items
+    return searchRes[0].items.slice(0, 4)
     // const searchTerm = 'rap-song'
     // const res = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&key=AIzaSyCUE7BdmEO9uF_gWcV5yY5O3eqyINxdavo`)
     // const data = await res.json()

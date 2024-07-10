@@ -113,7 +113,7 @@ export const StationIndex = () => {
               {/* <label>Search</label> */}
               <input
                 type="text"
-                class="search-field"
+                className="search-field"
                 placeholder="Search in your Library"
               />
             </form>

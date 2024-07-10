@@ -152,6 +152,12 @@ export function SongPreview({
           </section>
           <section>album</section>
           <button onClick={() => onAddToStation(song)} className="btn">
+      {type === "search-at-station" && (
+        <section>
+          <img style={{ width: "40px", height: "40px" }} src={songImg} />
+          <span>{songName}</span>
+          <span>{artistName}</span>
+          <button onClick={() => onAddToStation(song)}>
             {isSongSavedAtStation(song) ? "Added" : "Add"}
           </button>
         </>

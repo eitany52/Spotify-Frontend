@@ -19,7 +19,7 @@ export const SongList = ({
           <label></label>
         </li>
       ) : null}
-      {type === "search" && <h2>Songs</h2>}
+
       {songs.map((_song, index) => {
         const song = type === "station" ? _song : formatSong(_song);
         return (

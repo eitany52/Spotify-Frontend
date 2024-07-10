@@ -8,8 +8,13 @@ body,
     margin: 0;
     height: 100%;
     overflow: hidden;
-    font-family : opensans;
+    font-family: opensans;
 }
+
+li {
+    list-style-type: none;
+}
+
 
 body {
     background-color: black;
@@ -50,6 +55,7 @@ p {
 
 a {
     text-decoration: none;
+
     &:hover {
         text-decoration: underline;
     }
@@ -74,6 +80,7 @@ a {
 
 
 
+button,
 .btn {
     @include btn;
     &.active {  @include blockBtn($type: 'active'); }
@@ -95,8 +102,14 @@ a {
 
 i {
     @include icon;
-    &.dark { @include iconBlock($color: "dark")}
-    &.active { @include iconBlock($color: "active") ;
+
+    &.dark {
+        @include iconBlock($color: "dark")
+    }
+
+    &.active {
+        @include iconBlock($color: "active");
+
         &::after {
             //background-color: currentcolor;
             border-radius: 50%;
@@ -112,7 +125,10 @@ i {
             color: $clr5;
         }
     }
-    &:hover { @include bigger }
+
+    &:hover {
+        @include bigger
+    }
 }
 
 .svg-big {
@@ -130,8 +146,6 @@ input {
 
 
 
-
-
 .intro-outer {
     display:grid;
     grid-template-columns: auto 1fr;
@@ -143,9 +157,6 @@ input {
         align-content: space-evenly;
     }
 }
-
-
-
 
 
 

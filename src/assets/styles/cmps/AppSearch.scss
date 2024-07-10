@@ -8,7 +8,6 @@
         grid-auto-flow: column;
         justify-content: start;
         gap: 5px;
-        align-content: center;
         height: 48px;
         background-color: $bgc-search;
         border-radius: 500px;
@@ -17,6 +16,8 @@
 
         .icon-search {
             width: max-content;
+            margin: 0;
+            align-self: center;
         }
 
         input {
@@ -24,6 +25,8 @@
             border-radius: 500px;
             border: 0;
             color: white;
+            margin: 0;
+            padding: 0;
         }
     }
 }
