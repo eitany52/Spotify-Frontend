@@ -8,8 +8,13 @@ body,
     margin: 0;
     height: 100%;
     overflow: hidden;
-    font-family : opensans;
+    font-family: opensans;
 }
+
+li {
+    list-style-type: none;
+}
+
 
 body {
     background-color: black;
@@ -50,6 +55,7 @@ p {
 
 a {
     text-decoration: none;
+
     &:hover {
         text-decoration: underline;
     }
@@ -226,9 +232,6 @@ i {
     }
    
 }
-
-
-
 
 
 

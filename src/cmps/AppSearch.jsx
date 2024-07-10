@@ -78,14 +78,12 @@ export const AppSearch = () => {
           }
         />
       </form>
-      {isUserAtStation && userInput && songs && (
+      {isUserAtStation && userInput && songs &&
         <SongList
           songs={songs}
           onAddToStation={onToggleAddToStation}
           isSongSavedAtStation={isSongSavedAtStation}
-          type="search-at-station"
-        />
-      )}
+          type='search-at-station' />}
     </div>
   );
 };

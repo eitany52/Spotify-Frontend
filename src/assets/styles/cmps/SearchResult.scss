@@ -1,0 +1,65 @@
+.search-result {
+    .search-result-container {
+        display: grid;
+        grid-template-rows: auto auto 1fr;
+        grid-template-columns: 1fr 2fr;
+        gap: 8px;
+
+
+        .btns-container {
+            grid-area: 1 / 1 / span 1 / span 2;
+        }
+
+        .top-res {
+            grid-area: 2 / 1;
+        }
+
+        .songs {
+            grid-area: 2 / 2;
+        }
+
+        .top-result-container {
+            grid-area: 3 / 1;
+            cursor: pointer;
+            background-color: $bgc-top-result;
+            // aspect-ratio: 2/2;
+        }
+
+        .song-list {
+            grid-area: 3/2;
+            margin: 0;
+        }
+    }
+
+    .search-result-container1 {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 10px;
+        padding: 15px;
+        & h2 {
+            padding-left: 10px;
+        }
+        & .inner-grid {
+            display: grid;
+            grid-template-rows: auto 1fr;
+        }
+
+        & .top-result-container1 {
+            display: grid;
+            grid-template-rows: 2fr 1fr 1fr;
+            align-items: center;
+            background-color: $bgc-top-result;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 15px;
+            & img {
+                width: 120px;
+                border-radius: 15px;
+            }
+            & h3 {
+                font-size: 40px;
+                margin: 0;
+            }
+        }
+    }
+}
