@@ -93,7 +93,10 @@ export function SongPreview({
 
       {/* col 7 more */}
       {type === "search-at-station" && (
-        <button onClick={() => onAddToStation(song)} className="btn">
+        <button
+          onClick={() => onAddToStation(song)}
+          className="btn-type-3 center-item"
+        >
           {isSongSavedAtStation(song) ? "Added" : "Add"}
         </button>
       )}

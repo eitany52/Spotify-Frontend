@@ -55,11 +55,12 @@ export const StationIndex = () => {
     <div className={`station-index  ${displayCard ? "display-card" : null}  `}>
       {console.log("rendered")}
       <header>
-        <section className="icons-back-forward">
-          <button>
+        {/* <section className="icons-back-forward"> */}
+        <section>
+          <button className="icon-type-1 big">
             <SvgIcon iconName={"back"} />
           </button>
-          <button>
+          <button className="icon-type-1 big">
             <SvgIcon iconName={"forward"} />
           </button>
         </section>
@@ -74,16 +75,39 @@ export const StationIndex = () => {
       </header>
       <aside>
         <nav>
-          <Link to="/" className="btn btn-icon">
+          {/* <section className="all-buttons">
+            <span className="btn-type-2">
+              <SvgIcon iconName="home" /> Home{" "}
+            </span>
+
+            <span className="btn-type-1">Playlist</span>
+
+            <span className="btn-type-3">Add</span>
+            <span className="btn-type-3">Added</span> 
+            <span>---</span>
+            <span className="icon-type-1">
+              <SvgIcon iconName="plus" />
+            </span>
+
+            <span className="icon-type-2">
+              <SvgIcon iconName="skipforward" />
+            </span>
+
+            <span className="icon-type-3">
+              <SvgIcon iconName="play" />
+            </span>
+          </section> */}
+
+          <Link to="/" className="btn-type-2">
             <SvgIcon iconName="home" /> Home
           </Link>
-          <Link to="/search" className="btn btn-icon">
+          <Link to="/search" className="btn-type-2">
             <SvgIcon iconName="search" /> Search
           </Link>
         </nav>
         <section className="library">
           <div className="library-pannel">
-            <button title="Collapse Your Library" className="btn btn-icon">
+            <button title="Collapse Your Library" className="btn-type-2">
               {" "}
               <SvgIcon iconName="library" />
               Your Library
@@ -91,21 +115,23 @@ export const StationIndex = () => {
             <button
               onClick={onCreateEmptyStation}
               title="Create playlist"
-              className="btn"
+              className="icon-type-1"
             >
               <SvgIcon iconName="plus" />
             </button>
-            <button title="Show more" className="btn">
+            <button title="Show more" className="icon-type-1">
               <SvgIcon iconName="more" />
             </button>
           </div>
-          <div>
-            <button className="btn">Playlists</button>
-            <button className="btn">Artists</button>
-            <button className="btn">Albums</button>
+          <div className="library-types">
+            <button className="btn-type-1">Playlists</button>
+            <button className="btn-type-1">Artists</button>
+            <button className="btn-type-1">Albums</button>
           </div>
           <div className="search-in-lib">
-            <button title="Search in your Library" className="btn btn-icon">
+            {/* <button title="Search in your Library" className="btn btn-icon"> */}
+
+            <button title="Search in your Library" className="icon-type-1">
               {" "}
               <SvgIcon iconName="search" />
             </button>
