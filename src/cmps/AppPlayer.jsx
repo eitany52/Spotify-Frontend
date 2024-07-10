@@ -169,13 +169,19 @@ export const AppPlayer = () => {
       />
 
       <section className="current-song-details">
-        <img src={currentSong.imgUrl} />
+        {currentSong.id && (
+          <div className="square-ratio">
+            {" "}
+            <img src={currentSong.imgUrl} />
+          </div>
+        )}
+
         <span>{currentSong.title}</span>
       </section>
 
-      <section className="control-pannel">
+      <section className="control-pannel center-item">
         <section className="controls">
-          <span onClick={onShuffle}>
+          <span onClick={onShuffle} className="icon-type-2">
             {" "}
             <SvgIcon
               iconName="shuffle"
@@ -183,26 +189,31 @@ export const AppPlayer = () => {
             />
           </span>
 
-          <span onClick={onPrev}>
+          <span onClick={onPrev} className="icon-type-2">
             {" "}
             <SvgIcon iconName="skipback" />
           </span>
 
           {isPlaying ? (
-            <span onClick={pauseVideo}>
+            <span onClick={pauseVideo} className="icon-type-3">
               {" "}
               <SvgIcon iconName="pause" />
             </span>
           ) : (
-            <span onClick={playVideo}>
+            <span onClick={playVideo} className="icon-type-3">
               {" "}
               <SvgIcon iconName="play" />
             </span>
           )}
 
-          <span onClick={onNext}>
+          <span onClick={onNext} className="icon-type-2">
             {" "}
             <SvgIcon iconName="skipforward" />
+          </span>
+
+          <span className="icon-type-2">
+            {" "}
+            <SvgIcon iconName="repeat" />
           </span>
         </section>
         <section className="trace">
@@ -218,7 +229,7 @@ export const AppPlayer = () => {
       </section>
 
       <section className="extra-controls">
-        <span onClick={onDisplayCard}>
+        <span onClick={onDisplayCard} className="icon-type-2">
           <SvgIcon iconName="nowPlaying" />
         </span>
       </section>

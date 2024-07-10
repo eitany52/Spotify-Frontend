@@ -18,6 +18,8 @@
         grid-area: h;
         display: grid;
         grid-template-columns: auto 1fr;
+        // align-items: center;
+        padding:10px;
         // align-content: center;
         // grid-auto-flow: column;
         // justify-content: start;
@@ -97,27 +99,33 @@
             justify-content: start;
             align-items:center;
             gap:10px;
-          
+            padding: 10px 30px;
            
         }
 
         .library {
             grid-area: 2 / 2;
-
+            overflow-x :auto;
 
 
             & .library-pannel {
                 display:grid;
                 grid-template-columns: 1fr auto auto;
                 justify-items: start;
+                // padding:10px;
             }
+
+            & .library-types {
+                padding:15px 0px;
+            }
+
 
             & .search-in-lib{
                 position:relative;
                 & .btn-icon {width:40px; transition:all 500ms; height:3em;}
                 &:hover .btn-icon {width:250px;}
 
-                & form {display:none; position:absolute; left:50px; top:0px;}
+                & form {display:none; position:absolute; left:40px; top:-10px;}
                 &:hover form {display:block;}
 
                 display:grid;
@@ -130,6 +138,10 @@
 
     footer {
         grid-area: f;
+
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
     }
 
 
@@ -144,7 +156,7 @@
 .station-index main,
 .station-index aside nav,
 .station-index aside .library {
-    background-color: $bgc-clr1;
+    background-color: $dark-clr1;
 }
 
 // .station-index header {

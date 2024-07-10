@@ -1,6 +1,7 @@
 .app-player {
     display:grid;
     grid-template-columns: 0 1fr 1fr 1fr;
+    padding: 5px 25px;
 }
 
 .app-player .current-song-details {
@@ -10,12 +11,11 @@
     align-items:center;
     gap:10px;
 
-    img {
-      max-width: 100px;
-      max-Height: 100px;
-      display: block;
+   
+    .square-ratio {
+      width:60px;
+      border-radius:5px;
     }
-    
 }
 
 .app-player .control-pannel{
