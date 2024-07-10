@@ -12,6 +12,7 @@ import { SongList } from "./SongList.jsx";
 import { FloatingMenuSongAdd } from "./FloatingMenuSongAdd.jsx";
 import { onToggleModal } from "../store/actions/app.actions.js";
 import { FloatingMenuSong } from "./FloatingMenuSong.jsx";
+import { AppHeader } from "../cmps/AppHeader";
 
 //Checked - All looks good.
 
@@ -79,8 +80,9 @@ export function StationDetails() {
 
       {/* <AllIcons /> */}
       {station && (
-        <div>
-          <header>
+        <>
+          <AppHeader />
+          <section className="header">
             <span>playlist</span>
             <section className="intro-outer">
               <img src={station.imgUrl} />
@@ -92,11 +94,12 @@ export function StationDetails() {
                 </h3>
               </section>
             </section>
-          </header>
-          <section className="svg-big bigger">
-            <SvgIcon iconName="play" style="dark" />
           </section>
-
+          <section className="station-details-play">
+            <section className="svg-big bigger">
+              <SvgIcon iconName="play" style="dark" />
+            </section>
+          </section>
           <SongList
             songs={station.songs}
             onAddToStation={onAddToStation}
@@ -104,7 +107,7 @@ export function StationDetails() {
             type="station"
           />
           {isUserStation && station.type === "normal" && <AppSearch />}
-        </div>
+        </>
       )}
     </section>
   );

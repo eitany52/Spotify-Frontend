@@ -18,7 +18,7 @@ export const StationList = ({ location, songToAdd = {} }) => {
   if (!stations) return;
   return (
     <>
-      {location === "main" && <h3>Made for {getLoggedOnUser().name}</h3>}
+      {/* {location === "main" && <h3>Made for {getLoggedOnUser().name}</h3>} */}
       <ul className={`station-list ${location}`}>
         {stations.map((station) => (
           <StationPreview

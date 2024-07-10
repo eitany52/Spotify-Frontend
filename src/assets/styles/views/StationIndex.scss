@@ -1,9 +1,10 @@
 .station-index {
     display: grid;
     grid-template-columns: 0.7fr 1.3fr 0px;
-    grid-template-rows: 0.4fr 2.3fr 0.3fr;
+    grid-template-rows: 0.5em 0.4fr 2.3fr 0.3fr;
     grid-template-areas:
-        "a h c"
+        "s s s"
+        "a m c"
         "a m c"
         "f f f";
     gap: 0 10px;
@@ -15,7 +16,7 @@
     }
 
     header {
-        grid-area: h;
+        //grid-area: h;
         display: grid;
         grid-template-columns: auto 1fr;
         // align-items: center;

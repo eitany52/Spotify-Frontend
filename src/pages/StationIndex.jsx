@@ -7,7 +7,7 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import { AppSearch } from "../cmps/AppSearch";
+import { AppHeader } from "../cmps/AppHeader";
 import { AppPlayer } from "../cmps/AppPlayer";
 import { StationList } from "../cmps/StationList";
 import { CurrentSongDetails } from "../cmps/CurrentSongDetails";
@@ -54,8 +54,8 @@ export const StationIndex = () => {
   return (
     <div className={`station-index  ${displayCard ? "display-card" : null}  `}>
       {console.log("rendered")}
-      <header>
-        {/* <section className="icons-back-forward"> */}
+      {/* <header>
+        {/* <section className="icons-back-forward"> }
         <section>
           <button className="icon-type-1 big">
             <SvgIcon iconName={"back"} />
@@ -65,14 +65,8 @@ export const StationIndex = () => {
           </button>
         </section>
         {isSearchDisplayed && <AppSearch />}
-        {/* <button>Back</button>
-        <button>Forward</button> */}
-        {/* <div>
-          <button>Settings</button>
-          <button>More</button>
-          <UserPreview/>
-        </div> */}
-      </header>
+       
+      </header> */}
       <aside>
         <nav>
           <Link to="/" className="btn-type-2">
@@ -126,6 +120,7 @@ export const StationIndex = () => {
         </section>
       </aside>
       <main>
+        {(isHomePageDisplayed || isSearchDisplayed) && <AppHeader />}
         {isHomePageDisplayed && <StationList location="main" />}
         {!isHomePageDisplayed && <Outlet />}
       </main>
