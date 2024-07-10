@@ -25,22 +25,6 @@
         // justify-content: start;
         gap: 5px;
 
-        .icons-back-forward {
-            display: grid;
-            grid-auto-flow: column;
-            align-content: center;
-            gap: 5px;
-            margin-inline-start: 15px;
-            button {
-                display: grid;
-                place-content: center;
-                background-color: black;
-                border-radius: 50%;
-                height: 32px;
-                width: 32px;
-                border: 0;
-            }
-        }
 
         // form {
         //     display: grid;
@@ -66,13 +50,8 @@
 
     main {
         grid-area: m;
-        overflow: auto; //hidden
+        overflow: auto; 
         transition: overflow 0.3s ease;
-
-        // &:hover{
-        //     overflow: auto;
-        // }
-
     }
 
     aside {

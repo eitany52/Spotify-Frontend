@@ -75,29 +75,6 @@ export const StationIndex = () => {
       </header>
       <aside>
         <nav>
-          {/* <section className="all-buttons">
-            <span className="btn-type-2">
-              <SvgIcon iconName="home" /> Home{" "}
-            </span>
-
-            <span className="btn-type-1">Playlist</span>
-
-            <span className="btn-type-3">Add</span>
-            <span className="btn-type-3">Added</span> 
-            <span>---</span>
-            <span className="icon-type-1">
-              <SvgIcon iconName="plus" />
-            </span>
-
-            <span className="icon-type-2">
-              <SvgIcon iconName="skipforward" />
-            </span>
-
-            <span className="icon-type-3">
-              <SvgIcon iconName="play" />
-            </span>
-          </section> */}
-
           <Link to="/" className="btn-type-2">
             <SvgIcon iconName="home" /> Home
           </Link>
