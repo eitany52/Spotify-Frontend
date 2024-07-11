@@ -1,10 +1,10 @@
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
 
 // import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { loadStation } from "../store/actions/station.actions.js";
-// import { utilService } from "../services/util.service.js";
+import { utilService } from "../services/util.service.js";
 import { SvgIcon, AllIcons } from "./SvgIcon.jsx";
 import { getLoggedOnUser } from "../store/actions/user.actions.js";
 import { AppSearch } from "./AppSearch.jsx";
@@ -13,6 +13,7 @@ import { FloatingMenuSongAdd } from "./FloatingMenuSongAdd.jsx";
 import { onToggleModal } from "../store/actions/app.actions.js";
 import { FloatingMenuSong } from "./FloatingMenuSong.jsx";
 import { AppHeader } from "../cmps/AppHeader";
+import ImageColorComponent from "../cmps/ImageColorComponent";
 
 //Checked - All looks good.
 
@@ -22,10 +23,13 @@ export function StationDetails() {
   const stations = useSelector(
     (storeState) => storeState.stationModule.stations
   );
+  const [colors, setColors] = useState({ backgroundColor: "", color: "" });
+  const [style1, setStyle1] = useState(null);
+  const [style2, setStyle2] = useState(null);
 
   useEffect(() => {
     loadStation(stationId);
-  }, [stationId, stations]);
+  }, [stationId, stations, colors]);
 
   function onMoreOptions(ev, song) {
     console.log("song:", song);
@@ -68,6 +72,16 @@ export function StationDetails() {
     });
   }
 
+  const handleColorChange = (newColors) => {
+    console.log("newColors:", newColors);
+    const styles = utilService.createGradientColors(newColors.backgroundColor);
+
+    console.log("styles:", styles);
+    setStyle1(styles.style1);
+    setStyle2(styles.style2);
+    setColors(newColors);
+  };
+
   if (!station) return <div>Loading...</div>;
 
   const isUserStation = getLoggedOnUser()._id === station.createdBy.id;
@@ -81,8 +95,8 @@ export function StationDetails() {
       {/* <AllIcons /> */}
       {station && (
         <>
-          <AppHeader />
-          <section className="header">
+          <AppHeader backgroundColor={colors.backgroundColor} />
+          <section className="header" style={{ ...style1 }}>
             <span>playlist</span>
             <section className="intro-outer">
               <img src={station.imgUrl} />
@@ -95,11 +109,19 @@ export function StationDetails() {
               </section>
             </section>
           </section>
-          <section className="station-details-play">
+          <section className="station-details-play" style={{ ...style2 }}>
             <section className="svg-big bigger">
               <SvgIcon iconName="play" style="dark" />
             </section>
           </section>
+
+          <div style={{ width: "50px", height: "50px" }}>
+            <ImageColorComponent
+              imageUrl={station.imgUrl}
+              onColorChange={handleColorChange}
+            />
+          </div>
+
           <SongList
             songs={station.songs}
             onAddToStation={onAddToStation}

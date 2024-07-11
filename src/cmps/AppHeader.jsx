@@ -8,7 +8,7 @@ import { LoginSignup } from "./LoginSignup.jsx";
 import { SvgIcon } from "../cmps/SvgIcon";
 import { AppSearch } from "../cmps/AppSearch";
 
-export function AppHeader() {
+export function AppHeader({ backgroundColor = null }) {
   const user = useSelector((storeState) => storeState.userModule.user);
   const [isSearchDisplayed, setIsSearchDisplayed] = useState(false);
   const location = useLocation();
@@ -60,7 +60,7 @@ export function AppHeader() {
   }
 
   return (
-    <header className="app-header">
+    <header className="app-header" style={{ backgroundColor: backgroundColor }}>
       {
         <>
           <section>
