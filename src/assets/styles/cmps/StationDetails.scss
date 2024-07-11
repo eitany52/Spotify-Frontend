@@ -1,13 +1,26 @@
 .station-details {
+
+    display:grid;
+
     & header {
+        // background:rgba(179,154,154,1);
+        border-radius: 15px 15px 0 0;
+    }
+
+    & .header {
         display: grid;
         gap: 10px;
         grid-template-rows: repeat(3, auto);
-        grid-template-columns: 1fr;
-        background: #cdb2b2;
-        padding: 10px;
+        grid-template-columns:  1fr;
+        // background: rgb(106,104,104);
+        // background: linear-gradient(0deg, rgba(106,104,104,1) 0%, rgba(179,154,154,1) 100%);
     }
 
+
+    & .station-details-play {
+        // background: rgb(102,100,100);
+        // background: linear-gradient(180deg, rgba(102,100,100,1) 0%, rgba(14,14,14,1) 100%);
+    }
 
     & .intro-outer {
 
