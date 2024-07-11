@@ -59,11 +59,11 @@ async function getLikedSongsStation() {
 }
 
 async function isLikedSongStation(stationId){
-    console.log('stationId:', stationId)
+    // console.log('stationId:', stationId)
     const station = await getById(stationId)
-    console.log('station:', station)
+    // console.log('station:', station)
     const islikedSongsStation = (station.type === 'liked')
-    console.log('islikedSongsStation:', islikedSongsStation)
+    // console.log('islikedSongsStation:', islikedSongsStation)
     
     return islikedSongsStation
 }
@@ -174,8 +174,12 @@ async function updateStationDetails(stationToSave) {
 
     const station = await getById(stationToSave._id)
 
-    station.name = stationToSave.name;
-    station.description = stationToSave.description;
+    // station.name = stationToSave.name;
+    // station.description = stationToSave.description;
+    // station.imgUrl = stationToSave.imgUrl;
+
+    Object.assign(station, stationToSave);
+
     await storageService.put(STORAGE_KEY, station)
 
     return station // ?)
