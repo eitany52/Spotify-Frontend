@@ -107,7 +107,7 @@ async function save(station) {
         // Later, owner is set by the backend
         const user = {
             id: getLoggedOnUser()._id,
-            name: getLoggedOnUser().name
+            fullname: getLoggedOnUser().name
         }
         const stationToSave = {
             ...station, createdBy: user

@@ -105,7 +105,7 @@ function formatDate(timestamp) {
 
 function darkenColor(color, percent) {
 
-    console.log('color:', color)
+   
     const [r, g, b, a] = color.match(/\d+/g).map(Number);
     const darken = value => Math.max(0, value - Math.floor((value * percent) / 100));
   
