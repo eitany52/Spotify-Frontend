@@ -83,12 +83,9 @@ export function StationDetails() {
 
   const isUserStation = getLoggedOnUser()._id === station.createdBy.id;
 
+  // if (colors.backgroundColor === "") return <div>Loading...</div>;
   return (
     <section className="station-details">
-      {/* <Link to="/" className="btn">
-        Back Home
-      </Link> */}
-
       {/* <AllIcons /> */}
       {station && (
         <>
