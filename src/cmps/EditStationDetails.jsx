@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { updateStationDetails } from "../store/actions/station.actions.js";
 import { onToggleModal } from "../store/actions/app.actions.js";
+import { ImgUploader } from "./ImgUploader.jsx";
 
 export const EditStationDetails = ({ stationToEdit }) => {
   //console.log("stationToEdit:", stationToEdit);
@@ -32,6 +33,11 @@ export const EditStationDetails = ({ stationToEdit }) => {
     //console.log("stationToSave:", stationToSave);
   }
 
+  function onUploaded(imgUrl1) {
+    console.log("imgUrl:", imgUrl1);
+    stationToSave = { ...stationToSave, imgUrl: imgUrl1 };
+  }
+
   return (
     <div>
       EditStationDetails
@@ -51,7 +57,7 @@ export const EditStationDetails = ({ stationToEdit }) => {
           onChange={handleChange}
         ></input>
         {/* <input name="thumbnail" type="file" onChange={handleChange}></input> */}
-
+        <ImgUploader onUploaded={onUploaded} />
         <button className="send">save</button>
       </form>
     </div>

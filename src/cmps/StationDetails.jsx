@@ -73,10 +73,7 @@ export function StationDetails() {
   }
 
   const handleColorChange = (newColors) => {
-    console.log("newColors:", newColors);
     const styles = utilService.createGradientColors(newColors.backgroundColor);
-
-    console.log("styles:", styles);
     setStyle1(styles.style1);
     setStyle2(styles.style2);
     setColors(newColors);
@@ -86,12 +83,9 @@ export function StationDetails() {
 
   const isUserStation = getLoggedOnUser()._id === station.createdBy.id;
 
+  // if (colors.backgroundColor === "") return <div>Loading...</div>;
   return (
     <section className="station-details">
-      {/* <Link to="/" className="btn">
-        Back Home
-      </Link> */}
-
       {/* <AllIcons /> */}
       {station && (
         <>

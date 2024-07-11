@@ -53,20 +53,7 @@ export const StationIndex = () => {
 
   return (
     <div className={`station-index  ${displayCard ? "display-card" : null}  `}>
-      {console.log("rendered")}
-      {/* <header>
-        {/* <section className="icons-back-forward"> }
-        <section>
-          <button className="icon-type-1 big">
-            <SvgIcon iconName={"back"} />
-          </button>
-          <button className="icon-type-1 big">
-            <SvgIcon iconName={"forward"} />
-          </button>
-        </section>
-        {isSearchDisplayed && <AppSearch />}
-       
-      </header> */}
+      {/* {console.log("rendered")} */}
       <aside>
         <nav>
           <Link to="/" className="btn-type-2">
