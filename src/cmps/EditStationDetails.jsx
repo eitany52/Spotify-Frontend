@@ -39,10 +39,11 @@ export const EditStationDetails = ({ stationToEdit }) => {
   }
 
   return (
-    <div>
-      EditStationDetails
+    <div className="edit-station-details">
+      <span>Edit Details</span>
       <form onSubmit={onSubmitDetails}>
         <input
+          className="fieldName"
           name="name"
           type="text"
           placeholder="name"
@@ -50,6 +51,7 @@ export const EditStationDetails = ({ stationToEdit }) => {
           onChange={handleChange}
         ></input>
         <input
+          className="fieldDescription"
           name="description"
           type="text"
           placeholder="Description"
@@ -57,7 +59,14 @@ export const EditStationDetails = ({ stationToEdit }) => {
           onChange={handleChange}
         ></input>
         {/* <input name="thumbnail" type="file" onChange={handleChange}></input> */}
-        <ImgUploader onUploaded={onUploaded} />
+        <span className="upload">
+          {/* <img src={stationToEdit.imgUrl} /> */}
+          <ImgUploader
+            onUploaded={onUploaded}
+            background={stationToEdit.imgUrl}
+          />
+        </span>
+
         <button className="send">save</button>
       </form>
     </div>
