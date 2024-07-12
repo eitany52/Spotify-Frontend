@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { uploadService } from "../services/upload.service";
 
-export function ImgUploader({ onUploaded = null }) {
+export function ImgUploader({ onUploaded = null, background = "" }) {
   const [imgData, setImgData] = useState({
     imgUrl: null,
     height: 500,
@@ -24,15 +24,20 @@ export function ImgUploader({ onUploaded = null }) {
   }
 
   return (
-    <div className="upload-preview">
-      {imgData.imgUrl && (
-        <img
-          src={imgData.imgUrl}
-          style={{ maxWidth: "200px", float: "right" }}
-        />
-      )}
-      <label htmlFor="imgUpload">{getUploadLabel()}</label>
-      <input type="file" onChange={uploadImg} accept="img/*" id="imgUpload" />
+    <div
+      className="upload-preview"
+      style={{ background: `url(${background}) ` }}
+    >
+      <div className="upload-preview-inner">
+        {imgData.imgUrl && (
+          <img
+            src={imgData.imgUrl}
+            style={{ maxWidth: "200px", float: "right" }}
+          />
+        )}
+        {/* <label htmlFor="imgUpload">{getUploadLabel()}</label> */}
+        <input type="file" onChange={uploadImg} accept="img/*" id="imgUpload" />
+      </div>
     </div>
   );
 }
