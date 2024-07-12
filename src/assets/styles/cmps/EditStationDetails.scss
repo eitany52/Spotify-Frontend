@@ -19,7 +19,8 @@
     & .upload {
         &  .upload-preview {
             height: 100%;
-            & #imgUpload { display:none;   }
+            & #imgUpload { display:none;  
+                }
             .upload-preview-inner  {
                 height: 100%;
             }
@@ -28,7 +29,16 @@
                     background:url("https://www.greencode.co.il/wp-content/uploads/2024/07/upload-image.jpg");
                 }
         
-                & #imgUpload { display:block; height: 100%; } 
+                & #imgUpload { 
+                    display:block; 
+                    height: 100%;     
+                    color: #525252; 
+                    //font-size:1px;
+                   
+                    &input {
+                        background-color: #525252;
+                    }
+               } 
             }
         }
       
