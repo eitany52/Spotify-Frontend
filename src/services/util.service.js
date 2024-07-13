@@ -70,14 +70,23 @@ function formatDate(timestamp) {
     const now = new Date();
     const date = new Date(timestamp);
   
+    const msPerMinute =  60 * 1000;
+    const msPerHour = 60 * 60 * 1000;
     const msPerDay = 24 * 60 * 60 * 1000;
     const msPerWeek = 7 * msPerDay;
-  
+
+
     const timeDifference = now - date;
+    const minutesDiffrence = Math.floor(timeDifference / msPerMinute);
+    const hoursDifference = Math.floor(timeDifference / msPerHour);
     const daysDifference = Math.floor(timeDifference / msPerDay);
     const weeksDifference = Math.floor(timeDifference / msPerWeek);
   
-    if (daysDifference < 7) {
+    if (minutesDiffrence < 60) {
+        return 'just now'
+    } else if (hoursDifference < 24) {
+        return `${hoursDifference} hours ago`;
+    }  else if (daysDifference < 7) {
       return `${daysDifference} days ago`;
     } else if (daysDifference < 30) {
       return `${weeksDifference} weeks ago`;
