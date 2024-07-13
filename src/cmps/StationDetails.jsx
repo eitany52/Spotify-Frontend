@@ -85,14 +85,14 @@ export function StationDetails() {
 
   // if (colors.backgroundColor === "") return <div>Loading...</div>;
   return (
-    <section className="station-details">
+    <section className="station-details main-layout">
       {/* <AllIcons /> */}
       {station && (
         <>
-          <section className="main-layout">
+          <section className="app-header-continer full">
             <AppHeader backgroundColor={colors.backgroundColor} />
           </section>
-          <section className="header main-layout" style={{ ...style1 }}>
+          <section className="header full" style={{ ...style1 }}>
             <section className="intro-outer">
               <img src={station.imgUrl} />
               <section className="intro-inner sb">
@@ -105,17 +105,14 @@ export function StationDetails() {
               </section>
             </section>
           </section>
-          <section
-            className="station-details-play main-layout"
-            style={{ ...style2 }}
-          >
+          <section className="station-details-play full" style={{ ...style2 }}>
             <section className="svg-big bigger">
               <SvgIcon iconName="play" style="dark" />
             </section>
           </section>
 
           <div
-            class="color-component main-layout"
+            class="color-component "
             style={{ width: "50px", height: "50px" }}
           >
             <ImageColorComponent
@@ -124,7 +121,7 @@ export function StationDetails() {
             />
           </div>
 
-          <section className="main-layout">
+          <section className="">
             <SongList
               songs={station.songs}
               onAddToStation={onAddToStation}
@@ -133,7 +130,7 @@ export function StationDetails() {
             />
           </section>
 
-          <section className="main-layout">
+          <section className="">
             {isUserStation && station.type === "normal" && <AppSearch />}
           </section>
         </>

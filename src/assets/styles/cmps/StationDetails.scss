@@ -1,29 +1,27 @@
 .station-details {
 
-    
-       .main-layout {
         display:grid;
-        gap:6px 0;
         grid-template-columns: 1rem 1fr 1rem;
-        }
          
         & > * {
             grid-column: 2;
         }
 
-        // & > .full {
-        //     grid-column: 1 / -1;
-        // }
+        & > .full {
+            grid-column: 1 / -1;
+        }
     
+        & .app-header-continer { position: sticky; top: 0; z-index:99999;}
 
     & header {
-        grid-column: 1 / -1;
+        
         // background:rgba(179,154,154,1);
         border-radius: 15px 15px 0 0;
     }
 
     & .header {
-        grid-column: 1 / -1;
+        display:grid;
+        grid-template-columns: subgrid;
 
         & .intro-outer {
 
