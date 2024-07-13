@@ -89,12 +89,14 @@ export function StationDetails() {
       {/* <AllIcons /> */}
       {station && (
         <>
-          <AppHeader backgroundColor={colors.backgroundColor} />
-          <section className="header" style={{ ...style1 }}>
-            <span>playlist</span>
+          <section className="main-layout">
+            <AppHeader backgroundColor={colors.backgroundColor} />
+          </section>
+          <section className="header main-layout" style={{ ...style1 }}>
             <section className="intro-outer">
               <img src={station.imgUrl} />
               <section className="intro-inner sb">
+                <span>playlist</span>
                 <h2>{station.name}</h2>
                 <h3>
                   {station.createdBy.fullname} |{" "}
@@ -103,26 +105,37 @@ export function StationDetails() {
               </section>
             </section>
           </section>
-          <section className="station-details-play" style={{ ...style2 }}>
+          <section
+            className="station-details-play main-layout"
+            style={{ ...style2 }}
+          >
             <section className="svg-big bigger">
               <SvgIcon iconName="play" style="dark" />
             </section>
           </section>
 
-          <div style={{ width: "50px", height: "50px" }}>
+          <div
+            class="color-component main-layout"
+            style={{ width: "50px", height: "50px" }}
+          >
             <ImageColorComponent
               imageUrl={station.imgUrl}
               onColorChange={handleColorChange}
             />
           </div>
 
-          <SongList
-            songs={station.songs}
-            onAddToStation={onAddToStation}
-            onMoreOptions={onMoreOptions}
-            type="station"
-          />
-          {isUserStation && station.type === "normal" && <AppSearch />}
+          <section className="main-layout">
+            <SongList
+              songs={station.songs}
+              onAddToStation={onAddToStation}
+              onMoreOptions={onMoreOptions}
+              type="station"
+            />
+          </section>
+
+          <section className="main-layout">
+            {isUserStation && station.type === "normal" && <AppSearch />}
+          </section>
         </>
       )}
     </section>

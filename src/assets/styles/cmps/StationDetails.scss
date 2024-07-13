@@ -1,37 +1,54 @@
 .station-details {
 
-    display:grid;
+    
+       .main-layout {
+        display:grid;
+        gap:6px 0;
+        grid-template-columns: 1rem 1fr 1rem;
+        }
+         
+        & > * {
+            grid-column: 2;
+        }
+
+        // & > .full {
+        //     grid-column: 1 / -1;
+        // }
+    
 
     & header {
+        grid-column: 1 / -1;
         // background:rgba(179,154,154,1);
         border-radius: 15px 15px 0 0;
     }
 
     & .header {
-        display: grid;
-        gap: 10px;
-        grid-template-rows: repeat(3, auto);
-        grid-template-columns:  1fr;
-       
-    }
+        grid-column: 1 / -1;
 
+        & .intro-outer {
 
-    & .intro-outer {
-
-        & > img {
-            width:150px;
-        }
-      
-        & h2 {
-            font-size: 5em;
-        }
-
-        & .intro-inner.sb {
-            align-content: space-between;
+            grid-column: 2 / 3;
+            & > img {
+                width:150px;
+            }
+          
+            & h2 {
+                font-size: 5em;
+            }
+    
+            & .intro-inner.sb {
+                align-content: space-between;
+            }
         }
     }
+
+
+   
 
 
     & .svg-big {margin:20px;}
+
+    .song-list { grid-column: 2 / -1;}
+    .app-search { grid-column: 2 / 3;}
 
 }
