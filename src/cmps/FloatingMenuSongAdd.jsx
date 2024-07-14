@@ -3,7 +3,12 @@ import { StationList } from "./StationList.jsx";
 import { useSelector } from "react-redux";
 
 export const FloatingMenuSongAdd = ({ song, onDone }) => {
-  const stationId = useSelector(storeState => storeState.stationModule.station?._id)
+  const stationId = useSelector(
+    (storeState) => storeState.stationModule.station?._id
+  );
+  const stations = useSelector(
+    (storeState) => storeState.stationModule.stations
+  );
 
   function onRemove() {
     removeSongFromStation(stationId, song.id);
@@ -15,7 +20,12 @@ export const FloatingMenuSongAdd = ({ song, onDone }) => {
         {/* <li>Add To playlist</li> */}
         {/* <li><AppSearch/></li> */}
 
-        <StationList location="modal" />
+        <StationList
+          stations={stations}
+          location="modal-add"
+          // onAddSongToStation={onAddSongToStation}
+        />
+
         {/* <li>Remove From Your Liked Songs</li> */}
       </ul>
     </div>

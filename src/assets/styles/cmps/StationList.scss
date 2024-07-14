@@ -16,7 +16,11 @@
         img {max-width:200px;}
     }
 
-    &.modal {
+    &.modal-more {
         img {display:none;}
+    }
+
+    &.modal-add {
+        img {max-width:32px;}
     }
 }
