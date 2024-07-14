@@ -32,8 +32,8 @@ export function StationDetails() {
   }, [stationId, stations, colors]);
 
   function onMoreOptions(ev, song) {
-    console.log("song:", song);
-    console.log("ev:", ev);
+    // console.log("song:", song);
+    // console.log("ev:", ev);
     console.log("more.......");
     onToggleModal({
       cmp: FloatingMenuSong,
@@ -85,16 +85,18 @@ export function StationDetails() {
 
   // if (colors.backgroundColor === "") return <div>Loading...</div>;
   return (
-    <section className="station-details">
+    <section className="station-details main-layout">
       {/* <AllIcons /> */}
       {station && (
         <>
-          <AppHeader backgroundColor={colors.backgroundColor} />
-          <section className="header" style={{ ...style1 }}>
-            <span>playlist</span>
+          <section className="app-header-continer full">
+            <AppHeader backgroundColor={colors.backgroundColor} />
+          </section>
+          <section className="header full" style={{ ...style1 }}>
             <section className="intro-outer">
               <img src={station.imgUrl} />
               <section className="intro-inner sb">
+                <span>playlist</span>
                 <h2>{station.name}</h2>
                 <h3>
                   {station.createdBy.fullname} |{" "}
@@ -103,26 +105,34 @@ export function StationDetails() {
               </section>
             </section>
           </section>
-          <section className="station-details-play" style={{ ...style2 }}>
+          <section className="station-details-play full" style={{ ...style2 }}>
             <section className="svg-big bigger">
               <SvgIcon iconName="play" style="dark" />
             </section>
           </section>
 
-          <div style={{ width: "50px", height: "50px" }}>
+          <div
+            class="color-component "
+            style={{ width: "50px", height: "50px" }}
+          >
             <ImageColorComponent
               imageUrl={station.imgUrl}
               onColorChange={handleColorChange}
             />
           </div>
 
-          <SongList
-            songs={station.songs}
-            onAddToStation={onAddToStation}
-            onMoreOptions={onMoreOptions}
-            type="station"
-          />
-          {isUserStation && station.type === "normal" && <AppSearch />}
+          <section className="">
+            <SongList
+              songs={station.songs}
+              onAddToStation={onAddToStation}
+              onMoreOptions={onMoreOptions}
+              type="station"
+            />
+          </section>
+
+          <section className="">
+            {isUserStation && station.type === "normal" && <AppSearch />}
+          </section>
         </>
       )}
     </section>
