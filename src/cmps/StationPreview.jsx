@@ -10,8 +10,8 @@ export const StationPreview = ({ station, location, onAddSongToStation }) => {
   const navigate = useNavigate();
 
   async function onClickStation() {
-    if (location === "modal") {
-      onAddSongToStation(station)
+    if (location === "modal-more") {
+      onAddSongToStation(station);
     } else {
       onGoToStationDetails();
     }
