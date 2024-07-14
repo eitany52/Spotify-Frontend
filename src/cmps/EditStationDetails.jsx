@@ -24,7 +24,6 @@ export const EditStationDetails = ({ stationToEdit }) => {
         break;
       case "checkbox":
         value = target.checked;
-      default:
         break;
     }
 

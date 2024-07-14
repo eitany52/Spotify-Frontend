@@ -2,23 +2,58 @@ import { utilService } from "../services/util.service.js";
 import { SvgIcon } from "./SvgIcon.jsx";
 import { useSelector } from "react-redux";
 import { PlayBtn } from "./PlayBtn.jsx";
+import { onToggleModal } from "../store/actions/app.actions.js";
+import { FloatingMenuSongAdd } from "./FloatingMenuSongAdd.jsx";
+import { FloatingMenuSong } from "./FloatingMenuSong.jsx";
 
 export function SongPreview({
   song,
   onAddToStation,
-  onMoreOptions,
   isSongSavedAtStation,
+  isUserStation,
   type,
   index,
 }) {
-  const currentSong = useSelector(
-    (storeState) => storeState.stationModule.currentSong
-  );
 
+  function onOpenMoreOptionsModal(ev, song) {
+    onToggleModal({
+      cmp: FloatingMenuSong,
+      props: {
+        song,
+        onDone() {
+          onToggleModal(null);
+        },
+        class: "floating-menu-song",
+      },
+      style: {
+        left: `${ev.clientX - 300}px`,
+        top: `${ev.clientY - 200}px`,
+      },
+    });
+  }
+
+  function onOpenAddToStationModal(ev, song) {
+    console.log("Add.......");
+    onToggleModal({
+      cmp: FloatingMenuSongAdd,
+      props: {
+        song,
+        onDone() {
+          onToggleModal(null);
+        },
+        class: "floating-menu-song-add",
+      },
+      style: {
+        left: `${ev.clientX - 300}px`,
+        top: `${ev.clientY - 200}px`,
+      },
+    });
+  }
   const songImg = song.imgUrl;
   const songName = song.title;
   const artistName = song.channelTitle;
   const myClassName = type === "station" ? "song-preview-station-grid" : type;
+  const isSongSaved = isSongSavedAtStation(song)
 
   return (
     <li className={`song-preview  ${myClassName}`}>
@@ -65,17 +100,15 @@ export function SongPreview({
         <span>{utilService.formatDate(song.addedAt)}</span>
       )}
 
-      {/* col 5 tick */}
-      {type === "station" && (
-        <span onClick={(ev) => onAddToStation(ev, song)} className="add">
-          <SvgIcon iconName="tick" style="active" />
-        </span>
-      )}
-
       {/* need to be fix - should be general add */}
-      {type === "search" && (
-        <span title="Add to Liked Songs" onClick={() => onAddToStation(song)}>
-          {isSongSavedAtStation(song) ? (
+      {(type === "station" || type === "search") && (
+        <span
+          //  
+          className={!isUserStation && isSongSaved ? "" : "add"}
+          title={`Add to ${isSongSaved ? "playlist" : "Liked Songs"}`}
+          onClick={ev =>
+            isSongSaved ? onOpenAddToStationModal(ev, song) : onAddToStation(song)}>
+          {isSongSaved ? (
             <SvgIcon iconName="tick" style="active" />
           ) : (
             <SvgIcon iconName="add" />
@@ -86,7 +119,7 @@ export function SongPreview({
       {/* col 6 more */}
       {/* need to be fix - more not working in search becuse function not exist*/}
       {(type === "station" || type === "search") && (
-        <span onClick={(ev) => onMoreOptions(ev, song)} className="more">
+        <span onClick={(ev) => onOpenMoreOptionsModal(ev, song)} className="more">
           <SvgIcon iconName="more" />
         </span>
       )}
@@ -97,7 +130,7 @@ export function SongPreview({
           onClick={() => onAddToStation(song)}
           className="btn-type-3 center-item"
         >
-          {isSongSavedAtStation(song) ? "Added" : "Add"}
+          {isSongSaved ? "Added" : "Add"}
         </button>
       )}
       {/* 

@@ -4,6 +4,7 @@ export const REMOVE_STATION = 'REMOVE_STATION'
 export const SET_STATIONS = 'SET_STATIONS'
 export const UPDATE_STATION = 'UPDATE_STATION'
 export const SET_STATION = 'SET_STATION'
+export const SET_LIKED_SONGS_STATION = 'SET_LIKED_SONGS_STATION'
 export const SET_CURRENT_SONG = 'SET_CURRENT_SONG'
 export const SET_PLAY_PAUSE = 'SET_PLAY_PAUSE'
 export const SET_SHUFFLE = 'SET_SHUFFLE'
@@ -21,20 +22,24 @@ export const DISPLAY_HIDE_CARD = 'DISPLAY_HIDE_CARD'
 
 const initialState = {
     stations: [],
-    station : null,
-    currentSong: {'id': null},
+    station: null,
+    likedSongsStation: null,
+    currentSong: { 'id': null },
     isPlaying: false,
     isShuffle: false,
-    displayCard : false
+    displayCard: false
 }
 
 export function stationReducer(state = initialState, action) {
     let newState = state
     let stations
     switch (action.type) {
-     
+
         case SET_STATION:
             newState = { ...state, station: action.station }
+            break
+        case SET_LIKED_SONGS_STATION:
+            newState = { ...state, likedSongsStation: action.likedSongsStation }
             break
         case SET_STATIONS:
             newState = { ...state, stations: action.stations }
@@ -43,9 +48,8 @@ export function stationReducer(state = initialState, action) {
             newState = { ...state, stations: [...state.stations, action.savedStation] }
             break
         case REMOVE_STATION:
-            const lastRemovedStation = state.stations.find(station => station._id === action.stationId)
             stations = state.stations.filter(station => station._id !== action.stationId)
-            newState = { ...state, stations, lastRemovedStation }
+            newState = { ...state, stations }
             break
         case UPDATE_STATION:
             stations = state.stations.map(station => station._id === action.updatedStation._id ? action.updatedStation : station)
@@ -57,7 +61,7 @@ export function stationReducer(state = initialState, action) {
         case SET_PLAY_PAUSE:
             newState = { ...state, isPlaying: action.ip }
             break
-          case  SET_SHUFFLE:
+        case SET_SHUFFLE:
             newState = { ...state, isShuffle: action.isShuffle }
             break
         case DISPLAY_HIDE_CARD:

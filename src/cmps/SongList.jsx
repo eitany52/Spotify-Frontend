@@ -4,11 +4,10 @@ import { formatSong } from "../store/actions/station.actions.js";
 export const SongList = ({
   songs,
   onAddToStation,
-  onMoreOptions,
   isSongSavedAtStation,
+  isUserStation,
   type,
 }) => {
-  console.log(type);
   return (
     <ul className="song-list">
       {type === "station" && songs.length ? (
@@ -27,8 +26,8 @@ export const SongList = ({
             key={song.id}
             song={song}
             onAddToStation={onAddToStation}
-            onMoreOptions={onMoreOptions}
             isSongSavedAtStation={isSongSavedAtStation}
+            isUserStation={isUserStation}
             type={type}
             index={index}
           />

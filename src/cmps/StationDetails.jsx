@@ -1,70 +1,43 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 // import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
-import { loadStation } from "../store/actions/station.actions.js";
+import { addSongToStation, isSongSavedAtStation, loadStation, removeSongFromStation } from "../store/actions/station.actions.js";
 // import { utilService } from "../services/util.service.js";
-import { SvgIcon, AllIcons } from "./SvgIcon.jsx";
+import { SvgIcon } from "./SvgIcon.jsx";
 import { getLoggedOnUser } from "../store/actions/user.actions.js";
 import { AppSearch } from "./AppSearch.jsx";
 import { SongList } from "./SongList.jsx";
-import { FloatingMenuSongAdd } from "./FloatingMenuSongAdd.jsx";
-import { onToggleModal } from "../store/actions/app.actions.js";
-import { FloatingMenuSong } from "./FloatingMenuSong.jsx";
 
 //Checked - All looks good.
 
 export function StationDetails() {
   const { stationId } = useParams();
-  const station = useSelector((storeState) => storeState.stationModule.station);
-  const stations = useSelector(
-    (storeState) => storeState.stationModule.stations
-  );
+  const station = useSelector(storeState => storeState.stationModule.station)
+  const stations = useSelector(storeState => storeState.stationModule.stations)
+  const { onAddToLikedSongs, isSongSavedAtSomeUserStation } = useOutletContext()
+
 
   useEffect(() => {
     loadStation(stationId);
   }, [stationId, stations]);
 
-  function onMoreOptions(ev, song) {
-    console.log("song:", song);
-    console.log("ev:", ev);
-    console.log("more.......");
-    onToggleModal({
-      cmp: FloatingMenuSong,
-      props: {
-        stationId: station._id,
-        songId: song.id,
-        onDone() {
-          onToggleModal(null);
-        },
-        song: song,
-        class: "floating-menu-song",
-      },
-      style: {
-        left: `${ev.clientX - 300}px`,
-        top: `${ev.clientY - 200}px`,
-      },
-    });
+
+  function isSongSavedAtCurrentStation(song) {
+    return isSongSavedAtStation(station, song.id)
   }
 
-  function onAddToStation(ev, song) {
-    console.log("Add.......");
-    onToggleModal({
-      cmp: FloatingMenuSongAdd,
-      props: {
-        stationId: station._id,
-        songId: song.id,
-        onDone() {
-          onToggleModal(null);
-        },
-        class: "floating-menu-song-add",
-      },
-      style: {
-        left: `${ev.clientX - 300}px`,
-        top: `${ev.clientY - 200}px`,
-      },
-    });
+  function onToggleAddToStation(song) {
+    try {
+      if (isSongSavedAtCurrentStation(song)) {
+        removeSongFromStation(station._id, song.id);
+      } else {
+        addSongToStation(station._id, song);
+      }
+    } catch (err) {
+      console.log("Having issues with removing or saving the song to this station", err)
+    }
   }
 
   if (!station) return <div>Loading...</div>;
@@ -99,11 +72,15 @@ export function StationDetails() {
 
           <SongList
             songs={station.songs}
-            onAddToStation={onAddToStation}
-            onMoreOptions={onMoreOptions}
+            onAddToStation={song => !isUserStation ? onAddToLikedSongs(song) : null}
+            isSongSavedAtStation={song => !isUserStation ? isSongSavedAtSomeUserStation(song) : true}
+            isUserStation={isUserStation}
             type="station"
           />
-          {isUserStation && station.type === "normal" && <AppSearch />}
+          {isUserStation && station.type === "normal" &&
+            <AppSearch
+              onAddToStation={onToggleAddToStation}
+              isSongSavedAtStation={isSongSavedAtCurrentStation} />}
         </div>
       )}
     </section>

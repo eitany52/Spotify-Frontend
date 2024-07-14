@@ -2,7 +2,7 @@ import { stationService } from '../../services/station.service.local'
 import { store } from '../store'
 import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
 
-import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE, SET_SHUFFLE, DISPLAY_HIDE_CARD } from '../reducers/station.reducer'
+import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE, SET_SHUFFLE, DISPLAY_HIDE_CARD, SET_LIKED_SONGS_STATION } from '../reducers/station.reducer'
 
 //Checked - All looks good.
 
@@ -22,7 +22,6 @@ export async function loadStations() {
     // }
 }
 
-
 export async function loadStation(stationId) {
     try {
         const station = await stationService.getById(stationId)
@@ -41,7 +40,7 @@ export async function createEmptyStation() {
     try {
         const station = stationService.createEmptyStation()
         const savedStation = await stationService.save(station)
-        store.dispatch({type: ADD_STATION, savedStation })
+        store.dispatch({ type: ADD_STATION, savedStation })
         return savedStation
     } catch (err) {
         console.log("Having issues with saving this station", err)
@@ -50,10 +49,14 @@ export async function createEmptyStation() {
 
 }
 
+export function getUserStations(stations) {
+return stationService.getUserStations(stations)
+}
+
 export async function loadLikedSongsStation() {
     try {
         const likedSongsStation = await stationService.getLikedSongsStation()
-        store.dispatch({ type: SET_STATION, station: likedSongsStation })
+        store.dispatch({ type: SET_LIKED_SONGS_STATION, likedSongsStation })
     } catch (err) {
         console.log("Cannot load Liked Songs Station", err)
     }
@@ -71,7 +74,6 @@ export async function addStation(station) {
     }
 }
 
-
 export async function removeStation(stationId) {
     try {
         await stationService.remove(stationId)
@@ -82,10 +84,16 @@ export async function removeStation(stationId) {
     }
 }
 
+export function isSongSavedAtStation(station, songId) {
+    return stationService.isSongSavedAtStation(station, songId)
+}
+
+export function isSongSavedAtSomeStation(stations, songId) {
+    return stationService.isSongSavedAtSomeStation(stations, songId)
+}
 
 export async function addSongToStation(stationId, song) {
     try {
-        console.log("stationId:", stationId);
         const updatedStation = await stationService.addSongToStation(stationId, song)
         store.dispatch({ type: UPDATE_STATION, updatedStation })
     } catch (err) {

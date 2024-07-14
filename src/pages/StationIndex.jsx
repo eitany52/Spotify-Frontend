@@ -1,18 +1,12 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import {
-  Link,
-  Outlet,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { AppSearch } from "../cmps/AppSearch";
 import { AppPlayer } from "../cmps/AppPlayer";
 import { StationList } from "../cmps/StationList";
 import { CurrentSongDetails } from "../cmps/CurrentSongDetails";
 import { SvgIcon } from "../cmps/SvgIcon";
-import { createEmptyStation } from "../store/actions/station.actions";
+import { addSongToStation, createEmptyStation, getUserStations, isSongSavedAtSomeStation, loadLikedSongsStation, loadStations } from "../store/actions/station.actions";
 
 export const StationIndex = () => {
   const location = useLocation();
@@ -21,9 +15,14 @@ export const StationIndex = () => {
   const [isSearchDisplayed, setIsSearchDisplayed] = useState(false);
   const [isHomePageDisplayed, setIsHomePageDisplayed] = useState(true);
 
-  const displayCard = useSelector(
-    (storeState) => storeState.stationModule.displayCard
-  );
+  const stations = useSelector(storeState => storeState.stationModule.stations)
+  const likedSongsStation = useSelector(storeState => storeState.stationModule.likedSongsStation)
+  const displayCard = useSelector(storeState => storeState.stationModule.displayCard)
+
+  useEffect(() => {
+    loadStations()
+    loadLikedSongsStation()
+  }, []);
 
   useEffect(() => {
     getLocation();
@@ -42,6 +41,15 @@ export const StationIndex = () => {
     }
   }
 
+  async function onAddToLikedSongs(songToAdd) {
+    try {
+      await addSongToStation(likedSongsStation._id, songToAdd);
+      loadLikedSongsStation()
+    } catch (err) {
+      console.log("Having issues with saving this song", err);
+    }
+  }
+
   async function onCreateEmptyStation() {
     try {
       const emptyStation = await createEmptyStation();
@@ -50,6 +58,13 @@ export const StationIndex = () => {
       console.log("Creating new playlist failed, please try again later", err);
     }
   }
+
+  function isSongSavedAtSomeUserStation(song) {
+    const userStations = getUserStations(stations)
+    return isSongSavedAtSomeStation(userStations, song.id)
+  }
+
+  if (!stations.length) return
 
   return (
     <div className={`station-index  ${displayCard ? "display-card" : null}  `}>
@@ -145,12 +160,15 @@ export const StationIndex = () => {
             </form>
             {/* <button>Recents</button> */}
           </div>
-          <StationList location="library" />
+          <StationList stations={stations} location="library" />
         </section>
       </aside>
       <main>
-        {isHomePageDisplayed && <StationList location="main" />}
-        {!isHomePageDisplayed && <Outlet />}
+        {isHomePageDisplayed &&
+          <StationList
+            stations={stations}
+            location="main" />}
+        {!isHomePageDisplayed && <Outlet context={{ onAddToLikedSongs, isSongSavedAtSomeUserStation }} />}
       </main>
       {displayCard && (
         <section className="card">
