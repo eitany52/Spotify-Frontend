@@ -1,22 +1,17 @@
 import { useNavigate } from "react-router";
 import { getLoggedOnUser } from "../store/actions/user.actions";
 import { onToggleModal } from "../store/actions/app.actions.js";
-import { addSongToStation } from "../store/actions/station.actions.js";
-
 import { FloatingMenuStation } from "../cmps/FloatingMenuStation";
 import { EditStationDetails } from "../cmps/EditStationDetails";
 
 // Checked - All looks good.
 
-export const StationPreview = ({ station, location, songToAdd }) => {
+export const StationPreview = ({ station, location, onAddSongToStation }) => {
   const navigate = useNavigate();
 
-  function onClickStation() {
+  async function onClickStation() {
     if (location === "modal") {
-      console.log("onClickStation modal");
-      songToAdd.addedAt = Date.now();
-      addSongToStation(station._id, songToAdd);
-      onToggleModal(null);
+      onAddSongToStation(station)
     } else {
       onGoToStationDetails();
     }

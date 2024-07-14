@@ -1,21 +1,10 @@
-import { useSelector } from "react-redux";
 import { StationPreview } from "./StationPreview";
-import { useEffect } from "react";
-import { loadStations } from "../store/actions/station.actions";
 import { getLoggedOnUser } from "../store/actions/user.actions";
 
 // Checked - All looks good.
 
-export const StationList = ({ location, songToAdd = {} }) => {
-  const stations = useSelector(
-    (storeState) => storeState.stationModule.stations
-  );
+export const StationList = ({ stations, location, onAddSongToStation, songToAdd = {} }) => {
 
-  useEffect(() => {
-    loadStations();
-  }, []);
-
-  if (!stations) return;
   return (
     <>
       {/* {location === "main" && <h3>Made for {getLoggedOnUser().name}</h3>} */}
@@ -25,6 +14,7 @@ export const StationList = ({ location, songToAdd = {} }) => {
             key={station._id}
             station={station}
             location={location}
+            onAddSongToStation={onAddSongToStation}
             songToAdd={songToAdd}
           />
         ))}

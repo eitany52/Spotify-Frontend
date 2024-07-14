@@ -17,13 +17,12 @@ import { SongList } from "./SongList";
 
 // Checked - All looks good.
 
-export const AppSearch = () => {
+export const AppSearch = ({ onAddToStation, isSongSavedAtStation }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isUserAtStation, setIsUserAtStation] = useState(false);
   const [userInput, setUserInput] = useState(null);
   const [songs, setSongs] = useState(null);
-  const station = useSelector((storeState) => storeState.stationModule.station);
 
   useEffect(() => {
     getLocation();
@@ -52,18 +51,6 @@ export const AppSearch = () => {
     setUserInput(ev.target.txt.value);
   }
 
-  function onToggleAddToStation(song) {
-    if (isSongSavedAtStation(song)) {
-      removeSongFromStation(station._id, song.id);
-    } else {
-      addSongToStation(station._id, song);
-    }
-  }
-
-  function isSongSavedAtStation(song) {
-    return station.songs.some((_song) => _song.id === song.id);
-  }
-
   return (
     <div className="app-search">
       <form className="search-form" onSubmit={onSearch}>
@@ -81,8 +68,9 @@ export const AppSearch = () => {
       {isUserAtStation && userInput && songs &&
         <SongList
           songs={songs}
-          onAddToStation={onToggleAddToStation}
+          onAddToStation={onAddToStation}
           isSongSavedAtStation={isSongSavedAtStation}
+          isUserStation={true}
           type='search-at-station' />}
     </div>
   );

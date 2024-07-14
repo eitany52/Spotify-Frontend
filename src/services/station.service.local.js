@@ -22,7 +22,10 @@ export const stationService = {
     formatSong,
     createEmptyStation,
     getSongsFromYoutube,
-    updateStationDetails, 
+    updateStationDetails,
+    isSongSavedAtStation,
+    getUserStations,
+    isSongSavedAtSomeStation,
     isSongInLikedSong
     // getEmptyCar,
     // addCarMsg
@@ -59,14 +62,28 @@ async function getLikedSongsStation() {
     return likedSongsStation
 }
 
-async function isLikedSongStation(stationId){
-    // console.log('stationId:', stationId)
+async function isLikedSongStation(stationId) {
     const station = await getById(stationId)
-    // console.log('station:', station)
     const islikedSongsStation = (station.type === 'liked')
-    // console.log('islikedSongsStation:', islikedSongsStation)
-    
     return islikedSongsStation
+}
+
+function isSongSavedAtStation(station, songId) {
+    return station.songs.some(song => song.id === songId)
+}
+
+function getUserStations(stations) {
+    return stations.filter(station => station.createdBy.id === getLoggedOnUser()._id)
+}
+
+function isSongSavedAtSomeStation(stations, songId) {
+    let isSongSavedAtSomeStation = false
+    stations.forEach(station => {
+        if (station.songs.some(song => song.id === songId)) {
+            isSongSavedAtSomeStation = true
+        }
+    })
+    return isSongSavedAtSomeStation
 }
 
 async function getById(stationId) {
@@ -140,13 +157,9 @@ async function addSongToStation(stationId, song) {
 
 
 async function removeSongFromStation(stationId, songId) {
-    console.log('station.service removeSongFromStation stationId:', stationId)
-    console.log('station.service removeSongFromStation songId:', songId)
 
     const station = await getById(stationId)
-    console.log('station.service removeSongFromStation station:', station)
     station.songs = station.songs.filter((song) => song.id !== songId)
-    console.log('station.service removeSongFromStation updatedStation after filter:', station)
     await storageService.put(STORAGE_KEY, station)
 
     return station // ?
@@ -184,7 +197,7 @@ async function updateStationDetails(stationToSave) {
     await storageService.put(STORAGE_KEY, station)
 
     return station // ?)
-   
+
 }
 
 
@@ -223,11 +236,11 @@ function formatSong(song) {
 function getSubstringBeforePipe(str) {
     // בדוק אם המחרוזת מכילה את התו '|'
     const pipeIndex = str.indexOf('|');
-    
+
     // אם אין את התו '|', החזר את המחרוזת כולה
     if (pipeIndex === -1) {
         return str;
-    } 
+    }
     // אחרת, החזר את החלק של המחרוזת עד ל-| הראשון (לא כולל)
     return str.substring(0, pipeIndex);
 }

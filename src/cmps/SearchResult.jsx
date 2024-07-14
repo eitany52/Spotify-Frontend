@@ -1,11 +1,6 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import {
-    addSongToStation,
-    getSongsFromYoutube,
-    loadLikedSongsStation,
-} from "../store/actions/station.actions";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useOutletContext, useParams } from "react-router";
+import { getSongsFromYoutube } from "../store/actions/station.actions";
 import { useEffectUpdate } from "../customHooks/useEffectUpdate";
 import { SongList } from "./SongList";
 
@@ -14,39 +9,16 @@ import { SongList } from "./SongList";
 export const SearchResult = () => {
     const params = useParams();
     const [songs, setSongs] = useState(null);
-    const likedSongsStation = useSelector(
-        (storeState) => storeState.stationModule.station
-    );
-
-    useEffect(() => {
-        loadLikedSongsStation();
-    }, []);
+    const { onAddToLikedSongs, isSongSavedAtSomeUserStation } = useOutletContext()
 
     useEffectUpdate(() => {
-        loadSongs();
-    }, [params]);
+        loadSongs()
+    }, [params])
 
     function loadSongs() {
         setSongs(getSongsFromYoutube());
     }
 
-    function isSongSavedAtLikedSongs(song) {
-        return likedSongsStation.songs.some((_song) => _song.id === song.id);
-    }
-
-    async function onAddToLikedSongs(songToAdd) {
-        try {
-            await addSongToStation(likedSongsStation._id, songToAdd);
-            loadLikedSongsStation();
-        } catch (error) {
-            console.log("Having issues with saving this song");
-        }
-    }
-
-    function onMoreOptions() { }
-
-    console.log("SearchResult rendered");
-    console.log("params:", params);
     return (
         <div className="search-result">
             {/* <RecentSearches/> */}
@@ -96,12 +68,11 @@ export const SearchResult = () => {
                             <SongList
                                 songs={songs}
                                 onAddToStation={onAddToLikedSongs}
-                                onMoreOptions={onMoreOptions}
-                                isSongSavedAtStation={isSongSavedAtLikedSongs}
+                                isSongSavedAtStation={isSongSavedAtSomeUserStation}
+                                isUserStation={false}
                                 type="search" />
                         </section>
                     </section>
-
                 </>
             )}
             {!params.userInput && <h1>Suggestions</h1>}

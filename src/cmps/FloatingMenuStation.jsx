@@ -3,11 +3,7 @@ import { stationService } from "../services/station.service.local";
 
 import { removeStation } from "../store/actions/station.actions.js";
 
-export const FloatingMenuStation = ({
-  stationId,
-  onDone,
-  onOpenStationDetails,
-}) => {
+export const FloatingMenuStation = ({ stationId, onDone, onOpenStationDetails, }) => {
   const [isLikedSongStation, setIsLikedSongStation] = useState(null);
 
   useEffect(() => {
