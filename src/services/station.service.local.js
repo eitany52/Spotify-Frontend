@@ -22,7 +22,8 @@ export const stationService = {
     formatSong,
     createEmptyStation,
     getSongsFromYoutube,
-    updateStationDetails
+    updateStationDetails, 
+    isSongInLikedSong
     // getEmptyCar,
     // addCarMsg
 }
@@ -185,6 +186,21 @@ async function updateStationDetails(stationToSave) {
     return station // ?)
    
 }
+
+
+async function isSongInLikedSong(songId) {
+
+    const station = await getLikedSongsStation();
+    
+     console.log('isSongInLikedSong songId:', songId)
+     console.log('isSongInLikedSong station:', station)
+    const isInStation = station.songs.some((song) => song.id === songId )
+     console.log('isSongInLikedSong isInStation:', isInStation)
+    return isInStation;
+   
+}
+
+
 
 
 

@@ -32,8 +32,8 @@ export function StationDetails() {
   }, [stationId, stations, colors]);
 
   function onMoreOptions(ev, song) {
-    console.log("song:", song);
-    console.log("ev:", ev);
+    // console.log("song:", song);
+    // console.log("ev:", ev);
     console.log("more.......");
     onToggleModal({
       cmp: FloatingMenuSong,
