@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { AppSearch } from "../cmps/AppSearch";
+import { AppHeader } from "../cmps/AppHeader";
 import { AppPlayer } from "../cmps/AppPlayer";
 import { StationList } from "../cmps/StationList";
 import { CurrentSongDetails } from "../cmps/CurrentSongDetails";
@@ -68,51 +68,9 @@ export const StationIndex = () => {
 
   return (
     <div className={`station-index  ${displayCard ? "display-card" : null}  `}>
-      {console.log("rendered")}
-      <header>
-        {/* <section className="icons-back-forward"> */}
-        <section>
-          <button className="icon-type-1 big">
-            <SvgIcon iconName={"back"} />
-          </button>
-          <button className="icon-type-1 big">
-            <SvgIcon iconName={"forward"} />
-          </button>
-        </section>
-        {isSearchDisplayed && <AppSearch />}
-        {/* <button>Back</button>
-        <button>Forward</button> */}
-        {/* <div>
-          <button>Settings</button>
-          <button>More</button>
-          <UserPreview/>
-        </div> */}
-      </header>
+      {/* {console.log("rendered")} */}
       <aside>
         <nav>
-          {/* <section className="all-buttons">
-            <span className="btn-type-2">
-              <SvgIcon iconName="home" /> Home{" "}
-            </span>
-
-            <span className="btn-type-1">Playlist</span>
-
-            <span className="btn-type-3">Add</span>
-            <span className="btn-type-3">Added</span> 
-            <span>---</span>
-            <span className="icon-type-1">
-              <SvgIcon iconName="plus" />
-            </span>
-
-            <span className="icon-type-2">
-              <SvgIcon iconName="skipforward" />
-            </span>
-
-            <span className="icon-type-3">
-              <SvgIcon iconName="play" />
-            </span>
-          </section> */}
-
           <Link to="/" className="btn-type-2">
             <SvgIcon iconName="home" /> Home
           </Link>
@@ -164,10 +122,11 @@ export const StationIndex = () => {
         </section>
       </aside>
       <main>
-        {isHomePageDisplayed &&
-          <StationList
-            stations={stations}
-            location="main" />}
+        {(isHomePageDisplayed || isSearchDisplayed) && <AppHeader />}
+        {isHomePageDisplayed && 
+        <StationList
+          stations={stations}
+          location="main" />}
         {!isHomePageDisplayed && <Outlet context={{ onAddToLikedSongs, isSongSavedAtSomeUserStation }} />}
       </main>
       {displayCard && (

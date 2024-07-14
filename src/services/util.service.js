@@ -7,7 +7,8 @@ export const utilService = {
     saveToStorage,
     loadFromStorage,
     formatDate,
-    getRandomExcludingY
+    getRandomExcludingY,
+    createGradientColors
 }
 
 function makeId(length = 6) {
@@ -69,14 +70,23 @@ function formatDate(timestamp) {
     const now = new Date();
     const date = new Date(timestamp);
   
+    const msPerMinute =  60 * 1000;
+    const msPerHour = 60 * 60 * 1000;
     const msPerDay = 24 * 60 * 60 * 1000;
     const msPerWeek = 7 * msPerDay;
-  
+
+
     const timeDifference = now - date;
+    const minutesDiffrence = Math.floor(timeDifference / msPerMinute);
+    const hoursDifference = Math.floor(timeDifference / msPerHour);
     const daysDifference = Math.floor(timeDifference / msPerDay);
     const weeksDifference = Math.floor(timeDifference / msPerWeek);
   
-    if (daysDifference < 7) {
+    if (minutesDiffrence < 60) {
+        return 'just now'
+    } else if (hoursDifference < 24) {
+        return `${hoursDifference} hours ago`;
+    }  else if (daysDifference < 7) {
       return `${daysDifference} days ago`;
     } else if (daysDifference < 30) {
       return `${weeksDifference} weeks ago`;
@@ -102,3 +112,29 @@ function formatDate(timestamp) {
 }
 
 
+function darkenColor(color, percent) {
+
+   
+    const [r, g, b, a] = color.match(/\d+/g).map(Number);
+    const darken = value => Math.max(0, value - Math.floor((value * percent) / 100));
+  
+    return `rgba(${darken(r)}, ${darken(g)}, ${darken(b)}, ${a})`;
+  }
+  
+function createGradientColors(color) {
+
+    const darkenedBackground_50 = darkenColor(color, 50);
+    const gradientBackground1 = `linear-gradient(${color}, ${darkenedBackground_50})`;        
+       
+    const darkenedBackground_52 = darkenColor(color, 52);
+    //darkenedBackground_100 = darkenColor(color, 100);
+
+    const darkenedBackground_100 = 'rgba(18,18,18,1)';
+    const gradientBackground2 = `linear-gradient( ${darkenedBackground_52}, ${darkenedBackground_100})`;
+           
+   
+    return { 
+        style1: { background: gradientBackground1},
+        style2: { background: gradientBackground2}
+    };
+}

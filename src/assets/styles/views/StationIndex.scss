@@ -1,9 +1,10 @@
 .station-index {
     display: grid;
     grid-template-columns: 0.7fr 1.3fr 0px;
-    grid-template-rows: 0.4fr 2.3fr 0.3fr;
+    grid-template-rows: 0.5em 0.4fr 2.3fr 0.3fr;
     grid-template-areas:
-        "a h c"
+        "s s s"
+        "a m c"
         "a m c"
         "f f f";
     gap: 0 10px;
@@ -15,7 +16,7 @@
     }
 
     header {
-        grid-area: h;
+        //grid-area: h;
         display: grid;
         grid-template-columns: auto 1fr;
         // align-items: center;
@@ -25,22 +26,6 @@
         // justify-content: start;
         gap: 5px;
 
-        .icons-back-forward {
-            display: grid;
-            grid-auto-flow: column;
-            align-content: center;
-            gap: 5px;
-            margin-inline-start: 15px;
-            button {
-                display: grid;
-                place-content: center;
-                background-color: black;
-                // border-radius: 50%;
-                // height: 32px;
-                // width: 32px;
-                // border: 0;
-            }
-        }
 
         // form {
         //     display: grid;
@@ -66,13 +51,8 @@
 
     main {
         grid-area: m;
-        overflow: auto; //hidden
+        overflow: auto; 
         transition: overflow 0.3s ease;
-
-        // &:hover{
-        //     overflow: auto;
-        // }
-
     }
 
     aside {

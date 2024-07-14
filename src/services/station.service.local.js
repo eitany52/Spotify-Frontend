@@ -25,7 +25,8 @@ export const stationService = {
     updateStationDetails,
     isSongSavedAtStation,
     getUserStations,
-    isSongSavedAtSomeStation
+    isSongSavedAtSomeStation,
+    isSongInLikedSong
     // getEmptyCar,
     // addCarMsg
 }
@@ -62,12 +63,8 @@ async function getLikedSongsStation() {
 }
 
 async function isLikedSongStation(stationId) {
-    console.log('stationId:', stationId)
     const station = await getById(stationId)
-    console.log('station:', station)
     const islikedSongsStation = (station.type === 'liked')
-    console.log('islikedSongsStation:', islikedSongsStation)
-
     return islikedSongsStation
 }
 
@@ -128,7 +125,7 @@ async function save(station) {
         // Later, owner is set by the backend
         const user = {
             id: getLoggedOnUser()._id,
-            name: getLoggedOnUser().name
+            fullname: getLoggedOnUser().name
         }
         const stationToSave = {
             ...station, createdBy: user
@@ -191,13 +188,32 @@ async function updateStationDetails(stationToSave) {
 
     const station = await getById(stationToSave._id)
 
-    station.name = stationToSave.name;
-    station.description = stationToSave.description;
+    // station.name = stationToSave.name;
+    // station.description = stationToSave.description;
+    // station.imgUrl = stationToSave.imgUrl;
+
+    Object.assign(station, stationToSave);
+
     await storageService.put(STORAGE_KEY, station)
 
     return station // ?)
 
 }
+
+
+async function isSongInLikedSong(songId) {
+
+    const station = await getLikedSongsStation();
+    
+     console.log('isSongInLikedSong songId:', songId)
+     console.log('isSongInLikedSong station:', station)
+    const isInStation = station.songs.some((song) => song.id === songId )
+     console.log('isSongInLikedSong isInStation:', isInStation)
+    return isInStation;
+   
+}
+
+
 
 
 

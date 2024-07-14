@@ -18,7 +18,7 @@
         "likedByUsers": [],
         "songs": [
             {
-                "id": "j4jtIDaeaWI",
+                "id": "MXI5Nuz6OHg",
                 "title": "The Meters - Cissy Strut",
                 "url": "youtube/song.mp4",
                 "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
@@ -39,7 +39,7 @@
     },
     {
         "_id": "5cksxjas89xjsa8xjsa8jxs09",
-        "name": "Funky Monks",
+        "name": "Mostly Eurovision",
         "type": "normal",
         "description": "This is the best playlist ever. You will love this playlist.",
         "imgUrl" : "https://www.greencode.co.il/wp-content/uploads/2024/07/station-thumb1.jpg",
@@ -50,20 +50,20 @@
         ],
         "createdBy": {
             "id": "u101",
-            "fullname": "Puki Ben David",
+            "fullname": "Yossi Cohen",
             "imgUrl": "http://some-photo/"
         },
         "savedBy": [],
         "likedByUsers": [],
         "songs": [
             {
-                "id": "j4jtIDaeaWI",
+                "id": "j4jtIDaeaWR",
                 "title": "DNA - Tom's Diner",
                 "url": "youtube/song.mp4",
                 "imgUrl":  "https://de.rarevinyl.com/cdn/shop/products/suzanne-vega-tom-s-diner-uk-12-inch-vinyl-single-maxi-amy592-81160_1200x600_crop_center.jpg?v=1705451152",
                 "addedBy": {},
                 "addedAt": 1719168000000,
-                "channelTitle": "songer1"
+                "channelTitle": "Suzanne Vega"
             },
             {
                 "id": "0-EF60neguk",
@@ -72,16 +72,16 @@
                 "imgUrl": "https://media.newyorker.com/photos/590968a1c14b3c606c106d52/master/pass/Larson-Nothing-Compares-2-Sinead.jpg",
                 "addedBy": {},
                 "addedAt": 1719168000000,
-                "channelTitle": "songer1"
+                "channelTitle": "Sinéad O'Connor"
             },
             {
                 "id": "VZt7J0iaUD0",
-                "title": "Suzanne Vega - Luka",
+                "title": "Luka",
                 "url": "https://www.youtube.com/watch?v=VZt7J0iaUD0",
                 "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
                 "addedAt": 1719168000000,
                 "addedBy": {},
-                "channelTitle": "songer1"
+                "channelTitle": "Suzanne Vega"
             },
             {
                 "id": "CziHrYYSyPc",
@@ -90,7 +90,7 @@
                 "imgUrl": "https://wp.inews.co.uk/wp-content/uploads/2018/05/Eurovision-2018-Netta-credit-eurovision-e1526220429455.jpg?w=960&h=638&crop=1",
                 "addedBy": {},
                 "addedAt": 1698230400000,
-                "channelTitle": "songer1"
+                "channelTitle": "Netta"
             },
             {
                 "id": "lJYn09tuPw4",
@@ -99,7 +99,7 @@
                 "imgUrl": "https://escbubble.com/wp-content/uploads/2024/02/Eden-Golan.jpg",
                 "addedBy": {},
                 "addedAt": 1698230400000,
-                "channelTitle": "songer1"
+                "channelTitle": "Eden Golan"
             },
             {
                 "id": "Z3mIcCllJXY",
@@ -108,8 +108,30 @@
                 "imgUrl": "https://pix.eurovisionworld.com/pix/israel-2023-noa-kirel-8.jpg",
                 "addedBy": {},
                 "addedAt": 1698230400000,
-                "channelTitle": "songer1"
-            }   
+                "channelTitle": "Noa kirel"
+            },
+            {
+                "id": "MXI5Nuz6OHg",
+                "title": "The Meters - Cissy Strut",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+                "addedBy": {},
+                "addedAt": 162521765262,
+                "channelTitle": "The Meters"
+            },
+            {
+                "id": "mUkfiLjooxs",
+                "title": "The JB's - Pass The Peas",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+                "addedAt": 1698230400000,
+                "addedBy": {},
+                "channelTitle": "The JB's"
+            }
+
+            
+            
+            
         ]
     },
     {
@@ -125,7 +147,7 @@
         ],
         "createdBy": {
             "id": "u101",
-            "fullname": "Puki Ben David",
+            "fullname": "Naftali Bennet",
             "imgUrl": "http://some-photo/"
         },
         "savedBy": [],
@@ -133,30 +155,30 @@
         "songs": [
             {
                 "id": "MXI5Nuz6OHg",
-                "title": "The Meters - Cissy Strut",
+                "title": "Cissy Strut",
                 "url": "youtube/song.mp4",
                 "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
                 "addedBy": {},
                 "addedAt": 162521765262,
-                "channelTitle": "songer1"
+                "channelTitle": "The Meters"
             },
             {
                 "id": "mUkfiLjooxs",
-                "title": "The JB's - Pass The Peas",
+                "title": "Pass The Peas",
                 "url": "youtube/song.mp4",
                 "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
                 "addedAt": 1698230400000,
                 "addedBy": {},
-                "channelTitle": "songer1"
+                "channelTitle": "The JB's"
             },
             {
                 "id": "VZt7J0iaUD0",
-                "title": "Suzanne Vega - Luka",
+                "title": "Luka",
                 "url": "https://www.youtube.com/watch?v=VZt7J0iaUD0",
                 "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
                 "addedAt": 1719168000000,
                 "addedBy": {},
-                "channelTitle": "songer1"
+                "channelTitle": "Suzanne Vega"
             }
         ]
     },  {
@@ -172,7 +194,7 @@
         ],
         "createdBy": {
             "id": "u101",
-            "fullname": "Puki Ben David",
+            "fullname": "Binyamin Gants",
             "imgUrl": "http://some-photo/"
         },
         "savedBy": [],
@@ -180,30 +202,270 @@
         "songs": [
             {
                 "id": "MXI5Nuz6OHg",
-                "title": "The Meters - Cissy Strut",
+                "title": "Cissy Strut",
                 "url": "youtube/song.mp4",
                 "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
                 "addedBy": {},
                 "addedAt": 162521765262,
-                "channelTitle": "songer1"
+                "channelTitle": "The Meters"
             },
             {
                 "id": "mUkfiLjooxs",
-                "title": "The JB's - Pass The Peas",
+                "title": "Pass The Peas",
                 "url": "youtube/song.mp4",
                 "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
                 "addedAt": 1698230400000,
                 "addedBy": {},
-                "channelTitle": "songer1"
+                "channelTitle": "The JB's"
             },
             {
                 "id": "VZt7J0iaUD0",
-                "title": "Suzanne Vega - Luka",
+                "title": "Luka",
                 "url": "https://www.youtube.com/watch?v=VZt7J0iaUD0",
                 "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
                 "addedAt": 1719168000000,
                 "addedBy": {},
-                "channelTitle": "songer1"
+                "channelTitle": "Suzanne Vega"
+            }
+        ]
+    },
+    {
+        "_id": "gdfssxjas8967sa8xjsa8jxs09",
+        "name": "favorite",
+        "type": "normal",
+        "description": "yael favorite music",
+        "imgUrl" : "https://www.greencode.co.il/wp-content/uploads/2024/07/station-thumb5.jpg",
+
+        "tags": [
+            "Funk",
+            "Happy"
+        ],
+        "createdBy": {
+            "id": "u107",
+            "fullname": "Yael",
+            "imgUrl": "http://some-photo/"
+        },
+        "savedBy": [],
+        "likedByUsers": [],
+        "songs": [
+            {
+                "id": "MXI5Nuz6OHg",
+                "title": "Cissy Strut",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+                "addedBy": {},
+                "addedAt": 162521765262,
+                "channelTitle": "The Meters"
+            },
+            {
+                "id": "mUkfiLjooxs",
+                "title": "Pass The Peas",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+                "addedAt": 1698230400000,
+                "addedBy": {},
+                "channelTitle": "The JB's"
+            },
+            {
+                "id": "VZt7J0iaUD0",
+                "title": "Luka",
+                "url": "https://www.youtube.com/watch?v=VZt7J0iaUD0",
+                "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
+                "addedAt": 1719168000000,
+                "addedBy": {},
+                "channelTitle": "Suzanne Vega"
+            }
+        ]
+    },
+    {
+        "_id": "gila1xjas8967sa8xjsa8jxs09",
+        "name": "favorite",
+        "type": "normal",
+        "description": "gila favorite music",
+        "imgUrl" : "https://www.greencode.co.il/wp-content/uploads/2024/07/station-thumb5.jpg",
+
+        "tags": [
+            "Funk",
+            "Happy"
+        ],
+        "createdBy": {
+            "id": "u107",
+            "fullname": "Gila",
+            "imgUrl": "http://some-photo/"
+        },
+        "savedBy": [],
+        "likedByUsers": [],
+        "songs": [
+            {
+                "id": "MXI5Nuz6OHg",
+                "title": "Cissy Strut",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+                "addedBy": {},
+                "addedAt": 162521765262,
+                "channelTitle": "The Meters"
+            },
+            {
+                "id": "mUkfiLjooxs",
+                "title": "Pass The Peas",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+                "addedAt": 1698230400000,
+                "addedBy": {},
+                "channelTitle": "The JB's"
+            },
+            {
+                "id": "VZt7J0iaUD0",
+                "title": "Luka",
+                "url": "https://www.youtube.com/watch?v=VZt7J0iaUD0",
+                "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
+                "addedAt": 1719168000000,
+                "addedBy": {},
+                "channelTitle": "Suzanne Vega"
+            }
+        ]
+    },
+    {
+        "_id": "rina1xjas8967sa8xjsa8jxs09",
+        "name": "favorite",
+        "type": "normal",
+        "description": "rina favorite music",
+        "imgUrl" : "https://www.greencode.co.il/wp-content/uploads/2024/07/station-thumb5.jpg",
+
+        "tags": [
+            "Funk",
+            "Happy"
+        ],
+        "createdBy": {
+            "id": "u107",
+            "fullname": "Rina",
+            "imgUrl": "http://some-photo/"
+        },
+        "savedBy": [],
+        "likedByUsers": [],
+        "songs": [
+            {
+                "id": "MXI5Nuz6OHg",
+                "title": "Cissy Strut",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+                "addedBy": {},
+                "addedAt": 162521765262,
+                "channelTitle": "The Meters"
+            },
+            {
+                "id": "mUkfiLjooxs",
+                "title": "Pass The Peas",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+                "addedAt": 1698230400000,
+                "addedBy": {},
+                "channelTitle": "The JB's"
+            },
+            {
+                "id": "VZt7J0iaUD0",
+                "title": "Luka",
+                "url": "https://www.youtube.com/watch?v=VZt7J0iaUD0",
+                "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
+                "addedAt": 1719168000000,
+                "addedBy": {},
+                "channelTitle": "Suzanne Vega"
+            }
+        ]
+    },
+    {
+        "_id": "ditsaxjas8967sa8xjsa8jxs09",
+        "name": "favorite",
+        "type": "normal",
+        "description": "ditsa favorite music",
+        "imgUrl" : "https://www.greencode.co.il/wp-content/uploads/2024/07/station-thumb5.jpg",
+
+        "tags": [
+            "Funk",
+            "Happy"
+        ],
+        "createdBy": {
+            "id": "u107",
+            "fullname": "Ditsa",
+            "imgUrl": "http://some-photo/"
+        },
+        "savedBy": [],
+        "likedByUsers": [],
+        "songs": [
+            {
+                "id": "MXI5Nuz6OHg",
+                "title": "Cissy Strut",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+                "addedBy": {},
+                "addedAt": 162521765262,
+                "channelTitle": "The Meters"
+            },
+            {
+                "id": "mUkfiLjooxs",
+                "title": "Pass The Peas",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+                "addedAt": 1698230400000,
+                "addedBy": {},
+                "channelTitle": "The JB's"
+            },
+            {
+                "id": "VZt7J0iaUD0",
+                "title": "Luka",
+                "url": "https://www.youtube.com/watch?v=VZt7J0iaUD0",
+                "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
+                "addedAt": 1719168000000,
+                "addedBy": {},
+                "channelTitle": "Suzanne Vega"
+            }
+        ]
+    },
+    {
+        "_id": "hedvaxjas8967sa8xjsa8jxs09",
+        "name": "favorite",
+        "type": "normal",
+        "description": "hedva favorite music",
+        "imgUrl" : "https://www.greencode.co.il/wp-content/uploads/2024/07/station-thumb5.jpg",
+
+        "tags": [
+            "Funk",
+            "Happy"
+        ],
+        "createdBy": {
+            "id": "u107",
+            "fullname": "Hedva",
+            "imgUrl": "http://some-photo/"
+        },
+        "savedBy": [],
+        "likedByUsers": [],
+        "songs": [
+            {
+                "id": "MXI5Nuz6OHg",
+                "title": "Cissy Strut",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+                "addedBy": {},
+                "addedAt": 162521765262,
+                "channelTitle": "The Meters"
+            },
+            {
+                "id": "mUkfiLjooxs",
+                "title": "Pass The Peas",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+                "addedAt": 1698230400000,
+                "addedBy": {},
+                "channelTitle": "The JB's"
+            },
+            {
+                "id": "VZt7J0iaUD0",
+                "title": "Luka",
+                "url": "https://www.youtube.com/watch?v=VZt7J0iaUD0",
+                "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
+                "addedAt": 1719168000000,
+                "addedBy": {},
+                "channelTitle": "Suzanne Vega"
             }
         ]
     }

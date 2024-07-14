@@ -16,7 +16,7 @@ export const userService = {
     //login
     // logout,
     // signup,
-    getLoggedinUser,
+    //getLoggedinUser,
     saveLocalUser,
     // getUsers,
     // update,
@@ -66,9 +66,11 @@ function saveLocalUser(user) {
     return user
 }
 
-function getLoggedinUser() {
-    return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
-}
+
+// ***
+// function getLoggedinUser() {
+//     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+// }
 
 
 // async function login(userCred) {
