@@ -112,7 +112,7 @@ export function StationDetails() {
           </section>
 
           <div
-            class="color-component "
+            className="color-component "
             style={{ width: "50px", height: "50px" }}
           >
             <ImageColorComponent
