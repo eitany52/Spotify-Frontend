@@ -6,7 +6,14 @@ import { AppPlayer } from "../cmps/AppPlayer";
 import { StationList } from "../cmps/StationList";
 import { CurrentSongDetails } from "../cmps/CurrentSongDetails";
 import { SvgIcon } from "../cmps/SvgIcon";
-import { addSongToStation, createEmptyStation, getUserStations, isSongSavedAtSomeStation, loadLikedSongsStation, loadStations } from "../store/actions/station.actions";
+import {
+  addSongToStation,
+  createEmptyStation,
+  getUserStations,
+  isSongSavedAtSomeStation,
+  loadLikedSongsStation,
+  loadStations,
+} from "../store/actions/station.actions";
 
 export const StationIndex = () => {
   const location = useLocation();
@@ -15,13 +22,19 @@ export const StationIndex = () => {
   const [isSearchDisplayed, setIsSearchDisplayed] = useState(false);
   const [isHomePageDisplayed, setIsHomePageDisplayed] = useState(true);
 
-  const stations = useSelector(storeState => storeState.stationModule.stations)
-  const likedSongsStation = useSelector(storeState => storeState.stationModule.likedSongsStation)
-  const displayCard = useSelector(storeState => storeState.stationModule.displayCard)
+  const stations = useSelector(
+    (storeState) => storeState.stationModule.stations
+  );
+  const likedSongsStation = useSelector(
+    (storeState) => storeState.stationModule.likedSongsStation
+  );
+  const displayCard = useSelector(
+    (storeState) => storeState.stationModule.displayCard
+  );
 
   useEffect(() => {
-    loadStations()
-    loadLikedSongsStation()
+    loadStations();
+    loadLikedSongsStation();
   }, []);
 
   useEffect(() => {
@@ -44,7 +57,7 @@ export const StationIndex = () => {
   async function onAddToLikedSongs(songToAdd) {
     try {
       await addSongToStation(likedSongsStation._id, songToAdd);
-      loadLikedSongsStation()
+      loadLikedSongsStation();
     } catch (err) {
       console.log("Having issues with saving this song", err);
     }
@@ -60,11 +73,11 @@ export const StationIndex = () => {
   }
 
   function isSongSavedAtSomeUserStation(song) {
-    const userStations = getUserStations(stations)
-    return isSongSavedAtSomeStation(userStations, song.id)
+    const userStations = getUserStations(stations);
+    return isSongSavedAtSomeStation(userStations, song.id);
   }
 
-  if (!stations.length) return
+  if (!stations.length) return;
 
   return (
     <div className={`station-index  ${displayCard ? "display-card" : null}  `}>
@@ -123,11 +136,14 @@ export const StationIndex = () => {
       </aside>
       <main>
         {(isHomePageDisplayed || isSearchDisplayed) && <AppHeader />}
-        {isHomePageDisplayed && 
-        <StationList
-          stations={stations}
-          location="main" />}
-        {!isHomePageDisplayed && <Outlet context={{ onAddToLikedSongs, isSongSavedAtSomeUserStation }} />}
+        {isHomePageDisplayed && (
+          <StationList stations={stations} location="main" />
+        )}
+        {!isHomePageDisplayed && (
+          <Outlet
+            context={{ onAddToLikedSongs, isSongSavedAtSomeUserStation }}
+          />
+        )}
       </main>
       {displayCard && (
         <section className="card">

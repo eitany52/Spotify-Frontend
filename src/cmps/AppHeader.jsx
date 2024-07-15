@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 import { login, logout, signup } from "../store/actions/user.actions";
+
 import { LoginSignup } from "./LoginSignup.jsx";
 import { SvgIcon } from "../cmps/SvgIcon";
 import { AppSearch } from "../cmps/AppSearch";
@@ -13,6 +14,8 @@ export function AppHeader({ backgroundColor = null }) {
   const [isSearchDisplayed, setIsSearchDisplayed] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+
+  //   console.log("user", user);
 
   useEffect(() => {
     getLocation();
@@ -70,6 +73,9 @@ export function AppHeader({ backgroundColor = null }) {
             <button className="icon-type-1 big">
               <SvgIcon iconName={"forward"} />
             </button>
+          </section>
+          <section>
+            <span>{user.name}</span>
           </section>
           {isSearchDisplayed && <AppSearch />}
         </>

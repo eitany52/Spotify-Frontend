@@ -224,7 +224,9 @@ function formatSong(song) {
     }
     return {
         id: song.id.videoId,
-        title: getSubstringBeforePipe(song.snippet.title),
+        // title: getSubstringBeforePipe(song.snippet.title),
+        title: song.snippet.title,
+
         channelTitle: song.snippet.channelTitle,
         url: `https://youtube.com/watch?v=${song.id.videoId}`,
         imgUrl: song.snippet.thumbnails.default.url,

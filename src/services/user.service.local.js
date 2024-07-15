@@ -21,6 +21,7 @@ export const userService = {
     // getUsers,
     // update,
     // changeScore
+    // setLoggedOnUser
    
 }
 window.us = userService
@@ -104,6 +105,11 @@ function _createUsers() {
         utilService.saveToStorage(STORAGE_KEY_LOGEDON_USER, defaultLogedOnUser)
     } 
 }
+
+
+// function setLoggedOnUser() {
+//     return utilService.saveToStorage(STORAGE_KEY_LOGEDON_USER, defaultLogedOnUser)
+// }
 
 // TEST DATA
 // (() => {

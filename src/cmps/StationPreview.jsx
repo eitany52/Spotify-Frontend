@@ -27,7 +27,7 @@ export const StationPreview = ({ station, location, onAddSongToStation }) => {
     onToggleModal({
       cmp: FloatingMenuStation,
       props: {
-        stationId: station._id,
+        station: station,
         onDone() {
           onToggleModal(null);
         },

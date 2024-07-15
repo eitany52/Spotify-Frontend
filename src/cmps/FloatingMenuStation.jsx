@@ -3,31 +3,22 @@ import { stationService } from "../services/station.service.local";
 
 import { removeStation } from "../store/actions/station.actions.js";
 
-export const FloatingMenuStation = ({ stationId, onDone, onOpenStationDetails, }) => {
-  const [isLikedSongStation, setIsLikedSongStation] = useState(null);
-
-  useEffect(() => {
-    checkIfLikedSong();
-  }, []);
-
-  async function checkIfLikedSong() {
-    console.log("in checkIfLikedSong");
-    setIsLikedSongStation(await stationService.isLikedSongStation(stationId));
-  }
-
-  //const isLikedSongStation = stationService.isLikedSongStation(stationId);
+export const FloatingMenuStation = ({
+  station,
+  onDone,
+  onOpenStationDetails,
+}) => {
+  const isLikedSongStation = station.type === "liked" ? true : false;
 
   function onRemoveStation() {
-    removeStation(stationId);
+    removeStation(station._id);
     onDone();
   }
 
   function onEditStationDetails() {
-    onOpenStationDetails(stationId);
+    onOpenStationDetails(station._id);
   }
 
-  if (isLikedSongStation == null) return <div>Loading...</div>;
-  console.log("isLikedSongStation", isLikedSongStation);
   return (
     <div>
       {!isLikedSongStation ? (
