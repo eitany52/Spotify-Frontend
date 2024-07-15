@@ -14,6 +14,12 @@ export function SongPreview({
   type,
   index,
 }) {
+  const currentSong = useSelector(
+    (storeState) => storeState.stationModule.currentSong
+  );
+  const isPlaying = useSelector(
+    (storeState) => storeState.stationModule.isPlaying
+  );
 
   function onOpenMoreOptionsModal(ev, song) {
     onToggleModal({
@@ -53,14 +59,18 @@ export function SongPreview({
   const songName = song.title;
   const artistName = song.channelTitle;
   const myClassName = type === "station" ? "song-preview-station-grid" : type;
-  const isSongSaved = isSongSavedAtStation(song)
+  const isSongSaved = isSongSavedAtStation(song);
+
+  const isActive = currentSong.id === song.id && isPlaying ? true : false;
 
   return (
     <li className={`song-preview  ${myClassName}`}>
       {/* col 1 only in station view */}
       {type === "station" && (
         <div className="number">
-          <span className="num">{index + 1}</span>
+          <span className={`${isActive ? "num active" : "num"}`}>
+            {index + 1}
+          </span>
           <span className="play"> {<PlayBtn song={song} />}</span>
         </div>
       )}
@@ -86,7 +96,7 @@ export function SongPreview({
             <img src={songImg} />
           </div>
           <div className="intro-inner">
-            <span>{songName}</span>
+            <span className={`${isActive ? "active" : ""}`}>{songName}</span>
             <span>{artistName}</span>
           </div>
         </section>
@@ -103,11 +113,15 @@ export function SongPreview({
       {/* need to be fix - should be general add */}
       {(type === "station" || type === "search") && (
         <span
-          //  
+          //
           className={!isUserStation && isSongSaved ? "" : "add"}
           title={`Add to ${isSongSaved ? "playlist" : "Liked Songs"}`}
-          onClick={ev =>
-            isSongSaved ? onOpenAddToStationModal(ev, song) : onAddToStation(song)}>
+          onClick={(ev) =>
+            isSongSaved
+              ? onOpenAddToStationModal(ev, song)
+              : onAddToStation(song)
+          }
+        >
           {isSongSaved ? (
             <SvgIcon iconName="tick" style="active" />
           ) : (
@@ -119,7 +133,10 @@ export function SongPreview({
       {/* col 6 more */}
       {/* need to be fix - more not working in search becuse function not exist*/}
       {(type === "station" || type === "search") && (
-        <span onClick={(ev) => onOpenMoreOptionsModal(ev, song)} className="more">
+        <span
+          onClick={(ev) => onOpenMoreOptionsModal(ev, song)}
+          className="more"
+        >
           <SvgIcon iconName="more" />
         </span>
       )}

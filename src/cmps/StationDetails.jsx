@@ -1,10 +1,18 @@
 import { useEffect } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useState} from "react";
+import { useState } from "react";
 
 // import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
-import { addSongToStation, isSongSavedAtStation, loadStation, removeSongFromStation } from "../store/actions/station.actions.js";
+import {
+  addSongToStation,
+  isSongSavedAtStation,
+  loadStation,
+  removeSongFromStation,
+  setCurrentSong,
+  setPlayPause,
+} from "../store/actions/station.actions.js";
+
 // import { utilService } from "../services/util.service.js";
 import { getLoggedOnUser } from "../store/actions/user.actions.js";
 import { utilService } from "../services/util.service.js";
@@ -22,7 +30,14 @@ export function StationDetails() {
   const stations = useSelector(
     (storeState) => storeState.stationModule.stations
   );
-  const { onAddToLikedSongs, isSongSavedAtSomeUserStation } = useOutletContext()
+  const isPlaying = useSelector(
+    (storeState) => storeState.stationModule.isPlaying
+  );
+  const currentSong = useSelector(
+    (storeState) => storeState.stationModule.currentSong
+  );
+  const { onAddToLikedSongs, isSongSavedAtSomeUserStation } =
+    useOutletContext();
   const [colors, setColors] = useState({ backgroundColor: "", color: "" });
   const [style1, setStyle1] = useState(null);
   const [style2, setStyle2] = useState(null);
@@ -31,9 +46,8 @@ export function StationDetails() {
     loadStation(stationId);
   }, [stationId, stations, colors]);
 
-
   function isSongSavedAtCurrentStation(song) {
-    return isSongSavedAtStation(station, song.id)
+    return isSongSavedAtStation(station, song.id);
   }
 
   function onToggleAddToStation(song) {
@@ -44,7 +58,30 @@ export function StationDetails() {
         addSongToStation(station._id, song);
       }
     } catch (err) {
-      console.log("Having issues with removing or saving the song to this station", err)
+      console.log(
+        "Having issues with removing or saving the song to this station",
+        err
+      );
+    }
+  }
+
+  function playPauseStation() {
+    if (currentSong.id !== null && !isCurrentSongSavedAtStation) {
+      setCurrentSong(station.songs[0]);
+      setPlayPause(true);
+    }
+
+    if (currentSong.id !== null && isCurrentSongSavedAtStation) {
+      if (isPlaying) {
+        setPlayPause(false);
+      } else {
+        setPlayPause(true);
+      }
+    }
+
+    if (currentSong.id === null) {
+      setCurrentSong(station.songs[0]);
+      setPlayPause(true);
     }
   }
 
@@ -58,6 +95,10 @@ export function StationDetails() {
   if (!station) return <div>Loading...</div>;
 
   const isUserStation = getLoggedOnUser()._id === station.createdBy.id;
+  const isCurrentSongSavedAtStation = isSongSavedAtStation(
+    station,
+    currentSong.id
+  );
 
   // if (colors.backgroundColor === "") return <div>Loading...</div>;
   return (
@@ -82,9 +123,17 @@ export function StationDetails() {
             </section>
           </section>
           <section className="station-details-play full" style={{ ...style2 }}>
-            <section className="svg-big bigger">
-              <SvgIcon iconName="play" style="dark" />
-            </section>
+            {station.songs.length > 0 && (
+              <section onClick={playPauseStation} className="svg-big bigger">
+                {(!isPlaying ||
+                  (isPlaying && !isCurrentSongSavedAtStation)) && (
+                  <SvgIcon iconName="play" style="dark" />
+                )}
+                {isPlaying && isCurrentSongSavedAtStation && (
+                  <SvgIcon iconName="pause" style="dark" />
+                )}
+              </section>
+            )}
           </section>
 
           <div
@@ -98,20 +147,26 @@ export function StationDetails() {
           </div>
 
           <section>
-          <SongList
-            songs={station.songs}
-            onAddToStation={song => !isUserStation ? onAddToLikedSongs(song) : null}
-            isSongSavedAtStation={song => !isUserStation ? isSongSavedAtSomeUserStation(song) : true}
-            isUserStation={isUserStation}
-            type="station"
-          />
+            <SongList
+              songs={station.songs}
+              onAddToStation={(song) =>
+                !isUserStation ? onAddToLikedSongs(song) : null
+              }
+              isSongSavedAtStation={(song) =>
+                !isUserStation ? isSongSavedAtSomeUserStation(song) : true
+              }
+              isUserStation={isUserStation}
+              type="station"
+            />
           </section>
 
           <section>
-            {isUserStation && station.type === "normal" &&
-             <AppSearch
-             onAddToStation={onToggleAddToStation}
-             isSongSavedAtStation={isSongSavedAtCurrentStation} />}
+            {isUserStation && station.type === "normal" && (
+              <AppSearch
+                onAddToStation={onToggleAddToStation}
+                isSongSavedAtStation={isSongSavedAtCurrentStation}
+              />
+            )}
           </section>
         </>
       )}

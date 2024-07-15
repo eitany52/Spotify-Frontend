@@ -57,18 +57,9 @@
         "likedByUsers": [],
         "songs": [
             {
-                "id": "j4jtIDaeaWR",
-                "title": "DNA - Tom's Diner",
-                "url": "youtube/song.mp4",
-                "imgUrl":  "https://de.rarevinyl.com/cdn/shop/products/suzanne-vega-tom-s-diner-uk-12-inch-vinyl-single-maxi-amy592-81160_1200x600_crop_center.jpg?v=1705451152",
-                "addedBy": {},
-                "addedAt": 1719168000000,
-                "channelTitle": "Suzanne Vega"
-            },
-            {
                 "id": "0-EF60neguk",
                 "title": "Nothing Compares 2 U",
-                "url": "youtube/song.mp4",
+                "url": "https://www.youtube.com/watch?v=0-EF60neguk",
                 "imgUrl": "https://media.newyorker.com/photos/590968a1c14b3c606c106d52/master/pass/Larson-Nothing-Compares-2-Sinead.jpg",
                 "addedBy": {},
                 "addedAt": 1719168000000,

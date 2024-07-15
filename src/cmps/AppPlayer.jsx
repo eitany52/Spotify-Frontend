@@ -49,6 +49,10 @@ export const AppPlayer = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // const handleNextSong = () => {
+  //   onNext
+  // };
+
   const onReady = (event) => {
     // שומר את רפרנס ה-Player instance
     playerRef.current = event.target;
@@ -166,6 +170,7 @@ export const AppPlayer = () => {
         opts={opts}
         onReady={onReady}
         onStateChange={onStateChange}
+        onEnd={onNext}
       />
 
       <section className="current-song-details">
