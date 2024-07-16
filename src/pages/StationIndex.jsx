@@ -6,6 +6,8 @@ import { AppPlayer } from "../cmps/AppPlayer";
 import { StationList } from "../cmps/StationList";
 import { CurrentSongDetails } from "../cmps/CurrentSongDetails";
 import { SvgIcon } from "../cmps/SvgIcon";
+import { stationService } from "../services/station.service.local";
+
 import {
   addSongToStation,
   createEmptyStation,
@@ -13,6 +15,7 @@ import {
   isSongSavedAtSomeStation,
   loadLikedSongsStation,
   loadStations,
+  setStationFromDemo,
 } from "../store/actions/station.actions";
 
 export const StationIndex = () => {
@@ -31,6 +34,8 @@ export const StationIndex = () => {
   const displayCard = useSelector(
     (storeState) => storeState.stationModule.displayCard
   );
+
+  const demoStations = stationService.getDemoStations();
 
   useEffect(() => {
     loadStations();
@@ -61,6 +66,10 @@ export const StationIndex = () => {
     } catch (err) {
       console.log("Having issues with saving this song", err);
     }
+  }
+
+  function setStationFromSearch(station) {
+    setStationFromDemo(station);
   }
 
   async function onCreateEmptyStation() {
@@ -137,11 +146,18 @@ export const StationIndex = () => {
       <main>
         {(isHomePageDisplayed || isSearchDisplayed) && <AppHeader />}
         {isHomePageDisplayed && (
-          <StationList stations={stations} location="main" />
+          <StationList
+            stations={demoStations}
+            location="main"
+            setStationFromSearch={setStationFromSearch}
+          />
         )}
         {!isHomePageDisplayed && (
           <Outlet
-            context={{ onAddToLikedSongs, isSongSavedAtSomeUserStation }}
+            context={{
+              onAddToLikedSongs,
+              isSongSavedAtSomeUserStation,
+            }}
           />
         )}
       </main>

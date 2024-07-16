@@ -15,7 +15,6 @@
             "imgUrl": "http://some-photo/"
         },
         "savedBy": [],
-        "likedByUsers": [],
         "songs": [
             {
                 "id": "MXI5Nuz6OHg",
@@ -54,7 +53,6 @@
             "imgUrl": "http://some-photo/"
         },
         "savedBy": [],
-        "likedByUsers": [],
         "songs": [
             {
                 "id": "0-EF60neguk",
@@ -141,8 +139,7 @@
             "fullname": "Naftali Bennet",
             "imgUrl": "http://some-photo/"
         },
-        "savedBy": [],
-        "likedByUsers": [],
+        "savedBy": ["u1001"],
         "songs": [
             {
                 "id": "MXI5Nuz6OHg",
@@ -188,8 +185,7 @@
             "fullname": "Binyamin Gants",
             "imgUrl": "http://some-photo/"
         },
-        "savedBy": [],
-        "likedByUsers": [],
+        "savedBy": ["u1001"],
         "songs": [
             {
                 "id": "MXI5Nuz6OHg",
@@ -236,8 +232,7 @@
             "fullname": "Yael",
             "imgUrl": "http://some-photo/"
         },
-        "savedBy": [],
-        "likedByUsers": [],
+        "savedBy": ["u1001"],
         "songs": [
             {
                 "id": "MXI5Nuz6OHg",
@@ -284,8 +279,7 @@
             "fullname": "Gila",
             "imgUrl": "http://some-photo/"
         },
-        "savedBy": [],
-        "likedByUsers": [],
+        "savedBy": ["u1001"],
         "songs": [
             {
                 "id": "MXI5Nuz6OHg",
@@ -332,8 +326,7 @@
             "fullname": "Rina",
             "imgUrl": "http://some-photo/"
         },
-        "savedBy": [],
-        "likedByUsers": [],
+        "savedBy": ["u1001"],
         "songs": [
             {
                 "id": "MXI5Nuz6OHg",
@@ -380,8 +373,7 @@
             "fullname": "Ditsa",
             "imgUrl": "http://some-photo/"
         },
-        "savedBy": [],
-        "likedByUsers": [],
+        "savedBy": ["u1001"],
         "songs": [
             {
                 "id": "MXI5Nuz6OHg",
@@ -428,8 +420,7 @@
             "fullname": "Hedva",
             "imgUrl": "http://some-photo/"
         },
-        "savedBy": [],
-        "likedByUsers": [],
+        "savedBy": ["u1001"],
         "songs": [
             {
                 "id": "MXI5Nuz6OHg",

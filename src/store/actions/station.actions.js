@@ -32,6 +32,8 @@ export async function loadStation(stationId) {
     }
 }
 
+
+
 export function getSongsFromYoutube() {
     return stationService.getSongsFromYoutube()
 }
@@ -73,6 +75,30 @@ export async function addStation(station) {
         throw err
     }
 }
+
+
+export async function saveStationByUser(station){
+    try {
+        const savedStation = await stationService.saveStationByUser(station)
+        store.dispatch({ type: ADD_STATION, savedStation })
+    } catch (err) {
+        console.log('Cannot update station details', err)
+        throw err
+    }
+}
+
+export async function removeStationByUser(stationId){
+    try {
+        await stationService.remove(stationId)
+
+        store.dispatch({ type: REMOVE_STATION, stationId })
+    } catch (err) {
+        console.log('Cannot remove station by user', err)
+        throw err
+    }
+}
+
+
 
 export async function removeStation(stationId) {
     try {
@@ -146,6 +172,9 @@ export async function updateStationDetails(station) {
     }
 }
 
+
+
+
 export async function setCurrentSong(song) {
     try {
         //console.log('actions setCurrentSong songId:', song.id)
@@ -168,9 +197,8 @@ export async function setPlayPause(ip) {
     }
 }
 
-export function formatSong(song) {
-    return stationService.formatSong(song)
-}
+
+
 
 
 export async function setIsShuffle(isShuffle) {
@@ -191,6 +219,21 @@ export async function setDisplayHideCard(cardStatus) {
         console.log('Cannot set shuffle', err)
         throw err
     }
+}
+
+export function setStationFromDemo(station){
+    try {
+       
+        store.dispatch({ type: SET_STATION, station })
+    } catch (err) {
+        console.log('Cannot load station from search', err)
+        throw err
+    }
+
+}
+
+export function formatSong(song) {
+    return stationService.formatSong(song)
 }
 
 

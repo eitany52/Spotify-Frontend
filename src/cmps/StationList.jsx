@@ -3,8 +3,13 @@ import { getLoggedOnUser } from "../store/actions/user.actions";
 
 // Checked - All looks good.
 
-export const StationList = ({ stations, location, onAddSongToStation, songToAdd = {} }) => {
-
+export const StationList = ({
+  stations,
+  location,
+  onAddSongToStation,
+  songToAdd = {},
+  setStationFromSearch = {},
+}) => {
   return (
     <>
       {/* {location === "main" && <h3>Made for {getLoggedOnUser().name}</h3>} */}
@@ -14,6 +19,7 @@ export const StationList = ({ stations, location, onAddSongToStation, songToAdd 
             key={station._id}
             station={station}
             location={location}
+            setStationFromSearch={setStationFromSearch}
             onAddSongToStation={onAddSongToStation}
             songToAdd={songToAdd}
           />
