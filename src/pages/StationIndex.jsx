@@ -86,6 +86,15 @@ export const StationIndex = () => {
     return isSongSavedAtSomeStation(userStations, song.id);
   }
 
+  function isDemoStation(stationId) {
+    const isInDemo = demoStations.some((_station) => {
+      return _station._id === stationId;
+    });
+    //to check also that not added to library - no need - if added to library then get new ID and wont considerd as demo
+    // console.log("******* isInDemo:", isInDemo);
+    return isInDemo;
+  }
+
   if (!stations.length) return;
 
   return (
@@ -157,6 +166,7 @@ export const StationIndex = () => {
             context={{
               onAddToLikedSongs,
               isSongSavedAtSomeUserStation,
+              isDemoStation,
             }}
           />
         )}

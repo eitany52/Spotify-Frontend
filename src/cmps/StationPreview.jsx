@@ -18,7 +18,6 @@ export const StationPreview = ({
     if (location === "modal-more") {
       onAddSongToStation(station);
     } else if (location === "main") {
-      console.log("display station");
       setStationFromSearch(station);
       navigate(`/station/${station._id}`);
     } else {

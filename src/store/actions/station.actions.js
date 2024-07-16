@@ -224,7 +224,7 @@ export async function setDisplayHideCard(cardStatus) {
 export function setStationFromDemo(station){
     try {
        
-        store.dispatch({ type: SET_STATION, station })
+       store.dispatch({ type: SET_STATION, station })
     } catch (err) {
         console.log('Cannot load station from search', err)
         throw err
