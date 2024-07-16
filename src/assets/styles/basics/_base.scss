@@ -126,6 +126,12 @@ i {
       fill: $dark-clr2;
     }
     &:hover { transform: scale(1.04); }
+    &.regular-color {
+        background: none;
+        & i {
+            fill: $light-clr2;
+          }
+    }
 }
 
 

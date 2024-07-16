@@ -149,7 +149,11 @@ export const StationIndex = () => {
             </form>
             {/* <button>Recents</button> */}
           </div>
-          <StationList stations={stations} location="library" />
+          <StationList
+            stations={stations}
+            location="library"
+            onCreateEmptyStation={onCreateEmptyStation}
+          />
         </section>
       </aside>
       <main>
@@ -159,6 +163,7 @@ export const StationIndex = () => {
             stations={demoStations}
             location="main"
             setStationFromSearch={setStationFromSearch}
+            onCreateEmptyStation={onCreateEmptyStation}
           />
         )}
         {!isHomePageDisplayed && (
