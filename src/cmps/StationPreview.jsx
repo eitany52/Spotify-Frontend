@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { getLoggedOnUser } from "../store/actions/user.actions";
 import { onToggleModal } from "../store/actions/app.actions.js";
 import { FloatingMenuStation } from "../cmps/FloatingMenuStation";
@@ -6,12 +6,21 @@ import { EditStationDetails } from "../cmps/EditStationDetails";
 
 // Checked - All looks good.
 
-export const StationPreview = ({ station, location, onAddSongToStation }) => {
+export const StationPreview = ({
+  station,
+  location,
+  onAddSongToStation,
+  setStationFromSearch,
+}) => {
   const navigate = useNavigate();
+  const { stationId } = useParams();
 
   async function onClickStation() {
     if (location === "modal-more") {
       onAddSongToStation(station);
+    } else if (location === "main") {
+      setStationFromSearch(station);
+      navigate(`/station/${station._id}`);
     } else {
       onGoToStationDetails();
     }
@@ -22,13 +31,15 @@ export const StationPreview = ({ station, location, onAddSongToStation }) => {
   }
 
   function handleRightClick(event) {
-    if (location === "modal") return;
+    if (location === "modal-add" || location === "modal-more") return;
     event.preventDefault();
     onToggleModal({
       cmp: FloatingMenuStation,
       props: {
         station: station,
+        location: location,
         onDone() {
+          if (station._id === stationId) navigate(`/`);
           onToggleModal(null);
         },
         class: "floating-menu-station",
@@ -93,7 +104,7 @@ export const StationPreview = ({ station, location, onAddSongToStation }) => {
             className={`${location === "library" ? "intro-inner" : ""} `}
           >
             <h5>{station.name}</h5>
-            {location !== "modal" && <span> {numOfSongs} songs </span>}
+            {location === "library" && <span> {numOfSongs} songs </span>}
           </section>
         </section>
       ) : (
@@ -103,7 +114,7 @@ export const StationPreview = ({ station, location, onAddSongToStation }) => {
             className={` ${location === "library" ? "intro-inner" : ""} `}
           >
             <h5>{station.name}</h5>
-            {location !== "modal" && <span> {profileName} </span>}
+            {location === "library" && <span> {profileName} </span>}
             {location === "main" && <span>{station.description}</span>}
           </section>
         </section>
