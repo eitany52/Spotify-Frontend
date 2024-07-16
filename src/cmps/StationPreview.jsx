@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { getLoggedOnUser } from "../store/actions/user.actions";
 import { onToggleModal } from "../store/actions/app.actions.js";
 import { FloatingMenuStation } from "../cmps/FloatingMenuStation";
@@ -13,6 +13,7 @@ export const StationPreview = ({
   setStationFromSearch,
 }) => {
   const navigate = useNavigate();
+  const { stationId } = useParams();
 
   async function onClickStation() {
     if (location === "modal-more") {
@@ -38,6 +39,7 @@ export const StationPreview = ({
         station: station,
         location: location,
         onDone() {
+          if (station._id === stationId) navigate(`/`);
           onToggleModal(null);
         },
         class: "floating-menu-station",
