@@ -59,7 +59,7 @@ export const FloatingMenuStation = ({
         </li>
       )}
       {location === "main" && (
-        <li onClick={onSaveStation}>
+        <li onClick={onSaveStation} className="lastInGroup">
           <span className="btn-type-2">
             <SvgIcon iconName="add" /> Save To your library
           </span>

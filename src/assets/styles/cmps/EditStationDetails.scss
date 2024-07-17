@@ -1,5 +1,16 @@
 .edit-station-details {
+
+
+   
+    display: grid;
+    grid-template-columns: 10px 1fr 10px;
+    grid-template-rows: auto 1fr;
+    & > * {grid-area: 1 / 2;}
+    
+
+
    & form {
+    grid-row: 2 / 3;
     display:grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 0.5fr 4fr auto;
