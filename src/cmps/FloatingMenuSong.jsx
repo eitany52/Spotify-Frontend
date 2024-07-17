@@ -99,9 +99,8 @@ export const FloatingMenuSong = ({ onDone, song }) => {
             </span>
           </li>
         )}
-        <li onClick={onToggleAddToLikedSongs}>{`${
-          isSongSavedAtLikedSongs() ? "Remove From" : "Save to"
-        } Your Liked Songs`}</li>
+        <li onClick={onToggleAddToLikedSongs}>{`${isSongSavedAtLikedSongs() ? "Remove From" : "Save to"
+          } Your Liked Songs`}</li>
 
         {/* <li>
           {isInLikedSong ? (
