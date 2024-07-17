@@ -3,6 +3,7 @@ import { getLoggedOnUser } from "../store/actions/user.actions";
 import { onToggleModal } from "../store/actions/app.actions.js";
 import { FloatingMenuStation } from "../cmps/FloatingMenuStation";
 import { EditStationDetails } from "../cmps/EditStationDetails";
+import { SvgIcon } from "./SvgIcon.jsx";
 
 // Checked - All looks good.
 
@@ -70,57 +71,84 @@ export const StationPreview = ({
     (user) => user.id === getLoggedOnUser()._id
   );
   return (
-    // <li
-    //   onClick={onClickStation}
-    //   onContextMenu={handleRightClick}
-    //   className="station-preview"
-    // >
-    //   {location === "library" && (isUserStation || isSavedStation) && (
-    //     <section>
-    //       <img src={station.img} />
-    //       <h5>{station.name}</h5>
-    //       <span>
-    //         {/* Playlist ·{" "} */}
-    //         {station.type === "liked" ? `${numOfSongs} songs` : profileName}
-    //       </span>
-    //     </section>
-    //   )}
-    //   {/* {location !== "main" && ( */}
-    //   <section>
-    //     <img src={station.imgUrl} />
-    //     <h5>{station.name}</h5>
-    //     {location === "main" && <span>{station.description}</span>}
-    //   </section>
-    //   {/* )} */}
-    // </li>
-
     <li
       onClick={onClickStation}
       onContextMenu={handleRightClick}
-      className={`station-preview   ${location} `}
+      className={`station-preview ${location}`}
     >
-      {station.type === "liked" ? (
-        <section className={` ${location === "library" ? "intro-outer" : ""} `}>
-          <img src={station.imgUrl} />
-          <section
-            className={`${location === "library" ? "intro-inner" : ""} `}
-          >
-            <h5>{station.name}</h5>
-            {location === "library" && <span> {numOfSongs} songs </span>}
-          </section>
+      <section
+        className={`station-container ${location === "library" || location === "modal-add" ? "intro-outer" : ""}`}>
+        <img src={station.imgUrl} />
+        <section
+          className={`${location === "library" || location === "modal-add" ? "intro-inner" : ""}`}
+        >
+          <h5>{station.name}</h5>
+          {location === "library" && station.type === "liked" && <span> {numOfSongs} songs </span>}
+          {location === "library" && station.type === "normal" && <span> {profileName} </span>}
+          {location === "main" && <span>{station.description}</span>}
+          {location === "modal-add" &&
+            <span className="empty-circle">
+              <SvgIcon iconName="tick" style="active" />
+            </span>}
+
         </section>
-      ) : (
-        <section className={` ${location === "library" ? "intro-outer" : ""} `}>
-          <img src={station.imgUrl} />
-          <section
-            className={` ${location === "library" ? "intro-inner" : ""} `}
-          >
-            <h5>{station.name}</h5>
-            {location === "library" && <span> {profileName} </span>}
-            {location === "main" && <span>{station.description}</span>}
-          </section>
-        </section>
-      )}
+      </section>
     </li>
   );
 };
+
+{/* <li
+onClick={onClickStation}
+onContextMenu={handleRightClick}
+className={`station-preview ${location}`}
+>
+{station.type === "liked" ? (
+  <section className={` ${location === "library" ? "intro-outer" : ""} `}>
+    <img src={station.imgUrl} />
+    <section
+      className={`${location === "library" ? "intro-inner" : ""} `}
+    >
+      <h5>{station.name}</h5>
+      {location === "library" && <span> {numOfSongs} songs </span>}
+      {location === "modal-add" && <span className="empty-circle"></span>}
+    </section>
+  </section>
+) : (
+  <section className={` ${location === "library" ? "intro-outer" : ""} `}>
+    <img src={station.imgUrl} />
+    <section
+      className={` ${location === "library" ? "intro-inner" : ""} `}
+    >
+      <h5>{station.name}</h5>
+      {location === "library" && <span> {profileName} </span>}
+      {location === "main" && <span>{station.description}</span>}
+      {location === "modal-add" && <span className="empty-circle"></span>}
+    </section>
+  </section>
+)}
+</li> */}
+
+// <li
+//   onClick={onClickStation}
+//   onContextMenu={handleRightClick}
+//   className="station-preview"
+// >
+//   {location === "library" && (isUserStation || isSavedStation) && (
+//     <section>
+//       <img src={station.img} />
+//       <h5>{station.name}</h5>
+//       <span>
+//         {/* Playlist ·{" "} */}
+//         {station.type === "liked" ? `${numOfSongs} songs` : profileName}
+//       </span>
+//     </section>
+//   )}
+//   {/* {location !== "main" && ( */}
+//   <section>
+//     <img src={station.imgUrl} />
+//     <h5>{station.name}</h5>
+//     {location === "main" && <span>{station.description}</span>}
+//   </section>
+//   {/* )} */}
+// </li>
+
