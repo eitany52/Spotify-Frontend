@@ -163,7 +163,6 @@ async function saveStationByUser(station) {
     const stations = await getStations()
     const isExists = stations.some(_station => _station._id === station._id)
     if (isExists) {
-        console.log("already exist"); 
         return Promise.resolve('already exist'); 
     }
     const savedStation = await storageService.post(STORAGE_KEY, stationToSave)
