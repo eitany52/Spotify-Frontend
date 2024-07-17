@@ -3,6 +3,8 @@ import { utilService } from './util.service'
 import { userService } from './user.service.local'
 import initialStations from '../../data/stations.json'
 import searchRes from "../../data/search.json"
+import demoStations from "../../data/demo-station.json"
+
 import { getLoggedOnUser } from '../store/actions/user.actions'
 
 //Checked - All looks good.
@@ -26,7 +28,9 @@ export const stationService = {
     isSongSavedAtStation,
     getUserStations,
     isSongSavedAtSomeStation,
-    isSongInLikedSong
+    isSongInLikedSong,
+    getDemoStations,
+    saveStationByUser
     // getEmptyCar,
     // addCarMsg
 }
@@ -144,6 +148,22 @@ function getSongsFromYoutube() {
 }
 
 
+function getDemoStations() {
+    return demoStations
+    
+}
+
+
+async function saveStationByUser(station) {
+    // console.log('saveStationByUser station:', station)
+    const stationToSave = {
+        ...station, savedBy: [ ...station.savedBy , getLoggedOnUser()._id]
+    }
+    const savedStation = await storageService.post(STORAGE_KEY, stationToSave)
+    // console.log('saveStationByUser savedStation:', savedStation)
+    return savedStation
+
+}
 
 async function addSongToStation(stationId, song) {
     // Later, this is all done by the backend
@@ -224,9 +244,8 @@ function formatSong(song) {
     }
     return {
         id: song.id.videoId,
-        // title: getSubstringBeforePipe(song.snippet.title),
-        title: song.snippet.title,
-
+        title: getSubstringBeforePipe(song.snippet.title),
+        //title: song.snippet.title,
         channelTitle: song.snippet.channelTitle,
         url: `https://youtube.com/watch?v=${song.id.videoId}`,
         imgUrl: song.snippet.thumbnails.default.url,

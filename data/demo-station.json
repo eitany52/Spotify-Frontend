@@ -1,0 +1,140 @@
+[
+    {
+        "_id": "34567as89xjsa8xjsa8jxs09",
+        "name": "Radio by Geva Alon",
+        "type": "normal",
+        "description": "With Amir Lev, Daniela Spector, Rockfour and more",
+        "imgUrl" : "https://www.greencode.co.il/wp-content/uploads/2024/07/station-thumb_200.jpg",
+
+        "tags": [
+            "Funk",
+            "Happy"
+        ],
+        "createdBy": {
+            "id": "u2013",
+            "fullname": "lio",
+            "imgUrl": "http://some-photo/"
+        },
+        "savedBy": [],
+        "likedByUsers": [],
+        "songs": [
+            {
+                "id": "CWyqicHBMXs",
+                "title": "Come Race Me",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://scontent.fsdv1-2.fna.fbcdn.net/v/t39.30808-1/441925874_1018422159653260_1610022178191980739_n.jpg?stp=dst-jpg_p200x200&_nc_cat=104&ccb=1-7&_nc_sid=f4b9fd&_nc_ohc=ReUe40vlv2wQ7kNvgHVsAZQ&_nc_ht=scontent.fsdv1-2.fna&oh=00_AYDQVELAfE7LU-3axOH-rZRRo06IUEEogx1UvO_HjIaMHA&oe=669C1E4D",
+                "addedBy": {},
+                "addedAt": 162521765262,
+                "channelTitle": "Geva Alon"
+            },
+            {
+                "id": "OLoc0fc35qs",
+                "title": "Modern Love",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://cdns-images.dzcdn.net/images/artist/1c34d73e814413fde076d43669e4f8d7/1900x1900-000000-80-0-0.jpg",
+                "addedAt": 1698230400000,
+                "addedBy": {},
+                "channelTitle": "Geva Alon"
+            }
+        ]
+    },
+    {
+        "_id": "456787as89xjsa8xjsa8jxs09",
+        "name": "This is Rony Alter",
+        "type": "normal",
+        "description": "This is Roni Alter. The essential tracks, all in one playlist.",
+        "imgUrl" : "https://www.greencode.co.il/wp-content/uploads/2024/07/station-thumb_201.jpg",
+
+        "tags": [
+            "Funk",
+            "Happy"
+        ],
+        "createdBy": {
+            "id": "u2013",
+            "fullname": "lio",
+            "imgUrl": "http://some-photo/"
+        },
+        "savedBy": [],
+        "likedByUsers": [],
+        "songs": [
+            {
+                "id": "CC7xq01gRSw",
+                "title": "I Follow Rivers",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiVglbs7nnOev-09AThSKmO4Ahmy-6RbkoHqEWQKchrDNXUrAFXO00pzOnmKAluMScvhJ0zIMYQrYLA_6a8hTpwlNDbrQez9TWBVNtrbgh-vWvA_5MKh3uyQEulBy22a1D7wRIaIZIBjjXy/s1600/PHOTO+BY+DAVID+PEARL.JPG",
+                "addedBy": {},
+                "addedAt": 162521765262,
+                "channelTitle": "Rony Alter"
+            }
+        ]
+    },
+    {
+        "_id": "12345sxjafgfs89xjsa8xjsa8jxs09234",
+        "name": "Daily mix1",
+        "type": "normal",
+        "description": "yuval dayan and more",
+        "imgUrl" : "https://www.greencode.co.il/wp-content/uploads/2024/07/station-thumb_99.jpg",
+        "tags": [
+            "Funk",
+            "Happy"
+        ],
+        "createdBy": {
+            "id": "u2001",
+            "fullname": "frank",
+            "imgUrl": "http://some-photo/"
+        },
+        "savedBy": [],
+        "likedByUsers": [],
+        "songs": [
+            {
+                "id": "ZqzGe2e5RbY",
+                "title": "תשמרי על הלב שלך",
+                "url": "https://www.youtube.com/watch?v=ZqzGe2e5RbY",
+                "imgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7sgTD9qEy35_vjdLxB5dpVfXxCSQKxG3UdJVVZvf1oinZ1_y5",
+                "addedBy": {},
+                "addedAt": 1719168000000,
+                "channelTitle": "יובל דיין"
+            },
+            {
+                "id": "8X-RVosmQwk",
+                "title": "י-ה אכסוף",
+                "url": "youtube/song.mp4",
+                "imgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7sgTD9qEy35_vjdLxB5dpVfXxCSQKxG3UdJVVZvf1oinZ1_y5",
+                "addedBy": {},
+                "addedAt": 1698230400000,
+                "channelTitle": "יובל דיין"
+            }
+        ]
+    },
+    {
+        "_id": "23456as89xjsa8xjsa8jxs09",
+        "name": "Leonard Cohen Mix",
+        "type": "normal",
+        "description": "music by Leonard Cohen.",
+        "imgUrl" : "https://www.greencode.co.il/wp-content/uploads/2024/07/station-thumb_202.jpg",
+
+        "tags": [
+            "Funk",
+            "Happy"
+        ],
+        "createdBy": {
+            "id": "u2001",
+            "fullname": "leonard",
+            "imgUrl": "http://some-photo/"
+        },
+        "savedBy": [],
+        "likedByUsers": [],
+        "songs": [
+            {
+                "id": "YrLk4vdY28Q",
+                "title": "Halleluja",
+                "url": "https://www.youtube.com/watch?v=0-EF60neguk",
+                "imgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSozAIHzuzJAJxEqRQg9A5ca7_KVuEgNvg2Qw&s",
+                "addedBy": {},
+                "addedAt": 1719168000000,
+                "channelTitle": "Leonard Cohen"
+            }
+
+        ]
+    }
+]

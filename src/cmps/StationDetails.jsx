@@ -36,14 +36,16 @@ export function StationDetails() {
   const currentSong = useSelector(
     (storeState) => storeState.stationModule.currentSong
   );
-  const { onAddToLikedSongs, isSongSavedAtSomeUserStation } =
+  const { onAddToLikedSongs, isSongSavedAtSomeUserStation, isDemoStation } =
     useOutletContext();
   const [colors, setColors] = useState({ backgroundColor: "", color: "" });
   const [style1, setStyle1] = useState(null);
   const [style2, setStyle2] = useState(null);
 
   useEffect(() => {
-    loadStation(stationId);
+    //console.log("66666666666 isDemoStation:", isDemoStation(station));
+    const isDemo = isDemoStation(stationId);
+    if (!isDemo) loadStation(stationId);
   }, [stationId, stations, colors]);
 
   function isSongSavedAtCurrentStation(song) {
@@ -134,6 +136,14 @@ export function StationDetails() {
                 )}
               </section>
             )}
+            <section
+              onClick={() => {
+                console.log("now you should open modal");
+              }}
+              className="svg-big bigger regular-color"
+            >
+              <SvgIcon iconName="more" />
+            </section>
           </section>
 
           <div

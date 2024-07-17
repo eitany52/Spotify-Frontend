@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { getLoggedOnUser } from "../store/actions/user.actions";
 import { onToggleModal } from "../store/actions/app.actions.js";
 import { FloatingMenuStation } from "../cmps/FloatingMenuStation";
@@ -7,12 +7,22 @@ import { SvgIcon } from "./SvgIcon.jsx";
 
 // Checked - All looks good.
 
-export const StationPreview = ({ station, location, onAddSongToStation }) => {
+export const StationPreview = ({
+  station,
+  location,
+  onAddSongToStation,
+  setStationFromSearch,
+  onCreateEmptyStation,
+}) => {
   const navigate = useNavigate();
+  const { stationId } = useParams();
 
   async function onClickStation() {
     if (location === "modal-more") {
       onAddSongToStation(station);
+    } else if (location === "main") {
+      setStationFromSearch(station);
+      navigate(`/station/${station._id}`);
     } else {
       onGoToStationDetails();
     }
@@ -23,16 +33,19 @@ export const StationPreview = ({ station, location, onAddSongToStation }) => {
   }
 
   function handleRightClick(event) {
-    if (location === "modal") return;
+    if (location === "modal-add" || location === "modal-more") return;
     event.preventDefault();
     onToggleModal({
       cmp: FloatingMenuStation,
       props: {
         station: station,
+        location: location,
         onDone() {
+          if (station._id === stationId) navigate(`/`);
           onToggleModal(null);
         },
         class: "floating-menu-station",
+        onCreateEmptyStation: onCreateEmptyStation,
         onOpenStationDetails() {
           onToggleModal(null);
           onToggleModal({

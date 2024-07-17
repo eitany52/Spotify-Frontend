@@ -6,6 +6,8 @@ import { AppPlayer } from "../cmps/AppPlayer";
 import { StationList } from "../cmps/StationList";
 import { CurrentSongDetails } from "../cmps/CurrentSongDetails";
 import { SvgIcon } from "../cmps/SvgIcon";
+import { stationService } from "../services/station.service.local";
+
 import {
   addSongToStation,
   createEmptyStation,
@@ -13,6 +15,7 @@ import {
   isSongSavedAtSomeStation,
   loadLikedSongsStation,
   loadStations,
+  setStationFromDemo,
 } from "../store/actions/station.actions";
 
 export const StationIndex = () => {
@@ -31,6 +34,8 @@ export const StationIndex = () => {
   const displayCard = useSelector(
     (storeState) => storeState.stationModule.displayCard
   );
+
+  const demoStations = stationService.getDemoStations();
 
   useEffect(() => {
     loadStations();
@@ -63,6 +68,10 @@ export const StationIndex = () => {
     }
   }
 
+  function setStationFromSearch(station) {
+    setStationFromDemo(station);
+  }
+
   async function onCreateEmptyStation() {
     try {
       const emptyStation = await createEmptyStation();
@@ -75,6 +84,15 @@ export const StationIndex = () => {
   function isSongSavedAtSomeUserStation(song) {
     const userStations = getUserStations(stations);
     return isSongSavedAtSomeStation(userStations, song.id);
+  }
+
+  function isDemoStation(stationId) {
+    const isInDemo = demoStations.some((_station) => {
+      return _station._id === stationId;
+    });
+    //to check also that not added to library - no need - if added to library then get new ID and wont considerd as demo
+    // console.log("******* isInDemo:", isInDemo);
+    return isInDemo;
   }
 
   if (!stations.length) return;
@@ -131,17 +149,30 @@ export const StationIndex = () => {
             </form>
             {/* <button>Recents</button> */}
           </div>
-          <StationList stations={stations} location="library" />
+          <StationList
+            stations={stations}
+            location="library"
+            onCreateEmptyStation={onCreateEmptyStation}
+          />
         </section>
       </aside>
       <main>
         {(isHomePageDisplayed || isSearchDisplayed) && <AppHeader />}
         {isHomePageDisplayed && (
-          <StationList stations={stations} location="main" />
+          <StationList
+            stations={demoStations}
+            location="main"
+            setStationFromSearch={setStationFromSearch}
+            onCreateEmptyStation={onCreateEmptyStation}
+          />
         )}
         {!isHomePageDisplayed && (
           <Outlet
-            context={{ onAddToLikedSongs, isSongSavedAtSomeUserStation }}
+            context={{
+              onAddToLikedSongs,
+              isSongSavedAtSomeUserStation,
+              isDemoStation,
+            }}
           />
         )}
       </main>

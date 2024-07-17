@@ -2,12 +2,13 @@
     list-style-type: none;
     cursor: pointer;
 
-    .station-container {
-
+    &.modal-add {
         .intro-inner {
             grid-auto-flow: column;
         }
+    }
 
+    .station-container {
         .empty-circle {
             block-size: 16px;
             border: 1px solid #727272;
@@ -18,7 +19,4 @@
         }
 
     }
-
-
-
 }
