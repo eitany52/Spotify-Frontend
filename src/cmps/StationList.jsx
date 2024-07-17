@@ -9,6 +9,7 @@ export const StationList = ({
   onAddSongToStation,
   songToAdd = {},
   setStationFromSearch = {},
+  onCreateEmptyStation = {},
 }) => {
   return (
     <>
@@ -20,6 +21,7 @@ export const StationList = ({
             station={station}
             location={location}
             setStationFromSearch={setStationFromSearch}
+            onCreateEmptyStation={onCreateEmptyStation}
             onAddSongToStation={onAddSongToStation}
             songToAdd={songToAdd}
           />

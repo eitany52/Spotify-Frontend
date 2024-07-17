@@ -136,6 +136,14 @@ export function StationDetails() {
                 )}
               </section>
             )}
+            <section
+              onClick={() => {
+                console.log("now you should open modal");
+              }}
+              className="svg-big bigger regular-color"
+            >
+              <SvgIcon iconName="more" />
+            </section>
           </section>
 
           <div

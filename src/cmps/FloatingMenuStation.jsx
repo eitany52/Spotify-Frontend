@@ -9,11 +9,14 @@ import {
 } from "../store/actions/station.actions.js";
 import { getLoggedOnUser } from "../store/actions/user.actions.js";
 
+import { SvgIcon } from "./SvgIcon.jsx";
+
 export const FloatingMenuStation = ({
   station,
   location,
   onDone,
   onOpenStationDetails,
+  onCreateEmptyStation,
 }) => {
   const isLikedSongStation = station.type === "liked" ? true : false;
   const isUserStation = getLoggedOnUser()._id === station?.createdBy.id;
@@ -35,28 +38,46 @@ export const FloatingMenuStation = ({
     removeStationByUser(station._id);
   }
 
+  function onCreateEmptyStation1() {
+    onCreateEmptyStation();
+  }
+
   return (
-    <div>
-      {!isLikedSongStation ? (
-        <ul>
-          {location === "library" && isUserStation && (
-            <li onClick={onDeleteStation}> Delete Station</li>
-          )}
-          {location === "library" && isUserStation && (
-            <li onClick={onEditStationDetails}> Edit Details </li>
-          )}
-          {location === "main" && (
-            <li onClick={onSaveStation}> Save Station </li>
-          )}
-          {location === "library" && !isUserStation && (
-            <li onClick={onRemoveStation}> Remove From Saved Stations </li>
-          )}
-        </ul>
-      ) : (
-        <ul>
-          <li> you can't delete LikedSong station </li>
-        </ul>
+    <ul>
+      {location === "library" && isUserStation && !isLikedSongStation && (
+        <li onClick={onDeleteStation}>
+          <span className="btn-type-2">
+            <SvgIcon iconName="delete" /> Delete Station
+          </span>
+        </li>
       )}
-    </div>
+      {location === "library" && isUserStation && !isLikedSongStation && (
+        <li onClick={onEditStationDetails} className="lastInGroup">
+          <span className="btn-type-2">
+            <SvgIcon iconName="edit" /> Edit Details
+          </span>
+        </li>
+      )}
+      {location === "main" && (
+        <li onClick={onSaveStation} className="lastInGroup">
+          <span className="btn-type-2">
+            <SvgIcon iconName="add" /> Save To your library
+          </span>
+        </li>
+      )}
+      {location === "library" && !isUserStation && (
+        <li onClick={onRemoveStation} className="lastInGroup">
+          <span className="btn-type-2 active">
+            <SvgIcon iconName="tick" /> Remove From your library
+          </span>
+        </li>
+      )}
+
+      <li>
+        <span className="btn-type-2" onClick={onCreateEmptyStation1}>
+          <SvgIcon iconName="create" /> Create Playlist
+        </span>
+      </li>
+    </ul>
   );
 };

@@ -11,6 +11,7 @@ export const StationPreview = ({
   location,
   onAddSongToStation,
   setStationFromSearch,
+  onCreateEmptyStation,
 }) => {
   const navigate = useNavigate();
   const { stationId } = useParams();
@@ -43,6 +44,7 @@ export const StationPreview = ({
           onToggleModal(null);
         },
         class: "floating-menu-station",
+        onCreateEmptyStation: onCreateEmptyStation,
         onOpenStationDetails() {
           onToggleModal(null);
           onToggleModal({
