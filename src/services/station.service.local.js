@@ -155,14 +155,20 @@ function getDemoStations() {
 
 
 async function saveStationByUser(station) {
-    // console.log('saveStationByUser station:', station)
+   
     const stationToSave = {
         ...station, savedBy: [ ...station.savedBy , getLoggedOnUser()._id]
     }
+   
+    const stations = await getStations()
+    const isExists = stations.some(_station => _station._id === station._id)
+    if (isExists) {
+        return Promise.resolve('already exist'); 
+    }
     const savedStation = await storageService.post(STORAGE_KEY, stationToSave)
-    // console.log('saveStationByUser savedStation:', savedStation)
-    return savedStation
 
+    
+    return savedStation
 }
 
 async function addSongToStation(stationId, song) {

@@ -43,9 +43,9 @@ export function StationDetails() {
   const [style2, setStyle2] = useState(null);
 
   useEffect(() => {
-    //console.log("66666666666 isDemoStation:", isDemoStation(station));
-    const isDemo = isDemoStation(stationId);
-    if (!isDemo) loadStation(stationId);
+    const isDemoOnly = isDemoStation(stationId);
+    if (!isDemoOnly) loadStation(stationId);
+    //loadStation(stationId);
   }, [stationId, stations, colors]);
 
   function isSongSavedAtCurrentStation(song) {

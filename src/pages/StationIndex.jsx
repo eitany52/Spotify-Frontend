@@ -90,9 +90,14 @@ export const StationIndex = () => {
     const isInDemo = demoStations.some((_station) => {
       return _station._id === stationId;
     });
-    //to check also that not added to library - no need - if added to library then get new ID and wont considerd as demo
-    // console.log("******* isInDemo:", isInDemo);
-    return isInDemo;
+
+    const isInStations = stations.some((_station) => {
+      return _station._id === stationId;
+    });
+    // console.log("isInDemo:", isInDemo);
+    // console.log("isInStations:", isInStations);
+    // console.log("is only demo:", isInDemo && !isInStations);
+    return isInDemo && !isInStations;
   }
 
   if (!stations.length) return;

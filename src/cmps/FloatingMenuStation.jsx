@@ -32,14 +32,17 @@ export const FloatingMenuStation = ({
 
   function onSaveStation() {
     saveStationByUser(station);
+    onDone();
   }
 
   function onRemoveStation() {
     removeStationByUser(station._id);
+    onDone();
   }
 
   function onCreateEmptyStation1() {
     onCreateEmptyStation();
+    onDone();
   }
 
   return (
