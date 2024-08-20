@@ -5,12 +5,14 @@ import { ArtistDetails } from "./cmps/ArtistDetails";
 import { StationIndex } from "./pages/StationIndex.jsx";
 import { SearchResult } from "./cmps/SearchResult.jsx";
 import { DynamicModal } from "./cmps/DynamicModal";
+import { UserMsg } from "./cmps/UserMsg.jsx";
 
 // Checked - All looks good.
 
 export function RootCmp() {
   return (
     <>
+      <UserMsg />
       <Routes>
         <Route path="/" element={<StationIndex />}>
           <Route path="/search/:userInput?" element={<SearchResult />} />

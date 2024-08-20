@@ -75,7 +75,7 @@ export function AppHeader({ backgroundColor = null }) {
             </button>
           </section>
           <section>
-            <span>{user.name}</span>
+            <span>{user?.name}</span>
           </section>
           {isSearchDisplayed && <AppSearch />}
         </>
