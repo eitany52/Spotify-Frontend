@@ -87,6 +87,7 @@ export const FloatingMenuSong = ({ onDone, song }) => {
   if (!likedSongsStation) return <div>loading...</div>;
   const userStations = getUserStations(stations);
   const isUserStation = getLoggedOnUser()._id === station?.createdBy.id;
+  const isInLikedSong = isSongSavedAtLikedSongs();
   return (
     <div className="song-floating-menu">
       <ul>
@@ -107,10 +108,13 @@ export const FloatingMenuSong = ({ onDone, song }) => {
             </span>
           </li>
         )}
-        <li onClick={onToggleAddToLikedSongs}>{`${isSongSavedAtLikedSongs() ? "Remove From" : "Save to"
-          } Your Liked Songs`}</li>
+        {/* <li onClick={onToggleAddToLikedSongs}>
+          {`${
+            isSongSavedAtLikedSongs() ? "Remove From" : "Save to"
+          } Your Liked Songs`}
+        </li> */}
 
-        {/* <li>
+        <li>
           {isInLikedSong ? (
             <>
               <span className="btn-type-2 active">
@@ -126,7 +130,7 @@ export const FloatingMenuSong = ({ onDone, song }) => {
               </span>
             </>
           )}
-        </li> */}
+        </li>
       </ul>
     </div>
   );

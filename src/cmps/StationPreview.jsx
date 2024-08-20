@@ -84,16 +84,29 @@ export const StationPreview = ({
       className={`station-preview ${location}`}
     >
       <section
-        className={`station-container ${location === "library" || location === "modal-add" ? "intro-outer" : ""}`}>
+        className={`station-container ${
+          location === "library" || location === "modal-add"
+            ? "intro-outer"
+            : ""
+        }`}
+      >
         <img src={station.imgUrl} />
         <section
-          className={`${location === "library" || location === "modal-add" ? "intro-inner" : ""}`}
+          className={`${
+            location === "library" || location === "modal-add"
+              ? "intro-inner"
+              : ""
+          }`}
         >
           <h5>{station.name}</h5>
-          {location === "library" && station.type === "liked" && <span> {numOfSongs} songs </span>}
-          {location === "library" && station.type === "normal" && <span> {profileName} </span>}
+          {location === "library" && station.type === "liked" && (
+            <span> {numOfSongs} songs </span>
+          )}
+          {location === "library" && station.type === "normal" && (
+            <span> {profileName} </span>
+          )}
           {location === "main" && <span>{station.description}</span>}
-          {location === "modal-add" &&
+          {location === "modal-add" && (
             <span className="empty-circle">
               {isStationToMark(station._id) && <SvgIcon iconName="tick" style="active" />}
             </span>}
@@ -103,7 +116,8 @@ export const StationPreview = ({
   );
 };
 
-{/* <li
+{
+  /* <li
 onClick={onClickStation}
 onContextMenu={handleRightClick}
 className={`station-preview ${location}`}
@@ -132,7 +146,8 @@ className={`station-preview ${location}`}
     </section>
   </section>
 )}
-</li> */}
+</li> */
+}
 
 // <li
 //   onClick={onClickStation}
@@ -157,4 +172,3 @@ className={`station-preview ${location}`}
 //   </section>
 //   {/* )} */}
 // </li>
-

@@ -21,7 +21,9 @@ function get(entityType, entityId) {
 }
 
 function post(entityType, newEntity) {
-    newEntity._id = _makeId()
+    console.log("station.service put newEntity._id:", newEntity._id)
+    //using put also when add station from demo
+    if (newEntity._id === '') { newEntity._id = _makeId() }
     return query(entityType).then(entities => {
         entities.push(newEntity)
         _save(entityType, entities)
