@@ -32,7 +32,9 @@ export function UserMsg() {
     setMsg(null)
   }
 
+  console.log("msg: ", msg);
   if (!msg) return <span></span>
+
   return (
     <section className={`user-msg ${msg.type}`}>
       <button onClick={closeMsg}>x</button>

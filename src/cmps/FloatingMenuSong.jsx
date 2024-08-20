@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getLoggedOnUser } from "../store/actions/user.actions.js";
 import { SvgIcon } from "./SvgIcon.jsx";
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
 
 export const FloatingMenuSong = ({ onDone, song }) => {
   // console.log("SongFloatingMenu stationId:", stationId);
@@ -38,42 +39,49 @@ export const FloatingMenuSong = ({ onDone, song }) => {
   // }
 
   function onRemoveSongFromStation() {
-    removeSongFromStation(station._id, song.id);
     onDone();
+    try {
+      removeSongFromStation(station._id, song.id);
+    } catch (err) {
+      console.log("Having issues with removing song from station", err);
+      showErrorMsg("Failed to remove song")
+    }
   }
 
   function isSongSavedAtLikedSongs() {
     return isSongSavedAtStation(likedSongsStation, song.id);
   }
 
-  function onToggleAddToLikedSongs() {
+  async function onToggleAddToLikedSongs() {
+    onDone();
+    let isSongAdded = false // is song added or removed from liked songs station
     try {
       if (isSongSavedAtLikedSongs()) {
-        removeSongFromStation(likedSongsStation._id, song.id);
+        await removeSongFromStation(likedSongsStation._id, song.id);
       } else {
-        addSongToStation(likedSongsStation._id, {
-          ...song,
-          addedAt: Date.now(),
-        });
+        await addSongToStation(likedSongsStation._id, { ...song, addedAt: Date.now() });
+        isSongAdded = true
       }
-      onDone();
+      showSuccessMsg(`${isSongAdded ? "Added to" : "Removed from"} Liked Songs`)
     } catch (err) {
-      console.log("Having issues with removing or adding song to station", err);
+      console.log("Having issues with adding/removing song from liked songs station", err);
+      showErrorMsg("Failed to add/remove song from Liked Songs")
     }
   }
 
-  function onAddSongToStation(station) {
+  async function onAddSongToStation(station) {
+    onDone();
     try {
       if (!isSongSavedAtStation(station, song.id)) {
-        addSongToStation(station._id, { ...song, addedAt: Date.now() });
+        await addSongToStation(station._id, { ...song, addedAt: Date.now() });
+        showSuccessMsg(`Added to ${station.name}`)
       }
-      //Should present user message
       else {
-        console.log(`This is already in your ${station.name} playlist`);
+        showErrorMsg(`Already added: This is already in your '${station.name}' playlist.`)
       }
-      onDone();
     } catch (err) {
-      console.log("Having issues with saving this song to station", err);
+      console.log("Having issues with adding this song to station", err);
+      showErrorMsg("Failed to add song")
     }
   }
   if (!likedSongsStation) return <div>loading...</div>;

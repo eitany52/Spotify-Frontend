@@ -13,6 +13,8 @@ export const StationPreview = ({
   onAddSongToStation,
   setStationFromSearch,
   onCreateEmptyStation,
+  onToggleMarkStation,
+  isStationToMark
 }) => {
   const navigate = useNavigate();
   const { stationId } = useParams();
@@ -20,10 +22,15 @@ export const StationPreview = ({
   async function onClickStation() {
     if (location === "modal-more") {
       onAddSongToStation(station);
-    } else if (location === "main") {
+    }
+    else if (location === "main") {
       setStationFromSearch(station);
-      navigate(`/station/${station._id}`);
-    } else {
+      onGoToStationDetails()
+    }
+    else if (location === "modal-add") {
+      onToggleMarkStation(station)
+    }
+    else {
       onGoToStationDetails();
     }
   }
@@ -88,9 +95,8 @@ export const StationPreview = ({
           {location === "main" && <span>{station.description}</span>}
           {location === "modal-add" &&
             <span className="empty-circle">
-              <SvgIcon iconName="tick" style="active" />
+              {isStationToMark(station._id) && <SvgIcon iconName="tick" style="active" />}
             </span>}
-
         </section>
       </section>
     </li>
