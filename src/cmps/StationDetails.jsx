@@ -115,7 +115,7 @@ export function StationDetails() {
             <section className="intro-outer">
               <img src={station.imgUrl} />
               <section className="intro-inner sb">
-                <span>playlist</span>
+                <span>Playlist</span>
                 <h2>{station.name}</h2>
                 <h3>
                   {station.createdBy.fullname} |{" "}
