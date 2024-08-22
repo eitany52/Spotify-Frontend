@@ -34,8 +34,8 @@ export async function loadStation(stationId) {
 
 
 
-export function getSongsFromYoutube() {
-    return stationService.getSongsFromYoutube()
+export function getSongsFromYoutube(userInput) {
+    return stationService.getSongsFromYoutube(userInput)
 }
 
 export async function createEmptyStation() {

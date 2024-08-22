@@ -106,7 +106,7 @@ export const StationPreview = ({
             <span> {profileName} </span>
           )}
           {location === "main" && <span>{station.description}</span>}
-          {location === "modal-add" && (
+          {location === "modal-add" && 
             <span className="empty-circle">
               {isStationToMark(station._id) && <SvgIcon iconName="tick" style="active" />}
             </span>}

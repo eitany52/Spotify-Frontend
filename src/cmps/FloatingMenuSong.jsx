@@ -114,7 +114,7 @@ export const FloatingMenuSong = ({ onDone, song }) => {
           } Your Liked Songs`}
         </li> */}
 
-        <li>
+        <li onClick={onToggleAddToLikedSongs}>
           {isInLikedSong ? (
             <>
               <span className="btn-type-2 active">
