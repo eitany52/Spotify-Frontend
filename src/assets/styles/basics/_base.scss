@@ -138,6 +138,7 @@ i {
 //btn with background - playlist, arstist...
 .btn-type-1 {
     @include btn;
+    padding: 8px 10px;
     &:hover {
         background-color: lighten($dark-clr3, 5%);  
     }
@@ -156,13 +157,13 @@ i {
     & i {
         fill:$btn-text-clr1;
     }
-    &:hover {
+    &:hover, &.current {
         color:$light-clr2;
         & i {
             fill:$light-clr2;
         }
     }
-    &.active i { fill:$primery-clr;}
+    &.active i, &.current i { fill:$primery-clr;}
 }
 
 
@@ -251,22 +252,32 @@ i {
     height: 12px;
 }
 
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
+// ::-webkit-scrollbar-track {
+//     background: #3f3a3a;
+// }
 
-::-webkit-scrollbar-thumb {
-    background-color: #888;
-    border-radius: 10px;
-    border: 3px solid #f1f1f1; /* רווח מסביב לאצבעית */
-}
+// ::-webkit-scrollbar-thumb {
+//     background-color: #cb1313;
+//     border-radius: 10px;
+//     border: 3px solid #310acb; /* רווח מסביב לאצבעית */
+// }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
+// ::-webkit-scrollbar-thumb:hover {
+//     background: #555;
+// }
 
 /* Firefox */
 * {
-    scrollbar-color: #888 #f1f1f1;
+    scrollbar-color: $dark-clr1 $dark-clr1;
     scrollbar-width: thin;
 }
+
+.station-list-wrapper:hover,  main:hover {
+    scrollbar-color: $dark-clr5 $dark-clr1;
+    
+}
+
+
+
+
+

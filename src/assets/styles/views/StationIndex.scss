@@ -1,6 +1,6 @@
 .station-index {
     display: grid;
-    grid-template-columns: 0.7fr 1.3fr 0px;
+    grid-template-columns: 0.5fr 1.3fr 0px;
     grid-template-rows: 0.5em 0.4fr 2.3fr 0.3fr;
     grid-template-areas:
         "s s s"
@@ -12,7 +12,11 @@
 
 
     &.display-card {
-        grid-template-columns: 0.7fr 0.8fr 0.5fr;
+        grid-template-columns: 0.5fr 0.8fr 0.5fr;
+    }
+
+    &.expend-lib {
+        grid-template-columns: 0.7fr 0.8fr 0px;
     }
 
     header {
@@ -52,7 +56,9 @@
     main {
         grid-area: m;
         overflow: auto; 
+       // overflow-y: overlay;
         transition: overflow 0.3s ease;
+        grid-column-end: 6;
     }
 
     aside {
@@ -62,7 +68,7 @@
         grid-template-rows: subgrid;
         gap: 10px;
 
-        & > * { padding:20px; }
+        & > * { padding: 20px 0 20px 10px; }
 
        
 
@@ -74,13 +80,14 @@
             justify-content: start;
             align-items:center;
             gap:10px;
-            padding: 10px 30px;
+            padding: 10px 15px;
            
         }
 
         .library {
             grid-area: 2 / 2;
-            overflow-x :auto;
+           // overflow-x :auto;
+            overflow: hidden;
 
 
             & .library-pannel {
@@ -108,6 +115,11 @@
                 justify-items: start;
             }
             
+            & .station-list-wrapper {
+                height:100%;
+                overflow:scroll;
+                overflow-x:hidden;
+            }
         }
     }
 

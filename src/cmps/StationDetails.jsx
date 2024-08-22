@@ -38,7 +38,10 @@ export function StationDetails() {
   );
   const { onAddToLikedSongs, isSongSavedAtSomeUserStation, isDemoStation } =
     useOutletContext();
-  const [colors, setColors] = useState({ backgroundColor: "", color: "" });
+  const [colors, setColors] = useState({
+    backgroundColor: "",
+    color: "",
+  });
   const [style1, setStyle1] = useState(null);
   const [style2, setStyle2] = useState(null);
 
