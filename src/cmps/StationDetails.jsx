@@ -21,6 +21,7 @@ import { AppSearch } from "./AppSearch.jsx";
 import { SongList } from "./SongList.jsx";
 import { AppHeader } from "../cmps/AppHeader";
 import ImageColorComponent from "../cmps/ImageColorComponent";
+import { useStation } from "../customHooks/useStation.js";
 
 //Checked - All looks good.
 
@@ -38,13 +39,23 @@ export function StationDetails() {
   );
   const { onAddToLikedSongs, isSongSavedAtSomeUserStation, isDemoStation } =
     useOutletContext();
-  const [colors, setColors] = useState({ backgroundColor: "", color: "" });
+  const [colors, setColors] = useState({
+    backgroundColor: "",
+    color: "",
+  });
   const [style1, setStyle1] = useState(null);
   const [style2, setStyle2] = useState(null);
 
+  const location = "station-details";
+  const { handleRightClick } = useStation({ station, stationId, location });
+
   useEffect(() => {
     const isDemoOnly = isDemoStation(stationId);
-    if (!isDemoOnly) loadStation(stationId);
+    if (!isDemoOnly) {
+      loadStation(stationId);
+    } else {
+      console.log("-------------- only demo ---------------");
+    }
     //loadStation(stationId);
   }, [stationId, stations, colors]);
 
@@ -137,9 +148,10 @@ export function StationDetails() {
               </section>
             )}
             <section
-              onClick={() => {
-                console.log("now you should open modal");
-              }}
+              // onClick={() => {
+              //   console.log("now you should open modal");
+              // }}
+              onClick={handleRightClick}
               className="svg-big bigger regular-color"
             >
               <SvgIcon iconName="more" />

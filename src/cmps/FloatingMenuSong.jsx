@@ -44,7 +44,7 @@ export const FloatingMenuSong = ({ onDone, song }) => {
       removeSongFromStation(station._id, song.id);
     } catch (err) {
       console.log("Having issues with removing song from station", err);
-      showErrorMsg("Failed to remove song")
+      showErrorMsg("Failed to remove song");
     }
   }
 
@@ -54,18 +54,26 @@ export const FloatingMenuSong = ({ onDone, song }) => {
 
   async function onToggleAddToLikedSongs() {
     onDone();
-    let isSongAdded = false // is song added or removed from liked songs station
+    let isSongAdded = false; // is song added or removed from liked songs station
     try {
       if (isSongSavedAtLikedSongs()) {
         await removeSongFromStation(likedSongsStation._id, song.id);
       } else {
-        await addSongToStation(likedSongsStation._id, { ...song, addedAt: Date.now() });
-        isSongAdded = true
+        await addSongToStation(likedSongsStation._id, {
+          ...song,
+          addedAt: Date.now(),
+        });
+        isSongAdded = true;
       }
-      showSuccessMsg(`${isSongAdded ? "Added to" : "Removed from"} Liked Songs`)
+      showSuccessMsg(
+        `${isSongAdded ? "Added to" : "Removed from"} Liked Songs`
+      );
     } catch (err) {
-      console.log("Having issues with adding/removing song from liked songs station", err);
-      showErrorMsg("Failed to add/remove song from Liked Songs")
+      console.log(
+        "Having issues with adding/removing song from liked songs station",
+        err
+      );
+      showErrorMsg("Failed to add/remove song from Liked Songs");
     }
   }
 
@@ -74,14 +82,15 @@ export const FloatingMenuSong = ({ onDone, song }) => {
     try {
       if (!isSongSavedAtStation(station, song.id)) {
         await addSongToStation(station._id, { ...song, addedAt: Date.now() });
-        showSuccessMsg(`Added to ${station.name}`)
-      }
-      else {
-        showErrorMsg(`Already added: This is already in your '${station.name}' playlist.`)
+        showSuccessMsg(`Added to ${station.name}`);
+      } else {
+        showErrorMsg(
+          `Already added: This is already in your '${station.name}' playlist.`
+        );
       }
     } catch (err) {
       console.log("Having issues with adding this song to station", err);
-      showErrorMsg("Failed to add song")
+      showErrorMsg("Failed to add song");
     }
   }
   if (!likedSongsStation) return <div>loading...</div>;
@@ -114,7 +123,7 @@ export const FloatingMenuSong = ({ onDone, song }) => {
           } Your Liked Songs`}
         </li> */}
 
-        <li>
+        <li onClick={onToggleAddToLikedSongs}>
           {isInLikedSong ? (
             <>
               <span className="btn-type-2 active">

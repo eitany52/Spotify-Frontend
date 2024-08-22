@@ -16,6 +16,7 @@ import {
   loadLikedSongsStation,
   loadStations,
   setStationFromDemo,
+  setExpandLib,
 } from "../store/actions/station.actions";
 
 export const StationIndex = () => {
@@ -35,6 +36,9 @@ export const StationIndex = () => {
     (storeState) => storeState.stationModule.displayCard
   );
 
+  const expendLib = useSelector(
+    (storeState) => storeState.stationModule.expendLib
+  );
   const demoStations = stationService.getDemoStations();
 
   useEffect(() => {
@@ -81,6 +85,10 @@ export const StationIndex = () => {
     }
   }
 
+  function onSetExpandLib() {
+    setExpandLib(!expendLib);
+  }
+
   function isSongSavedAtSomeUserStation(song) {
     const userStations = getUserStations(stations);
     return isSongSavedAtSomeStation(userStations, song.id);
@@ -103,16 +111,39 @@ export const StationIndex = () => {
   if (!stations.length) return;
 
   return (
-    <div className={`station-index  ${displayCard ? "display-card" : null}  `}>
+    <div
+      className={`station-index  ${displayCard ? "display-card" : ""}  ${
+        expendLib ? "expend-lib" : ""
+      } `}
+    >
       {/* {console.log("rendered")} */}
       <aside>
         <nav>
-          <Link to="/" className="btn-type-2">
-            <SvgIcon iconName="home" /> Home
-          </Link>
-          <Link to="/search" className="btn-type-2">
-            <SvgIcon iconName="search" /> Search
-          </Link>
+          {!isHomePageDisplayed && (
+            <Link to="/" className="btn-type-2">
+              {" "}
+              <SvgIcon iconName="home" /> Home{" "}
+            </Link>
+          )}
+          {isHomePageDisplayed && (
+            <Link to="/" className="btn-type-2 current">
+              {" "}
+              <SvgIcon iconName="homeActive" /> Home{" "}
+            </Link>
+          )}
+
+          {!isSearchDisplayed && (
+            <Link to="/search" className="btn-type-2 ">
+              {" "}
+              <SvgIcon iconName="search" /> Search
+            </Link>
+          )}
+          {isSearchDisplayed && (
+            <Link to="/search" className="btn-type-2 current">
+              {" "}
+              <SvgIcon iconName="searchActive" /> Search
+            </Link>
+          )}
         </nav>
         <section className="library">
           <div className="library-pannel">
@@ -128,8 +159,15 @@ export const StationIndex = () => {
             >
               <SvgIcon iconName="plus" />
             </button>
-            <button title="Show more" className="icon-type-1">
-              <SvgIcon iconName="more" />
+            <button
+              title="Show more"
+              className="icon-type-1"
+              onClick={onSetExpandLib}
+            >
+              <>
+                {expendLib && <SvgIcon iconName="arrowLeft" />}
+                {!expendLib && <SvgIcon iconName="arrowRight" />}
+              </>
             </button>
           </div>
           <div className="library-types">
@@ -154,11 +192,13 @@ export const StationIndex = () => {
             </form>
             {/* <button>Recents</button> */}
           </div>
-          <StationList
-            stations={stations}
-            location="library"
-            onCreateEmptyStation={onCreateEmptyStation}
-          />
+          <div className="station-list-wrapper">
+            <StationList
+              stations={stations}
+              location="library"
+              onCreateEmptyStation={onCreateEmptyStation}
+            />
+          </div>
         </section>
       </aside>
       <main>

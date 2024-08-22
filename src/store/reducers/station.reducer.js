@@ -9,6 +9,7 @@ export const SET_CURRENT_SONG = 'SET_CURRENT_SONG'
 export const SET_PLAY_PAUSE = 'SET_PLAY_PAUSE'
 export const SET_SHUFFLE = 'SET_SHUFFLE'
 export const DISPLAY_HIDE_CARD = 'DISPLAY_HIDE_CARD'
+export const EXPEND_LIB = 'EXPEND_LIB'
 
 
 //Checked - All looks good.
@@ -27,7 +28,8 @@ const initialState = {
     currentSong: { 'id': null },
     isPlaying: false,
     isShuffle: false,
-    displayCard: false
+    displayCard: false,
+    expendLib: false
 }
 
 export function stationReducer(state = initialState, action) {
@@ -66,6 +68,9 @@ export function stationReducer(state = initialState, action) {
             break
         case DISPLAY_HIDE_CARD:
             newState = { ...state, displayCard: action.cardStatus }
+            break
+        case EXPEND_LIB:
+            newState = { ...state, expendLib: action.libStatus }
             break
         default:
     }

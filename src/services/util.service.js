@@ -8,7 +8,9 @@ export const utilService = {
     loadFromStorage,
     formatDate,
     getRandomExcludingY,
-    createGradientColors
+    createGradientColors,
+    getFirstChar,
+    darkenColor
 }
 
 function makeId(length = 6) {
@@ -114,15 +116,21 @@ function formatDate(timestamp) {
 
 function darkenColor(color, percent) {
 
-   
+    color = color.replace(/\s+/g, '');
+
+
     const [r, g, b, a] = color.match(/\d+/g).map(Number);
     const darken = value => Math.max(0, value - Math.floor((value * percent) / 100));
   
     return `rgba(${darken(r)}, ${darken(g)}, ${darken(b)}, ${a})`;
   }
   
+
+  
+
 function createGradientColors(color) {
 
+    //console.log('color:', color)
     const darkenedBackground_50 = darkenColor(color, 50);
     const gradientBackground1 = `linear-gradient(${color}, ${darkenedBackground_50})`;        
        
@@ -135,6 +143,14 @@ function createGradientColors(color) {
    
     return { 
         style1: { background: gradientBackground1},
-        style2: { background: gradientBackground2}
+        style2: { background: gradientBackground2},
+        darken : darkenedBackground_52
     };
+}
+
+
+
+function getFirstChar(str) {
+    if (str.length === 0) return ''; 
+    return str.charAt(0).toUpperCase(); 
 }

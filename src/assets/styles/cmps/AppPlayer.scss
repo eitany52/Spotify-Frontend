@@ -41,7 +41,7 @@
 
 .app-player  .control-pannel .trace {
     input[type="range"] {
-        width: 350px;
+        width: 500px;
         margin: 0;
       }
 
@@ -57,3 +57,55 @@
   
 
 
+
+
+  :root {
+    --slider-width: 500px;
+    --slider-height: 5px;
+  }
+  
+  input[type='range'] {
+    cursor: ew-resize;
+    overflow: hidden;
+  }
+  
+  @media screen and (-webkit-min-device-pixel-ratio:0) {
+    input[type='range'] {
+      width: var(--slider-width);
+      -webkit-appearance: none;
+      background-color: #353535;
+      border-radius:5px;
+    }
+    input[type='range']::-webkit-slider-runnable-track {
+      height: var(--slider-height);
+      -webkit-appearance: none;
+      color: $light-clr2;
+      margin-top: -1px;
+    }
+    input[type='range']::-webkit-slider-thumb {
+      width: 0px;
+      -webkit-appearance: none;
+      height: var(--slider-height);
+      box-shadow: calc(-1 * var(--slider-width)) 0 0 var(--slider-width) $light-clr2;
+    }
+  }
+  
+  /* FF */
+  input[type="range"]::-moz-range-progress {
+    background-color: $light-clr2; 
+  }
+  input[type="range"]::-moz-range-thumb {
+    height: var(--slider-height);
+    width: 0;
+    border: none;
+    box-shadow: calc(-1 * var(--slider-width)) 0 0 var(--slider-width) $light-clr2;
+    box-sizing: border-box;
+  }
+  
+  /* IE */
+  input[type="range"]::-ms-fill-lower {
+    background-color: $light-clr2; 
+  }
+  input[type="range"]::-ms-fill-upper {  
+    background-color: $light-clr2;
+  }
