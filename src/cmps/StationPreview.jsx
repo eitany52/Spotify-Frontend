@@ -14,7 +14,7 @@ export const StationPreview = ({
   setStationFromSearch,
   onCreateEmptyStation,
   onToggleMarkStation,
-  isStationToMark
+  isStationToMark,
 }) => {
   const navigate = useNavigate();
   const { stationId } = useParams();
@@ -22,15 +22,12 @@ export const StationPreview = ({
   async function onClickStation() {
     if (location === "modal-more") {
       onAddSongToStation(station);
-    }
-    else if (location === "main") {
+    } else if (location === "main") {
       setStationFromSearch(station);
-      onGoToStationDetails()
-    }
-    else if (location === "modal-add") {
-      onToggleMarkStation(station)
-    }
-    else {
+      onGoToStationDetails();
+    } else if (location === "modal-add") {
+      onToggleMarkStation(station);
+    } else {
       onGoToStationDetails();
     }
   }
@@ -84,19 +81,17 @@ export const StationPreview = ({
       className={`station-preview ${location}`}
     >
       <section
-        className={`station-container ${
-          location === "library" || location === "modal-add"
+        className={`station-container ${location === "library" || location === "modal-add"
             ? "intro-outer"
             : ""
-        }`}
+          }`}
       >
         <img src={station.imgUrl} />
         <section
-          className={`${
-            location === "library" || location === "modal-add"
+          className={`${location === "library" || location === "modal-add"
               ? "intro-inner"
               : ""
-          }`}
+            }`}
         >
           <h5>{station.name}</h5>
           {location === "library" && station.type === "liked" && (
@@ -106,9 +101,11 @@ export const StationPreview = ({
             <span> {profileName} </span>
           )}
           {location === "main" && <span>{station.description}</span>}
-          {location === "modal-add" && 
+          {location === "modal-add" &&
             <span className="empty-circle">
-              {isStationToMark(station._id) && <SvgIcon iconName="tick" style="active" />}
+              {isStationToMark(station._id) && (
+                <SvgIcon iconName="tick" style="active" />
+              )}
             </span>}
         </section>
       </section>

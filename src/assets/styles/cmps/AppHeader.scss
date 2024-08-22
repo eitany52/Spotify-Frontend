@@ -12,23 +12,23 @@
     .user-info {
         // background-color: $dark-clr2;
         // padding: 2px 8px;
-        padding-left: 100px;
+        justify-self: end;
         color: $dark-clr1;
+        
 
-        .score {
-            background-color: $dark-clr2;
-            color: $light-clr2;
-            padding: 8px;
-            margin: 10px;
-            border-radius: 50%;
-        }
+        span {
+            //background-color:black;
+            color:$dark-clr3;
+            padding:3px;
+            border-radius:15px;
+            display:grid;
 
-        img {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            object-fit: cover;
+            small {
+                padding: 2px 6px;
+                border-radius:15px;
+            }
         }
+        
     }
 
     .user-info .btn-link {

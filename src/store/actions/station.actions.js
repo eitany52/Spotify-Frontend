@@ -2,7 +2,7 @@ import { stationService } from '../../services/station.service.local'
 import { store } from '../store'
 import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
 
-import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE, SET_SHUFFLE, DISPLAY_HIDE_CARD, SET_LIKED_SONGS_STATION } from '../reducers/station.reducer'
+import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE, SET_SHUFFLE, DISPLAY_HIDE_CARD, SET_LIKED_SONGS_STATION, EXPEND_LIB } from '../reducers/station.reducer'
 
 //Checked - All looks good.
 
@@ -80,10 +80,11 @@ export async function addStation(station) {
 export async function saveStationByUser(station){
     try {
         const savedStation = await stationService.saveStationByUser(station)
+        console.log('savedStation: 111111111',savedStation);
         if (savedStation !== "already exist" ){
             store.dispatch({ type: ADD_STATION, savedStation })
-            store.dispatch({ type: SET_STATION, savedStation })
-        }
+           // store.dispatch({ type: SET_STATION, savedStation })
+        } 
     } catch (err) {
         console.log('Cannot save station by user', err)
         throw err
@@ -219,11 +220,21 @@ export async function setDisplayHideCard(cardStatus) {
     try {
         store.dispatch({ type: DISPLAY_HIDE_CARD, cardStatus })
     } catch (err) {
-        console.log('Cannot set shuffle', err)
+        console.log('Cannot set display hide card', err)
         throw err
     }
 }
 
+
+
+export async function setExpandLib(libStatus) {
+    try {
+        store.dispatch({ type: EXPEND_LIB, libStatus })
+    } catch (err) {
+        console.log('Cannot set expand library', err)
+        throw err
+    }
+}
 export function setStationFromDemo(station){
     try {
        

@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 import { login, logout, signup } from "../store/actions/user.actions";
+import { utilService } from "../services/util.service.js";
 
 import { LoginSignup } from "./LoginSignup.jsx";
 import { SvgIcon } from "../cmps/SvgIcon";
@@ -62,6 +63,20 @@ export function AppHeader({ backgroundColor = null }) {
     }
   }
 
+  const userLatter = utilService.getFirstChar(user?.name);
+  console.log("-----------------------------");
+  console.log(backgroundColor);
+  const darkenedBackground_50 = utilService.darkenColor(
+    "rgba(173,152,151,1)",
+    50
+  );
+
+  //const darkenedBackground_50 = "rgba(255,5,5,1)";
+  // const darkenedBackground_50 =
+  //   backgroundColor === null
+  //     ? "rgba(255,255,255,1)"
+  //     : utilService.darkenColor(backgroundColor, 50);
+
   return (
     <header className="app-header" style={{ backgroundColor: backgroundColor }}>
       {
@@ -74,8 +89,19 @@ export function AppHeader({ backgroundColor = null }) {
               <SvgIcon iconName={"forward"} />
             </button>
           </section>
-          <section>
-            <span>{user?.name}</span>
+          <section className="user-info">
+            {/* <span>{backgroundColor} </span>
+            <span>{darkenedBackground_50} </span> */}
+
+            <span style={{ backgroundColor: darkenedBackground_50 }}>
+              <small
+                style={{
+                  backgroundColor: backgroundColor,
+                }}
+              >
+                {userLatter}
+              </small>
+            </span>
           </section>
           {isSearchDisplayed && <AppSearch />}
         </>

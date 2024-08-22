@@ -9,6 +9,8 @@
 
 .modal-content {
     //position: fixed;
+    user-select: none;
+
     position:absolute;
     font-size: 1.1em;
     inset: 0;

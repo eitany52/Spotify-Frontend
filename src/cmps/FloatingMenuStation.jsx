@@ -30,8 +30,9 @@ export const FloatingMenuStation = ({
     onOpenStationDetails(station._id);
   }
 
-  function onSaveStation() {
-    saveStationByUser(station);
+  async function onSaveStation() {
+    const savedStation = await saveStationByUser(station);
+    //saveStationByUser(station);
     onDone();
   }
 
@@ -61,7 +62,7 @@ export const FloatingMenuStation = ({
           </span>
         </li>
       )}
-      {location === "main" && (
+      {(location === "main" || location === "station-details") && (
         <li onClick={onSaveStation} className="lastInGroup">
           <span className="btn-type-2">
             <SvgIcon iconName="add" /> Save To your library

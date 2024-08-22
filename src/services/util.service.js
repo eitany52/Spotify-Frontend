@@ -10,7 +10,9 @@ export const utilService = {
     getRandomExcludingY,
     createGradientColors,
     convertFormattedTimeToSeconds,
-    formatTime
+    formatTime,
+    getFirstChar,
+    darkenColor
 }
 
 function makeId(length = 6) {
@@ -100,8 +102,6 @@ function formatDate(timestamp) {
     }
 }
 
-
-
 function getRandomExcludingY(x, y) {
     if (x === 0) throw new Error("x must be greater than 0");
 
@@ -113,32 +113,15 @@ function getRandomExcludingY(x, y) {
     return randomNum;
 }
 
-
 function darkenColor(color, percent) {
+
+    color = color.replace(/\s+/g, '');
 
 
     const [r, g, b, a] = color.match(/\d+/g).map(Number);
     const darken = value => Math.max(0, value - Math.floor((value * percent) / 100));
 
     return `rgba(${darken(r)}, ${darken(g)}, ${darken(b)}, ${a})`;
-}
-
-function createGradientColors(color) {
-
-    const darkenedBackground_50 = darkenColor(color, 50);
-    const gradientBackground1 = `linear-gradient(${color}, ${darkenedBackground_50})`;
-
-    const darkenedBackground_52 = darkenColor(color, 52);
-    //darkenedBackground_100 = darkenColor(color, 100);
-
-    const darkenedBackground_100 = 'rgba(18,18,18,1)';
-    const gradientBackground2 = `linear-gradient( ${darkenedBackground_52}, ${darkenedBackground_100})`;
-
-
-    return {
-        style1: { background: gradientBackground1 },
-        style2: { background: gradientBackground2 }
-    };
 }
 
 function convertFormattedTimeToSeconds(formattedTime) {
@@ -155,4 +138,29 @@ function formatTime(timeInSeconds) {
     const formattedTime = `${minutes}:${seconds > 9 ? seconds : '0' + seconds}`
 
     return formattedTime
+}
+
+function createGradientColors(color) {
+
+    //console.log('color:', color)
+    const darkenedBackground_50 = darkenColor(color, 50);
+    const gradientBackground1 = `linear-gradient(${color}, ${darkenedBackground_50})`;
+
+    const darkenedBackground_52 = darkenColor(color, 52);
+    //darkenedBackground_100 = darkenColor(color, 100);
+
+    const darkenedBackground_100 = 'rgba(18,18,18,1)';
+    const gradientBackground2 = `linear-gradient( ${darkenedBackground_52}, ${darkenedBackground_100})`;
+
+    return { 
+        style1: { background: gradientBackground1},
+        style2: { background: gradientBackground2},
+        darken : darkenedBackground_52
+    };
+}
+
+
+function getFirstChar(str) {
+    if (str.length === 0) return ''; 
+    return str.charAt(0).toUpperCase(); 
 }
