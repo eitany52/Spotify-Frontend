@@ -80,10 +80,11 @@ export async function addStation(station) {
 export async function saveStationByUser(station){
     try {
         const savedStation = await stationService.saveStationByUser(station)
+        console.log('savedStation: 111111111',savedStation);
         if (savedStation !== "already exist" ){
             store.dispatch({ type: ADD_STATION, savedStation })
-            store.dispatch({ type: SET_STATION, savedStation })
-        }
+           // store.dispatch({ type: SET_STATION, savedStation })
+        } 
     } catch (err) {
         console.log('Cannot save station by user', err)
         throw err
