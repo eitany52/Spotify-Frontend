@@ -1,10 +1,12 @@
 import { onToggleModal } from "../store/actions/app.actions.js";
 import { FloatingMenuStation } from "../cmps/FloatingMenuStation";
 import { useNavigate } from "react-router";
+import { EditStationDetails } from "../cmps/EditStationDetails";
 
 
 
-export const useStation = ({ station, stationId, location }) => {
+
+export const useStation = ({ station, stationId, location, onCreateEmptyStation }) => {
    
     const navigate = useNavigate();
 
@@ -21,8 +23,7 @@ export const useStation = ({ station, stationId, location }) => {
               onToggleModal(null);
             },
             class: "floating-menu-station",
-            // onCreateEmptyStation: onCreateEmptyStation,
-            onCreateEmptyStation: ()=>{},
+            onCreateEmptyStation: onCreateEmptyStation,
             onOpenStationDetails() {
               onToggleModal(null);
               onToggleModal({

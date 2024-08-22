@@ -87,7 +87,7 @@
         .library {
             grid-area: 2 / 2;
            // overflow-x :auto;
-            overflow: auto;
+             overflow: hidden;
 
 
             & .library-pannel {
@@ -116,7 +116,7 @@
             }
             
             & .station-list-wrapper {
-                height:100%;
+                height:87%;
                 overflow:scroll;
                 overflow-x:hidden;
             }
@@ -126,7 +126,7 @@
     footer {
         grid-area: f;
 
-        position: absolute;
+        // position: absolute;
         bottom: 10px;
         width: 100%;
     }

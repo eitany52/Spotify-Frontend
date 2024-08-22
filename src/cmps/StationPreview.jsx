@@ -4,6 +4,7 @@ import { onToggleModal } from "../store/actions/app.actions.js";
 import { FloatingMenuStation } from "../cmps/FloatingMenuStation";
 import { EditStationDetails } from "../cmps/EditStationDetails";
 import { SvgIcon } from "./SvgIcon.jsx";
+import { useStation } from "../customHooks/useStation.js";
 
 // Checked - All looks good.
 
@@ -18,6 +19,13 @@ export const StationPreview = ({
 }) => {
   const navigate = useNavigate();
   const { stationId } = useParams();
+
+  const { handleRightClick } = useStation({
+    station,
+    stationId,
+    location,
+    onCreateEmptyStation,
+  });
 
   async function onClickStation() {
     if (location === "modal-more") {
@@ -36,37 +44,37 @@ export const StationPreview = ({
     navigate(`/station/${station._id}`);
   }
 
-  function handleRightClick(event) {
-    if (location === "modal-add" || location === "modal-more") return;
-    event.preventDefault();
-    onToggleModal({
-      cmp: FloatingMenuStation,
-      props: {
-        station: station,
-        location: location,
-        onDone() {
-          if (station._id === stationId) navigate(`/`);
-          onToggleModal(null);
-        },
-        class: "floating-menu-station",
-        onCreateEmptyStation: onCreateEmptyStation,
-        onOpenStationDetails() {
-          onToggleModal(null);
-          onToggleModal({
-            cmp: EditStationDetails,
-            props: {
-              stationToEdit: station,
-              class: "floating-edit-station-details",
-            },
-          });
-        },
-      },
-      style: {
-        left: `${event.clientX}px`,
-        top: `${event.clientY}px`,
-      },
-    });
-  }
+  // function handleRightClick(event) {
+  //   if (location === "modal-add" || location === "modal-more") return;
+  //   event.preventDefault();
+  //   onToggleModal({
+  //     cmp: FloatingMenuStation,
+  //     props: {
+  //       station: station,
+  //       location: location,
+  //       onDone() {
+  //         if (station._id === stationId) navigate(`/`);
+  //         onToggleModal(null);
+  //       },
+  //       class: "floating-menu-station",
+  //       onCreateEmptyStation: onCreateEmptyStation,
+  //       onOpenStationDetails() {
+  //         onToggleModal(null);
+  //         onToggleModal({
+  //           cmp: EditStationDetails,
+  //           props: {
+  //             stationToEdit: station,
+  //             class: "floating-edit-station-details",
+  //           },
+  //         });
+  //       },
+  //     },
+  //     style: {
+  //       left: `${event.clientX}px`,
+  //       top: `${event.clientY}px`,
+  //     },
+  //   });
+  // }
 
   const numOfSongs = station.songs.length;
   const profileName = station.createdBy.fullname;
@@ -81,17 +89,19 @@ export const StationPreview = ({
       className={`station-preview ${location}`}
     >
       <section
-        className={`station-container ${location === "library" || location === "modal-add"
+        className={`station-container ${
+          location === "library" || location === "modal-add"
             ? "intro-outer"
             : ""
-          }`}
+        }`}
       >
         <img src={station.imgUrl} />
         <section
-          className={`${location === "library" || location === "modal-add"
+          className={`${
+            location === "library" || location === "modal-add"
               ? "intro-inner"
               : ""
-            }`}
+          }`}
         >
           <h5>{station.name}</h5>
           {location === "library" && station.type === "liked" && (
@@ -101,12 +111,13 @@ export const StationPreview = ({
             <span> {profileName} </span>
           )}
           {location === "main" && <span>{station.description}</span>}
-          {location === "modal-add" &&
+          {location === "modal-add" && (
             <span className="empty-circle">
               {isStationToMark(station._id) && (
                 <SvgIcon iconName="tick" style="active" />
               )}
-            </span>}
+            </span>
+          )}
         </section>
       </section>
     </li>

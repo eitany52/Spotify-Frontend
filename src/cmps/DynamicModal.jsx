@@ -22,9 +22,9 @@ export function DynamicModal() {
       <section onClick={onCloseModal} className="modal-backdrop"></section>
       <section style={style} className={`modal-content  ${props.class}`}>
         <Cmp {...props} />
-        <span className="btn close-btn" onClick={onCloseModal}>
+        {/* <span className="btn close-btn" onClick={onCloseModal}>
           <SvgIcon iconName="close" />
-        </span>
+        </span> */}
       </section>
     </>
   );

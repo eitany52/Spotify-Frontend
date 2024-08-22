@@ -77,11 +77,13 @@ export const FloatingMenuStation = ({
         </li>
       )}
 
-      <li>
-        <span className="btn-type-2" onClick={onCreateEmptyStation1}>
-          <SvgIcon iconName="create" /> Create Playlist
-        </span>
-      </li>
+      {location !== "station-details" && (
+        <li>
+          <span className="btn-type-2" onClick={onCreateEmptyStation1}>
+            <SvgIcon iconName="create" /> Create Playlist
+          </span>
+        </li>
+      )}
     </ul>
   );
 };

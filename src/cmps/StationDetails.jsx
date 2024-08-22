@@ -53,8 +53,6 @@ export function StationDetails() {
     const isDemoOnly = isDemoStation(stationId);
     if (!isDemoOnly) {
       loadStation(stationId);
-    } else {
-      console.log("-------------- only demo ---------------");
     }
     //loadStation(stationId);
   }, [stationId, stations, colors]);
