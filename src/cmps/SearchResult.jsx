@@ -16,8 +16,9 @@ export const SearchResult = () => {
     loadSongs();
   }, [params]);
 
-  function loadSongs() {
-    setSongs(getSongsFromYoutube());
+  async function loadSongs() {
+    const songs = await getSongsFromYoutube(params.userInput)
+    setSongs(songs);
   }
 
   return (

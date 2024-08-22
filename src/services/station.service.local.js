@@ -36,6 +36,8 @@ export const stationService = {
 }
 window.ss = stationService
 const STORAGE_KEY = 'station_db'
+const API_KEY = 'AIzaSyCUE7BdmEO9uF_gWcV5yY5O3eqyINxdavo'
+
 _createStations()
 
 
@@ -139,35 +141,55 @@ async function save(station) {
     return savedStation
 }
 
-function getSongsFromYoutube() {
-    return searchRes[0].items.slice(0, 4)
-    // const searchTerm = 'rap-song'
-    // const res = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&key=AIzaSyCUE7BdmEO9uF_gWcV5yY5O3eqyINxdavo`)
-    // const data = await res.json()
-    // console.log(data);
+async function getSongsFromYoutube(userInput) {
+    const searchTerm = userInput
+    let res = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&type=video&videoCategoryId=10&maxResults=4&key=${API_KEY}`)
+    let data = await res.json()
+    const songs = data.items
+    const songIds = _getSongIds(songs)
+    res = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${songIds[0]},${songIds[1]},${songIds[2]},${songIds[3]}&key=${API_KEY}`)
+    data = await res.json()
+    const songsAdditionalInfo = data.items
+    _addDurationToSongs(songs, songsAdditionalInfo)
+    return songs
+    // return searchRes[0].items.slice(0,4)
 }
 
+function _getSongIds(songs) {
+    const songIds = []
+    songs.forEach(song => {
+        songIds.push(song.id.videoId)
+    })
+
+    return songIds
+}
+
+function _addDurationToSongs(songs, songsAdditionalInfo) {
+    songs.forEach(song => {
+        const songAdditionalInfo = songsAdditionalInfo.find(songAdditionalInfo => songAdditionalInfo.id === song.id.videoId)
+        song.duration = songAdditionalInfo.contentDetails.duration
+    })
+}
 
 function getDemoStations() {
     return demoStations
-    
+
 }
 
-
 async function saveStationByUser(station) {
-   
+
     const stationToSave = {
-        ...station, savedBy: [ ...station.savedBy , getLoggedOnUser()._id]
+        ...station, savedBy: [...station.savedBy, getLoggedOnUser()._id]
     }
-   
+
     const stations = await getStations()
     const isExists = stations.some(_station => _station._id === station._id)
     if (isExists) {
-        return Promise.resolve('already exist'); 
+        return Promise.resolve('already exists');
     }
     const savedStation = await storageService.post(STORAGE_KEY, stationToSave)
 
-    
+
     return savedStation
 }
 
@@ -230,13 +252,13 @@ async function updateStationDetails(stationToSave) {
 async function isSongInLikedSong(songId) {
 
     const station = await getLikedSongsStation();
-    
-     console.log('isSongInLikedSong songId:', songId)
-     console.log('isSongInLikedSong station:', station)
-    const isInStation = station.songs.some((song) => song.id === songId )
-     console.log('isSongInLikedSong isInStation:', isInStation)
+
+    console.log('isSongInLikedSong songId:', songId)
+    console.log('isSongInLikedSong station:', station)
+    const isInStation = station.songs.some((song) => song.id === songId)
+    console.log('isSongInLikedSong isInStation:', isInStation)
     return isInStation;
-   
+
 }
 
 
@@ -256,8 +278,19 @@ function formatSong(song) {
         url: `https://youtube.com/watch?v=${song.id.videoId}`,
         imgUrl: song.snippet.thumbnails.default.url,
         addedBy: user,
-        addedAt: Date.now()
+        addedAt: Date.now(),
+        duration: _formatSongDuration(song.duration)
     }
+}
+
+function _formatSongDuration(songDuration) {
+    let formattedDuration = songDuration.substring(2, songDuration.indexOf('S'))
+    const [minutes, seconds] = formattedDuration.split('M')
+    const formattedSeconds = seconds.length < 2 ? `0${seconds}` : seconds
+
+    formattedDuration = `${minutes}:${formattedSeconds}`
+
+    return formattedDuration
 }
 
 function getSubstringBeforePipe(str) {

@@ -32,11 +32,16 @@ export const AppSearch = ({ onAddToStation, isSongSavedAtStation }) => {
     if (!userInput) return;
 
     if (isUserAtStation) {
-      setSongs(getSongsFromYoutube());
+      loadSongs()
     } else {
       navigate(`/search/${userInput}`);
     }
   }, [userInput]);
+
+  async function loadSongs() {
+    const songs = await getSongsFromYoutube(userInput)
+    setSongs(songs)
+  }
 
   function getLocation() {
     if (location.pathname.includes("station")) {

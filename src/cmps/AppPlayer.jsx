@@ -15,7 +15,7 @@ import {
 export const AppPlayer = () => {
   const playerRef = useRef(null);
 
-  const [currentTime, setCurrentTime] = useState(0);
+  const [currentTimeInSeconds, setCurrentTimeInSeconds] = useState(0);
 
   const [isSongLoaded, setIsSongLoaded] = useState(false);
   // const [isShuffleLocal, setIsShuffleLocal] = useState(false);
@@ -43,7 +43,7 @@ export const AppPlayer = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (playerRef.current) {
-        setCurrentTime(playerRef.current.getCurrentTime());
+        setCurrentTimeInSeconds(parseInt(playerRef.current.getCurrentTime(), 10));
       }
     }, 1000);
     return () => clearInterval(interval);
@@ -81,17 +81,18 @@ export const AppPlayer = () => {
   };
 
   const onStateChange = (event) => {
-    setCurrentTime(playerRef.current.getCurrentTime());
+    setCurrentTimeInSeconds(parseInt(playerRef.current.getCurrentTime(), 10));
     if (event.data === window.YT.PlayerState.CUED) {
       setIsSongLoaded(true);
     }
   };
 
   const handleRangeChange = (event) => {
-    const time = parseFloat(event.target.value);
-    setCurrentTime(time);
+    // const time = parseFloat(event.target.value);
+    const timeInSeconds = parseInt(event.target.value, 10);
+    setCurrentTimeInSeconds(timeInSeconds);
     if (playerRef.current) {
-      playerRef.current.seekTo(time, true);
+      playerRef.current.seekTo(timeInSeconds, true);
     }
   };
 
@@ -162,6 +163,7 @@ export const AppPlayer = () => {
       origin: window.location.origin, // מגדיר את המקור ל-URL הנוכחי של הדפדפן
     },
   };
+console.log("currentSong: ", currentSong);
 
   return (
     <div className="app-player">
@@ -222,14 +224,17 @@ export const AppPlayer = () => {
           </span>
         </section>
         <section className="trace">
+          {currentSong.id && <span>{utilService.formatTime(currentTimeInSeconds)}</span>}
           <input
             type="range"
             min="0"
-            max={playerRef.current ? playerRef.current.getDuration() : 100}
-            step="0.1"
-            value={currentTime}
+            max={currentSong.id ? utilService.convertFormattedTimeToSeconds(currentSong.duration) : "120"}
+            value={currentTimeInSeconds}
             onChange={handleRangeChange}
+            // step="0.1"
+            // max={playerRef.current ? playerRef.current.getDuration() : 100}
           />
+          {currentSong.id && <span>{currentSong.duration}</span>}
         </section>
       </section>
 

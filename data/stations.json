@@ -23,7 +23,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
                 "addedBy": {},
                 "addedAt": 1719168000000,
-                "channelTitle": "songer1"
+                "channelTitle": "songer1",
+                "duration": "3:02"
             },
             {
                 "id": "mUkfiLjooxs",
@@ -32,7 +33,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
                 "addedBy": {},
                 "addedAt": 1698230400000,
-                "channelTitle": "songer2"
+                "channelTitle": "songer2",
+                "duration": "3:31"
             }
         ]
     },
@@ -61,7 +63,8 @@
                 "imgUrl": "https://media.newyorker.com/photos/590968a1c14b3c606c106d52/master/pass/Larson-Nothing-Compares-2-Sinead.jpg",
                 "addedBy": {},
                 "addedAt": 1719168000000,
-                "channelTitle": "Sinéad O'Connor"
+                "channelTitle": "Sinéad O'Connor",
+                "duration": "5:08"
             },
             {
                 "id": "VZt7J0iaUD0",
@@ -70,7 +73,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
                 "addedAt": 1719168000000,
                 "addedBy": {},
-                "channelTitle": "Suzanne Vega"
+                "channelTitle": "Suzanne Vega",
+                "duration": "3:48"
             },
             {
                 "id": "CziHrYYSyPc",
@@ -79,7 +83,8 @@
                 "imgUrl": "https://wp.inews.co.uk/wp-content/uploads/2018/05/Eurovision-2018-Netta-credit-eurovision-e1526220429455.jpg?w=960&h=638&crop=1",
                 "addedBy": {},
                 "addedAt": 1698230400000,
-                "channelTitle": "Netta"
+                "channelTitle": "Netta",
+                "duration": "4:30"
             },
             {
                 "id": "lJYn09tuPw4",
@@ -88,7 +93,8 @@
                 "imgUrl": "https://escbubble.com/wp-content/uploads/2024/02/Eden-Golan.jpg",
                 "addedBy": {},
                 "addedAt": 1698230400000,
-                "channelTitle": "Eden Golan"
+                "channelTitle": "Eden Golan",
+                "duration": "3:07"
             },
             {
                 "id": "Z3mIcCllJXY",
@@ -97,7 +103,8 @@
                 "imgUrl": "https://pix.eurovisionworld.com/pix/israel-2023-noa-kirel-8.jpg",
                 "addedBy": {},
                 "addedAt": 1698230400000,
-                "channelTitle": "Noa kirel"
+                "channelTitle": "Noa kirel",
+                "duration": "3:13"
             },
             {
                 "id": "MXI5Nuz6OHg",
@@ -106,7 +113,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
                 "addedBy": {},
                 "addedAt": 162521765262,
-                "channelTitle": "The Meters"
+                "channelTitle": "The Meters",
+                "duration": "3:02"
             },
             {
                 "id": "mUkfiLjooxs",
@@ -115,12 +123,9 @@
                 "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
                 "addedAt": 1698230400000,
                 "addedBy": {},
-                "channelTitle": "The JB's"
-            }
-
-            
-            
-            
+                "channelTitle": "The JB's",
+                "duration": "3:31"
+            }                          
         ]
     },
     {
@@ -148,7 +153,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
                 "addedBy": {},
                 "addedAt": 162521765262,
-                "channelTitle": "The Meters"
+                "channelTitle": "The Meters",
+                "duration": "3:02"
             },
             {
                 "id": "mUkfiLjooxs",
@@ -157,7 +163,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
                 "addedAt": 1698230400000,
                 "addedBy": {},
-                "channelTitle": "The JB's"
+                "channelTitle": "The JB's",
+                "duration": "3:31"
             },
             {
                 "id": "VZt7J0iaUD0",
@@ -166,7 +173,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
                 "addedAt": 1719168000000,
                 "addedBy": {},
-                "channelTitle": "Suzanne Vega"
+                "channelTitle": "Suzanne Vega",
+                "duration": "3:48"
             }
         ]
     },  {
@@ -194,7 +202,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
                 "addedBy": {},
                 "addedAt": 162521765262,
-                "channelTitle": "The Meters"
+                "channelTitle": "The Meters",
+                "duration": "3:02"
             },
             {
                 "id": "mUkfiLjooxs",
@@ -203,7 +212,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
                 "addedAt": 1698230400000,
                 "addedBy": {},
-                "channelTitle": "The JB's"
+                "channelTitle": "The JB's",
+                "duration": "3:31"
             },
             {
                 "id": "VZt7J0iaUD0",
@@ -212,7 +222,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
                 "addedAt": 1719168000000,
                 "addedBy": {},
-                "channelTitle": "Suzanne Vega"
+                "channelTitle": "Suzanne Vega",
+                "duration": "3:48"
             }
         ]
     },
@@ -241,7 +252,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
                 "addedBy": {},
                 "addedAt": 162521765262,
-                "channelTitle": "The Meters"
+                "channelTitle": "The Meters",
+                "duration": "3:02"
             },
             {
                 "id": "mUkfiLjooxs",
@@ -250,7 +262,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
                 "addedAt": 1698230400000,
                 "addedBy": {},
-                "channelTitle": "The JB's"
+                "channelTitle": "The JB's",
+                "duration": "3:31"
             },
             {
                 "id": "VZt7J0iaUD0",
@@ -259,7 +272,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
                 "addedAt": 1719168000000,
                 "addedBy": {},
-                "channelTitle": "Suzanne Vega"
+                "channelTitle": "Suzanne Vega",
+                "duration": "3:48"
             }
         ]
     },
@@ -288,7 +302,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
                 "addedBy": {},
                 "addedAt": 162521765262,
-                "channelTitle": "The Meters"
+                "channelTitle": "The Meters",
+                "duration": "3:02"
             },
             {
                 "id": "mUkfiLjooxs",
@@ -297,7 +312,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
                 "addedAt": 1698230400000,
                 "addedBy": {},
-                "channelTitle": "The JB's"
+                "channelTitle": "The JB's",
+                "duration": "3:31"
             },
             {
                 "id": "VZt7J0iaUD0",
@@ -306,7 +322,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
                 "addedAt": 1719168000000,
                 "addedBy": {},
-                "channelTitle": "Suzanne Vega"
+                "channelTitle": "Suzanne Vega",
+                "duration": "3:48"
             }
         ]
     },
@@ -335,7 +352,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
                 "addedBy": {},
                 "addedAt": 162521765262,
-                "channelTitle": "The Meters"
+                "channelTitle": "The Meters",
+                "duration": "3:02"
             },
             {
                 "id": "mUkfiLjooxs",
@@ -344,7 +362,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
                 "addedAt": 1698230400000,
                 "addedBy": {},
-                "channelTitle": "The JB's"
+                "channelTitle": "The JB's",
+                "duration": "3:31"
             },
             {
                 "id": "VZt7J0iaUD0",
@@ -353,7 +372,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
                 "addedAt": 1719168000000,
                 "addedBy": {},
-                "channelTitle": "Suzanne Vega"
+                "channelTitle": "Suzanne Vega",
+                "duration": "3:48"
             }
         ]
     },
@@ -382,7 +402,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
                 "addedBy": {},
                 "addedAt": 162521765262,
-                "channelTitle": "The Meters"
+                "channelTitle": "The Meters",
+                "duration": "3:02"
             },
             {
                 "id": "mUkfiLjooxs",
@@ -391,7 +412,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
                 "addedAt": 1698230400000,
                 "addedBy": {},
-                "channelTitle": "The JB's"
+                "channelTitle": "The JB's",
+                "duration": "3:31"
             },
             {
                 "id": "VZt7J0iaUD0",
@@ -400,7 +422,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
                 "addedAt": 1719168000000,
                 "addedBy": {},
-                "channelTitle": "Suzanne Vega"
+                "channelTitle": "Suzanne Vega",
+                "duration": "3:48"
             }
         ]
     },
@@ -429,7 +452,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
                 "addedBy": {},
                 "addedAt": 162521765262,
-                "channelTitle": "The Meters"
+                "channelTitle": "The Meters",
+                "duration": "3:02"
             },
             {
                 "id": "mUkfiLjooxs",
@@ -438,7 +462,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
                 "addedAt": 1698230400000,
                 "addedBy": {},
-                "channelTitle": "The JB's"
+                "channelTitle": "The JB's",
+                "duration": "3:31"
             },
             {
                 "id": "VZt7J0iaUD0",
@@ -447,7 +472,8 @@
                 "imgUrl": "https://i.ytimg.com/vi/VZt7J0iaUD0/hqdefault.jpg",
                 "addedAt": 1719168000000,
                 "addedBy": {},
-                "channelTitle": "Suzanne Vega"
+                "channelTitle": "Suzanne Vega",
+                "duration": "3:48"
             }
         ]
     }
