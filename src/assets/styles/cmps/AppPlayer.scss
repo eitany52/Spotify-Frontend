@@ -39,10 +39,23 @@
     padding:10px;
   }
 
+
+  .app-player  .control-pannel .trace-wrapper {
+    display:grid;
+    grid-template-columns: auto 1fr auto;
+    gap:5px;
+  }
+
+  
 .app-player  .control-pannel .trace {
+  
     input[type="range"] {
         width: 500px;
         margin: 0;
+
+
+        position: relative;
+        top: -3px;
       }
 
    

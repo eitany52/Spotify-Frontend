@@ -43,7 +43,9 @@ export const AppPlayer = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (playerRef.current) {
-        setCurrentTimeInSeconds(parseInt(playerRef.current.getCurrentTime(), 10));
+        setCurrentTimeInSeconds(
+          parseInt(playerRef.current.getCurrentTime(), 10)
+        );
       }
     }, 1000);
     return () => clearInterval(interval);
@@ -163,7 +165,7 @@ export const AppPlayer = () => {
       origin: window.location.origin, // מגדיר את המקור ל-URL הנוכחי של הדפדפן
     },
   };
-console.log("currentSong: ", currentSong);
+  console.log("currentSong: ", currentSong);
 
   return (
     <div className="app-player">
@@ -223,19 +225,29 @@ console.log("currentSong: ", currentSong);
             <SvgIcon iconName="repeat" />
           </span>
         </section>
-        <section className="trace">
-          {currentSong.id && <span>{utilService.formatTime(currentTimeInSeconds)}</span>}
-          <input
-            type="range"
-            min="0"
-            max={currentSong.id ? utilService.convertFormattedTimeToSeconds(currentSong.duration) : "120"}
-            value={currentTimeInSeconds}
-            onChange={handleRangeChange}
-            // step="0.1"
-            // max={playerRef.current ? playerRef.current.getDuration() : 100}
-          />
+        <div className="trace-wrapper">
+          {currentSong.id && (
+            <span>{utilService.formatTime(currentTimeInSeconds)}</span>
+          )}
+          <section className="trace">
+            <input
+              type="range"
+              min="0"
+              max={
+                currentSong.id
+                  ? utilService.convertFormattedTimeToSeconds(
+                      currentSong.duration
+                    )
+                  : "120"
+              }
+              value={currentTimeInSeconds}
+              onChange={handleRangeChange}
+              // step="0.1"
+              // max={playerRef.current ? playerRef.current.getDuration() : 100}
+            />
+          </section>
           {currentSong.id && <span>{currentSong.duration}</span>}
-        </section>
+        </div>
       </section>
 
       <section className="extra-controls">
