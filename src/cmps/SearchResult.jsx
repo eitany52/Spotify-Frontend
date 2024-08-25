@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useOutletContext, useParams } from "react-router";
-import { getSongsFromYoutube } from "../store/actions/station.actions";
+import { getSongsFromYoutube, setStationFromDemo } from "../store/actions/station.actions";
 import { useEffectUpdate } from "../customHooks/useEffectUpdate";
 import { SongList } from "./SongList";
-
-//Checked - All looks good.
+import { StationList } from "./StationList";
+import demoStations from "../../data/demo-stations.json";
 
 export const SearchResult = () => {
   const params = useParams();
@@ -21,25 +21,42 @@ export const SearchResult = () => {
     setSongs(songs);
   }
 
+  function setStationFromSearch(station) {
+    setStationFromDemo(station)
+  }
+
+  function filterStationsByUserInput() {
+    let stations = structuredClone(demoStations)
+
+    stations = stations.filter(station => station.tags.some(tag => {
+      const regExp = new RegExp(tag, 'i')
+      return regExp.test(params.userInput)
+    }))
+
+    return stations
+  }
+
+  const stations = filterStationsByUserInput()
+  const firstSongImg = songs ? songs[0].imgUrl : null
   return (
     <div className="search-result">
       {/* <RecentSearches/> */}
       {params.userInput && songs && (
         <>
           <div className="btns-container">
-            <button>All</button>
-            <button>Playlists</button>
-            <button>Songs</button>
-            <button>Artists</button>
-            <button>Genres</button>
+            <button className="btn-type-1">All</button>
+            <button className="btn-type-1">Playlists</button>
+            <button className="btn-type-1">Songs</button>
+            <button className="btn-type-1">Artists</button>
+            <button className="btn-type-1">Genres</button>
           </div>
           <section className="search-result-container">
             <section className="inner-grid">
               <h2 className="top-res">Top result</h2>
               <div className="top-result-container">
-                <img src="../../public/img/Rap.PNG" />
-                <h3>Hip-Hop</h3>
-                <span>Genre</span>
+                <img src={firstSongImg} />
+                {/* <h3>Hip-Hop</h3> */}
+                {/* <span>Genre</span> */}
               </div>
             </section>
             <section className="inner-grid">
@@ -52,10 +69,18 @@ export const SearchResult = () => {
                 type="search"
               />
             </section>
+            <h2>Playlists result</h2>
+            {!!stations.length &&
+              <StationList
+                stations={stations}
+                location="search"
+                setStationFromSearch={setStationFromSearch} />}
+            {!stations.length &&
+              <span className="span-no-results">No results</span>}
           </section>
         </>
       )}
-      {!params.userInput && <h1>Suggestions</h1>}
+      {/* {!params.userInput && <h1>Suggestions</h1>} */}
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { utilService } from './util.service'
 import { userService } from './user.service.local'
 import initialStations from '../../data/stations.json'
 import searchRes from "../../data/search.json"
-import demoStations from "../../data/demo-station.json"
+import demoStations from "../../data/demo-stations.json"
 
 import { getLoggedOnUser } from '../store/actions/user.actions'
 
@@ -21,7 +21,6 @@ export const stationService = {
     removeUserLikedFromStation,
     getLikedSongsStation,
     isLikedSongStation,
-    formatSong,
     createEmptyStation,
     getSongsFromYoutube,
     updateStationDetails,
@@ -145,14 +144,26 @@ async function getSongsFromYoutube(userInput) {
     const searchTerm = userInput
     let res = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&type=video&videoCategoryId=10&maxResults=4&key=${API_KEY}`)
     let data = await res.json()
-    const songs = data.items
+    let songs = data.items
     const songIds = _getSongIds(songs)
-    res = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${songIds[0]},${songIds[1]},${songIds[2]},${songIds[3]}&key=${API_KEY}`)
+    const songIdsStr = songIds.join(',')
+    res = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${songIdsStr}&key=${API_KEY}`)
     data = await res.json()
     const songsAdditionalInfo = data.items
     _addDurationToSongs(songs, songsAdditionalInfo)
+    songs = songs.filter(song => song.duration)
+    songs = _formatSongs(songs)
     return songs
     // return searchRes[0].items.slice(0,4)
+}
+
+function _formatSongs(songs) {
+    const formattedSongs = []
+    songs.forEach(song => {
+        formattedSongs.push(_formatSong(song))
+    });
+
+    return formattedSongs
 }
 
 function _getSongIds(songs) {
@@ -167,7 +178,9 @@ function _getSongIds(songs) {
 function _addDurationToSongs(songs, songsAdditionalInfo) {
     songs.forEach(song => {
         const songAdditionalInfo = songsAdditionalInfo.find(songAdditionalInfo => songAdditionalInfo.id === song.id.videoId)
-        song.duration = songAdditionalInfo.contentDetails.duration
+        if (songAdditionalInfo) {
+            song.duration = songAdditionalInfo.contentDetails.duration
+        }
     })
 }
 
@@ -248,7 +261,6 @@ async function updateStationDetails(stationToSave) {
 
 }
 
-
 async function isSongInLikedSong(songId) {
 
     const station = await getLikedSongsStation();
@@ -261,11 +273,7 @@ async function isSongInLikedSong(songId) {
 
 }
 
-
-
-
-
-function formatSong(song) {
+function _formatSong(song) {
     const user = {
         id: getLoggedOnUser()._id,
         name: getLoggedOnUser().name
@@ -284,11 +292,26 @@ function formatSong(song) {
 }
 
 function _formatSongDuration(songDuration) {
-    let formattedDuration = songDuration.substring(2, songDuration.indexOf('S'))
-    const [minutes, seconds] = formattedDuration.split('M')
-    const formattedSeconds = seconds.length < 2 ? `0${seconds}` : seconds
+    // Examples of durations: 'PT4M' | 'PT35S' | 'PT4M35S'
 
-    formattedDuration = `${minutes}:${formattedSeconds}`
+    let formattedDuration = null
+    if (!songDuration.includes('S')) {
+        const minutes = songDuration.substring(2, songDuration.indexOf('M'))
+        formattedDuration = `${minutes}:00`
+    }
+
+    if (!songDuration.includes('M')) {
+        const seconds = songDuration.substring(2, songDuration.indexOf('S'))
+        const formattedSeconds = seconds.length < 2 ? `0${seconds}` : seconds
+        formattedDuration = `0:${formattedSeconds}`
+    }
+    if (songDuration.includes('S') && songDuration.includes('M')) {
+        formattedDuration = songDuration.substring(2, songDuration.indexOf('S'))
+        const [minutes, seconds] = formattedDuration.split('M')
+        const formattedSeconds = seconds.length < 2 ? `0${seconds}` : seconds
+
+        formattedDuration = `${minutes}:${formattedSeconds}`
+    }
 
     return formattedDuration
 }
