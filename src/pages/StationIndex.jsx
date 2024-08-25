@@ -144,6 +144,19 @@ export const StationIndex = () => {
               <SvgIcon iconName="searchActive" /> Search
             </Link>
           )}
+
+          <Link to="/" className="mobile-only btn-type-2 ">
+            {" "}
+            <SvgIcon iconName="library" /> Your Library
+          </Link>
+
+          <Link
+            to="https://open.spotify.com/download"
+            className="mobile-only btn-type-2 "
+          >
+            {" "}
+            <SvgIcon iconName="arrowDown" /> Install now
+          </Link>
         </nav>
         <section className="library">
           <div className="library-pannel">

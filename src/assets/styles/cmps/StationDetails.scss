@@ -39,6 +39,17 @@
             & .intro-inner.sb {
                 align-content: space-between;
             }
+
+
+            @include for-mobile-layout {
+                grid-template-columns: 1fr;
+                & .color-component {width:10px; height:10px;}
+                & > img {max-width:140px}
+                & h2{font-size:30px;}
+            }
+
+
+
         }
     }
 

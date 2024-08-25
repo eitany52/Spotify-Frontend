@@ -2,6 +2,13 @@
     display:grid;
     grid-template-columns: 0 1fr 1fr 1fr;
     padding: 5px 25px;
+
+    @include for-mobile-layout { 
+      grid-template-columns: 0 1fr 1fr 0;
+      position:relative;
+      padding: 5px 10px;
+    }
+
 }
 
 .app-player .current-song-details {
@@ -16,6 +23,13 @@
       width:60px;
       border-radius:5px;
     }
+
+
+
+    @include for-mobile-layout { 
+      span {font-size:12px;}
+     }
+  
 }
 
 .app-player .control-pannel{
@@ -30,6 +44,12 @@
 .app-player .control-pannel .controls{
   align-items:center;
   margin:auto;
+
+
+  @include for-mobile-layout { 
+    .icon-type-2 {display:none;}
+   }
+
 }
 
 
@@ -44,6 +64,20 @@
     display:grid;
     grid-template-columns: auto 1fr auto;
     gap:5px;
+
+
+    @include for-mobile-layout { 
+      position: absolute;
+      bottom: -20px;
+      left: 10px;
+      width: 95%;
+    }
+
+    & span {
+      @include for-mobile-layout { 
+      display:none;
+     }}
+
   }
 
   
@@ -56,6 +90,12 @@
 
         position: relative;
         top: -3px;
+
+
+        @include for-mobile-layout { 
+          width: 100%;
+         }
+
       }
 
    
@@ -75,6 +115,10 @@
   :root {
     --slider-width: 500px;
     --slider-height: 5px;
+
+    @include for-mobile-layout { 
+      --slider-width: 200px;
+     }
   }
   
   input[type='range'] {

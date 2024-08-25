@@ -158,7 +158,7 @@ export function StationDetails() {
 
           <div
             className="color-component "
-            style={{ width: "50px", height: "50px" }}
+            style={{ width: "10px", height: "10px" }}
           >
             <ImageColorComponent
               imageUrl={station.imgUrl}

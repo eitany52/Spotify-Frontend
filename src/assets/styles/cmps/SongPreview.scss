@@ -30,9 +30,17 @@
     & .active{ color:$primery-clr;}
 
     & .add {display:none;}
-    & .more {display:none;}
-    &:hover .add {display:block;}
-    &:hover .more {display:block;}
+
+    @include for-wide-layout {
+      & .more {display:none;}
+   
+      &:hover .add {display:block;}
+      &:hover .more {display:block;}
+    }
+
+    @include for-mobile-layout {
+      & .more svg { transform: rotate(90deg);}
+    }
 
 
 

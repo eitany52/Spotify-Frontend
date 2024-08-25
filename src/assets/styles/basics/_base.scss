@@ -164,6 +164,18 @@ i {
         }
     }
     &.active i, &.current i { fill:$primery-clr;}
+
+
+    @include for-mobile-layout { 
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+        justify-items: center;
+        justify-content: center;
+        font-size: 11px;
+    }
+    
+   
+
 }
 
 
