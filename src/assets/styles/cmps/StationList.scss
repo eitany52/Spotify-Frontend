@@ -18,7 +18,15 @@
     &.search {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 10px;
+        gap:10px;
+        img {max-width:200px;}
+        padding:10px;
+
+        @include for-mobile-layout {
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+         
+        }
+
 
         img {
             max-width: 200px;

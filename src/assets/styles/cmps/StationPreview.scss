@@ -17,5 +17,11 @@
             inline-size: 16px;
             justify-self: end
         }
+
+
+        @include for-mobile-layout {
+            & span {display:none;}
+        }
+
     }
 }

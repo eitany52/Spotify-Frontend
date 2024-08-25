@@ -1,14 +1,38 @@
 .station-index {
     display: grid;
-    grid-template-columns: 0.5fr 1.3fr 0px;
-    grid-template-rows: 0.5em 0.4fr 2.3fr 0.3fr;
-    grid-template-areas:
+    // grid-template-columns: 0.5fr 1.3fr 0px;
+    // grid-template-rows: 0.5em 0.4fr 2.3fr 0.3fr;
+    // grid-template-areas:
+    //     "s s s"
+    //     "a m c"
+    //     "a m c"
+    //     "f f f";
+    gap: 0 10px;
+    height: 100%;
+
+
+
+    @include for-mobile-layout { 
+            // grid-template-columns: 1fr;
+            grid-template-rows: 0.5em 1fr 100px 100px;
+            grid-template-areas:
+            "s s s s s"
+            "m m m m m"
+            "f f f f f"
+            "a a a a a";
+        
+    }
+    @include for-wide-layout {
+        grid-template-columns: 0.5fr 1.3fr 0px;
+        grid-template-rows: 0.5em 0.4fr 2.3fr 0.3fr;
+        grid-template-areas:
         "s s s"
         "a m c"
         "a m c"
         "f f f";
-    gap: 0 10px;
-    height: 100%;
+    }
+   
+
 
 
     &.display-card {
@@ -70,6 +94,10 @@
 
         & > * { padding: 20px 0 20px 10px; }
 
+        @include for-mobile-layout {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+        }
        
 
         nav {
@@ -81,13 +109,35 @@
             align-items:center;
             gap:10px;
             padding: 10px 15px;
+
+
+            & .mobile-only {
+                display:none;
+            }
            
+
+            @include for-mobile-layout { 
+                grid-template-columns: repeat(4,1fr);
+                grid-template-rows: 1fr;
+                & .mobile-only {
+                display:grid;
+            }
+            }
+
+            
         }
 
         .library {
             grid-area: 2 / 2;
            // overflow-x :auto;
-            overflow: auto;
+             overflow: hidden;
+
+
+
+             @include for-mobile-layout { 
+               display:none;
+                
+            }
 
 
             & .library-pannel {
@@ -116,17 +166,25 @@
             }
             
             & .station-list-wrapper {
-                height:100%;
+                height:87%;
                 overflow:scroll;
                 overflow-x:hidden;
+
+                @include for-mobile-layout {
+                    display:none;
+                }
             }
+
+
+            
+    
         }
     }
 
     footer {
         grid-area: f;
 
-        position: absolute;
+        // position: absolute;
         bottom: 10px;
         width: 100%;
     }
@@ -144,6 +202,7 @@
 .station-index aside nav,
 .station-index aside .library {
     background-color: $dark-clr1;
+    border-radius:10px;
 }
 
 // .station-index header {

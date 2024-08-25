@@ -74,8 +74,13 @@
     &.floating-menu-song-add {
         align-items: start;
         width: 20vw;
-        height: 200px;
-        overflow-y: scroll;
+       
+        // overflow-y: scroll;
+
+        & ul {
+            max-height: 300px;
+             overflow-y: scroll;
+        }
     }
 
   

@@ -107,7 +107,7 @@ export function SongPreview({
 
       {/* col 4 date */}
       {type === "station" && (
-        <span>{utilService.formatDate(song.addedAt)}</span>
+        <span className="date">{utilService.formatDate(song.addedAt)}</span>
       )}
 
       {/* need to be fix - should be general add */}
