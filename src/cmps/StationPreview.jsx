@@ -22,7 +22,7 @@ export const StationPreview = ({
   async function onClickStation() {
     if (location === "modal-more") {
       onAddSongToStation(station);
-    } else if (location === "main") {
+    } else if (location === "main" || location === "search") {
       setStationFromSearch(station);
       onGoToStationDetails();
     } else if (location === "modal-add") {
@@ -82,15 +82,15 @@ export const StationPreview = ({
     >
       <section
         className={`station-container ${location === "library" || location === "modal-add"
-            ? "intro-outer"
-            : ""
+          ? "intro-outer"
+          : ""
           }`}
       >
         <img src={station.imgUrl} />
         <section
           className={`${location === "library" || location === "modal-add"
-              ? "intro-inner"
-              : ""
+            ? "intro-inner"
+            : ""
             }`}
         >
           <h5>{station.name}</h5>
@@ -100,7 +100,8 @@ export const StationPreview = ({
           {location === "library" && station.type === "normal" && (
             <span> {profileName} </span>
           )}
-          {location === "main" && <span>{station.description}</span>}
+          {(location === "main" || location === "search") &&
+            <span>{station.description}</span>}
           {location === "modal-add" &&
             <span className="empty-circle">
               {isStationToMark(station._id) && (

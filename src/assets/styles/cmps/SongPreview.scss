@@ -1,83 +1,124 @@
 .song-preview {
 
   user-select: none;
-  border-radius:10px;
+  border-radius: 10px;
   margin: 10px 0;
 
   &:hover {
-    background-color:$dark-clr3;
+    background-color: $dark-clr3;
   }
 
 
   .square-ratio {
-    width:50px;
+    width: 50px;
   }
 
   img {
     display: block;
-    border-radius:10px;
+    border-radius: 10px;
   }
 
 
 
   &.song-preview-station-grid {
-    & .number .play{ display:none;}
-    &:hover .number  {
-      & .play{ display:block;}
-      & .num{ display:none;}
+    & .number .play {
+      display: none;
     }
 
-    & .active{ color:$primery-clr;}
+    &:hover .number {
+      & .play {
+        display: block;
+      }
 
-    & .add {display:none;}
-    & .more {display:none;}
-    &:hover .add {display:block;}
-    &:hover .more {display:block;}
+      & .num {
+        display: none;
+      }
+    }
+
+    & .active {
+      color: $primery-clr;
+    }
+
+    & .add {
+      display: none;
+    }
+
+    & .more {
+      display: none;
+    }
+
+    &:hover .add {
+      display: block;
+    }
+
+    &:hover .more {
+      display: block;
+    }
 
 
 
   }
 
   &.search-at-station {
-    display:grid;
+    display: grid;
     grid-template-columns: 2fr 1fr 0.5fr;
     align-items: center;
     padding: 0 10px;
 
-    
 
-    & .intro-outer{
-     
+
+    & .intro-outer {
+
 
       & .square-ratio {
-        
-          & .play {display:none; 
-            align-items: center;
-            justify-content: center;}
-          &:hover .play {display:flex;}
+
+        & .play {
+          display: none;
+          align-items: center;
+          justify-content: center;
+        }
+
+        &:hover .play {
+          display: flex;
+        }
       }
     }
   }
 
-
-
   &.search {
-    display:grid;
+    display: grid;
     grid-template-columns: 2fr 0.2fr 0.2fr;
     align-items: center;
     padding: 0 10px;
+    margin: 4px 0;
 
-    & .add {display:none;}
-    & .more {display:none;}
-    &:hover .add {display:block;}
-    &:hover .more {display:block;}
+    & .add {
+      display: none;
+    }
+
+    & .more {
+      display: none;
+    }
+
+    &:hover .add {
+      display: block;
+    }
+
+    &:hover .more {
+      display: block;
+    }
 
     & .square-ratio {
-        
-      & .play {display:none; 
+
+      & .play {
+        display: none;
         align-items: center;
-        justify-content: center;}
-      &:hover .play {display:flex;}
-   }
+        justify-content: center;
+      }
+
+      &:hover .play {
+        display: flex;
+      }
+    }
   }
 }
