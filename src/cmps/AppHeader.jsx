@@ -63,7 +63,7 @@ export function AppHeader({ backgroundColor = null }) {
     }
   }
 
-  const userLatter = utilService.getFirstChar(user?.name);
+  const userLatter =  user ? utilService.getFirstChar(user.name) : null
   console.log("-----------------------------");
   console.log(backgroundColor);
   const darkenedBackground_50 = utilService.darkenColor(

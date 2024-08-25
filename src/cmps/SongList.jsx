@@ -19,8 +19,8 @@ export const SongList = ({
         </li>
       ) : null}
 
-      {songs.map((_song, index) => {
-        const song = type === "station" ? _song : formatSong(_song);
+      {songs.map((song, index) => {
+        // const song = type === "station" ? _song : formatSong(_song);
         return (
           <SongPreview
             key={song.id}

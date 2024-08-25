@@ -1,16 +1,22 @@
 .station-list {
     &.library {
-        img {max-width:50px;}
+        img {
+            max-width: 50px;
+        }
 
-        & { 
-            padding-left:0;
-            & li {margin:20px 10px }
+        & {
+            padding-left: 0;
+
+            & li {
+                margin: 20px 10px
+            }
         }
 
     }
 
-    &.main {
-        display:grid;
+    &.main,
+    &.search {
+        display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap:10px;
         img {max-width:200px;}
@@ -21,16 +27,30 @@
          
         }
 
-        // & ul {
-        //     padding-left:10px;
-        // }
+
+        img {
+            max-width: 200px;
+            aspect-ratio: 1 / 1;
+            border-radius: 6px;
+            object-fit: cover;
+
+        }
+    }
+
+    &.search {
+        grid-column: 1 / -1;
+        padding: 0;
     }
 
     &.modal-more {
-        img {display:none;}
+        img {
+            display: none;
+        }
     }
 
     &.modal-add {
-        img {max-width:32px;}
+        img {
+            max-width: 32px;
+        }
     }
 }

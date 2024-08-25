@@ -229,7 +229,7 @@ export const StationIndex = () => {
             context={{
               onAddToLikedSongs,
               isSongSavedAtSomeUserStation,
-              isDemoStation,
+              isDemoStation
             }}
           />
         )}

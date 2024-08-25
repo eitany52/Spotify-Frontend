@@ -32,8 +32,6 @@ export async function loadStation(stationId) {
     }
 }
 
-
-
 export function getSongsFromYoutube(userInput) {
     return stationService.getSongsFromYoutube(userInput)
 }
@@ -52,7 +50,7 @@ export async function createEmptyStation() {
 }
 
 export function getUserStations(stations) {
-return stationService.getUserStations(stations)
+    return stationService.getUserStations(stations)
 }
 
 export async function loadLikedSongsStation() {
@@ -77,11 +75,11 @@ export async function addStation(station) {
 }
 
 
-export async function saveStationByUser(station){
+export async function saveStationByUser(station) {
     try {
         const savedStation = await stationService.saveStationByUser(station)
-        console.log('savedStation: 111111111',savedStation);
-        if (savedStation !== "already exist" ){
+        console.log('savedStation: 111111111', savedStation);
+        if (savedStation !== "already exist") {
             store.dispatch({ type: ADD_STATION, savedStation })
             store.dispatch({ type: SET_STATION, savedStation })
         } 
@@ -91,7 +89,7 @@ export async function saveStationByUser(station){
     }
 }
 
-export async function removeStationByUser(stationId){
+export async function removeStationByUser(stationId) {
     try {
         await stationService.remove(stationId)
 
@@ -235,10 +233,9 @@ export async function setExpandLib(libStatus) {
         throw err
     }
 }
-export function setStationFromDemo(station){
+export function setStationFromDemo(station) {
     try {
-       
-       store.dispatch({ type: SET_STATION, station })
+        store.dispatch({ type: SET_STATION, station })
     } catch (err) {
         console.log('Cannot load station from search', err)
         throw err
