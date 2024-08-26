@@ -5,6 +5,7 @@ import { PlayBtn } from "./PlayBtn.jsx";
 import { onToggleModal } from "../store/actions/app.actions.js";
 import { FloatingMenuSongAdd } from "./FloatingMenuSongAdd.jsx";
 import { FloatingMenuSong } from "./FloatingMenuSong.jsx";
+import { setCurrentSong, setPlayPause } from "../store/actions/station.actions";
 
 export function SongPreview({
   song,
@@ -20,6 +21,13 @@ export function SongPreview({
   const isPlaying = useSelector(
     (storeState) => storeState.stationModule.isPlaying
   );
+
+  function playSong() {
+    if (currentSong !== song) {
+      setCurrentSong(song);
+    }
+    setPlayPause(true);
+  }
 
   function onOpenMoreOptionsModal(ev, song) {
     onToggleModal({
@@ -95,7 +103,7 @@ export function SongPreview({
             {" "}
             <img src={songImg} />
           </div>
-          <div className="intro-inner">
+          <div className="intro-inner" onClick={playSong}>
             <span className={`${isActive ? "active" : ""}`}>{songName}</span>
             <span>{artistName}</span>
           </div>

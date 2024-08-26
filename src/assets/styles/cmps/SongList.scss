@@ -14,7 +14,7 @@
     @include for-mobile-layout {
 
 
-      grid-template-columns: 0fr 1.2fr 0fr 0.1fr 0fr;
+      grid-template-columns: 0 1.2fr 0fr 0.1fr 0fr;
       padding: 5px 5px;
       & label:first-child  {display:none;}
       & label:nth-child(3)  {display:none;}

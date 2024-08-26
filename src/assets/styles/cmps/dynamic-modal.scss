@@ -43,16 +43,21 @@
     }
 
 
-   
+    @include for-mobile-layout {
+        & {
+            width: 100%;
+            top:inherit;
+            bottom:0;
+        }
+    }
 
-   
+
 
     & ul li.lastInGroup {
         border-bottom:1px solid $gray4;
     }
 
     
-
     .close-btn {
         position: absolute;
         top: 5px;
@@ -66,34 +71,24 @@
 
 
 
-    &.floating-menu-song {
-        align-items: start;
+    &.floating-menu-song-add {   
         width: minmax(20vw, 200px);
     }
 
-    &.floating-menu-song-add {
+    &.floating-menu-song {
         align-items: start;
-        width: 20vw;
-       
-        // overflow-y: scroll;
-
-        & ul {
-            max-height: 300px;
-             overflow-y: scroll;
-        }
+        width: minmax(20vw, 200px); 
     }
 
-  
+   
 
    &.floating-edit-station-details {
     margin: auto;
-    width: 40vw;
-    max-width:450px;
+    width: minmax(40vw, 450px);
    }
 
    &.floating-menu-station {
-     width: 20vw;
-     max-width:250px;
+     width: minmax(20vw,250px);
    }
 
    
