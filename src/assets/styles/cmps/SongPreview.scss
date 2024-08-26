@@ -44,6 +44,10 @@
     }
 
     @include for-mobile-layout {
+
+      &.number ,  &:hover .number{   visibility:hidden;    }
+      
+   
       & .more svg { transform: rotate(90deg);}
     }
   
