@@ -153,6 +153,7 @@ i {
     justify-content: start;
     gap:20px;
     font-size:17px;
+   
 
     & i {
         fill:$btn-text-clr1;
@@ -163,16 +164,20 @@ i {
             fill:$light-clr2;
         }
     }
-    &.active i, &.current i { fill:$primery-clr;}
+    // &.active i, &.current i { fill:$primery-clr;} - interapt library in mobile
+    &.active i { fill:$primery-clr;}
 
 
-    @include for-mobile-layout { 
-        grid-template-columns: auto;
-        grid-template-rows: auto auto;
-        justify-items: center;
-        justify-content: center;
-        font-size: 11px;
+    nav & {
+        @include for-mobile-layout { 
+            grid-template-columns: auto;
+            grid-template-rows: auto auto;
+            justify-items: center;
+            justify-content: center;
+            font-size: 11px;
+        }
     }
+   
     
    
 

@@ -7,6 +7,7 @@ import { StationList } from "../cmps/StationList";
 import { CurrentSongDetails } from "../cmps/CurrentSongDetails";
 import { SvgIcon } from "../cmps/SvgIcon";
 import { stationService } from "../services/station.service.local";
+import { useScreenCategory } from "../customHooks/useBreakpoint";
 
 import {
   addSongToStation,
@@ -22,6 +23,8 @@ import {
 export const StationIndex = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const screenCategory = useScreenCategory();
+  const [isHome, setHomeLib] = useState(true);
 
   const [isSearchDisplayed, setIsSearchDisplayed] = useState(false);
   const [isHomePageDisplayed, setIsHomePageDisplayed] = useState(true);
@@ -61,6 +64,15 @@ export const StationIndex = () => {
     } else {
       setIsHomePageDisplayed(false);
     }
+  }
+
+  function toggleDemoLib() {
+    setHomeLib(false);
+    navigate("/");
+  }
+  function goToHome() {
+    setHomeLib(true);
+    navigate("/");
   }
 
   async function onAddToLikedSongs(songToAdd) {
@@ -116,20 +128,24 @@ export const StationIndex = () => {
         expendLib ? "expend-lib" : ""
       } `}
     >
+      {/* <p>Current screen category: {screenCategory}</p> */}
+      {/* {isHome ? "home" : "library"} */}
       {/* {console.log("rendered")} */}
       <aside>
         <nav>
-          {!isHomePageDisplayed && (
-            <Link to="/" className="btn-type-2">
+          {((screenCategory !== "mobile" && !isHomePageDisplayed) ||
+            (screenCategory === "mobile" && !isHome)) && (
+            <button onClick={goToHome} className="btn-type-2">
               {" "}
               <SvgIcon iconName="home" /> Home{" "}
-            </Link>
+            </button>
           )}
-          {isHomePageDisplayed && (
-            <Link to="/" className="btn-type-2 current">
+          {((screenCategory !== "mobile" && isHomePageDisplayed) ||
+            (screenCategory === "mobile" && isHome)) && (
+            <button onClick={goToHome} className="btn-type-2 current">
               {" "}
               <SvgIcon iconName="homeActive" /> Home{" "}
-            </Link>
+            </button>
           )}
 
           {!isSearchDisplayed && (
@@ -145,19 +161,31 @@ export const StationIndex = () => {
             </Link>
           )}
 
-          <Link to="/" className="mobile-only btn-type-2 ">
-            {" "}
-            <SvgIcon iconName="library" /> Your Library
-          </Link>
+          {screenCategory === "mobile" && isHome && (
+            <button className="btn-type-2" onClick={toggleDemoLib}>
+              {" "}
+              <SvgIcon iconName="library" /> Your Library
+            </button>
+          )}
 
-          <Link
-            to="https://open.spotify.com/download"
-            className="mobile-only btn-type-2 "
-          >
-            {" "}
-            <SvgIcon iconName="arrowDown" /> Install now
-          </Link>
+          {screenCategory === "mobile" && !isHome && (
+            <button className="btn-type-2 current" onClick={toggleDemoLib}>
+              {" "}
+              <SvgIcon iconName="library" /> Your Library
+            </button>
+          )}
+
+          {screenCategory === "mobile" && (
+            <Link
+              to="https://open.spotify.com/download"
+              className="btn-type-2 "
+            >
+              {" "}
+              <SvgIcon iconName="arrowDown" /> Install now
+            </Link>
+          )}
         </nav>
+
         <section className="library">
           <div className="library-pannel">
             <button title="Collapse Your Library" className="btn-type-2">
@@ -216,7 +244,9 @@ export const StationIndex = () => {
       </aside>
       <main>
         {(isHomePageDisplayed || isSearchDisplayed) && <AppHeader />}
-        {isHomePageDisplayed && (
+
+        {((isHomePageDisplayed && screenCategory !== "mobile") ||
+          (isHomePageDisplayed && isHome && screenCategory === "mobile")) && (
           <StationList
             stations={demoStations}
             location="main"
@@ -224,12 +254,23 @@ export const StationIndex = () => {
             onCreateEmptyStation={onCreateEmptyStation}
           />
         )}
+
+        {isHomePageDisplayed && screenCategory === "mobile" && !isHome && (
+          <div className="station-list-wrapper">
+            <StationList
+              stations={stations}
+              location="library"
+              onCreateEmptyStation={onCreateEmptyStation}
+            />
+          </div>
+        )}
+
         {!isHomePageDisplayed && (
           <Outlet
             context={{
               onAddToLikedSongs,
               isSongSavedAtSomeUserStation,
-              isDemoStation
+              isDemoStation,
             }}
           />
         )}

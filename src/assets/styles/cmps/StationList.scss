@@ -64,6 +64,9 @@
             -webkit-line-clamp: 2;
             line-clamp: 2;
             // line-height: normal;
+            @include for-mobile-layout {
+                width: 110px;
+            }
         }
     }
 

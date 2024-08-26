@@ -1,6 +1,8 @@
 .song-floating-menu {
 
-  
+    // @include for-mobile-layout {
+    //     width: 100%;
+    // }
 
     ul {
         list-style:none;
@@ -38,6 +40,10 @@
                 color: $btn-text-clr1;
             }
         }
+
+
+
+       
     }
 
 

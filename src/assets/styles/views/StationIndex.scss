@@ -113,19 +113,16 @@
             gap: 10px;
             padding: 10px 15px;
 
-
-            & .mobile-only {
-                display: none;
+            & button {
+                padding-inline: 0; //when change link to button (for mobile)
             }
+
+
 
 
             @include for-mobile-layout {
                 grid-template-columns: repeat(4, 1fr);
                 grid-template-rows: 1fr;
-
-                & .mobile-only {
-                    display: grid;
-                }
             }
 
 
@@ -191,9 +188,9 @@
                 overflow-x: hidden;
                 padding-block-end: 20px;
 
-                @include for-mobile-layout {
-                    display: none;
-                }
+                // @include for-mobile-layout {
+                //     display:none;
+                // }
             }
 
 
