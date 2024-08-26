@@ -18,10 +18,10 @@
             justify-self: end
         }
 
-
         @include for-mobile-layout {
-            & span {display:none;}
+            & span {
+                display: none;
+            }
         }
-
     }
 }
