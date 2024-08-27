@@ -162,24 +162,37 @@
                     height: 3em;
                 }
 
+                input {
+                    border: 0;
+                    outline: none;
+                    background-color: $input-bgc-clr;
+                    color: $input-text-clr;
+                    font-weight: bold;
+                }
+
+                ::placeholder {
+                    color: $input-text-clr;
+                    font-size: 14px;
+                }
+
                 &:hover .btn-icon {
                     width: 250px;
                 }
 
-                & form {
-                    display: none;
-                    position: absolute;
-                    left: 40px;
-                    top: -10px;
-                }
+                // & form {
+                //     display: none;
+                //     position: absolute;
+                //     left: 40px;
+                //     top: -10px;
+                // }
 
-                &:hover form {
-                    display: block;
-                }
+                // &:hover form {
+                //     display: block;
+                // }
 
                 display:grid;
                 grid-template-columns: auto auto;
-                justify-items: start;
+                justify-content: start;
             }
 
             & .station-list-wrapper {

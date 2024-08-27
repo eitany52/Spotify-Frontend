@@ -1,32 +1,52 @@
 .app-search {
-    display: grid;
+    // display: grid;
+
     // align-content: center;
 
-
     .search-form {
-        display: grid;
-        grid-auto-flow: column;
-        justify-content: start;
-        gap: 5px;
+        position: relative;
+        width: 350px;
         height: 48px;
         background-color: $bgc-search;
         border-radius: 500px;
         padding-inline-start: 10px;
-        width: 34%;
+        display: flex;
+        align-items: center;
+
+        // display: grid;
+        // grid-auto-flow: column;
+        // justify-content: start;
+        // gap: 5px;
+        // height: 48px;
+        // background-color: $bgc-search;
+        // border-radius: 500px;
+        // padding-inline-start: 10px;
+        // width: 34%;
 
         .icon-search {
-            width: max-content;
-            margin: 0;
-            align-self: center;
+            z-index: 1;
+            font-size: 25px;
+
+            // width: max-content;
+            // margin: 0;
+            // align-self: center;
         }
 
         input {
+            position: absolute;
+            inset: 0;
             background-color: $bgc-search;
             border-radius: 500px;
             border: 0;
             color: white;
-            margin: 0;
-            padding: 0;
+            padding: 0 0 0 40px;
+
+            // background-color: $bgc-search;
+            // border-radius: 500px;
+            // border: 0;
+            // color: white;
+            // margin: 0;
+            // padding: 0;
         }
     }
 }
