@@ -47,7 +47,7 @@
     header {
         //grid-area: h;
         display: grid;
-        grid-template-columns: auto 1fr;
+        grid-template-columns: 1fr 1fr;
         // align-items: center;
         padding: 10px;
         // align-content: center;
@@ -162,30 +162,31 @@
                     height: 3em;
                 }
 
+                input {
+                    display: none;
+                    border: 0;
+                    outline: none;
+                    background-color: $input-bgc-clr;
+                    color: $input-text-clr;
+                    font-weight: bold;
+                }
+
+                ::placeholder {
+                    color: $input-text-clr;
+                    font-size: 14px;
+                }
+
+                &:hover input {
+                    display: block;
+                }
+
                 &:hover .btn-icon {
                     width: 250px;
                 }
 
-                & form {
-                    display: none;
-                    position: absolute;
-                    left: 40px;
-                   
-                    
-                    & input {
-                        background: $dark-clr3;
-                        color: $btn-text-clr1;
-                        border:none;
-                    }
-                }
-
-                &:hover form {
-                    display: block;
-                }
-
                 display:grid;
                 grid-template-columns: auto auto;
-                justify-items: start;
+                justify-content: start;
             }
 
             & .station-list-wrapper {
