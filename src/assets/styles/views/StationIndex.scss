@@ -163,6 +163,7 @@
                 }
 
                 input {
+                    display: none;
                     border: 0;
                     outline: none;
                     background-color: $input-bgc-clr;
@@ -173,6 +174,10 @@
                 ::placeholder {
                     color: $input-text-clr;
                     font-size: 14px;
+                }
+
+                &:hover input {
+                    display: block;
                 }
 
                 &:hover .btn-icon {
