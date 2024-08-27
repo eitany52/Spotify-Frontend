@@ -29,15 +29,23 @@
 
     & .upload {
         &  .upload-preview {
-            height: 100%;
-            & #imgUpload { display:none;  
+            height: 200px;
+            width: 200px;
+            overflow: hidden;
+            background-size: cover;
+
+
+            & #imgUpload {
+                 display:none;  
                 }
             .upload-preview-inner  {
                 height: 100%;
+                //height: 200px;
             }
             &:hover { 
                 & .upload-preview-inner {
                     background:url("https://www.greencode.co.il/wp-content/uploads/2024/07/upload-image.jpg");
+                    width:100%;
                 }
         
                 & #imgUpload { 

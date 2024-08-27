@@ -170,7 +170,13 @@
                     display: none;
                     position: absolute;
                     left: 40px;
-                    top: -10px;
+                   
+                    
+                    & input {
+                        background: $dark-clr3;
+                        color: $btn-text-clr1;
+                        border:none;
+                    }
                 }
 
                 &:hover form {

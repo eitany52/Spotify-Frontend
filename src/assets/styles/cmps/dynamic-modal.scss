@@ -84,7 +84,8 @@
 
    &.floating-edit-station-details {
     margin: auto;
-    width: minmax(40vw, 450px);
+    width: 40vw;
+    min-width:450px
    }
 
    &.floating-menu-station {
