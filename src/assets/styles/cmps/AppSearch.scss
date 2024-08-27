@@ -1,23 +1,28 @@
 .app-search {
     display: grid;
+    padding:10px;
+    position:relative;
     // align-content: center;
 
 
     .search-form {
         display: grid;
         grid-auto-flow: column;
-        justify-content: start;
+        // justify-content: start;
         gap: 5px;
         height: 48px;
         background-color: $bgc-search;
         border-radius: 500px;
         padding-inline-start: 10px;
-        width: 34%;
+        width: 50%;
+        padding:0;
 
         .icon-search {
             width: max-content;
             margin: 0;
             align-self: center;
+            position: absolute;
+            left:25px;
         }
 
         input {
@@ -27,6 +32,7 @@
             color: white;
             margin: 0;
             padding: 0;
+            padding-left:45px;
         }
     }
 }

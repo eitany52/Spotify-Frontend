@@ -144,6 +144,9 @@ i {
     }
 }
 
+
+
+
 //btn with icon - home, search
 .btn-type-2 {
     color:$btn-text-clr1; 
@@ -168,6 +171,8 @@ i {
     &.active i { fill:$primery-clr;}
 
 
+
+
     nav & {
         @include for-mobile-layout { 
             grid-template-columns: auto;
@@ -183,6 +188,7 @@ i {
 
 }
 
+a.btn-type-2 i {  margin-top:5px;    } //strange but needed to align search in nav
 
 //btn - like type 1 with border - add / added
 .btn-type-3 {

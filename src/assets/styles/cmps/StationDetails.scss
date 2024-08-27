@@ -29,6 +29,8 @@
             & > img {
                 width:100%;
                 max-width:200px;
+                aspect-ratio: 1 / 1;
+                object-fit: cover;
             }
           
             & h2 {
