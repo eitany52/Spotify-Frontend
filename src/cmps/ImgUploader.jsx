@@ -26,13 +26,18 @@ export function ImgUploader({ onUploaded = null, background = "" }) {
   return (
     <div
       className="upload-preview"
-      style={{ background: `url(${background}) ` }}
+      style={{ background: `url(${background})`, backgroundSize: "cover" }}
     >
       <div className="upload-preview-inner">
         {imgData.imgUrl && (
           <img
             src={imgData.imgUrl}
-            style={{ maxWidth: "200px", float: "right" }}
+            style={{
+              width: "200px",
+              height: "200px",
+              float: "right",
+              objectFit: "cover",
+            }}
           />
         )}
         {/* <label htmlFor="imgUpload">{getUploadLabel()}</label> */}

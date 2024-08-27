@@ -47,7 +47,7 @@
     header {
         //grid-area: h;
         display: grid;
-        grid-template-columns: auto 1fr;
+        grid-template-columns: 1fr 1fr;
         // align-items: center;
         padding: 10px;
         // align-content: center;
@@ -183,17 +183,6 @@
                 &:hover .btn-icon {
                     width: 250px;
                 }
-
-                // & form {
-                //     display: none;
-                //     position: absolute;
-                //     left: 40px;
-                //     top: -10px;
-                // }
-
-                // &:hover form {
-                //     display: block;
-                // }
 
                 display:grid;
                 grid-template-columns: auto auto;

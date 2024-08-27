@@ -1,52 +1,37 @@
 .app-search {
-    // display: grid;
-
+    display: grid;
+    padding: 10px;
+    position: relative;
     // align-content: center;
 
     .search-form {
-        position: relative;
-        width: 350px;
+        display: grid;
+        grid-auto-flow: column;
+        // justify-content: start;
+        gap: 5px;
         height: 48px;
         background-color: $bgc-search;
-        border-radius: 500px;
+        border-radius: 25px;
         padding-inline-start: 10px;
-        display: flex;
-        align-items: center;
-
-        // display: grid;
-        // grid-auto-flow: column;
-        // justify-content: start;
-        // gap: 5px;
-        // height: 48px;
-        // background-color: $bgc-search;
-        // border-radius: 500px;
-        // padding-inline-start: 10px;
-        // width: 34%;
+        width: 100%;
+        padding: 0;
 
         .icon-search {
-            z-index: 1;
-            font-size: 25px;
-
-            // width: max-content;
-            // margin: 0;
-            // align-self: center;
+            width: max-content;
+            margin: 0;
+            align-self: center;
+            position: absolute;
+            left: 25px;
         }
 
         input {
-            position: absolute;
-            inset: 0;
             background-color: $bgc-search;
             border-radius: 25px;
             border: 0;
             color: white;
-            padding: 0 0 0 40px;
-
-            // background-color: $bgc-search;
-            // border-radius: 500px;
-            // border: 0;
-            // color: white;
-            // margin: 0;
-            // padding: 0;
+            margin: 0;
+            padding: 0;
+            padding-left: 45px;
         }
     }
 }

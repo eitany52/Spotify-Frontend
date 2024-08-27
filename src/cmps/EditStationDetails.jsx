@@ -52,7 +52,9 @@ export const EditStationDetails = ({ stationToEdit }) => {
         <input
           className="fieldDescription"
           name="description"
-          type="text"
+          type="textarea"
+          cols="40"
+          rows="5"
           placeholder="Description"
           defaultValue={stationToEdit.description}
           onChange={handleChange}

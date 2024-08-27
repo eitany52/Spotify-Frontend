@@ -180,7 +180,7 @@ export function StationDetails() {
             />
           </section>
 
-          <section>
+          <section className="app-search-wrapper">
             {isUserStation && station.type === "normal" && (
               <AppSearch
                 onAddToStation={onToggleAddToStation}
