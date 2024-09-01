@@ -6,6 +6,7 @@ import { StationIndex } from "./pages/StationIndex.jsx";
 import { SearchResult } from "./cmps/SearchResult.jsx";
 import { DynamicModal } from "./cmps/DynamicModal";
 import { UserMsg } from "./cmps/UserMsg.jsx";
+import { LoginSignup } from "./pages/LoginSignup.jsx";
 
 // Checked - All looks good.
 
@@ -22,6 +23,7 @@ export function RootCmp() {
           {/* <Route path="/genre/:genreId" element={} /> */}
           {/* <Route path="/recent-searches" element={} /> */}
         </Route>
+        <Route path="/:location" element={<LoginSignup />} />
       </Routes>
       <DynamicModal />
     </>

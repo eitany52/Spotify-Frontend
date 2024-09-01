@@ -1,5 +1,5 @@
 import { StationPreview } from "./StationPreview";
-import { getLoggedOnUser } from "../store/actions/user.actions";
+import { getLoggedInUser } from "../store/actions/user.actions";
 
 // Checked - All looks good.
 
@@ -15,7 +15,7 @@ export const StationList = ({
 }) => {
   return (
     <>
-      {/* {location === "main" && <h3>Made for {getLoggedOnUser().name}</h3>} */}
+      {/* {location === "main" && <h3>Made for {getLoggedInUser().name}</h3>} */}
       <ul className={`station-list ${location}`}>
         {stations.map((station) => (
           <StationPreview

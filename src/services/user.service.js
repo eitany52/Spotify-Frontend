@@ -2,100 +2,123 @@ import { storageService } from './async-storage.service'
 import { httpService } from './http.service'
 import { utilService } from './util.service'
 
-const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
-const STORAGE_KEY_LOGEDON_USER = 'logedon_user'
+const STORAGE_KEY_LOGGEDIN_USER = 'loggedInUser'
+// const STORAGE_KEY_LOGEDON_USER = 'logedon_user'
 
 export const userService = {
     login,
     logout,
     signup,
-    getLoggedinUser,
-    getLoggedOnUser,
-    saveLocalUser,
+    getLoggedInUser,
     getUsers,
     getById,
     remove,
     update,
-    changeScore
+    getEmptyCredentials
 }
 
 window.userService = userService
 
-
-function getUsers() {
-    return storageService.query('user')
-    // return httpService.get(`user`)
+async function getUsers() {
+    try {
+        const users = await httpService.get(`user`)
+        return users
+    } catch (error) {
+        console.log("Having issues with getting users", error);
+        throw error
+    }
 }
-
-
 
 async function getById(userId) {
-    const user = await storageService.get('user', userId)
-    // const user = await httpService.get(`user/${userId}`)
-    return user
+    try {
+        const user = await httpService.get(`user/${userId}`)
+        return user
+    } catch (error) {
+        console.log("Having issues with getting user", error);
+        throw error
+    }
 }
 
-function remove(userId) {
-    return storageService.remove('user', userId)
-    // return httpService.delete(`user/${userId}`)
+async function remove(userId) {
+    try {
+        const data = await httpService.delete(`user/${userId}`)
+        return data
+    } catch (error) {
+        console.log("Having issues with removing user", error);
+        throw error
+    }
 }
 
-async function update({ _id, score }) {
-    const user = await storageService.get('user', _id)
-    user.score = score
-    await storageService.put('user', user)
+async function update({ _id, fullname }) {
+    try {
+        const user = await httpService.put(`user/${_id}`, { _id, fullname })
 
-    // const user = await httpService.put(`user/${_id}`, {_id, score})
-
-    // When admin updates other user's details, do not update loggedinUser
-    if (getLoggedinUser()._id === user._id) saveLocalUser(user)
-    return user
+        // When admin updates other user's details, do not update loggedinUser
+        if (getLoggedInUser()._id === user._id) _saveLocalUser(user)
+        return user
+    } catch (error) {
+        console.log("Having issues with updating user", error);
+        throw error
+    }
 }
 
-async function login(userCred) {
-    const users = await storageService.query('user')
-    const user = users.find(user => user.username === userCred.username)
-    // const user = await httpService.post('auth/login', userCred)
-    if (user) return saveLocalUser(user)
+async function login(credentials) {
+    try {
+        const user = await httpService.post('auth/login', credentials)
+        _saveLocalUser(user)
+        return user
+    } catch (error) {
+        console.log("Cannot login", error);
+        throw error
+    }
 }
 
-async function signup(userCred) {
-    if (!userCred.imgUrl) userCred.imgUrl = 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
-    userCred.score = 10000
-    const user = await storageService.post('user', userCred)
-    // const user = await httpService.post('auth/signup', userCred)
-    return saveLocalUser(user)
+async function signup(credentials) {
+    try {
+        const user = await httpService.post('auth/signup', credentials)
+        _saveLocalUser(user)
+        return user
+    } catch (error) {
+        console.log("Cannot sign up", error);
+        throw error
+    }
+
+    // if (!userCred.imgUrl) userCred.imgUrl = 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
 }
 
 async function logout() {
-    sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
-    // return await httpService.post('auth/logout')
+    try {
+        await httpService.post('auth/logout')
+        sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
+    } catch (error) {
+        console.log("Cannot logout", error);
+        throw error
+    }
 }
 
-async function changeScore(by) {
-    const user = getLoggedinUser()
-    if (!user) throw new Error('Not loggedin')
-    user.score = user.score + by || by
-    await update(user)
-    return user.score
-}
-
-
-function saveLocalUser(user) {
-    user = { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, score: user.score, isAdmin: user.isAdmin }
+function _saveLocalUser(user) {
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
-    return user
 }
 
-function getLoggedinUser() {
+function getLoggedInUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
 }
 
-function getLoggedOnUser() {
-    return utilService.loadFromStorage(STORAGE_KEY_LOGEDON_USER)
+function getEmptyCredentials() {
+    return (
+        {
+            fullname: "",
+            username: "",
+            password: "",
+            email: ""
+        }
+    )
 }
 
 
+// function getLoggedInUser() {
+//     return utilService.loadFromStorage(STORAGE_KEY_LOGEDON_USER)
+// }
 
 // ;(async ()=>{
 //     await userService.signup({fullname: 'Puki Norma', username: 'puki', password:'123',score: 10000, isAdmin: false})

@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router";
-import { getLoggedOnUser } from "../store/actions/user.actions";
+import { getLoggedInUser } from "../store/actions/user.actions";
 import { onToggleModal } from "../store/actions/app.actions.js";
 import { FloatingMenuStation } from "../cmps/FloatingMenuStation";
 import { EditStationDetails } from "../cmps/EditStationDetails";
@@ -78,10 +78,9 @@ export const StationPreview = ({
 
   const numOfSongs = station.songs.length;
   const profileName = station.createdBy.fullname;
-  const isUserStation = getLoggedOnUser()._id === station.createdBy.id;
-  const isSavedStation = station.savedBy.some(
-    (user) => user.id === getLoggedOnUser()._id
-  );
+  // const isUserStation = getLoggedInUser()._id === station.createdBy.id;
+  // const isSavedStation = station.savedBy.some(
+  //   (user) => user.id === getLoggedInUser()._id);
   return (
     <li
       onClick={onClickStation}

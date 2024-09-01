@@ -8,7 +8,7 @@ import {
   saveStationByUser,
   removeStationByUser,
 } from "../store/actions/station.actions.js";
-import { getLoggedOnUser } from "../store/actions/user.actions.js";
+import { getLoggedInUser } from "../store/actions/user.actions.js";
 
 import { SvgIcon } from "./SvgIcon.jsx";
 
@@ -20,7 +20,7 @@ export const FloatingMenuStation = ({
   onCreateEmptyStation,
 }) => {
   const isLikedSongStation = station.type === "liked" ? true : false;
-  const isUserStation = getLoggedOnUser()._id === station?.createdBy.id;
+  const isUserStation = getLoggedInUser()._id === station?.createdBy.id;
 
   function onDeleteStation() {
     removeStation(station._id);

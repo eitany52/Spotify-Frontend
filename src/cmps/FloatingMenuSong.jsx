@@ -8,7 +8,7 @@ import {
 } from "../store/actions/station.actions.js";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getLoggedOnUser } from "../store/actions/user.actions.js";
+import { getLoggedInUser } from "../store/actions/user.actions.js";
 import { SvgIcon } from "./SvgIcon.jsx";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
 
@@ -95,7 +95,7 @@ export const FloatingMenuSong = ({ onDone, song }) => {
   }
   if (!likedSongsStation) return <div>loading...</div>;
   const userStations = getUserStations(stations);
-  const isUserStation = getLoggedOnUser()._id === station?.createdBy.id;
+  const isUserStation = getLoggedInUser()._id === station?.createdBy.id;
   const isInLikedSong = isSongSavedAtLikedSongs();
   return (
     <div className="song-floating-menu">

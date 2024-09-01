@@ -96,11 +96,6 @@ function formatSongs(songs) {
 
 
 
-const nums = [1, 2, 3, 4]
-let newNums = structuredClone(nums)
-newNums = newNums.filter(num => num > 4)
-console.log(newNums);
-
 
 
 

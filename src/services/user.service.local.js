@@ -1,10 +1,9 @@
-
 import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
 
-
 const STORAGE_KEY = 'user'
-const STORAGE_KEY_LOGEDON_USER = 'logedon_user'
+const STORAGE_KEY_LOGGEDIN_USER = 'loggedInUser'
+const loggedInUser = { _id: 'u1001', fullname: 'avi', imgUrl: '', isAdmin: false }
 
 
 export const userService = {
@@ -12,7 +11,7 @@ export const userService = {
     getById,
     save,
     remove,
-    getLoggedOnUser,
+    // getLoggedInUser,
     //login
     // logout,
     // signup,
@@ -22,15 +21,14 @@ export const userService = {
     // update,
     // changeScore
     // setLoggedOnUser
-   
+
 }
 window.us = userService
-
+_createLoggedInUser()
 
 async function query() {
     var users = await storageService.query(STORAGE_KEY)
-    console.log('users:', users)
-   
+
     return users
 }
 
@@ -47,14 +45,14 @@ async function save(user) {
     var savedUser
     if (user._id) {
         const userToSave = {
-            _id : user._id,
-            name : user.name
+            _id: user._id,
+            name: user.name
         }
         savedUser = await storageService.put(STORAGE_KEY, userToSave)
     } else {
         // Later, owner is set by the backend
         const userToSave = {
-            name : user.name,
+            name: user.name,
         }
         savedUser = await storageService.post(STORAGE_KEY, userToSave)
     }
@@ -62,10 +60,17 @@ async function save(user) {
 }
 
 function saveLocalUser(user) {
-    user = { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, score: user.score, isAdmin : user.isAdmin }
+    user = { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, score: user.score, isAdmin: user.isAdmin }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
 }
+
+function _createLoggedInUser() {
+    sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(loggedInUser))
+}
+
+
+
 
 
 // ***
@@ -81,30 +86,29 @@ function saveLocalUser(user) {
 //     // if (user) return saveLocalUser(user)
 // }
 
-const defaultLogedOnUser = {  _id: 'u1001',    name: 'avi', }
 
-const userArray = [defaultLogedOnUser,
-    {  _id: 'u1002',name: 'haim' },
-    {  _id: 'u1003',name: 'yossi' }, 
-]
+// const userArray = [defaultLogedOnUser,
+//     { _id: 'u1002', name: 'haim' },
+//     { _id: 'u1003', name: 'yossi' },
+// ]
 
-function getLoggedOnUser() {
-    return utilService.loadFromStorage(STORAGE_KEY_LOGEDON_USER)
-}
+// function getLoggedInUser() {
+//     return utilService.loadFromStorage(STORAGE_KEY_LOGEDON_USER)
+// }
 
 
 // utilService.saveToStorage(STORAGE_KEY, userArray)
 // utilService.saveToStorage(STORAGE_KEY_LOGEDON_USER, defaultLogedOnUser)
 
-_createUsers()
+// _createUsers()
 
-function _createUsers() {
-    let users = utilService.loadFromStorage(STORAGE_KEY)
-    if (!users || !users.length) {
-        utilService.saveToStorage(STORAGE_KEY, userArray)
-        utilService.saveToStorage(STORAGE_KEY_LOGEDON_USER, defaultLogedOnUser)
-    } 
-}
+// function _createUsers() {
+//     let users = utilService.loadFromStorage(STORAGE_KEY)
+//     if (!users || !users.length) {
+//         utilService.saveToStorage(STORAGE_KEY, userArray)
+//         utilService.saveToStorage(STORAGE_KEY_LOGEDON_USER, defaultLogedOnUser)
+//     }
+// }
 
 
 // function setLoggedOnUser() {

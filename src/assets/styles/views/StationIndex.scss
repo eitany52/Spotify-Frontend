@@ -167,12 +167,12 @@
                     border: 0;
                     outline: none;
                     background-color: $input-bgc-clr;
-                    color: $input-text-clr;
+                    color: $input-text-clr1;
                     font-weight: bold;
                 }
 
                 ::placeholder {
-                    color: $input-text-clr;
+                    color: $input-text-clr1;
                     font-size: 14px;
                 }
 

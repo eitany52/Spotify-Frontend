@@ -5,7 +5,7 @@ import {stationService as remote} from './station.service.remote.js'
 import {stationService as local} from './station.service.local.js'
 
 import demoStations from "../../../data/demo-stations.json"
-import { getLoggedOnUser } from '../../store/actions/user.actions'
+import { getLoggedInUser } from '../../store/actions/user.actions'
 
 const API_KEY = 'AIzaSyCUE7BdmEO9uF_gWcV5yY5O3eqyINxdavo'
 
@@ -35,7 +35,7 @@ function isSongSavedAtStation(station, songId) {
 }
 
 function getUserStations(stations) {
-    return stations.filter(station => station.createdBy.id === getLoggedOnUser()._id)
+    return stations.filter(station => station.createdBy.id === getLoggedInUser()._id)
 }
 
 function isSongSavedAtSomeStation(stations, songId) {
