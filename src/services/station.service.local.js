@@ -5,7 +5,7 @@ import initialStations from '../../data/stations.json'
 import searchRes from "../../data/search.json"
 import demoStations from "../../data/demo-stations.json"
 
-import { getLoggedOnUser } from '../store/actions/user.actions'
+import { getLoggedInUser } from '../store/actions/user.actions'
 
 //Checked - All looks good.
 
@@ -78,7 +78,7 @@ function isSongSavedAtStation(station, songId) {
 }
 
 function getUserStations(stations) {
-    return stations.filter(station => station.createdBy.id === getLoggedOnUser()._id)
+    return stations.filter(station => station.createdBy.id === getLoggedInUser()._id)
 }
 
 function isSongSavedAtSomeStation(stations, songId) {
@@ -129,8 +129,8 @@ async function save(station) {
     } else {
         // Later, owner is set by the backend
         const user = {
-            id: getLoggedOnUser()._id,
-            fullname: getLoggedOnUser().name
+            id: getLoggedInUser()._id,
+            fullname: getLoggedInUser().name
         }
         const stationToSave = {
             ...station, createdBy: user
@@ -192,7 +192,7 @@ function getDemoStations() {
 async function saveStationByUser(station) {
 
     const stationToSave = {
-        ...station, savedBy: [...station.savedBy, getLoggedOnUser()._id]
+        ...station, savedBy: [...station.savedBy, getLoggedInUser()._id]
     }
 
     const stations = await getStations()
@@ -275,8 +275,8 @@ async function isSongInLikedSong(songId) {
 
 function _formatSong(song) {
     const user = {
-        id: getLoggedOnUser()._id,
-        name: getLoggedOnUser().name
+        id: getLoggedInUser()._id,
+        name: getLoggedInUser().name
     }
     return {
         id: song.id.videoId,

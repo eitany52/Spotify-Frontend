@@ -6,7 +6,7 @@ import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 import { login, logout, signup } from "../store/actions/user.actions";
 import { utilService } from "../services/util.service.js";
 
-import { LoginSignup } from "./LoginSignup.jsx";
+import { LoginSignup } from "../pages/LoginSignup.jsx";
 import { SvgIcon } from "../cmps/SvgIcon";
 import { AppSearch } from "../cmps/AppSearch";
 
@@ -33,6 +33,10 @@ export function AppHeader({ backgroundColor = null }) {
     // } else {
     //   setIsHomePageDisplayed(false);
     // }
+  }
+
+  function onGoToLoginSignup(location) {
+    navigate(`/${location}`)
   }
 
   async function onLogin(credentials) {
@@ -62,9 +66,9 @@ export function AppHeader({ backgroundColor = null }) {
       showErrorMsg("Cannot logout");
     }
   }
+console.log("user:", user);
 
-  const userLatter =  user ? utilService.getFirstChar(user.name) : null
-  console.log("-----------------------------");
+  const userLatter = user ? utilService.getFirstChar(user.fullname) : null
   console.log(backgroundColor);
   const darkenedBackground_50 = utilService.darkenColor(
     "rgba(173,152,151,1)",
@@ -82,14 +86,14 @@ export function AppHeader({ backgroundColor = null }) {
       {
         <>
           <section>
-            <button className="icon-type-1 big">
+            <button className=" btn-back icon-type-1 big">
               <SvgIcon iconName={"back"} />
             </button>
-            <button className="icon-type-1 big">
+            <button className=" btn-forward icon-type-1 big">
               <SvgIcon iconName={"forward"} />
             </button>
           </section>
-          <section className="user-info">
+          {user && <section className="user-info">
             {/* <span>{backgroundColor} </span>
             <span>{darkenedBackground_50} </span> */}
 
@@ -102,7 +106,16 @@ export function AppHeader({ backgroundColor = null }) {
                 {userLatter}
               </small>
             </span>
-          </section>
+          </section>}
+          {!user &&
+            <section className="btns-login-signup">
+              <button
+                onClick={() => onGoToLoginSignup("signup")}
+                className="btn-signup">Sign up</button>
+              <button
+                onClick={() => onGoToLoginSignup("login")}
+                className="btn-login">Login</button>
+            </section>}
           {isSearchDisplayed && <AppSearch />}
         </>
 

@@ -1,0 +1,55 @@
+.login-signup {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    // background: linear-gradient(rgba(255, 255, 255, 0.1) 0%,
+    //         rgb(0, 0, 0) 100%);
+    background: rgb(2, 0, 36);
+    background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(0, 212, 255, 1) 100%);
+    // background: rgb(2, 0, 36);
+    // background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+
+    .login-signup-container {
+        background-color: $dark-clr1;
+        width: 45%;
+        height: 90%;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+
+        .login-signup-form {
+            display: grid;
+            width: 38%;
+            gap: 8px;
+
+            input {
+                height: 32px;
+                border-radius: 4px;
+                background-color: $dark-clr1;
+                border: 0;
+                padding-inline: 12px;
+                box-shadow: inset 0 0 0 1px $gray6;
+                color: $input-text-clr2;
+                outline: 0;
+                transition: box-shadow 100ms ease-in-out, color 100ms ease-in-out;
+
+                &:hover {
+                    box-shadow: inset 0 0 0 1px $input-text-clr2
+                }
+
+                &:focus {
+                    box-shadow: inset 0 0 0 2px $input-text-clr2
+                }
+            }
+
+            .btn-login-signup {
+                background-color: $bgc-login-signup-btn;
+                color: black;
+                width: 100%;
+                height: 35px;
+                font-weight: bold;
+                border-radius: 25px;
+            }
+        }
+    }
+}

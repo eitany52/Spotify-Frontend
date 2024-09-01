@@ -14,7 +14,7 @@ import {
 } from "../store/actions/station.actions.js";
 
 // import { utilService } from "../services/util.service.js";
-import { getLoggedOnUser } from "../store/actions/user.actions.js";
+import { getLoggedInUser } from "../store/actions/user.actions.js";
 import { utilService } from "../services/util.service.js";
 import { SvgIcon, AllIcons } from "./SvgIcon.jsx";
 import { AppSearch } from "./AppSearch.jsx";
@@ -105,7 +105,7 @@ export function StationDetails() {
 
   if (!station) return <div>Loading...</div>;
 
-  const isUserStation = getLoggedOnUser()._id === station.createdBy.id;
+  const isUserStation = getLoggedInUser()._id === station.createdBy.id;
   const isCurrentSongSavedAtStation = isSongSavedAtStation(
     station,
     currentSong.id
@@ -138,8 +138,8 @@ export function StationDetails() {
               <section onClick={playPauseStation} className="svg-big bigger">
                 {(!isPlaying ||
                   (isPlaying && !isCurrentSongSavedAtStation)) && (
-                  <SvgIcon iconName="play" style="dark" />
-                )}
+                    <SvgIcon iconName="play" style="dark" />
+                  )}
                 {isPlaying && isCurrentSongSavedAtStation && (
                   <SvgIcon iconName="pause" style="dark" />
                 )}
