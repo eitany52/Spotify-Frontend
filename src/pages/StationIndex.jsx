@@ -6,7 +6,7 @@ import { AppPlayer } from "../cmps/AppPlayer";
 import { StationList } from "../cmps/StationList";
 import { CurrentSongDetails } from "../cmps/CurrentSongDetails";
 import { SvgIcon } from "../cmps/SvgIcon";
-import { stationService } from "../services/station.service.local";
+import { stationService } from "../services/station";
 import { useScreenCategory } from "../customHooks/useBreakpoint";
 
 import {
@@ -124,8 +124,9 @@ export const StationIndex = () => {
 
   return (
     <div
-      className={`station-index  ${displayCard ? "display-card" : ""}  ${expendLib ? "expend-lib" : ""
-        } `}
+      className={`station-index  ${displayCard ? "display-card" : ""}  ${
+        expendLib ? "expend-lib" : ""
+      } `}
     >
       {/* <p>Current screen category: {screenCategory}</p> */}
       {/* {isHome ? "home" : "library"} */}
@@ -134,18 +135,18 @@ export const StationIndex = () => {
         <nav>
           {((screenCategory !== "mobile" && !isHomePageDisplayed) ||
             (screenCategory === "mobile" && !isHome)) && (
-              <button onClick={goToHome} className="btn-type-2">
-                {" "}
-                <SvgIcon iconName="home" /> Home{" "}
-              </button>
-            )}
+            <button onClick={goToHome} className="btn-type-2">
+              {" "}
+              <SvgIcon iconName="home" /> Home{" "}
+            </button>
+          )}
           {((screenCategory !== "mobile" && isHomePageDisplayed) ||
             (screenCategory === "mobile" && isHome)) && (
-              <button onClick={goToHome} className="btn-type-2 current">
-                {" "}
-                <SvgIcon iconName="homeActive" /> Home{" "}
-              </button>
-            )}
+            <button onClick={goToHome} className="btn-type-2 current">
+              {" "}
+              <SvgIcon iconName="homeActive" /> Home{" "}
+            </button>
+          )}
 
           {!isSearchDisplayed && (
             <Link to="/search" className="btn-type-2 ">
@@ -243,13 +244,13 @@ export const StationIndex = () => {
 
         {((isHomePageDisplayed && screenCategory !== "mobile") ||
           (isHomePageDisplayed && isHome && screenCategory === "mobile")) && (
-            <StationList
-              stations={demoStations}
-              location="main"
-              setStationFromSearch={setStationFromSearch}
-              onCreateEmptyStation={onCreateEmptyStation}
-            />
-          )}
+          <StationList
+            stations={demoStations}
+            location="main"
+            setStationFromSearch={setStationFromSearch}
+            onCreateEmptyStation={onCreateEmptyStation}
+          />
+        )}
 
         {isHomePageDisplayed && screenCategory === "mobile" && !isHome && (
           <div className="station-list-wrapper">

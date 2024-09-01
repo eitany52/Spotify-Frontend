@@ -1,11 +1,11 @@
-import { storageService } from './async-storage.service'
-import { utilService } from './util.service'
-import { userService } from './user.service.local'
-import initialStations from '../../data/stations.json'
-import searchRes from "../../data/search.json"
-import demoStations from "../../data/demo-stations.json"
+import { storageService } from '../async-storage.service'
+import { utilService } from '../util.service'
+import { userService } from '../user.service.local'
+import initialStations from '../../../data/stations.json'
+import searchRes from "../../../data/search.json"
+// import demoStations from "../../../data/demo-stations.json"
 
-import { getLoggedInUser } from '../store/actions/user.actions'
+import { getLoggedInUser } from '../../store/actions/user.actions'
 
 //Checked - All looks good.
 
@@ -14,33 +14,34 @@ export const stationService = {
     getById,
     save,
     remove,
-    getStations,
+    // getStations,
     addSongToStation,
     removeSongFromStation,
     addUserLikedToStation,
     removeUserLikedFromStation,
     getLikedSongsStation,
     isLikedSongStation,
-    createEmptyStation,
-    getSongsFromYoutube,
+    // createEmptyStation,
+    // getSongsFromYoutube,
     updateStationDetails,
-    isSongSavedAtStation,
-    getUserStations,
-    isSongSavedAtSomeStation,
+    // isSongSavedAtStation,
+    // getUserStations,
+    // isSongSavedAtSomeStation,
     isSongInLikedSong,
-    getDemoStations,
+    // getDemoStations,
     saveStationByUser
     // getEmptyCar,
     // addCarMsg
 }
 window.ss = stationService
 const STORAGE_KEY = 'station_db'
-const API_KEY = 'AIzaSyCUE7BdmEO9uF_gWcV5yY5O3eqyINxdavo'
+// const API_KEY = 'AIzaSyCUE7BdmEO9uF_gWcV5yY5O3eqyINxdavo'
 
 _createStations()
 
 
 async function query(filterBy = { txt: '', price: 0 }) {
+    console.log('local')
     var stations = await storageService.query(STORAGE_KEY)
     console.log('stations:', stations)
     // if (filterBy.txt) {
@@ -57,12 +58,12 @@ async function query(filterBy = { txt: '', price: 0 }) {
 }
 
 
-function getStations() {
-    return storageService.query(STORAGE_KEY)
-}
+// function getStations() {
+//     return storageService.query(STORAGE_KEY)
+// }
 
 async function getLikedSongsStation() {
-    const stations = await getStations()
+    const stations = await query()
     const likedSongsStation = stations.find(station => station.type === 'liked')
     return likedSongsStation
 }
@@ -77,19 +78,19 @@ function isSongSavedAtStation(station, songId) {
     return station.songs.some(song => song.id === songId)
 }
 
-function getUserStations(stations) {
-    return stations.filter(station => station.createdBy.id === getLoggedInUser()._id)
-}
+// function getUserStations(stations) {
+//     return stations.filter(station => station.createdBy.id === getLoggedInUser()._id)
+// }
 
-function isSongSavedAtSomeStation(stations, songId) {
-    let isSongSavedAtSomeStation = false
-    stations.forEach(station => {
-        if (station.songs.some(song => song.id === songId)) {
-            isSongSavedAtSomeStation = true
-        }
-    })
-    return isSongSavedAtSomeStation
-}
+// function isSongSavedAtSomeStation(stations, songId) {
+//     let isSongSavedAtSomeStation = false
+//     stations.forEach(station => {
+//         if (station.songs.some(song => song.id === songId)) {
+//             isSongSavedAtSomeStation = true
+//         }
+//     })
+//     return isSongSavedAtSomeStation
+// }
 
 async function getById(stationId) {
     return await storageService.get(STORAGE_KEY, stationId)
@@ -100,19 +101,19 @@ async function remove(stationId) {
     await storageService.remove(STORAGE_KEY, stationId)
 }
 
-function createEmptyStation() {
-    return {
-        _id: "",
-        name: "My Playlist",
-        type: "normal",
-        description: null,
-        imgUrl: 'https://www.greencode.co.il/wp-content/uploads/2024/07/station-thumb-default.jpg',
-        tags: [],
-        createdBy: {},
-        savedBy: [],
-        songs: []
-    }
-}
+// function createEmptyStation() {
+//     return {
+//         _id: "",
+//         name: "My Playlist",
+//         type: "normal",
+//         description: null,
+//         imgUrl: 'https://www.greencode.co.il/wp-content/uploads/2024/07/station-thumb-default.jpg',
+//         tags: [],
+//         createdBy: {},
+//         savedBy: [],
+//         songs: []
+//     }
+// }
 
 async function save(station) {
     let savedStation
@@ -140,54 +141,54 @@ async function save(station) {
     return savedStation
 }
 
-async function getSongsFromYoutube(userInput) {
-    const searchTerm = userInput
-    let res = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&type=video&videoCategoryId=10&maxResults=4&key=${API_KEY}`)
-    let data = await res.json()
-    let songs = data.items
-    const songIds = _getSongIds(songs)
-    const songIdsStr = songIds.join(',')
-    res = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${songIdsStr}&key=${API_KEY}`)
-    data = await res.json()
-    const songsAdditionalInfo = data.items
-    _addDurationToSongs(songs, songsAdditionalInfo)
-    songs = songs.filter(song => song.duration)
-    songs = _formatSongs(songs)
-    return songs
-    // return searchRes[0].items.slice(0,4)
-}
+// async function getSongsFromYoutube(userInput) {
+//     const searchTerm = userInput
+//     let res = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&type=video&videoCategoryId=10&maxResults=4&key=${API_KEY}`)
+//     let data = await res.json()
+//     let songs = data.items
+//     const songIds = _getSongIds(songs)
+//     const songIdsStr = songIds.join(',')
+//     res = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${songIdsStr}&key=${API_KEY}`)
+//     data = await res.json()
+//     const songsAdditionalInfo = data.items
+//     _addDurationToSongs(songs, songsAdditionalInfo)
+//     songs = songs.filter(song => song.duration)
+//     songs = _formatSongs(songs)
+//     return songs
+//     // return searchRes[0].items.slice(0,4)
+// }
 
-function _formatSongs(songs) {
-    const formattedSongs = []
-    songs.forEach(song => {
-        formattedSongs.push(_formatSong(song))
-    });
+// function _formatSongs(songs) {
+//     const formattedSongs = []
+//     songs.forEach(song => {
+//         formattedSongs.push(_formatSong(song))
+//     });
 
-    return formattedSongs
-}
+//     return formattedSongs
+// }
 
-function _getSongIds(songs) {
-    const songIds = []
-    songs.forEach(song => {
-        songIds.push(song.id.videoId)
-    })
+// function _getSongIds(songs) {
+//     const songIds = []
+//     songs.forEach(song => {
+//         songIds.push(song.id.videoId)
+//     })
 
-    return songIds
-}
+//     return songIds
+// }
 
-function _addDurationToSongs(songs, songsAdditionalInfo) {
-    songs.forEach(song => {
-        const songAdditionalInfo = songsAdditionalInfo.find(songAdditionalInfo => songAdditionalInfo.id === song.id.videoId)
-        if (songAdditionalInfo) {
-            song.duration = songAdditionalInfo.contentDetails.duration
-        }
-    })
-}
+// function _addDurationToSongs(songs, songsAdditionalInfo) {
+//     songs.forEach(song => {
+//         const songAdditionalInfo = songsAdditionalInfo.find(songAdditionalInfo => songAdditionalInfo.id === song.id.videoId)
+//         if (songAdditionalInfo) {
+//             song.duration = songAdditionalInfo.contentDetails.duration
+//         }
+//     })
+// }
 
-function getDemoStations() {
-    return demoStations
+// function getDemoStations() {
+//     return demoStations
 
-}
+// }
 
 async function saveStationByUser(station) {
 
@@ -291,42 +292,42 @@ function _formatSong(song) {
     }
 }
 
-function _formatSongDuration(songDuration) {
-    // Examples of durations: 'PT4M' | 'PT35S' | 'PT4M35S'
+// function _formatSongDuration(songDuration) {
+//     // Examples of durations: 'PT4M' | 'PT35S' | 'PT4M35S'
 
-    let formattedDuration = null
-    if (!songDuration.includes('S')) {
-        const minutes = songDuration.substring(2, songDuration.indexOf('M'))
-        formattedDuration = `${minutes}:00`
-    }
+//     let formattedDuration = null
+//     if (!songDuration.includes('S')) {
+//         const minutes = songDuration.substring(2, songDuration.indexOf('M'))
+//         formattedDuration = `${minutes}:00`
+//     }
 
-    if (!songDuration.includes('M')) {
-        const seconds = songDuration.substring(2, songDuration.indexOf('S'))
-        const formattedSeconds = seconds.length < 2 ? `0${seconds}` : seconds
-        formattedDuration = `0:${formattedSeconds}`
-    }
-    if (songDuration.includes('S') && songDuration.includes('M')) {
-        formattedDuration = songDuration.substring(2, songDuration.indexOf('S'))
-        const [minutes, seconds] = formattedDuration.split('M')
-        const formattedSeconds = seconds.length < 2 ? `0${seconds}` : seconds
+//     if (!songDuration.includes('M')) {
+//         const seconds = songDuration.substring(2, songDuration.indexOf('S'))
+//         const formattedSeconds = seconds.length < 2 ? `0${seconds}` : seconds
+//         formattedDuration = `0:${formattedSeconds}`
+//     }
+//     if (songDuration.includes('S') && songDuration.includes('M')) {
+//         formattedDuration = songDuration.substring(2, songDuration.indexOf('S'))
+//         const [minutes, seconds] = formattedDuration.split('M')
+//         const formattedSeconds = seconds.length < 2 ? `0${seconds}` : seconds
 
-        formattedDuration = `${minutes}:${formattedSeconds}`
-    }
+//         formattedDuration = `${minutes}:${formattedSeconds}`
+//     }
 
-    return formattedDuration
-}
+//     return formattedDuration
+// }
 
-function getSubstringBeforePipe(str) {
-    // בדוק אם המחרוזת מכילה את התו '|'
-    const pipeIndex = str.indexOf('|');
+// function getSubstringBeforePipe(str) {
+//     // בדוק אם המחרוזת מכילה את התו '|'
+//     const pipeIndex = str.indexOf('|');
 
-    // אם אין את התו '|', החזר את המחרוזת כולה
-    if (pipeIndex === -1) {
-        return str;
-    }
-    // אחרת, החזר את החלק של המחרוזת עד ל-| הראשון (לא כולל)
-    return str.substring(0, pipeIndex);
-}
+//     // אם אין את התו '|', החזר את המחרוזת כולה
+//     if (pipeIndex === -1) {
+//         return str;
+//     }
+//     // אחרת, החזר את החלק של המחרוזת עד ל-| הראשון (לא כולל)
+//     return str.substring(0, pipeIndex);
+// }
 
 
 
