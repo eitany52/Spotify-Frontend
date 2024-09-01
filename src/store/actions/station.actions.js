@@ -1,4 +1,4 @@
-import { stationService } from '../../services/station.service.local'
+import { stationService } from '../../services/station'
 import { store } from '../store'
 import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
 
@@ -10,7 +10,7 @@ import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS,
 export async function loadStations() {
     try {
         // store.dispatch({ type: LOADING_START })
-        const stations = await stationService.getStations()
+        const stations = await stationService.query()
         store.dispatch({ type: SET_STATIONS, stations })
     } catch (err) {
         console.log('UserActions: err in loadStations', err)
