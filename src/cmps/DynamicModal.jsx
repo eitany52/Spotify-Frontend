@@ -23,7 +23,7 @@ export function DynamicModal() {
   console.log(style);
   return (
     <>
-      <section onClick={onCloseModal} className="modal-backdrop"></section>
+      {/* <section onClick={onCloseModal} className="modal-backdrop"></section> */}
       <section style={style} className={`modal-content  ${props.class}`}>
         <Cmp {...props} />
         {/* <span className="btn close-btn" onClick={onCloseModal}>

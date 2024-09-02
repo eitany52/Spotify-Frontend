@@ -15,20 +15,20 @@ export const stationService = {
     save,
     remove,
     // getStations,
-    addSongToStation,
-    removeSongFromStation,
-    addUserLikedToStation,
-    removeUserLikedFromStation,
-    getLikedSongsStation,
-    isLikedSongStation,
+    addSongToStation, // =
+    getLikedSongsStation, // =
+    updateStationDetails, // =
+    getDemoStations, // =
     // createEmptyStation,
     // getSongsFromYoutube,
-    updateStationDetails,
     // isSongSavedAtStation,
     // getUserStations,
     // isSongSavedAtSomeStation,
     isSongInLikedSong,
-    getDemoStations,
+    removeSongFromStation,
+    addUserLikedToStation,
+    removeUserLikedFromStation,
+    isLikedSongStation,
     saveStationByUser
     // getEmptyCar,
     // addCarMsg

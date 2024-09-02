@@ -251,9 +251,9 @@ export const AppPlayer = () => {
       </section>
 
       <section className="extra-controls">
-        <span onClick={onDisplayCard} className="icon-type-2">
+        {/* <span onClick={onDisplayCard} className="icon-type-2">
           <SvgIcon iconName="nowPlaying" />
-        </span>
+        </span> */}
       </section>
     </div>
   );

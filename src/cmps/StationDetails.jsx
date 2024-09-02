@@ -103,7 +103,12 @@ export function StationDetails() {
     setColors(newColors);
   };
 
-  if (!station) return <div>Loading...</div>;
+  if (!station)
+    return (
+      <div className="loading-wrapper">
+        <div className="loading"></div>{" "}
+      </div>
+    );
 
   const isUserStation = getLoggedInUser()._id === station.createdBy.id;
   const isCurrentSongSavedAtStation = isSongSavedAtStation(
@@ -138,8 +143,8 @@ export function StationDetails() {
               <section onClick={playPauseStation} className="svg-big bigger">
                 {(!isPlaying ||
                   (isPlaying && !isCurrentSongSavedAtStation)) && (
-                    <SvgIcon iconName="play" style="dark" />
-                  )}
+                  <SvgIcon iconName="play" style="dark" />
+                )}
                 {isPlaying && isCurrentSongSavedAtStation && (
                   <SvgIcon iconName="pause" style="dark" />
                 )}

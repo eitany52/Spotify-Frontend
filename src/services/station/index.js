@@ -4,7 +4,6 @@ const { DEV, VITE_LOCAL } = import.meta.env
 import {stationService as remote} from './station.service.remote.js'
 import {stationService as local} from './station.service.local.js'
 
-import demoStations from "../../../data/demo-stations.json"
 import { getLoggedInUser } from '../../store/actions/user.actions.js'
 
 
