@@ -3,7 +3,7 @@ import { utilService } from '../util.service'
 import { userService } from '../user.service.local'
 import initialStations from '../../../data/stations.json'
 import searchRes from "../../../data/search.json"
-// import demoStations from "../../../data/demo-stations.json"
+import demoStations from "../../../data/demo-stations.json"
 
 import { getLoggedInUser } from '../../store/actions/user.actions'
 
@@ -28,7 +28,7 @@ export const stationService = {
     // getUserStations,
     // isSongSavedAtSomeStation,
     isSongInLikedSong,
-    // getDemoStations,
+    getDemoStations,
     saveStationByUser
     // getEmptyCar,
     // addCarMsg
@@ -185,10 +185,10 @@ async function save(station) {
 //     })
 // }
 
-// function getDemoStations() {
-//     return demoStations
+function getDemoStations() {
+    return demoStations
 
-// }
+}
 
 async function saveStationByUser(station) {
 
@@ -244,6 +244,7 @@ async function removeUserLikedFromStation(stationId, userId) {
 
     return station // ?
 }
+
 
 
 async function updateStationDetails(stationToSave) {

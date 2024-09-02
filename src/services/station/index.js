@@ -5,14 +5,15 @@ import {stationService as remote} from './station.service.remote.js'
 import {stationService as local} from './station.service.local.js'
 
 import demoStations from "../../../data/demo-stations.json"
-import { getLoggedInUser } from '../../store/actions/user.actions'
+import { getLoggedInUser } from '../../store/actions/user.actions.js'
+
 
 const API_KEY = 'AIzaSyCUE7BdmEO9uF_gWcV5yY5O3eqyINxdavo'
 
 
 function createEmptyStation() {
     return {
-        _id: "",
+        // _id: "",
         name: "My Playlist",
         type: "normal",
         description: null,
@@ -24,10 +25,10 @@ function createEmptyStation() {
     }
 }
 
-function getDemoStations() {
-    return demoStations
 
-}
+
+
+
 
 
 function isSongSavedAtStation(station, songId) {
@@ -96,8 +97,8 @@ function _formatSongs(songs) {
 
 function _formatSong(song) {
     const user = {
-        id: getLoggedOnUser()._id,
-        name: getLoggedOnUser().name
+        id: getLoggedInUser()._id,
+        name: getLoggedInUser().name
     }
     return {
         id: song.id.videoId,
@@ -151,6 +152,9 @@ function getSubstringBeforePipe(str) {
 
 
 
+
+
+
 // function getDefaultFilter() {
 //     return { pageIdx: '', txt: '', severity: '' , labels: '', sortBy: '', sortDir: ''}
 // }
@@ -173,11 +177,12 @@ const service = VITE_LOCAL === 'true' ? local : remote
 
 export const stationService = { 
     createEmptyStation,
-    getDemoStations, 
+    // getDemoStations, 
     isSongSavedAtStation,
     getUserStations,
     isSongSavedAtSomeStation,
-    getSongsFromYoutube, ...service }
+    getSongsFromYoutube, 
+    getLoggedInUser, ...service }
 
 // Easy access to this service from the dev tools console
 // when using script - dev / dev:local
