@@ -19,6 +19,7 @@ export const stationService = {
     getLikedSongsStation, // =
     updateStationDetails, // =
     getDemoStations, // =
+    removeSongFromStation, // =
     // createEmptyStation,
     // getSongsFromYoutube,
     // isSongSavedAtStation,

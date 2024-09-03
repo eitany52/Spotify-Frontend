@@ -14,7 +14,9 @@ export const stationService = {
     getLikedSongsStation,
     addSongToStation,
     updateStationDetails,
-    getDemoStations
+    getDemoStations,
+    reorderSongInStation,
+    removeSongFromStation
     // getEmptyCar,
     // addCarMsg
 }
@@ -58,7 +60,6 @@ async function addSongToStation(stationId, song) {
     // Later, this is all done by the backend
     const station = await getById(stationId)
 
-
     station.songs.push(song)
 
 
@@ -87,6 +88,29 @@ async function updateStationDetails(stationToSave) {
 function getDemoStations(loggedInUserId) {
     return query({ notCreatedBy : loggedInUserId }) 
 }
+
+
+
+async function reorderSongInStation(stationId, songs) {
+    const station = await getById(stationId)
+
+    station.songs = songs
+    
+    await save(station)
+
+    return station // ?
+}
+
+
+async function removeSongFromStation(stationId, songId) {
+
+    const station = await getById(stationId)
+    station.songs = station.songs.filter((song) => song.id !== songId)
+    await save(station)
+
+    return station // ?
+}
+
 
 async function addCarMsg(carId, txt) {
     const savedMsg = await httpService.post(`car/${carId}/msg`, {txt})

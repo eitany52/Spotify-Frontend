@@ -11,6 +11,7 @@ import {
   removeSongFromStation,
   setCurrentSong,
   setPlayPause,
+  reorderSongInStation,
 } from "../store/actions/station.actions.js";
 
 // import { utilService } from "../services/util.service.js";
@@ -48,6 +49,8 @@ export function StationDetails() {
 
   const location = "station-details";
   const { handleRightClick } = useStation({ station, stationId, location });
+
+  // const [localSongs, setLocalSongs] = useState(songs);
 
   useEffect(() => {
     const isDemoOnly = isDemoStation(stationId);
@@ -116,6 +119,21 @@ export function StationDetails() {
     currentSong.id
   );
 
+  function onDragEnd(result) {
+    const { destination, source } = result;
+    if (!destination) return;
+
+    const reorderedSongs = Array.from(station.songs);
+    const [removed] = reorderedSongs.splice(source.index, 1);
+    reorderedSongs.splice(destination.index, 0, removed);
+
+    console.log("onDragEnd 222222222");
+    // עדכן את הרשימה המעודכנת עם סדר השירים החדש
+    //setSongs(reorderedSongs);
+
+    reorderSongInStation(stationId, reorderedSongs);
+  }
+
   // if (colors.backgroundColor === "") return <div>Loading...</div>;
   return (
     <section className="station-details main-layout">
@@ -182,6 +200,7 @@ export function StationDetails() {
               }
               isUserStation={isUserStation}
               type="station"
+              onDragEnd={onDragEnd}
             />
           </section>
 

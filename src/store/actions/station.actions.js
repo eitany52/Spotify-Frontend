@@ -127,6 +127,16 @@ export async function addSongToStation(stationId, song) {
 }
 
 
+export async function reorderSongInStation(stationId, songs) {
+    try {
+        const updatedStation = await stationService.reorderSongInStation(stationId, songs)
+        store.dispatch({ type: UPDATE_STATION, updatedStation })
+    } catch (err) {
+        console.log('Cannot reorder song to station', err)
+        throw err
+    }
+}
+
 export async function removeSongFromStation(stationId, songId) {
     try {
         const updatedStation = await stationService.removeSongFromStation(stationId, songId)
