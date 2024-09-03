@@ -3,7 +3,7 @@ import { utilService } from '../util.service'
 import { userService } from '../user.service.local'
 import initialStations from '../../../data/stations.json'
 import searchRes from "../../../data/search.json"
-// import demoStations from "../../../data/demo-stations.json"
+import demoStations from "../../../data/demo-stations.json"
 
 import { getLoggedInUser } from '../../store/actions/user.actions'
 
@@ -15,20 +15,21 @@ export const stationService = {
     save,
     remove,
     // getStations,
-    addSongToStation,
-    removeSongFromStation,
-    addUserLikedToStation,
-    removeUserLikedFromStation,
-    getLikedSongsStation,
-    isLikedSongStation,
+    addSongToStation, // =
+    getLikedSongsStation, // =
+    updateStationDetails, // =
+    getDemoStations, // =
+    removeSongFromStation, // =
     // createEmptyStation,
     // getSongsFromYoutube,
-    updateStationDetails,
     // isSongSavedAtStation,
     // getUserStations,
     // isSongSavedAtSomeStation,
     isSongInLikedSong,
-    // getDemoStations,
+    removeSongFromStation,
+    addUserLikedToStation,
+    removeUserLikedFromStation,
+    isLikedSongStation,
     saveStationByUser
     // getEmptyCar,
     // addCarMsg
@@ -185,10 +186,10 @@ async function save(station) {
 //     })
 // }
 
-// function getDemoStations() {
-//     return demoStations
+function getDemoStations() {
+    return demoStations
 
-// }
+}
 
 async function saveStationByUser(station) {
 
@@ -244,6 +245,7 @@ async function removeUserLikedFromStation(stationId, userId) {
 
     return station // ?
 }
+
 
 
 async function updateStationDetails(stationToSave) {

@@ -29,6 +29,8 @@ export const StationIndex = () => {
   const [isSearchDisplayed, setIsSearchDisplayed] = useState(false);
   const [isHomePageDisplayed, setIsHomePageDisplayed] = useState(true);
 
+  const [demoStations, setDemoStations] = useState([]);
+
   const stations = useSelector(
     (storeState) => storeState.stationModule.stations
   );
@@ -42,16 +44,44 @@ export const StationIndex = () => {
   const expendLib = useSelector(
     (storeState) => storeState.stationModule.expendLib
   );
-  const demoStations = stationService.getDemoStations();
+
+  const user = useSelector((storeState) => storeState.userModule.user);
+
+  //local
+  //const demoStations = stationService.getDemoStations();
 
   useEffect(() => {
-    loadStations();
+    if (user) {
+      console.log("stationIndex user 1", user);
+      loadStations({ createdBy: user._id });
+      loadDemoStations(user._id);
+      console.log("demoStations", demoStations);
+      console.log("stations", stations);
+    } else {
+      console.log("stationIndex user 2", user);
+      loadStations();
+      loadDemoStations();
+      console.log("demoStations", demoStations);
+      console.log("stations", stations);
+    }
+
     loadLikedSongsStation();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     getLocation();
   }, [location]);
+
+  async function loadDemoStations(userId) {
+    //remote
+    try {
+      const demoStations = await stationService.getDemoStations(userId);
+      setDemoStations(demoStations);
+      //console.log(demoStations);
+    } catch (err) {
+      console.error("error getting demo stations", err);
+    }
+  }
 
   function getLocation() {
     if (location.pathname.includes("search")) {
@@ -231,11 +261,13 @@ export const StationIndex = () => {
             {/* <button>Recents</button> */}
           </div>
           <div className="station-list-wrapper">
-            <StationList
-              stations={stations}
-              location="library"
-              onCreateEmptyStation={onCreateEmptyStation}
-            />
+            {user && (
+              <StationList
+                stations={stations}
+                location="library"
+                onCreateEmptyStation={onCreateEmptyStation}
+              />
+            )}
           </div>
         </section>
       </aside>

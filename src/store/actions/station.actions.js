@@ -3,10 +3,10 @@ import { store } from '../store'
 import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
 import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE, SET_SHUFFLE, DISPLAY_HIDE_CARD, SET_LIKED_SONGS_STATION, EXPEND_LIB } from '../reducers/station.reducer'
 
-export async function loadStations() {
+export async function loadStations( filterBy ) {
     try {
         // store.dispatch({ type: LOADING_START })
-        const stations = await stationService.query()
+        const stations = await stationService.query(filterBy)
         store.dispatch({ type: SET_STATIONS, stations })
     } catch (err) {
         console.log('UserActions: err in loadStations', err)
@@ -126,6 +126,16 @@ export async function addSongToStation(stationId, song) {
     }
 }
 
+
+export async function reorderSongInStation(stationId, songs) {
+    try {
+        const updatedStation = await stationService.reorderSongInStation(stationId, songs)
+        store.dispatch({ type: UPDATE_STATION, updatedStation })
+    } catch (err) {
+        console.log('Cannot reorder song to station', err)
+        throw err
+    }
+}
 
 export async function removeSongFromStation(stationId, songId) {
     try {

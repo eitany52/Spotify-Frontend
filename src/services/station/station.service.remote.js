@@ -11,14 +11,19 @@ export const stationService = {
     getById,
     save,
     remove,
-    getLikedSongsStation
+    getLikedSongsStation,
+    addSongToStation,
+    updateStationDetails,
+    getDemoStations,
+    reorderSongInStation,
+    removeSongFromStation
     // getEmptyCar,
     // addCarMsg
 }
 window.ss = stationService
 
 
-async function query(filterBy = { txt: '', price: 0 }) {
+async function query(filterBy = {}) {
     console.log('remote')
     return httpService.get(STORAGE_KEY, filterBy)
 }
@@ -32,8 +37,10 @@ async function remove(stationId) {
 }
 async function save(station) {
     var savedStation
+
     if (station._id) {
-        savedStation = await httpService.put(`station/${station._id}`, station)
+     //   savedStation = await httpService.put(`station/${station._id}`, station)
+        savedStation = await httpService.put(`station`, station)
 
     } else {
         savedStation = await httpService.post('station', station)
@@ -45,6 +52,63 @@ async function getLikedSongsStation() {
     const stations = await query()
     const likedSongsStation = stations.find(station => station.type === 'liked')
     return likedSongsStation
+}
+
+
+async function addSongToStation(stationId, song) {
+  
+    // Later, this is all done by the backend
+    const station = await getById(stationId)
+
+    station.songs.push(song)
+
+
+    await save(station)
+
+    return station // ?
+}
+
+
+async function updateStationDetails(stationToSave) {
+
+    const station = await getById(stationToSave._id)
+
+    // station.name = stationToSave.name;
+    // station.description = stationToSave.description;
+    // station.imgUrl = stationToSave.imgUrl;
+
+    Object.assign(station, stationToSave);
+
+    await save(station)
+
+    return station // ?)
+
+}
+
+function getDemoStations(loggedInUserId) {
+    return query({ notCreatedBy : loggedInUserId }) 
+}
+
+
+
+async function reorderSongInStation(stationId, songs) {
+    const station = await getById(stationId)
+
+    station.songs = songs
+    
+    await save(station)
+
+    return station // ?
+}
+
+
+async function removeSongFromStation(stationId, songId) {
+
+    const station = await getById(stationId)
+    station.songs = station.songs.filter((song) => song.id !== songId)
+    await save(station)
+
+    return station // ?
 }
 
 

@@ -66,7 +66,7 @@ function saveLocalUser(user) {
 }
 
 function _createLoggedInUser() {
-    sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(loggedInUser))
+    // sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(loggedInUser))
 }
 
 
