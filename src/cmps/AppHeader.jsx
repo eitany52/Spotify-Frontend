@@ -9,6 +9,8 @@ import { utilService } from "../services/util.service.js";
 import { LoginSignup } from "../pages/LoginSignup.jsx";
 import { SvgIcon } from "../cmps/SvgIcon";
 import { AppSearch } from "../cmps/AppSearch";
+import { onToggleModal } from "../store/actions/app.actions.js";
+import { FloatingMenuUser } from "./FloatingMenuUser.jsx";
 
 export function AppHeader({ backgroundColor = null }) {
   const user = useSelector((storeState) => storeState.userModule.user);
@@ -56,6 +58,22 @@ export function AppHeader({ backgroundColor = null }) {
     } catch (err) {
       showErrorMsg("Cannot signup");
     }
+  }
+
+  function onOpenUserModal(ev) {
+    onToggleModal({
+      cmp: FloatingMenuUser,
+      props: {
+        onDone() {
+          onToggleModal(null);
+        },
+        class: "floating-menu-user",
+      },
+      style: {
+        left: `${ev.clientX - 150}px`,
+        top: `${ev.clientY + 40}px`,
+      },
+    });
   }
   async function onLogout() {
     try {
@@ -106,7 +124,7 @@ export function AppHeader({ backgroundColor = null }) {
             </button>
           </section>
           {user && (
-            <section className="user-info">
+            <section onClick={onOpenUserModal} className="user-info">
               {/* <span>{backgroundColor} </span>
             <span>{darkenedBackground_50} </span> */}
 

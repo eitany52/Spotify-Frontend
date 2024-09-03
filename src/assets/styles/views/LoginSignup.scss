@@ -1,29 +1,60 @@
 .login-signup {
     display: grid;
-    place-items: center;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    grid-template-rows: 1fr auto 1fr;
     height: 100%;
-    // background: linear-gradient(rgba(255, 255, 255, 0.1) 0%,
-    //         rgb(0, 0, 0) 100%);
-    background: rgb(2, 0, 36);
-    background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(0, 212, 255, 1) 100%);
-    // background: rgb(2, 0, 36);
-    // background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+    background: $bg-gradient-login-signup;
 
     .login-signup-container {
-        background-color: $dark-clr1;
-        width: 45%;
-        height: 90%;
-        border-radius: 8px;
+        grid-area: 2 / 2;
+        padding-block: 25px;
         display: grid;
-        place-items: center;
+        gap: 25px;
+        grid-template-rows: auto auto auto;
+        grid-template-columns: 20px minmax(322px, 1fr) 20px;
+        background-color: $dark-clr1;
+        border-radius: 8px;
+
+        label:not(:first-of-type) {
+            padding-block-start: 6px;
+        }
+
+        .spotify-logo-and-title {
+            grid-area: 1 /2;
+            display: grid;
+            gap: 5px;
+            justify-items: center;
+
+            h1 {
+                margin: 0;
+            }
+
+            .btn-spotify {
+                padding: 0;
+                width: 30px;
+                height: 30px;
+
+                i {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
 
         .login-signup-form {
+            grid-area: 2/ 2;
+            align-self: center;
             display: grid;
-            width: 38%;
+            grid-template-columns: 3fr 4fr 3fr;
+            align-content: start;
             gap: 8px;
 
+            &>* {
+                grid-column: 2;
+            }
+
             input {
-                height: 32px;
+                height: 40px;
                 border-radius: 4px;
                 background-color: $dark-clr1;
                 border: 0;
@@ -45,10 +76,34 @@
             .btn-login-signup {
                 background-color: $bgc-login-signup-btn;
                 color: black;
-                width: 100%;
-                height: 35px;
+                height: 40px;
                 font-weight: bold;
+                // font-family: opensans;
                 border-radius: 25px;
+                margin: 12px 0 0 0;
+                padding: 0;
+
+                &:hover {
+                    transform: scale(1.04);
+                    background-color: $bgc-login-signup-btn-hover;
+                }
+            }
+        }
+
+        .auth-navigation {
+            grid-area: 3/ 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+
+            span {
+                color: $gray5;
+            }
+
+            a {
+                color: white;
+                text-decoration: underline;
             }
         }
     }
