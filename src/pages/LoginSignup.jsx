@@ -3,6 +3,8 @@ import { userService } from "../services/user.service"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import { useNavigate, useParams } from "react-router"
 import { login, signup } from "../store/actions/user.actions"
+import { AllIcons, SvgIcon } from "../cmps/SvgIcon"
+import { Link } from "react-router-dom"
 
 export const LoginSignup = () => {
     const [credentials, setCredentials] = useState(userService.getEmptyCredentials())
@@ -34,7 +36,14 @@ export const LoginSignup = () => {
     const { fullname, username, password, email } = credentials
     return (
         <div className="login-signup">
+
             <div className="login-signup-container">
+                <section className="spotify-logo-and-title">
+                    <button onClick={() => navigate('/')} className="btn-spotify">
+                        <SvgIcon iconName='spotify' />
+                    </button>
+                    <h1>{location === "signup" ? "Sign up" : "Log in"} to Spotify</h1>
+                </section>
                 <form
                     onSubmit={onSubmitLoginSignup}
                     className="login-signup-form">
@@ -76,6 +85,14 @@ export const LoginSignup = () => {
                             required />}
                     <button className="btn-login-signup">{location === 'signup' ? 'Sign up' : 'Log in'}</button>
                 </form>
+                <section className="auth-navigation">
+                    <span>
+                        {location === "login" ? "Don't have an account?" : "Already have an account?"}
+                    </span>
+                    <Link to={location === "login" ? "/signup" : "/login"}>
+                        {location === "login" ? "Sign up for Spotify" : "Log in here"}
+                    </Link>
+                </section>
             </div>
         </div>
     )

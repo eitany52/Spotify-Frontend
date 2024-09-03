@@ -12,7 +12,7 @@ export function DynamicModal() {
   function onCloseModal() {
     onToggleModal(null);
   }
-
+  
   if (!modalData) return <></>;
 
   const Cmp = modalData?.cmp || (() => "");
