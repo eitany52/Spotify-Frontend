@@ -11,7 +11,7 @@ import {
   removeSongFromStation,
   setCurrentSong,
   setPlayPause,
-  reorderSongInStation,
+  setNewSongOrder,
 } from "../store/actions/station.actions.js";
 
 // import { utilService } from "../services/util.service.js";
@@ -131,7 +131,7 @@ export function StationDetails() {
     // עדכן את הרשימה המעודכנת עם סדר השירים החדש
     //setSongs(reorderedSongs);
 
-    reorderSongInStation(stationId, reorderedSongs);
+    setNewSongOrder(station, reorderedSongs);
   }
 
   // if (colors.backgroundColor === "") return <div>Loading...</div>;
@@ -161,8 +161,8 @@ export function StationDetails() {
               <section onClick={playPauseStation} className="svg-big bigger">
                 {(!isPlaying ||
                   (isPlaying && !isCurrentSongSavedAtStation)) && (
-                  <SvgIcon iconName="play" style="dark" />
-                )}
+                    <SvgIcon iconName="play" style="dark" />
+                  )}
                 {isPlaying && isCurrentSongSavedAtStation && (
                   <SvgIcon iconName="pause" style="dark" />
                 )}

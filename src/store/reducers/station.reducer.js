@@ -10,6 +10,7 @@ export const SET_PLAY_PAUSE = 'SET_PLAY_PAUSE'
 export const SET_SHUFFLE = 'SET_SHUFFLE'
 export const DISPLAY_HIDE_CARD = 'DISPLAY_HIDE_CARD'
 export const EXPEND_LIB = 'EXPEND_LIB'
+export const UNDO_UPDATE_STATION = 'UNDO_UPDATE_STATION'
 
 
 //Checked - All looks good.
@@ -29,7 +30,8 @@ const initialState = {
     isPlaying: false,
     isShuffle: false,
     displayCard: false,
-    expendLib: false
+    expendLib: false,
+    lastStation: null
 }
 
 export function stationReducer(state = initialState, action) {
@@ -55,7 +57,7 @@ export function stationReducer(state = initialState, action) {
             break
         case UPDATE_STATION:
             stations = state.stations.map(station => station._id === action.updatedStation._id ? action.updatedStation : station)
-            newState = { ...state, stations }
+            newState = { ...state, stations, lastStation: action.updatedStation }
             break
         case SET_CURRENT_SONG:
             newState = { ...state, currentSong: action.song }
@@ -71,6 +73,10 @@ export function stationReducer(state = initialState, action) {
             break
         case EXPEND_LIB:
             newState = { ...state, expendLib: action.libStatus }
+            break
+        case UNDO_UPDATE_STATION:
+            stations = state.stations.map(station => station._id === newState.lastStation._id ? newState.lastStation : station)
+            newState = { ...state, stations }
             break
         default:
     }
