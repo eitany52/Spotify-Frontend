@@ -1,9 +1,9 @@
 import { stationService } from '../../services/station'
 import { store } from '../store'
 import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
-import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE, SET_SHUFFLE, DISPLAY_HIDE_CARD, SET_LIKED_SONGS_STATION, EXPEND_LIB } from '../reducers/station.reducer'
+import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE, SET_SHUFFLE, DISPLAY_HIDE_CARD, SET_LIKED_SONGS_STATION, EXPEND_LIB, UNDO_UPDATE_STATION } from '../reducers/station.reducer'
 
-export async function loadStations( filterBy ) {
+export async function loadStations(filterBy) {
     try {
         // store.dispatch({ type: LOADING_START })
         const stations = await stationService.query(filterBy)
@@ -78,7 +78,7 @@ export async function saveStationByUser(station) {
         if (savedStation !== "already exist") {
             store.dispatch({ type: ADD_STATION, savedStation })
             store.dispatch({ type: SET_STATION, savedStation })
-        } 
+        }
     } catch (err) {
         console.log('Cannot save station by user', err)
         throw err
@@ -127,11 +127,15 @@ export async function addSongToStation(stationId, song) {
 }
 
 
-export async function reorderSongInStation(stationId, songs) {
+export async function setNewSongOrder(station, songs) {
     try {
-        const updatedStation = await stationService.reorderSongInStation(stationId, songs)
-        store.dispatch({ type: UPDATE_STATION, updatedStation })
+        station.songs = songs
+        store.dispatch({ type: UPDATE_STATION, updatedStation: station })
+        await stationService.save(station)
     } catch (err) {
+        console.log("Entered Catch");
+
+        store.disptach({ type: UNDO_UPDATE_STATION })
         console.log('Cannot reorder song to station', err)
         throw err
     }

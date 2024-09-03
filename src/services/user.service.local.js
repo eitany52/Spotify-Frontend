@@ -24,7 +24,6 @@ export const userService = {
 
 }
 window.us = userService
-_createLoggedInUser()
 
 async function query() {
     var users = await storageService.query(STORAGE_KEY)

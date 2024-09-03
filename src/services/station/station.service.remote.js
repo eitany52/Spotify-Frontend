@@ -15,7 +15,7 @@ export const stationService = {
     addSongToStation,
     updateStationDetails,
     getDemoStations,
-    reorderSongInStation,
+    // reorderSongInStation,
     removeSongFromStation
     // getEmptyCar,
     // addCarMsg
@@ -91,15 +91,15 @@ function getDemoStations(loggedInUserId) {
 
 
 
-async function reorderSongInStation(stationId, songs) {
-    const station = await getById(stationId)
+// async function reorderSongInStation(stationId, songs) {
+//     const station = await getById(stationId)
 
-    station.songs = songs
+//     station.songs = songs
     
-    await save(station)
+//     await save(station)
 
-    return station // ?
-}
+//     return station // ?
+// }
 
 
 async function removeSongFromStation(stationId, songId) {
