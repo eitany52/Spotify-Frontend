@@ -1,23 +1,22 @@
-
 .modal-backdrop {
     position: fixed;
     background-color: transparent;
     inset: 0;
     z-index: 0;
-   
+
 }
 
 .modal-content {
     //position: fixed;
     user-select: none;
 
-    position:absolute;
+    position: absolute;
     font-size: 1.1em;
     inset: 0;
-    width: 25vw; 
+    width: 25vw;
     height: fit-content;
     padding: 3px;
-    background:$dark-clr3;
+    background: $dark-clr3;
     color: white;
     z-index: 3;
     border-radius: 5px;
@@ -26,19 +25,21 @@
     justify-content: stretch;
 
     & ul {
-        list-style:none;
+        list-style: none;
         // padding-left:10px;
-        margin:0;
-        padding:0;
+        margin: 0;
+        padding: 0;
     }
 
     & ul li {
-        padding:10px;
-        & span{
-            font-size:14px;
+        padding: 10px;
+
+        & span {
+            font-size: 14px;
         }
+
         &:hover {
-            background-color:$dark-clr5;
+            background-color: $dark-clr5;
         }
     }
 
@@ -46,18 +47,18 @@
     @include for-mobile-layout {
         & {
             width: 100%;
-            top:inherit;
-            bottom:0;
+            top: inherit;
+            bottom: 0;
         }
     }
 
 
 
     & ul li.lastInGroup {
-        border-bottom:1px solid $gray4;
+        border-bottom: 1px solid $gray4;
     }
 
-    
+
     .close-btn {
         position: absolute;
         top: 5px;
@@ -71,28 +72,29 @@
 
 
 
-    &.floating-menu-song-add {   
+    &.floating-menu-song-add {
         width: minmax(20vw, 200px);
     }
 
     &.floating-menu-song {
         align-items: start;
-        width: minmax(20vw, 200px); 
+        width: minmax(20vw, 200px);
     }
 
-   
+    &.floating-menu-user {
+        width: 200px;
+    }
 
-   &.floating-edit-station-details {
-    margin: auto;
-    width: 40vw;
-    min-width:450px
-   }
 
-   &.floating-menu-station {
-     width: minmax(20vw,250px);
-   }
+    &.floating-edit-station-details {
+        margin: auto;
+        width: 40vw;
+        min-width: 450px
+    }
 
-   
+    &.floating-menu-station {
+        width: minmax(20vw, 250px);
+    }
+
+
 }
-
-
