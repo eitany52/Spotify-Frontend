@@ -36,7 +36,7 @@ export function AppHeader({ backgroundColor = null }) {
   }
 
   function onGoToLoginSignup(location) {
-    navigate(`/${location}`)
+    navigate(`/${location}`);
   }
 
   async function onLogin(credentials) {
@@ -66,9 +66,9 @@ export function AppHeader({ backgroundColor = null }) {
       showErrorMsg("Cannot logout");
     }
   }
-console.log("user:", user);
+  console.log("user:", user);
 
-  const userLatter = user ? utilService.getFirstChar(user.fullname) : null
+  const userLatter = user ? utilService.getFirstChar(user.fullname) : null;
   console.log(backgroundColor);
   const darkenedBackground_50 = utilService.darkenColor(
     "rgba(173,152,151,1)",
@@ -86,36 +86,57 @@ console.log("user:", user);
       {
         <>
           <section>
-            <button className=" btn-back icon-type-1 big">
+            {/* <button className=" btn-back icon-type-1 big">
               <SvgIcon iconName={"back"} />
             </button>
             <button className=" btn-forward icon-type-1 big">
               <SvgIcon iconName={"forward"} />
+            </button> */}
+            <button
+              className="btn-back icon-type-1 big"
+              onClick={() => navigate(-1)}
+            >
+              <SvgIcon iconName={"back"} />
+            </button>
+            <button
+              className="btn-forward icon-type-1 big"
+              onClick={() => navigate(1)}
+            >
+              <SvgIcon iconName={"forward"} />
             </button>
           </section>
-          {user && <section className="user-info">
-            {/* <span>{backgroundColor} </span>
+          {user && (
+            <section className="user-info">
+              {/* <span>{backgroundColor} </span>
             <span>{darkenedBackground_50} </span> */}
 
-            <span style={{ backgroundColor: darkenedBackground_50 }}>
-              <small
-                style={{
-                  backgroundColor: backgroundColor,
-                }}
-              >
-                {userLatter}
-              </small>
-            </span>
-          </section>}
-          {!user &&
+              <span style={{ backgroundColor: darkenedBackground_50 }}>
+                <small
+                  style={{
+                    backgroundColor: backgroundColor,
+                  }}
+                >
+                  {userLatter}
+                </small>
+              </span>
+            </section>
+          )}
+          {!user && (
             <section className="btns-login-signup">
               <button
                 onClick={() => onGoToLoginSignup("signup")}
-                className="btn-signup">Sign up</button>
+                className="btn-signup"
+              >
+                Sign up
+              </button>
               <button
                 onClick={() => onGoToLoginSignup("login")}
-                className="btn-login">Login</button>
-            </section>}
+                className="btn-login"
+              >
+                Login
+              </button>
+            </section>
+          )}
           {isSearchDisplayed && <AppSearch />}
         </>
 
