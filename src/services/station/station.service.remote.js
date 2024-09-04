@@ -2,6 +2,7 @@
 // import { storageService } from './async-storage.service'
 import { httpService } from '../http.service'
 import { utilService } from '../util.service'
+import { getLoggedInUser } from '../../store/actions/user.actions'
 
 
 const STORAGE_KEY = 'station'
@@ -15,8 +16,9 @@ export const stationService = {
     addSongToStation,
     updateStationDetails,
     getDemoStations,
-    // reorderSongInStation,
-    removeSongFromStation
+    removeSongFromStation,
+    saveStationByUser,
+    isLikedSongStation
     // getEmptyCar,
     // addCarMsg
 }
@@ -35,14 +37,24 @@ function getById(stationId) {
 async function remove(stationId) {
     return httpService.delete(`station/${stationId}`)
 }
-async function save(station) {
+async function save(station, updateSavedByOnly = false) {
     var savedStation
-
+    console.log('remote save    11111111111')
     if (station._id) {
-     //   savedStation = await httpService.put(`station/${station._id}`, station)
-        savedStation = await httpService.put(`station`, station)
+
+        if (updateSavedByOnly) {
+            console.log('remote save put   22222222222222')
+            savedStation = await httpService.put(`station/${station._id}`, station)
+        } else {
+            console.log('remote save put   333333333333333')
+            //   savedStation = await httpService.put(`station/${station._id}`, station)
+               savedStation = await httpService.put(`station`, station)
+        }
+
+       
 
     } else {
+        console.log('remote save post   444444444444')
         savedStation = await httpService.post('station', station)
     }
     return savedStation
@@ -91,16 +103,6 @@ function getDemoStations(loggedInUserId) {
 
 
 
-// async function reorderSongInStation(stationId, songs) {
-//     const station = await getById(stationId)
-
-//     station.songs = songs
-    
-//     await save(station)
-
-//     return station // ?
-// }
-
 
 async function removeSongFromStation(stationId, songId) {
 
@@ -109,6 +111,42 @@ async function removeSongFromStation(stationId, songId) {
     await save(station)
 
     return station // ?
+}
+
+
+
+async function saveStationByUser(station) {
+
+
+    console.log('remote saveStationByUser')
+    const stationToSave = {
+        ...station, savedBy: [...station.savedBy, getLoggedInUser()._id]
+    }
+
+    const stations = await query()
+    console.log('remote saveStationByUser stations:', stations)
+    console.log('remote saveStationByUser station._id:', station._id)
+    console.log('remote saveStationByUser getLoggedInUser()._id:', getLoggedInUser()._id)
+
+    //const isExists = stations.some(_station => _station._id === station._id)
+
+    const isExists = stations.some(_station => 
+        _station._id === station._id && 
+        _station.savedBy.includes(getLoggedInUser()._id)
+      );
+    if (isExists) {
+        return Promise.resolve('already exists');
+    }
+    const savedStation = await save(stationToSave, true)
+    console.log('remote saveStationByUser savedStations:', savedStation)
+    return savedStation
+}
+
+
+async function isLikedSongStation(stationId) {
+    const station = await getById(stationId)
+    const islikedSongsStation = (station.type === 'liked')
+    return islikedSongsStation
 }
 
 

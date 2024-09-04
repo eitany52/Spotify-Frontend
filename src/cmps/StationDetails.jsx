@@ -157,10 +157,6 @@ export function StationDetails() {
     const [removed] = reorderedSongs.splice(source.index, 1);
     reorderedSongs.splice(destination.index, 0, removed);
 
-    console.log("onDragEnd 222222222");
-    // עדכן את הרשימה המעודכנת עם סדר השירים החדש
-    //setSongs(reorderedSongs);
-
     setNewSongOrder(station, reorderedSongs);
   }
 
