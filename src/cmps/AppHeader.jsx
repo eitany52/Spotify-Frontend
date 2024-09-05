@@ -60,7 +60,6 @@ export function AppHeader({ backgroundColor = null }) {
     });
   }
   
-  console.log("user:", user);
 
   const userLatter = user ? utilService.getFirstChar(user.fullname) : null;
   console.log(backgroundColor);

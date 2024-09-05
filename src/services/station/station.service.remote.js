@@ -35,7 +35,7 @@ async function remove(stationId) {
 }
 async function save(station, updateSavedByOnly = false) {
     var savedStation
-   
+
     if (station._id) {
 
         if (updateSavedByOnly) {
@@ -118,10 +118,10 @@ async function saveStationByUser(station) {
 
     //const isExists = stations.some(_station => _station._id === station._id)
 
-    const isExists = stations.some(_station => 
-        _station._id === station._id && 
+    const isExists = stations.some(_station =>
+        _station._id === station._id &&
         _station.savedBy.includes(getLoggedInUser()._id)
-      );
+    );
     if (isExists) {
         return Promise.resolve('already exists');
     }

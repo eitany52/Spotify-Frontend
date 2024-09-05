@@ -3,12 +3,9 @@ import {
   addSongToStation,
   getUserStations,
   isSongSavedAtStation,
-  loadLikedSongsStation,
-  removeSongFromStation,
+  removeSongFromStation
 } from "../store/actions/station.actions.js";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getLoggedInUser } from "../store/actions/user.actions.js";
 import { SvgIcon } from "./SvgIcon.jsx";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
 
@@ -38,6 +35,10 @@ export const FloatingMenuSong = ({ onDone, song }) => {
 
   async function onToggleAddToLikedSongs() {
     onDone();
+    if (!user) {
+      showErrorMsg("Log in to add this to your Liked Songs.")
+      return
+    }
     let isSongAdded = false; // is song added or removed from liked songs station
     try {
       if (isSongSavedAtLikedSongs()) {
@@ -78,9 +79,11 @@ export const FloatingMenuSong = ({ onDone, song }) => {
     }
   }
   // if (!likedSongsStation) return <div>loading...</div>;
+  console.log("likedSongsStation: ", likedSongsStation);
   const userStations = user ? getUserStations(stations) : []
   const isUserStation = user && station && user._id === station.createdBy.id;
   const isSongToMark = user && isSongSavedAtLikedSongs();
+
   return (
     <div className="song-floating-menu">
       <ul>
