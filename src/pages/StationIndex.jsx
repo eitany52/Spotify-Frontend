@@ -15,8 +15,8 @@ import {
   getUserStations,
   isSongSavedAtSomeStation,
   loadLikedSongsStation,
-  loadStations,
-  setStationFromDemo,
+  loadLibraryStations as loadLibraryStations,
+  // setStationFromDemo,
   setExpandLib,
 } from "../store/actions/station.actions";
 
@@ -29,7 +29,7 @@ export const StationIndex = () => {
   const [isSearchDisplayed, setIsSearchDisplayed] = useState(false);
   const [isHomePageDisplayed, setIsHomePageDisplayed] = useState(true);
 
-  const [demoStations, setDemoStations] = useState([]);
+  const [homeStations, setHomeStations] = useState([]);
 
   const stations = useSelector(
     (storeState) => storeState.stationModule.stations
@@ -52,19 +52,12 @@ export const StationIndex = () => {
 
   useEffect(() => {
     if (user) {
-      console.log("stationIndex user 1", user);
-      loadStations({ createdBy: user._id });
-      loadDemoStations(user._id);
-      console.log("demoStations", demoStations);
-      console.log("stations", stations);
-    } else {
-      console.log("stationIndex user 2", user);
-      loadStations();
-      loadDemoStations();
-      console.log("demoStations", demoStations);
-      console.log("stations", stations);
+      loadLibraryStations({ location: "library", userId: user._id });
+      loadHomeStations({ location: "home", userId: user._id });
     }
-
+    else {
+      loadHomeStations({ location: "home", userId: null });
+    }
     loadLikedSongsStation();
   }, [user]);
 
@@ -72,12 +65,11 @@ export const StationIndex = () => {
     getLocation();
   }, [location]);
 
-  async function loadDemoStations(userId) {
+  async function loadHomeStations(filterBy) {
     //remote
     try {
-      const demoStations = await stationService.getDemoStations(userId);
-      setDemoStations(demoStations);
-      //console.log(demoStations);
+      const demoStations = await stationService.query(filterBy);
+      setHomeStations(demoStations);
     } catch (err) {
       console.error("error getting demo stations", err);
     }
@@ -108,15 +100,14 @@ export const StationIndex = () => {
   async function onAddToLikedSongs(songToAdd) {
     try {
       await addSongToStation(likedSongsStation._id, songToAdd);
-      loadLikedSongsStation();
     } catch (err) {
       console.log("Having issues with saving this song", err);
     }
   }
 
-  function setStationFromSearch(station) {
-    setStationFromDemo(station);
-  }
+  // function setStationFromSearch(station) {
+  //   setStationFromDemo(station);
+  // }
 
   async function onCreateEmptyStation() {
     try {
@@ -132,31 +123,28 @@ export const StationIndex = () => {
   }
 
   function isSongSavedAtSomeUserStation(song) {
-    const userStations = getUserStations(stations);
+    const userStations = user ? getUserStations(stations) : []
     return isSongSavedAtSomeStation(userStations, song.id);
   }
 
-  function isDemoStation(stationId) {
-    const isInDemo = demoStations.some((_station) => {
-      return _station._id === stationId;
-    });
+  // function isDemoStation(stationId) {
+  //   const isInDemo = demoStations.some((_station) => {
+  //     return _station._id === stationId;
+  //   });
 
-    const isInStations = stations.some((_station) => {
-      return _station._id === stationId;
-    });
-    // console.log("isInDemo:", isInDemo);
-    // console.log("isInStations:", isInStations);
-    // console.log("is only demo:", isInDemo && !isInStations);
-    return isInDemo && !isInStations;
-  }
-
-  if (!stations.length) return;
+  //   const isInStations = stations.some((_station) => {
+  //     return _station._id === stationId;
+  //   });
+  //   // console.log("isInDemo:", isInDemo);
+  //   // console.log("isInStations:", isInStations);
+  //   // console.log("is only demo:", isInDemo && !isInStations);
+  //   return isInDemo && !isInStations;
+  // }
 
   return (
     <div
-      className={`station-index  ${displayCard ? "display-card" : ""}  ${
-        expendLib ? "expend-lib" : ""
-      } `}
+      className={`station-index  ${displayCard ? "display-card" : ""}  ${expendLib ? "expend-lib" : ""
+        } `}
     >
       {/* <p>Current screen category: {screenCategory}</p> */}
       {/* {isHome ? "home" : "library"} */}
@@ -165,18 +153,18 @@ export const StationIndex = () => {
         <nav>
           {((screenCategory !== "mobile" && !isHomePageDisplayed) ||
             (screenCategory === "mobile" && !isHome)) && (
-            <button onClick={goToHome} className="btn-type-2">
-              {" "}
-              <SvgIcon iconName="home" /> Home{" "}
-            </button>
-          )}
+              <button onClick={goToHome} className="btn-type-2">
+                {" "}
+                <SvgIcon iconName="home" /> Home{" "}
+              </button>
+            )}
           {((screenCategory !== "mobile" && isHomePageDisplayed) ||
             (screenCategory === "mobile" && isHome)) && (
-            <button onClick={goToHome} className="btn-type-2 current">
-              {" "}
-              <SvgIcon iconName="homeActive" /> Home{" "}
-            </button>
-          )}
+              <button onClick={goToHome} className="btn-type-2 current">
+                {" "}
+                <SvgIcon iconName="homeActive" /> Home{" "}
+              </button>
+            )}
 
           {!isSearchDisplayed && (
             <Link to="/search" className="btn-type-2 ">
@@ -276,13 +264,13 @@ export const StationIndex = () => {
 
         {((isHomePageDisplayed && screenCategory !== "mobile") ||
           (isHomePageDisplayed && isHome && screenCategory === "mobile")) && (
-          <StationList
-            stations={demoStations}
-            location="main"
-            setStationFromSearch={setStationFromSearch}
-            onCreateEmptyStation={onCreateEmptyStation}
-          />
-        )}
+            <StationList
+              stations={homeStations}
+              location="main"
+              onCreateEmptyStation={onCreateEmptyStation}
+            // setStationFromSearch={setStationFromSearch}
+            />
+          )}
 
         {isHomePageDisplayed && screenCategory === "mobile" && !isHome && (
           <div className="station-list-wrapper">
@@ -298,8 +286,8 @@ export const StationIndex = () => {
           <Outlet
             context={{
               onAddToLikedSongs,
-              isSongSavedAtSomeUserStation,
-              isDemoStation,
+              isSongSavedAtSomeUserStation
+              // isDemoStation,
             }}
           />
         )}

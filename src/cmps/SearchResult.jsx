@@ -1,42 +1,51 @@
 import { useState } from "react";
 import { useOutletContext, useParams } from "react-router";
-import { getSongsFromYoutube, setStationFromDemo } from "../store/actions/station.actions";
+import { getSongsFromYoutube } from "../store/actions/station.actions";
 import { useEffectUpdate } from "../customHooks/useEffectUpdate";
 import { SongList } from "./SongList";
 import { StationList } from "./StationList";
-import demoStations from "../../data/demo-stations.json";
+// import demoStations from "../../data/demo-stations.json";
+import { stationService } from "../services/station";
+import { showErrorMsg } from "../services/event-bus.service";
 
 export const SearchResult = () => {
   const params = useParams();
   const [songs, setSongs] = useState(null);
-  const { onAddToLikedSongs, isSongSavedAtSomeUserStation } =
-    useOutletContext();
+  const [stationsByUserInput, setStationsByUserInput] = useState([]);
+  const { onAddToLikedSongs, isSongSavedAtSomeUserStation } = useOutletContext();
 
   useEffectUpdate(() => {
     loadSongs();
+    loadStationsByUserInput()
   }, [params]);
 
   async function loadSongs() {
-    const songs = await getSongsFromYoutube(params.userInput)
-    setSongs(songs);
+    try {
+      const songs = await getSongsFromYoutube(params.userInput)
+      setSongs(songs);
+    } catch (error) {
+      console.log("Cannot load songs", error);
+      showErrorMsg("Failed to find songs")
+    }
   }
 
-  function setStationFromSearch(station) {
-    setStationFromDemo(station)
+  async function loadStationsByUserInput() {
+    try {
+      const stationsByUserInput = await stationService.query({
+        location: "search",
+        userInput: params.userInput
+      })
+
+      setStationsByUserInput(stationsByUserInput)
+    } catch (error) {
+      console.log("Cannot load stations by user input", error);
+    }
   }
 
-  function filterStationsByUserInput() {
-    let stations = structuredClone(demoStations)
+  // function setStationFromSearch(station) {
+  //   setStationFromDemo(station)
+  // }
 
-    stations = stations.filter(station => station.tags.some(tag => {
-      const regExp = new RegExp(tag, 'i')
-      return regExp.test(params.userInput)
-    }))
-
-    return stations
-  }
-
-  const stations = filterStationsByUserInput()
   const firstSongImg = songs ? songs[0].imgUrl : null
   return (
     <div className="search-result">
@@ -70,12 +79,12 @@ export const SearchResult = () => {
               />
             </section>
             <h2>Playlists result</h2>
-            {!!stations.length &&
+            {!!stationsByUserInput.length &&
               <StationList
-                stations={stations}
-                location="search"
-                setStationFromSearch={setStationFromSearch} />}
-            {!stations.length &&
+                stations={stationsByUserInput}
+                location="search" />}
+            {/* setStationFromSearch={setStationFromSearch} />} */}
+            {!stationsByUserInput.length &&
               <span className="span-no-results">No results</span>}
           </section>
         </>

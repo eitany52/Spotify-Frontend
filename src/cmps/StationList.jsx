@@ -1,14 +1,11 @@
 import { StationPreview } from "./StationPreview";
-import { getLoggedInUser } from "../store/actions/user.actions";
-
-// Checked - All looks good.
 
 export const StationList = ({
   stations,
   location,
   onAddSongToStation,
   songToAdd = {},
-  setStationFromSearch = {},
+  // setStationFromSearch = {},
   onCreateEmptyStation = {},
   onToggleMarkStation,
   isStationToMark
@@ -22,7 +19,7 @@ export const StationList = ({
             key={station._id}
             station={station}
             location={location}
-            setStationFromSearch={setStationFromSearch}
+            // setStationFromSearch={setStationFromSearch}
             onCreateEmptyStation={onCreateEmptyStation}
             onAddSongToStation={onAddSongToStation}
             songToAdd={songToAdd}

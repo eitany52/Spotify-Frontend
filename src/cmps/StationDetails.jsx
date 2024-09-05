@@ -15,7 +15,6 @@ import {
 } from "../store/actions/station.actions.js";
 
 // import { utilService } from "../services/util.service.js";
-import { getLoggedInUser } from "../store/actions/user.actions.js";
 import { utilService } from "../services/util.service.js";
 import { SvgIcon, AllIcons } from "./SvgIcon.jsx";
 import { AppSearch } from "./AppSearch.jsx";
@@ -23,8 +22,6 @@ import { SongList } from "./SongList.jsx";
 import { AppHeader } from "../cmps/AppHeader";
 import ImageColorComponent from "../cmps/ImageColorComponent";
 import { useStation } from "../customHooks/useStation.js";
-
-//Checked - All looks good.
 
 export function StationDetails() {
   const { stationId } = useParams();
@@ -38,6 +35,7 @@ export function StationDetails() {
   const currentSong = useSelector(
     (storeState) => storeState.stationModule.currentSong
   );
+  const user = useSelector(storeState => storeState.userModule.user)
   const { onAddToLikedSongs, isSongSavedAtSomeUserStation, isDemoStation } =
     useOutletContext();
   const [colors, setColors] = useState({
@@ -50,16 +48,21 @@ export function StationDetails() {
   const location = "station-details";
   const { handleRightClick } = useStation({ station, stationId, location });
 
+  useEffect(() => {
+    loadStation(stationId)
+  }, [stationId])
+
+  // const [localSongs, setLocalSongs] = useState(songs);
   const [fontSize, setFontSize] = useState("1em");
   const containerRef = useRef(null);
 
-  useEffect(() => {
-    const isDemoOnly = isDemoStation(stationId);
-    if (!isDemoOnly) {
-      loadStation(stationId);
-    }
-    //loadStation(stationId);
-  }, [stationId, stations, colors]);
+  // useEffect(() => {
+  //   const isDemoOnly = isDemoStation(stationId);
+  //   if (!isDemoOnly) {
+  //     loadStation(stationId);
+  //   }
+  //   //loadStation(stationId);
+  // }, [stationId, stations, colors]);
 
   useEffect(() => {
     const resizeFont = () => {
@@ -164,7 +167,7 @@ export function StationDetails() {
       </div>
     );
 
-  const isUserStation = getLoggedInUser()._id === station.createdBy.id;
+  const isUserStation = user && user._id === station.createdBy.id;
   const isCurrentSongSavedAtStation = isSongSavedAtStation(
     station,
     currentSong.id

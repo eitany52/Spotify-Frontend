@@ -37,6 +37,7 @@ const initialState = {
 export function stationReducer(state = initialState, action) {
     let newState = state
     let stations
+    let station
     switch (action.type) {
 
         case SET_STATION:
@@ -56,8 +57,9 @@ export function stationReducer(state = initialState, action) {
             newState = { ...state, stations }
             break
         case UPDATE_STATION:
+            station = state.stations.find(station => station._id === action.updatedStation._id)
             stations = state.stations.map(station => station._id === action.updatedStation._id ? action.updatedStation : station)
-            newState = { ...state, stations, lastStation: action.updatedStation }
+            newState = { ...state, stations, lastStation: station }
             break
         case SET_CURRENT_SONG:
             newState = { ...state, currentSong: action.song }

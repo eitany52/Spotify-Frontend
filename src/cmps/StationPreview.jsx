@@ -12,10 +12,10 @@ export const StationPreview = ({
   station,
   location,
   onAddSongToStation,
-  setStationFromSearch,
   onCreateEmptyStation,
   onToggleMarkStation,
-  isStationToMark,
+  isStationToMark
+  // setStationFromSearch,
 }) => {
   const navigate = useNavigate();
   const { stationId } = useParams();
@@ -31,7 +31,7 @@ export const StationPreview = ({
     if (location === "modal-more") {
       onAddSongToStation(station);
     } else if (location === "main" || location === "search") {
-      setStationFromSearch(station);
+      // setStationFromSearch(station);
       onGoToStationDetails();
     } else if (location === "modal-add") {
       onToggleMarkStation(station);
@@ -78,9 +78,7 @@ export const StationPreview = ({
 
   const numOfSongs = station.songs.length;
   const profileName = station.createdBy.fullname;
-  // const isUserStation = getLoggedInUser()._id === station.createdBy.id;
-  // const isSavedStation = station.savedBy.some(
-  //   (user) => user.id === getLoggedInUser()._id);
+
   return (
     <li
       onClick={onClickStation}

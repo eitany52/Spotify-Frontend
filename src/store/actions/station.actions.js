@@ -3,7 +3,7 @@ import { store } from '../store'
 import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
 import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE, SET_SHUFFLE, DISPLAY_HIDE_CARD, SET_LIKED_SONGS_STATION, EXPEND_LIB, UNDO_UPDATE_STATION } from '../reducers/station.reducer'
 
-export async function loadStations(filterBy) {
+export async function loadLibraryStations(filterBy) {
     try {
         // store.dispatch({ type: LOADING_START })
         const stations = await stationService.query(filterBy)
@@ -51,7 +51,7 @@ export function getUserStations(stations) {
 
 export async function loadLikedSongsStation() {
     try {
-        const likedSongsStation = await stationService.getLikedSongsStation()
+        const likedSongsStation = await stationService.getUserLikedSongs()
         store.dispatch({ type: SET_LIKED_SONGS_STATION, likedSongsStation })
     } catch (err) {
         console.log("Cannot load Liked Songs Station", err)
@@ -121,9 +121,16 @@ export async function addSongToStation(stationId, song) {
     try {
         const updatedStation = await stationService.addSongToStation(stationId, song)
         store.dispatch({ type: UPDATE_STATION, updatedStation })
+        handleLikedSongsStationUpdate(updatedStation)
     } catch (err) {
         console.log('Cannot add song to station', err)
         throw err
+    }
+}
+
+function handleLikedSongsStationUpdate(updatedStation) {
+    if (updatedStation.type === "liked") {
+        store.dispatch({ type: SET_LIKED_SONGS_STATION, likedSongsStation: updatedStation })
     }
 }
 
@@ -134,9 +141,7 @@ export async function setNewSongOrder(station, songs) {
         store.dispatch({ type: UPDATE_STATION, updatedStation: station })
         await stationService.save(station)
     } catch (err) {
-        console.log("Entered Catch");
-
-        store.disptach({ type: UNDO_UPDATE_STATION })
+        store.dispatch({ type: UNDO_UPDATE_STATION })
         console.log('Cannot reorder song to station', err)
         throw err
     }
@@ -146,6 +151,7 @@ export async function removeSongFromStation(stationId, songId) {
     try {
         const updatedStation = await stationService.removeSongFromStation(stationId, songId)
         store.dispatch({ type: UPDATE_STATION, updatedStation })
+        handleLikedSongsStationUpdate(updatedStation);
     } catch (err) {
         console.log('Cannot remove song from station', err)
         throw err
@@ -244,15 +250,15 @@ export async function setExpandLib(libStatus) {
         throw err
     }
 }
-export function setStationFromDemo(station) {
-    try {
-        store.dispatch({ type: SET_STATION, station })
-    } catch (err) {
-        console.log('Cannot load station from search', err)
-        throw err
-    }
+// export function setStationFromDemo(station) {
+//     try {
+//         store.dispatch({ type: SET_STATION, station })
+//     } catch (err) {
+//         console.log('Cannot load station from search', err)
+//         throw err
+//     }
 
-}
+// }
 
 export function formatSong(song) {
     return stationService.formatSong(song)

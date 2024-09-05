@@ -4,21 +4,17 @@ import { httpService } from '../http.service'
 import { utilService } from '../util.service'
 import { getLoggedInUser } from '../../store/actions/user.actions'
 
-
-const STORAGE_KEY = 'station'
-
 export const stationService = {
     query,
     getById,
     save,
     remove,
-    getLikedSongsStation,
     addSongToStation,
     updateStationDetails,
-    getDemoStations,
+    getUserLikedSongs,
     removeSongFromStation,
-    saveStationByUser,
-    isLikedSongStation
+    saveStationByUser
+    // reorderSongInStation,
     // getEmptyCar,
     // addCarMsg
 }
@@ -27,7 +23,7 @@ window.ss = stationService
 
 async function query(filterBy = {}) {
     console.log('remote')
-    return httpService.get(STORAGE_KEY, filterBy)
+    return httpService.get('station', filterBy)
 }
 
 function getById(stationId) {
@@ -54,24 +50,14 @@ async function save(station, updateSavedByOnly = false) {
     return savedStation
 }
 
-async function getLikedSongsStation() {
-    const stations = await query()
-    const likedSongsStation = stations.find(station => station.type === 'liked')
-    return likedSongsStation
-}
-
 
 async function addSongToStation(stationId, song) {
-  
-    // Later, this is all done by the backend
     const station = await getById(stationId)
 
     station.songs.push(song)
-
-
     await save(station)
 
-    return station // ?
+    return station
 }
 
 
@@ -91,20 +77,28 @@ async function updateStationDetails(stationToSave) {
 
 }
 
-function getDemoStations(loggedInUserId) {
-    return query({ notCreatedBy : loggedInUserId }) 
+async function getUserLikedSongs() {
+    const userLikedSongs = await httpService.get('station/user-liked-songs')
+    return userLikedSongs
 }
 
+// async function reorderSongInStation(stationId, songs) {
+//     const station = await getById(stationId)
 
+//     station.songs = songs
+
+//     await save(station)
+
+//     return station // ?
+// }
 
 
 async function removeSongFromStation(stationId, songId) {
-
     const station = await getById(stationId)
     station.songs = station.songs.filter((song) => song.id !== songId)
     await save(station)
 
-    return station // ?
+    return station
 }
 
 
@@ -145,7 +139,7 @@ async function isLikedSongStation(stationId) {
 
 
 async function addCarMsg(carId, txt) {
-    const savedMsg = await httpService.post(`car/${carId}/msg`, {txt})
+    const savedMsg = await httpService.post(`car/${carId}/msg`, { txt })
     return savedMsg
 }
 
