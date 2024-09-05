@@ -18,6 +18,10 @@ export async function loadLibraryStations(filterBy) {
     // }
 }
 
+export function resetStation() {
+    store.dispatch({ type: SET_STATION, station: null })
+}
+
 export async function loadStation(stationId) {
     try {
         const station = await stationService.getById(stationId)

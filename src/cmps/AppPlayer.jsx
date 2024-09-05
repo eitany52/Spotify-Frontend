@@ -165,12 +165,9 @@ export const AppPlayer = () => {
     playerVars: {
       autoplay: 0,
       controls: 0,
-      origin: window.location.origin, // מגדיר את המקור ל-URL הנוכחי של הדפדפן
-    },
-    // origin: 'http://localhost:5173'
+      origin: window.location.origin // מגדיר את המקור ל-URL הנוכחי של הדפדפן
+    }
   };
-  console.log("window.location.origin: ", window.location.origin);
-  console.log("currentSong: ", currentSong);
 
   return (
     <div className="app-player">

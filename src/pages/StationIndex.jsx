@@ -19,6 +19,7 @@ import {
   // setStationFromDemo,
   setExpandLib,
 } from "../store/actions/station.actions";
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 
 export const StationIndex = () => {
   const location = useLocation();
@@ -68,8 +69,8 @@ export const StationIndex = () => {
   async function loadHomeStations(filterBy) {
     //remote
     try {
-      const demoStations = await stationService.query(filterBy);
-      setHomeStations(demoStations);
+      const homeStations = await stationService.query(filterBy);
+      setHomeStations(homeStations);
     } catch (err) {
       console.error("error getting demo stations", err);
     }
@@ -99,7 +100,13 @@ export const StationIndex = () => {
 
   async function onAddToLikedSongs(songToAdd) {
     try {
-      await addSongToStation(likedSongsStation._id, songToAdd);
+      if (user) {
+        await addSongToStation(likedSongsStation._id, songToAdd);
+        showSuccessMsg("Added to Liked Songs")
+      }
+      else {
+        showErrorMsg("Log in to add this to your Liked Songs")
+      }
     } catch (err) {
       console.log("Having issues with saving this song", err);
     }
