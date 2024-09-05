@@ -20,16 +20,16 @@ export const stationService = {
     updateStationDetails, // =
     getDemoStations, // =
     // removeSongFromStation, // =
+    saveStationByUser, // =
+    isLikedSongStation, // =
     // createEmptyStation,
     // getSongsFromYoutube,
     // isSongSavedAtStation,
     // getUserStations,
     // isSongSavedAtSomeStation,
-    isSongInLikedSong,
-    addUserLikedToStation,
-    removeUserLikedFromStation,
-    isLikedSongStation,
-    saveStationByUser
+    isSongInLikedSong, // only in Floating in mark
+    addUserLikedToStation, //nobody call that function
+    removeUserLikedFromStation, //nobody call that function
     // getEmptyCar,
     // addCarMsg
 }

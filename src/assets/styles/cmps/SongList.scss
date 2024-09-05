@@ -5,10 +5,13 @@
 
   & .song-preview-station-grid {
     display: grid;
-    grid-template-columns: 0.2fr 2fr 0.5fr 0.2fr 0.2fr;
+    grid-template-columns: 0.2fr 2fr 0.5fr 0.2fr 0.2fr 0.1fr;
     align-items: center;
-    padding: 5px 10px;
+    padding: 5px 25px;
 
+    color:$input-text-clr1;
+    & .song-duration i {fill: $input-text-clr1; width:16px;}
+    & .intro-outer { color: $input-text-clr2;}
 
 
     @include for-mobile-layout {

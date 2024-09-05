@@ -32,6 +32,7 @@ export const FloatingMenuStation = ({
   }
 
   async function onSaveStation() {
+    console.log("FloatingMenuStation onSaveStation");
     const savedStation = await saveStationByUser(station);
     //saveStationByUser(station);
     onDone();

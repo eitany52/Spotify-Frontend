@@ -86,21 +86,26 @@ export const StationPreview = ({
       className={`station-preview ${location}`}
     >
       <section
-        className={`station-container ${location === "library" || location === "modal-add"
-          ? "intro-outer"
-          : ""
-          }`}
+        className={`station-container ${
+          location === "library" || location === "modal-add"
+            ? "intro-outer"
+            : ""
+        }`}
       >
         <img src={station.imgUrl} />
         <section
-          className={`${location === "library" || location === "modal-add"
-            ? "intro-inner"
-            : ""
-            }`}
+          className={`${
+            location === "library" || location === "modal-add"
+              ? "intro-inner"
+              : ""
+          }`}
         >
-          <h4 className="station-name">{station.name}</h4>
+          <span className="station-name">{station.name}</span>
           {location === "library" && station.type === "liked" && (
-            <span className="span-num-of-liked-songs"> {numOfSongs} songs </span>
+            <span className="span-num-of-liked-songs">
+              {" "}
+              {numOfSongs} songs{" "}
+            </span>
           )}
           {location === "library" && station.type === "normal" && (
             <span className="profile-name"> {profileName} </span>

@@ -75,6 +75,9 @@
     }
 
     & span {
+      font-size:14px;
+      color: $input-text-clr1;
+
       @include for-mobile-layout { 
       display:none;
      }}
