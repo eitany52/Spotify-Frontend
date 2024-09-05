@@ -78,8 +78,6 @@ export const FloatingMenuSong = ({ onDone, song }) => {
       showErrorMsg("Failed to add song");
     }
   }
-  // if (!likedSongsStation) return <div>loading...</div>;
-  console.log("likedSongsStation: ", likedSongsStation);
   const userStations = user ? getUserStations(stations) : []
   const isUserStation = user && station && user._id === station.createdBy.id;
   const isSongToMark = user && isSongSavedAtLikedSongs();

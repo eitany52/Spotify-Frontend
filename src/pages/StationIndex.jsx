@@ -32,7 +32,7 @@ export const StationIndex = () => {
 
   const [homeStations, setHomeStations] = useState([]);
 
-  const stations = useSelector(
+  const libraryStations = useSelector(
     (storeState) => storeState.stationModule.stations
   );
   const likedSongsStation = useSelector(
@@ -59,7 +59,9 @@ export const StationIndex = () => {
     else {
       loadHomeStations({ location: "home", userId: null });
     }
-    loadLikedSongsStation();
+    if (user) {
+      loadLikedSongsStation();
+    }
   }, [user]);
 
   useEffect(() => {
@@ -130,7 +132,7 @@ export const StationIndex = () => {
   }
 
   function isSongSavedAtSomeUserStation(song) {
-    const userStations = user ? getUserStations(stations) : []
+    const userStations = user ? getUserStations(libraryStations) : []
     return isSongSavedAtSomeStation(userStations, song.id);
   }
 
@@ -258,7 +260,7 @@ export const StationIndex = () => {
           <div className="station-list-wrapper">
             {user && (
               <StationList
-                stations={stations}
+                stations={libraryStations}
                 location="library"
                 onCreateEmptyStation={onCreateEmptyStation}
               />
@@ -282,7 +284,7 @@ export const StationIndex = () => {
         {isHomePageDisplayed && screenCategory === "mobile" && !isHome && (
           <div className="station-list-wrapper">
             <StationList
-              stations={stations}
+              stations={libraryStations}
               location="library"
               onCreateEmptyStation={onCreateEmptyStation}
             />
