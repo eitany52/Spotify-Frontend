@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -50,7 +50,8 @@ export function StationDetails() {
   const location = "station-details";
   const { handleRightClick } = useStation({ station, stationId, location });
 
-  // const [localSongs, setLocalSongs] = useState(songs);
+  const [fontSize, setFontSize] = useState("1em");
+  const containerRef = useRef(null);
 
   useEffect(() => {
     const isDemoOnly = isDemoStation(stationId);
@@ -59,6 +60,45 @@ export function StationDetails() {
     }
     //loadStation(stationId);
   }, [stationId, stations, colors]);
+
+  useEffect(() => {
+    const resizeFont = () => {
+      const container = containerRef.current;
+      if (!container) return;
+
+      let currentFontSize = 150; // Start with the initial font size
+      const { width: maxWidth, height: maxHeight } =
+        container.getBoundingClientRect();
+
+      // Create a temporary element to measure text size
+      const tempEl = document.createElement("span");
+      tempEl.style.visibility = "hidden";
+      tempEl.style.whiteSpace = "nowrap";
+      tempEl.style.fontSize = `${currentFontSize}px`;
+      tempEl.textContent = station.name;
+      document.body.appendChild(tempEl);
+
+      // Adjust font size until the text fits within the container
+      while (
+        (tempEl.getBoundingClientRect().width > maxWidth ||
+          tempEl.getBoundingClientRect().height > maxHeight) &&
+        currentFontSize > 0
+      ) {
+        currentFontSize -= 1;
+        tempEl.style.fontSize = `${currentFontSize}px`;
+      }
+
+      document.body.removeChild(tempEl);
+      setFontSize(currentFontSize);
+    };
+
+    resizeFont();
+    window.addEventListener("resize", resizeFont);
+
+    return () => {
+      window.removeEventListener("resize", resizeFont);
+    };
+  }, [station]);
 
   function isSongSavedAtCurrentStation(song) {
     return isSongSavedAtStation(station, song.id);
@@ -106,6 +146,17 @@ export function StationDetails() {
     setColors(newColors);
   };
 
+  function onDragEnd(result) {
+    const { destination, source } = result;
+    if (!destination) return;
+
+    const reorderedSongs = Array.from(station.songs);
+    const [removed] = reorderedSongs.splice(source.index, 1);
+    reorderedSongs.splice(destination.index, 0, removed);
+
+    setNewSongOrder(station, reorderedSongs);
+  }
+
   if (!station)
     return (
       <div className="loading-wrapper">
@@ -118,21 +169,6 @@ export function StationDetails() {
     station,
     currentSong.id
   );
-
-  function onDragEnd(result) {
-    const { destination, source } = result;
-    if (!destination) return;
-
-    const reorderedSongs = Array.from(station.songs);
-    const [removed] = reorderedSongs.splice(source.index, 1);
-    reorderedSongs.splice(destination.index, 0, removed);
-
-    console.log("onDragEnd 222222222");
-    // עדכן את הרשימה המעודכנת עם סדר השירים החדש
-    //setSongs(reorderedSongs);
-
-    setNewSongOrder(station, reorderedSongs);
-  }
 
   // if (colors.backgroundColor === "") return <div>Loading...</div>;
   return (
@@ -148,7 +184,18 @@ export function StationDetails() {
               <img src={station.imgUrl} />
               <section className="intro-inner sb">
                 <span>Playlist</span>
-                <h2>{station.name}</h2>
+                {/* <h2>{station.name}</h2> */}
+                <div
+                  ref={containerRef}
+                  style={{
+                    width: "100%",
+                    height: "150px",
+                  }}
+                >
+                  <h2 style={{ fontSize: `${fontSize}px`, margin: 0 }}>
+                    {station.name}
+                  </h2>
+                </div>
                 <h3>
                   {station.createdBy.fullname} |{" "}
                   {station.songs && station.songs.length} songs{" "}
@@ -161,8 +208,8 @@ export function StationDetails() {
               <section onClick={playPauseStation} className="svg-big bigger">
                 {(!isPlaying ||
                   (isPlaying && !isCurrentSongSavedAtStation)) && (
-                    <SvgIcon iconName="play" style="dark" />
-                  )}
+                  <SvgIcon iconName="play" style="dark" />
+                )}
                 {isPlaying && isCurrentSongSavedAtStation && (
                   <SvgIcon iconName="pause" style="dark" />
                 )}
