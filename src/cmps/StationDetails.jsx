@@ -59,8 +59,6 @@ export function StationDetails() {
       loadStation(stationId);
     }
     //loadStation(stationId);
-
-    //  if (containerRef.current) resize2fit(containerRef.current);
   }, [stationId, stations, colors]);
 
   useEffect(() => {
@@ -88,7 +86,6 @@ export function StationDetails() {
       ) {
         currentFontSize -= 1;
         tempEl.style.fontSize = `${currentFontSize}px`;
-        console.log("whileeeeeeeeeeeeeee");
       }
 
       document.body.removeChild(tempEl);
@@ -159,26 +156,6 @@ export function StationDetails() {
 
     setNewSongOrder(station, reorderedSongs);
   }
-
-  // function resize2fit(el) {
-  //   // el = containerRef.current;
-  //   console.log("el:", el);
-  //   if (!el.parentElement) return;
-  //   console.log(222222222222222);
-  //   el.style.setProperty("--font-size", "1em");
-
-  //   const { width: max_width, height: max_height } = el.getBoundingClientRect();
-  //   console.log("container max width:", max_width);
-  //   console.log("container max height:", max_height);
-  //   const { width, height } = el.children[0].getBoundingClientRect();
-  //   console.log("h2 width:", width);
-  //   console.log("h2 height:", height);
-  //   el.style.setProperty(
-  //     "--font-size",
-  //     Math.min(max_width / width, max_height / height) + "em"
-  //   );
-  //   console.log("computed:", Math.min(max_width / width, max_height / height));
-  // }
 
   if (!station)
     return (

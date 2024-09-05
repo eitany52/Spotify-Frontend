@@ -97,7 +97,10 @@
     }
 
     & .app-search-wrapper {
-        width: 50%;
+        width: 100%;
+        & .search-form {
+            width:50%;
+        }
     }
 
     & .svg-big {

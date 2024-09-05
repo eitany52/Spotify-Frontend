@@ -47,7 +47,7 @@ export function SongPreview({
   }
 
   function onOpenAddToStationModal(ev, song) {
-    console.log("Add.......");
+    // console.log("Add.......");
     onToggleModal({
       cmp: FloatingMenuSongAdd,
       props: {
@@ -138,7 +138,10 @@ export function SongPreview({
         </span>
       )}
 
-      {/* col 6 more */}
+      {/* col 6 duration */}
+      <span className="song-duration">{song.duration}</span>
+
+      {/* col 7 more */}
       {/* need to be fix - more not working in search becuse function not exist*/}
       {(type === "station" || type === "search") && (
         <span
@@ -149,7 +152,7 @@ export function SongPreview({
         </span>
       )}
 
-      {/* col 7 more */}
+      {/* col 8 more */}
       {type === "search-at-station" && (
         <button
           onClick={() => onAddToStation(song)}

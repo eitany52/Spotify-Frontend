@@ -39,22 +39,16 @@ async function remove(stationId) {
 }
 async function save(station, updateSavedByOnly = false) {
     var savedStation
-    console.log('remote save    11111111111')
+   
     if (station._id) {
 
         if (updateSavedByOnly) {
-            console.log('remote save put   22222222222222')
-            savedStation = await httpService.put(`station/${station._id}`, station)
+            savedStation = await httpService.put(`station/savedby`, station)
         } else {
-            console.log('remote save put   333333333333333')
-            //   savedStation = await httpService.put(`station/${station._id}`, station)
-               savedStation = await httpService.put(`station`, station)
+            savedStation = await httpService.put(`station`, station)
         }
 
-       
-
     } else {
-        console.log('remote save post   444444444444')
         savedStation = await httpService.post('station', station)
     }
     return savedStation

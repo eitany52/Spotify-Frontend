@@ -4,6 +4,9 @@
   border-radius: 10px;
   margin: 10px 0;
 
+
+  
+
   &:hover {
     background-color: $dark-clr3;
   }
@@ -17,7 +20,6 @@
     display: block;
     border-radius: 10px;
   }
-
 
 
   &.song-preview-station-grid {
@@ -34,18 +36,18 @@
       }
     }
 
-    & .add {display:none;}
+    & .add {visibility: hidden;}
 
     @include for-wide-layout {
-      & .more {display:none;}
+      & .more {visibility: hidden;}
    
-      &:hover .add {display:block;}
-      &:hover .more {display:block;}
+      &:hover .add {visibility: visible;}
+      &:hover .more {visibility: visible;}
     }
 
     @include for-mobile-layout {
 
-      &.number ,  &:hover .number{   visibility:hidden;    }
+      &.number ,  &:hover .number{   display: none;    }
       
    
       & .more svg { transform: rotate(90deg);}
@@ -60,7 +62,7 @@
 
   &.search-at-station {
     display: grid;
-    grid-template-columns: 2fr 1fr 0.5fr;
+    grid-template-columns: 2fr 1fr 0.5fr 0.2fr;
     align-items: center;
     padding: 0 10px;
 
@@ -72,52 +74,67 @@
       & .square-ratio {
 
         & .play {
-          display: none;
+          visibility: hidden;
+          display: flex;
           align-items: center;
           justify-content: center;
         }
 
-        &:hover .play {
-          display: flex;
-        }
+        // &:hover .play {
+        //   display: flex;
+        // }
       }
+
+    }
+
+    &:hover .intro-outer .square-ratio .play {
+      visibility: visible;
+      display: flex;
     }
   }
 
   &.search {
     display: grid;
-    grid-template-columns: 2fr 0.2fr 0.2fr;
+    grid-template-columns: 2fr 0.2fr 0.2fr 0.2fr;
     align-items: center;
     padding: 0 10px;
     margin: 4px 0;
 
     & .add {
-      display: none;
+      visibility: hidden;
     }
 
     & .more {
-      display: none;
+      visibility: hidden;
     }
 
     &:hover .add {
-      display: block;
+      visibility: visible;
     }
 
     &:hover .more {
-      display: block;
+      visibility: visible;
     }
 
     & .square-ratio {
 
       & .play {
-        display: none;
+        display: flex;
+        visibility: hidden;
         align-items: center;
         justify-content: center;
       }
 
-      &:hover .play {
-        display: flex;
-      }
+      // &:hover .play {
+      //   visibility: visible;
+      //   display: flex;
+      // }
+    }
+
+
+    &:hover .play {
+      visibility: visible;
+      display: flex;
     }
   }
 }
