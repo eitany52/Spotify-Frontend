@@ -12,21 +12,20 @@ import { getLoggedInUser } from '../../store/actions/user.actions'
 export const stationService = {
     query,
     getById,
-    save,
+    // save,
     remove,
     // getStations,
-    addSongToStation, // =
+    // addSongToStation, // =
     getLikedSongsStation, // =
     updateStationDetails, // =
     getDemoStations, // =
-    removeSongFromStation, // =
+    // removeSongFromStation, // =
     // createEmptyStation,
     // getSongsFromYoutube,
     // isSongSavedAtStation,
     // getUserStations,
     // isSongSavedAtSomeStation,
     isSongInLikedSong,
-    removeSongFromStation,
     addUserLikedToStation,
     removeUserLikedFromStation,
     isLikedSongStation,
@@ -116,31 +115,31 @@ async function remove(stationId) {
 //     }
 // }
 
-async function save(station) {
-    let savedStation
-    if (station._id) {
-        // const stationToSave = {
-        //     _id: station._id,
-        //     name: station.name,
-        //     tags: station.tags,
-        //     createdBy: station.createdBy,
-        //     likedByUsers: station.likedByUsers,
-        //     songs: station.songs
-        // }
-        savedStation = await storageService.put(STORAGE_KEY, station)
-    } else {
-        // Later, owner is set by the backend
-        const user = {
-            id: getLoggedInUser()._id,
-            fullname: getLoggedInUser().name
-        }
-        const stationToSave = {
-            ...station, createdBy: user
-        }
-        savedStation = await storageService.post(STORAGE_KEY, stationToSave)
-    }
-    return savedStation
-}
+// async function save(station) {
+//     let savedStation
+//     if (station._id) {
+//         // const stationToSave = {
+//         //     _id: station._id,
+//         //     name: station.name,
+//         //     tags: station.tags,
+//         //     createdBy: station.createdBy,
+//         //     likedByUsers: station.likedByUsers,
+//         //     songs: station.songs
+//         // }
+//         savedStation = await storageService.put(STORAGE_KEY, station)
+//     } else {
+//         // Later, owner is set by the backend
+//         const user = {
+//             id: getLoggedInUser()._id,
+//             fullname: getLoggedInUser().name
+//         }
+//         const stationToSave = {
+//             ...station, createdBy: user
+//         }
+//         savedStation = await storageService.post(STORAGE_KEY, stationToSave)
+//     }
+//     return savedStation
+// }
 
 // async function getSongsFromYoutube(userInput) {
 //     const searchTerm = userInput
@@ -208,25 +207,25 @@ async function saveStationByUser(station) {
     return savedStation
 }
 
-async function addSongToStation(stationId, song) {
-    // Later, this is all done by the backend
-    const station = await getById(stationId)
+// async function addSongToStation(stationId, song) {
+//     // Later, this is all done by the backend
+//     const station = await getById(stationId)
 
-    station.songs.push(song)
-    await storageService.put(STORAGE_KEY, station)
+//     station.songs.push(song)
+//     await storageService.put(STORAGE_KEY, station)
 
-    return station // ?
-}
+//     return station // ?
+// }
 
 
-async function removeSongFromStation(stationId, songId) {
+// async function removeSongFromStation(stationId, songId) {
 
-    const station = await getById(stationId)
-    station.songs = station.songs.filter((song) => song.id !== songId)
-    await storageService.put(STORAGE_KEY, station)
+//     const station = await getById(stationId)
+//     station.songs = station.songs.filter((song) => song.id !== songId)
+//     await storageService.put(STORAGE_KEY, station)
 
-    return station // ?
-}
+//     return station // ?
+// }
 
 async function addUserLikedToStation(stationId, userId) {
     const station = await getById(stationId)

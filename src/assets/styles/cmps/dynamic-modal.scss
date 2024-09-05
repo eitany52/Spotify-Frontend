@@ -82,7 +82,12 @@
     }
 
     &.floating-menu-user {
-        width: 200px;
+        width: 150px;
+        padding: 6px 0 10px 12px;
+
+        &:hover {
+            background-color: $bgc-user-modal-hover;
+        }
     }
 
 

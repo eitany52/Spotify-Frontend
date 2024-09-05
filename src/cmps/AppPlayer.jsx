@@ -12,6 +12,9 @@ import {
   setDisplayHideCard,
 } from "../store/actions/station.actions";
 
+// const origin = process.env.NODE_ENV === 'production' ?
+//  window.location.origin : "https://localhost:5173"
+
 export const AppPlayer = () => {
   const playerRef = useRef(null);
 
@@ -164,7 +167,9 @@ export const AppPlayer = () => {
       controls: 0,
       origin: window.location.origin, // מגדיר את המקור ל-URL הנוכחי של הדפדפן
     },
+    // origin: 'http://localhost:5173'
   };
+  console.log("window.location.origin: ", window.location.origin);
   console.log("currentSong: ", currentSong);
 
   return (
@@ -236,14 +241,14 @@ export const AppPlayer = () => {
               max={
                 currentSong.id
                   ? utilService.convertFormattedTimeToSeconds(
-                      currentSong.duration
-                    )
+                    currentSong.duration
+                  )
                   : "120"
               }
               value={currentTimeInSeconds}
               onChange={handleRangeChange}
-              // step="0.1"
-              // max={playerRef.current ? playerRef.current.getDuration() : 100}
+            // step="0.1"
+            // max={playerRef.current ? playerRef.current.getDuration() : 100}
             />
           </section>
           {currentSong.id && <span>{currentSong.duration}</span>}

@@ -13,8 +13,6 @@ import { SvgIcon } from "./SvgIcon.jsx";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
 
 export const FloatingMenuSong = ({ onDone, song }) => {
-  // console.log("SongFloatingMenu stationId:", stationId);
-  // console.log("SongFloatingMenu songId:", songId);
   const stations = useSelector(
     (storeState) => storeState.stationModule.stations
   );
@@ -22,21 +20,7 @@ export const FloatingMenuSong = ({ onDone, song }) => {
   const likedSongsStation = useSelector(
     (storeState) => storeState.stationModule.likedSongsStation
   );
-
-  useEffect(() => {
-    loadLikedSongsStation();
-  }, []);
-
-  // const [isInLikedSong, setIsInLikedSong] = useState(null);
-
-  // useEffect(() => {
-  //   checkIfInLikedSong();
-  // }, []);
-
-  // async function checkIfInLikedSong() {
-  //   console.log("in checkIfInLikedSong");
-  //   setIsInLikedSong(await stationService.isSongInLikedSong(songId));
-  // }
+  const user = useSelector(storeState => storeState.userModule.user)
 
   function onRemoveSongFromStation() {
     onDone();
@@ -93,10 +77,10 @@ export const FloatingMenuSong = ({ onDone, song }) => {
       showErrorMsg("Failed to add song");
     }
   }
-  if (!likedSongsStation) return <div>loading...</div>;
-  const userStations = getUserStations(stations);
-  const isUserStation = getLoggedInUser()._id === station?.createdBy.id;
-  const isInLikedSong = isSongSavedAtLikedSongs();
+  // if (!likedSongsStation) return <div>loading...</div>;
+  const userStations = user ? getUserStations(stations) : []
+  const isUserStation = user && station && user._id === station.createdBy.id;
+  const isSongToMark = user && isSongSavedAtLikedSongs();
   return (
     <div className="song-floating-menu">
       <ul>
@@ -124,7 +108,7 @@ export const FloatingMenuSong = ({ onDone, song }) => {
         </li> */}
 
         <li onClick={onToggleAddToLikedSongs}>
-          {isInLikedSong ? (
+          {isSongToMark ? (
             <>
               <span className="btn-type-2 active">
                 <SvgIcon iconName="tick" />

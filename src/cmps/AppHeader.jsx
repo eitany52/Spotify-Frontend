@@ -41,26 +41,10 @@ export function AppHeader({ backgroundColor = null }) {
     navigate(`/${location}`);
   }
 
-  async function onLogin(credentials) {
-    try {
-      const user = await login(credentials);
-      showSuccessMsg(`Welcome: ${user.fullname}`);
-      navigate("/");
-    } catch (err) {
-      showErrorMsg("Cannot login");
-    }
-  }
-  async function onSignup(credentials) {
-    try {
-      const user = await signup(credentials);
-      showSuccessMsg(`Welcome new user: ${user.fullname}`);
-      navigate("/");
-    } catch (err) {
-      showErrorMsg("Cannot signup");
-    }
-  }
-
   function onOpenUserModal(ev) {
+    const element = ev.currentTarget
+    const rect = element.getBoundingClientRect()
+
     onToggleModal({
       cmp: FloatingMenuUser,
       props: {
@@ -70,20 +54,12 @@ export function AppHeader({ backgroundColor = null }) {
         class: "floating-menu-user",
       },
       style: {
-        left: `${ev.clientX - 150}px`,
-        top: `${ev.clientY + 40}px`,
+        left: `${rect.left - 120}px`,
+        top: `${rect.top + 35}px`,
       },
     });
   }
-  async function onLogout() {
-    try {
-      await logout();
-      navigate("/");
-      showSuccessMsg(`Bye now`);
-    } catch (err) {
-      showErrorMsg("Cannot logout");
-    }
-  }
+  
   console.log("user:", user);
 
   const userLatter = user ? utilService.getFirstChar(user.fullname) : null;
