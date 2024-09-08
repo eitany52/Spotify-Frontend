@@ -4,23 +4,21 @@ import { getSongsFromYoutube } from "../store/actions/station.actions";
 import { useEffectUpdate } from "../customHooks/useEffectUpdate";
 import { SongList } from "./SongList";
 import { StationList } from "./StationList";
-// import demoStations from "../../data/demo-stations.json";
-import { stationService } from "../services/station";
+// import { stationService } from "../services/station";
 import { showErrorMsg } from "../services/event-bus.service";
+import { useSelector } from "react-redux";
 import { useScreenCategory } from "../customHooks/useBreakpoint";
 
 export const SearchResult = () => {
   const params = useParams();
   const [songs, setSongs] = useState(null);
-  const [stationsByUserInput, setStationsByUserInput] = useState([]);
-  const { onAddToLikedSongs, isSongSavedAtSomeUserStation } =
-    useOutletContext();
-
+  const { onAddToLikedSongs, isSongSavedAtSomeUserStation, onCreateEmptyStation } = useOutletContext()
+  const homeStations = useSelector(storeState => storeState.stationModule.homeStations)
+  // const [stationsByUserInput, setStationsByUserInput] = useState([]);
   const screenCategory = useScreenCategory();
-
   useEffectUpdate(() => {
     loadSongs();
-    loadStationsByUserInput();
+    // loadStationsByUserInput()
   }, [params]);
 
   async function loadSongs() {
@@ -33,24 +31,31 @@ export const SearchResult = () => {
     }
   }
 
-  async function loadStationsByUserInput() {
-    try {
-      const stationsByUserInput = await stationService.query({
-        location: "search",
-        userInput: params.userInput,
-      });
+  // async function loadStationsByUserInput() {
+  //   try {
+  //     const stationsByUserInput = await stationService.query({
+  //       location: "search",
+  //       userInput: params.userInput
+  //     })
 
-      setStationsByUserInput(stationsByUserInput);
-    } catch (error) {
-      console.log("Cannot load stations by user input", error);
-    }
-  }
-
-  // function setStationFromSearch(station) {
-  //   setStationFromDemo(station)
+  //     setStationsByUserInput(stationsByUserInput)
+  //   } catch (error) {
+  //     console.log("Cannot load stations by user input", error);
+  //   }
   // }
 
-  const firstSongImg = songs ? songs[0].imgUrl : null;
+  function filterStationsByUserInput() {
+    let stations = []
+    if (params.userInput) {
+      stations = homeStations.filter(station => station.tags.some(tag =>
+        tag.toLowerCase() === params.userInput.toLowerCase()))
+    }
+
+    return stations
+  }
+
+  const stations = filterStationsByUserInput()
+  const firstSongImg = songs ? songs[0].imgUrl : null
   return (
     <div className="search-result">
       {/* <RecentSearches/> */}
@@ -86,13 +91,13 @@ export const SearchResult = () => {
               />
             </section>
             <h2>Playlists result</h2>
-            {!!stationsByUserInput.length && (
-              <StationList stations={stationsByUserInput} location="search" />
-            )}
-            {/* setStationFromSearch={setStationFromSearch} />} */}
-            {!stationsByUserInput.length && (
-              <span className="span-no-results">No results</span>
-            )}
+            {!!stations.length &&
+              <StationList
+                stations={stations}
+                location="search"
+                onCreateEmptyStation={onCreateEmptyStation} />}
+            {!stations.length &&
+              <span className="span-no-results">No results</span>}
           </section>
         </>
       )}

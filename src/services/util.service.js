@@ -132,7 +132,7 @@ function convertFormattedTimeToSeconds(formattedTime) {
     return (minutes * 60) + seconds
 }
 
-function formatTime(timeInSeconds) {
+function formatTime(timeInSeconds = 0) {
     const minutes = parseInt(timeInSeconds / 60, 10)
     const seconds = timeInSeconds % 60
     const formattedTime = `${minutes}:${seconds > 9 ? seconds : '0' + seconds}`

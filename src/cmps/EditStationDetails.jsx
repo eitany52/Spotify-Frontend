@@ -1,20 +1,16 @@
-import React, { useState } from "react";
-
+import { useSelector } from "react-redux";
 import { updateStationDetails } from "../store/actions/station.actions.js";
-import { onToggleModal } from "../store/actions/app.actions.js";
 import { ImgUploader } from "./ImgUploader.jsx";
 import { SvgIcon } from "./SvgIcon.jsx";
 
-export const EditStationDetails = ({ stationToEdit }) => {
-  //console.log("stationToEdit:", stationToEdit);
-
+export const EditStationDetails = ({ stationToEdit, onDone }) => {
+  const currentStation = useSelector(storeState => storeState.stationModule.station)
   let stationToSave = stationToEdit;
 
-  function onSubmitDetails(event) {
-    //console.log("stationToUpdate:-----------", stationToSave);
-    event.preventDefault();
-    updateStationDetails(stationToSave);
-    onToggleModal(null);
+  function onSubmitDetails(ev) {
+    ev.preventDefault()
+    onDone()
+    updateStationDetails(stationToSave, currentStation?._id)
   }
 
   function handleChange({ target }) {
@@ -42,7 +38,7 @@ export const EditStationDetails = ({ stationToEdit }) => {
     <div className="edit-station-details">
       <section className="modal-header">
         <span>Edit Details</span>
-        <span onClick={onToggleModal}>
+        <span onClick={onDone}>
           <SvgIcon iconName="close" />
         </span>
       </section>

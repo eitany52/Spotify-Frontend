@@ -54,7 +54,6 @@ export function AppHeader({ backgroundColor = null }) {
   }
 
   const userLatter = user ? utilService.getFirstChar(user.fullname) : null;
-  // console.log(backgroundColor);
   const darkenedBackground_50 = utilService.darkenColor(
     "rgba(173,152,151,1)",
     50
@@ -62,60 +61,58 @@ export function AppHeader({ backgroundColor = null }) {
 
   return (
     <header className="app-header" style={{ backgroundColor: backgroundColor }}>
-      {
-        <>
-          <section>
-            {/* <button className=" btn-back icon-type-1 big">
+      <>
+        <section>
+          {/* <button className=" btn-back icon-type-1 big">
               <SvgIcon iconName={"back"} />
             </button>
             <button className=" btn-forward icon-type-1 big">
               <SvgIcon iconName={"forward"} />
             </button> */}
+          <button
+            className="btn-back icon-type-1 big"
+            onClick={() => navigate(-1)}
+          >
+            <SvgIcon iconName={"back"} />
+          </button>
+          <button
+            className="btn-forward icon-type-1 big"
+            onClick={() => navigate(1)}
+          >
+            <SvgIcon iconName={"forward"} />
+          </button>
+        </section>
+        {user && (
+          <section onClick={onOpenUserModal} className="user-info">
+            <span style={{ backgroundColor: darkenedBackground_50 }}>
+              <small
+                style={{
+                  backgroundColor: backgroundColor,
+                }}
+              >
+                {userLatter}
+              </small>
+            </span>
+          </section>
+        )}
+        {!user && (
+          <section className="btns-login-signup">
             <button
-              className="btn-back icon-type-1 big"
-              onClick={() => navigate(-1)}
+              onClick={() => onGoToLoginSignup("signup")}
+              className="btn-signup"
             >
-              <SvgIcon iconName={"back"} />
+              Sign up
             </button>
             <button
-              className="btn-forward icon-type-1 big"
-              onClick={() => navigate(1)}
+              onClick={() => onGoToLoginSignup("login")}
+              className="btn-login"
             >
-              <SvgIcon iconName={"forward"} />
+              Login
             </button>
           </section>
-          {user && (
-            <section onClick={onOpenUserModal} className="user-info">
-              <span style={{ backgroundColor: darkenedBackground_50 }}>
-                <small
-                  style={{
-                    backgroundColor: backgroundColor,
-                  }}
-                >
-                  {userLatter}
-                </small>
-              </span>
-            </section>
-          )}
-          {!user && (
-            <section className="btns-login-signup">
-              <button
-                onClick={() => onGoToLoginSignup("signup")}
-                className="btn-signup"
-              >
-                Sign up
-              </button>
-              <button
-                onClick={() => onGoToLoginSignup("login")}
-                className="btn-login"
-              >
-                Login
-              </button>
-            </section>
-          )}
-          {isSearchDisplayed && <AppSearch />}
-        </>
-      }
+        )}
+        {isSearchDisplayed && <AppSearch />}
+      </>
     </header>
   );
 }

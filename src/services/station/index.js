@@ -1,8 +1,8 @@
 
 const { DEV, VITE_LOCAL } = import.meta.env
 
-import {stationService as remote} from './station.service.remote.js'
-import {stationService as local} from './station.service.local.js'
+import { stationService as remote } from './station.service.remote.js'
+import { stationService as local } from './station.service.local.js'
 
 import { getLoggedInUser } from '../../store/actions/user.actions.js'
 
@@ -95,10 +95,6 @@ function _formatSongs(songs) {
 }
 
 function _formatSong(song) {
-    const user = {
-        id: getLoggedInUser()._id,
-        name: getLoggedInUser().name
-    }
     return {
         id: song.id.videoId,
         title: getSubstringBeforePipe(song.snippet.title),
@@ -106,8 +102,8 @@ function _formatSong(song) {
         channelTitle: song.snippet.channelTitle,
         url: `https://youtube.com/watch?v=${song.id.videoId}`,
         imgUrl: song.snippet.thumbnails.default.url,
-        addedBy: user,
-        addedAt: Date.now(),
+        addedBy: {},
+        addedAt: null,
         duration: _formatSongDuration(song.duration)
     }
 }
@@ -120,7 +116,6 @@ function _formatSongDuration(songDuration) {
         const minutes = songDuration.substring(2, songDuration.indexOf('M'))
         formattedDuration = `${minutes}:00`
     }
-
     if (!songDuration.includes('M')) {
         const seconds = songDuration.substring(2, songDuration.indexOf('S'))
         const formattedSeconds = seconds.length < 2 ? `0${seconds}` : seconds
@@ -174,14 +169,15 @@ function getSubstringBeforePipe(str) {
 
 const service = VITE_LOCAL === 'true' ? local : remote
 
-export const stationService = { 
+export const stationService = {
     createEmptyStation,
     // getDemoStations, 
     isSongSavedAtStation,
     getUserStations,
     isSongSavedAtSomeStation,
-    getSongsFromYoutube, 
-    getLoggedInUser, ...service }
+    getSongsFromYoutube,
+    getLoggedInUser, ...service
+}
 
 // Easy access to this service from the dev tools console
 // when using script - dev / dev:local

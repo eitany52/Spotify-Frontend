@@ -1,21 +1,11 @@
-import searchRes from "../../data/search.json";
-
 // import { stationService } from "../services/station.service.local";
 // import { userService } from "../services/user.service.local";
-
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 // import { loadStations, addStation } from "../store/actions/station.actions";
 import { SvgIcon } from "./SvgIcon";
 import { useLocation, useNavigate } from "react-router";
-import {
-  addSongToStation,
-  getSongsFromYoutube,
-  removeSongFromStation,
-} from "../store/actions/station.actions";
+import { getSongsFromYoutube } from "../store/actions/station.actions";
 import { SongList } from "./SongList";
-
-// Checked - All looks good.
 
 export const AppSearch = ({ onAddToStation, isSongSavedAtStation }) => {
   const location = useLocation();
@@ -30,7 +20,6 @@ export const AppSearch = ({ onAddToStation, isSongSavedAtStation }) => {
 
   useEffect(() => {
     if (!userInput) return;
-
     if (isUserAtStation) {
       loadSongs()
     } else {

@@ -5,7 +5,6 @@ export const StationList = ({
   location,
   onAddSongToStation,
   songToAdd = {},
-  // setStationFromSearch = {},
   onCreateEmptyStation = {},
   onToggleMarkStation,
   isStationToMark

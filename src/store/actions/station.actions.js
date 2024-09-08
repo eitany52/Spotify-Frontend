@@ -1,7 +1,7 @@
 import { stationService } from '../../services/station'
 import { store } from '../store'
 import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
-import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE, SET_SHUFFLE, DISPLAY_HIDE_CARD, SET_LIKED_SONGS_STATION, EXPEND_LIB, UNDO_UPDATE_STATION } from '../reducers/station.reducer'
+import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE, SET_SHUFFLE, DISPLAY_HIDE_CARD, SET_LIKED_SONGS_STATION, EXPEND_LIB, UNDO_UPDATE_STATION, SET_HOME_STATIONS, UPDATE_HOME_STATION } from '../reducers/station.reducer'
 
 export async function loadLibraryStations(filterBy) {
     try {
@@ -9,13 +9,20 @@ export async function loadLibraryStations(filterBy) {
         const stations = await stationService.query(filterBy)
         store.dispatch({ type: SET_STATIONS, stations })
     } catch (err) {
-        console.log('UserActions: err in loadStations', err)
-    } finally {
-        store.dispatch({ type: LOADING_DONE })
+        console.log('stationActions: err in loadLibraryStations', err)
     }
     // finally {
     //     store.dispatch({ type: LOADING_DONE })
     // }
+}
+
+export async function loadHomeStations(filterBy) {
+    try {
+        const homeStations = await stationService.query(filterBy)
+        store.dispatch({ type: SET_HOME_STATIONS, homeStations })
+    } catch (err) {
+        console.log('stationActions: err in loadHomeStations', err)
+    }
 }
 
 export function resetStation() {
@@ -46,7 +53,6 @@ export async function createEmptyStation() {
         console.log("Having issues with saving this station", err)
         throw err
     }
-
 }
 
 export function getUserStations(stations) {
@@ -74,34 +80,35 @@ export async function addStation(station) {
     }
 }
 
-
-export async function saveStationByUser(station) {
+export async function addStationToLibrary(station, currentStationId) {
     try {
-        console.log('station action savedStation: 111111111');
-        const savedStation = await stationService.saveStationByUser(station)
-        console.log('station action savedStation: 2222222222', savedStation);
-        if (savedStation !== "already exist") {
-            store.dispatch({ type: ADD_STATION, savedStation })
-            store.dispatch({ type: SET_STATION, savedStation })
-        }
+        const savedStation = await stationService.addStationToLibrary(station)
+        store.dispatch({ type: ADD_STATION, savedStation })
+        store.dispatch({ type: UPDATE_HOME_STATION, updatedStation: savedStation })
+        handleCurrentStationUpdate(savedStation, currentStationId)
     } catch (err) {
-        console.log('Cannot save station by user', err)
+        console.log('Cannot add station to library', err)
         throw err
     }
 }
 
-export async function removeStationByUser(stationId) {
+export async function removeStationFromLibrary(station, currentStationId) {
     try {
-        await stationService.remove(stationId)
-
-        store.dispatch({ type: REMOVE_STATION, stationId })
+        const removedStation = await stationService.removeStationFromLibrary(station)
+        store.dispatch({ type: REMOVE_STATION, stationId: removedStation._id })
+        store.dispatch({ type: UPDATE_HOME_STATION, updatedStation: removedStation })
+        handleCurrentStationUpdate(removedStation, currentStationId)
     } catch (err) {
-        console.log('Cannot remove station by user', err)
+        console.log('Cannot remove station from library', err)
         throw err
     }
 }
 
-
+export function handleCurrentStationUpdate(updatedStation, currentStationId) {
+    if (updatedStation._id === currentStationId) {
+        store.dispatch({ type: SET_STATION, station: updatedStation })
+    }
+}
 
 export async function removeStation(stationId) {
     try {
@@ -121,11 +128,12 @@ export function isSongSavedAtSomeStation(stations, songId) {
     return stationService.isSongSavedAtSomeStation(stations, songId)
 }
 
-export async function addSongToStation(stationId, song) {
+export async function addSongToStation(stationId, song, currentStationId) {
     try {
         const updatedStation = await stationService.addSongToStation(stationId, song)
         store.dispatch({ type: UPDATE_STATION, updatedStation })
         handleLikedSongsStationUpdate(updatedStation)
+        handleCurrentStationUpdate(updatedStation, currentStationId)
     } catch (err) {
         console.log('Cannot add song to station', err)
         throw err
@@ -151,11 +159,12 @@ export async function setNewSongOrder(station, songs) {
     }
 }
 
-export async function removeSongFromStation(stationId, songId) {
+export async function removeSongFromStation(stationId, songId, currentStationId) {
     try {
         const updatedStation = await stationService.removeSongFromStation(stationId, songId)
         store.dispatch({ type: UPDATE_STATION, updatedStation })
         handleLikedSongsStationUpdate(updatedStation);
+        handleCurrentStationUpdate(updatedStation, currentStationId)
     } catch (err) {
         console.log('Cannot remove song from station', err)
         throw err
@@ -183,12 +192,11 @@ export async function removeUserLikedFromStation(stationId, userId) {
     }
 }
 
-
-
-export async function updateStationDetails(station) {
+export async function updateStationDetails(stationToUpdate, currentStationId) {
     try {
-        const updatedStation = await stationService.updateStationDetails(station)
+        const updatedStation = await stationService.save(stationToUpdate)
         store.dispatch({ type: UPDATE_STATION, updatedStation })
+        handleCurrentStationUpdate(updatedStation, currentStationId)
     } catch (err) {
         console.log('Cannot update station details', err)
         throw err

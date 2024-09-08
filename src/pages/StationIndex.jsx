@@ -16,8 +16,8 @@ import {
   isSongSavedAtSomeStation,
   loadLikedSongsStation,
   loadLibraryStations as loadLibraryStations,
-  // setStationFromDemo,
   setExpandLib,
+  loadHomeStations,
 } from "../store/actions/station.actions";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 
@@ -30,10 +30,11 @@ export const StationIndex = () => {
   const [isSearchDisplayed, setIsSearchDisplayed] = useState(false);
   const [isHomePageDisplayed, setIsHomePageDisplayed] = useState(true);
 
-  const [homeStations, setHomeStations] = useState([]);
-
   const libraryStations = useSelector(
     (storeState) => storeState.stationModule.stations
+  );
+  const homeStations = useSelector(
+    (storeState) => storeState.stationModule.homeStations
   );
   const likedSongsStation = useSelector(
     (storeState) => storeState.stationModule.likedSongsStation
@@ -47,9 +48,6 @@ export const StationIndex = () => {
   );
 
   const user = useSelector((storeState) => storeState.userModule.user);
-
-  //local
-  //const demoStations = stationService.getDemoStations();
 
   useEffect(() => {
     if (user) {
@@ -67,16 +65,6 @@ export const StationIndex = () => {
   useEffect(() => {
     getLocation();
   }, [location]);
-
-  async function loadHomeStations(filterBy) {
-    //remote
-    try {
-      const homeStations = await stationService.query(filterBy);
-      setHomeStations(homeStations);
-    } catch (err) {
-      console.error("error getting demo stations", err);
-    }
-  }
 
   function getLocation() {
     if (location.pathname.includes("search")) {
@@ -111,6 +99,7 @@ export const StationIndex = () => {
       }
     } catch (err) {
       console.log("Having issues with saving this song", err);
+      showErrorMsg("Cannot Add to your Liked Songs")
     }
   }
 
@@ -120,10 +109,16 @@ export const StationIndex = () => {
 
   async function onCreateEmptyStation() {
     try {
-      const emptyStation = await createEmptyStation();
-      navigate(`/station/${emptyStation._id}`);
+      if (user) {
+        const emptyStation = await createEmptyStation();
+        navigate(`/station/${emptyStation._id}`);
+      }
+      else {
+        showErrorMsg("Log in to create playlists")
+      }
     } catch (err) {
-      console.log("Creating new playlist failed, please try again later", err);
+      console.log("Creating new playlist failed", err)
+      showErrorMsg("Failed to create playlist")
     }
   }
 
@@ -149,6 +144,7 @@ export const StationIndex = () => {
   //   // console.log("is only demo:", isInDemo && !isInStations);
   //   return isInDemo && !isInStations;
   // }
+  console.log("StationIndex Rendered");
 
   return (
     <div
@@ -277,7 +273,6 @@ export const StationIndex = () => {
               stations={homeStations}
               location="main"
               onCreateEmptyStation={onCreateEmptyStation}
-            // setStationFromSearch={setStationFromSearch}
             />
           )}
 
@@ -295,8 +290,8 @@ export const StationIndex = () => {
           <Outlet
             context={{
               onAddToLikedSongs,
-              isSongSavedAtSomeUserStation
-              // isDemoStation,
+              isSongSavedAtSomeUserStation,
+              onCreateEmptyStation
             }}
           />
         )}

@@ -13,7 +13,7 @@ export const FloatingMenuSong = ({ onDone, song }) => {
   const stations = useSelector(
     (storeState) => storeState.stationModule.stations
   );
-  const station = useSelector((storeState) => storeState.stationModule.station);
+  const currentStation = useSelector((storeState) => storeState.stationModule.station);
   const likedSongsStation = useSelector(
     (storeState) => storeState.stationModule.likedSongsStation
   );
@@ -22,10 +22,10 @@ export const FloatingMenuSong = ({ onDone, song }) => {
   function onRemoveSongFromStation() {
     onDone();
     try {
-      removeSongFromStation(station._id, song.id);
+      removeSongFromStation(currentStation._id, song.id, currentStation._id);
     } catch (err) {
       console.log("Having issues with removing song from station", err);
-      showErrorMsg("Failed to remove song");
+      showErrorMsg("Failed to Remove song");
     }
   }
 
@@ -36,18 +36,15 @@ export const FloatingMenuSong = ({ onDone, song }) => {
   async function onToggleAddToLikedSongs() {
     onDone();
     if (!user) {
-      showErrorMsg("Log in to add this to your Liked Songs.")
+      showErrorMsg("Log in to add this to your Liked Songs")
       return
     }
     let isSongAdded = false; // is song added or removed from liked songs station
     try {
       if (isSongSavedAtLikedSongs()) {
-        await removeSongFromStation(likedSongsStation._id, song.id);
+        await removeSongFromStation(likedSongsStation._id, song.id, currentStation?._id);
       } else {
-        await addSongToStation(likedSongsStation._id, {
-          ...song,
-          addedAt: Date.now(),
-        });
+        await addSongToStation(likedSongsStation._id, song);
         isSongAdded = true;
       }
       showSuccessMsg(
@@ -58,7 +55,7 @@ export const FloatingMenuSong = ({ onDone, song }) => {
         "Having issues with adding/removing song from liked songs station",
         err
       );
-      showErrorMsg("Failed to add/remove song from Liked Songs");
+      showErrorMsg("Failed to Add/Remove song from Liked Songs");
     }
   }
 
@@ -66,7 +63,7 @@ export const FloatingMenuSong = ({ onDone, song }) => {
     onDone();
     try {
       if (!isSongSavedAtStation(station, song.id)) {
-        await addSongToStation(station._id, { ...song, addedAt: Date.now() });
+        await addSongToStation(station._id, song)
         showSuccessMsg(`Added to ${station.name}`);
       } else {
         showErrorMsg(
@@ -75,11 +72,11 @@ export const FloatingMenuSong = ({ onDone, song }) => {
       }
     } catch (err) {
       console.log("Having issues with adding this song to station", err);
-      showErrorMsg("Failed to add song");
+      showErrorMsg("Failed to Add song");
     }
   }
   const userStations = user ? getUserStations(stations) : []
-  const isUserStation = user && station && user._id === station.createdBy.id;
+  const isUserStation = user && currentStation && user._id === currentStation.createdBy.id;
   const isSongToMark = user && isSongSavedAtLikedSongs();
 
   return (
@@ -95,7 +92,7 @@ export const FloatingMenuSong = ({ onDone, song }) => {
             onAddSongToStation={onAddSongToStation}
           />
         </li>
-        {station && station.type === "normal" && isUserStation && (
+        {currentStation && currentStation.type === "normal" && isUserStation && (
           <li onClick={onRemoveSongFromStation}>
             <span className="btn-type-2">
               <SvgIcon iconName="bin" /> Remove From This Playlist

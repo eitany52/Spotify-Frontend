@@ -1,12 +1,6 @@
-import { useNavigate, useParams } from "react-router";
-import { getLoggedInUser } from "../store/actions/user.actions";
-import { onToggleModal } from "../store/actions/app.actions.js";
-import { FloatingMenuStation } from "../cmps/FloatingMenuStation";
-import { EditStationDetails } from "../cmps/EditStationDetails";
+import { useNavigate } from "react-router";
 import { SvgIcon } from "./SvgIcon.jsx";
 import { useStation } from "../customHooks/useStation.js";
-
-// Checked - All looks good.
 
 export const StationPreview = ({
   station,
@@ -15,17 +9,14 @@ export const StationPreview = ({
   onCreateEmptyStation,
   onToggleMarkStation,
   isStationToMark
-  // setStationFromSearch,
 }) => {
-  const navigate = useNavigate();
-  const { stationId } = useParams();
 
-  const { handleRightClick } = useStation({
+  const navigate = useNavigate();
+  const { handleClick: handleRightClick } = useStation({
     station,
-    stationId,
     location,
-    onCreateEmptyStation,
-  });
+    onCreateEmptyStation
+  })
 
   async function onClickStation() {
     if (location === "modal-more") {
@@ -44,7 +35,7 @@ export const StationPreview = ({
     navigate(`/station/${station._id}`);
   }
 
-  // function handleRightClick(event) {
+  // function handleClick(event) {
   //   if (location === "modal-add" || location === "modal-more") return;
   //   event.preventDefault();
   //   onToggleModal({
@@ -86,19 +77,17 @@ export const StationPreview = ({
       className={`station-preview ${location}`}
     >
       <section
-        className={`station-container ${
-          location === "library" || location === "modal-add"
-            ? "intro-outer"
-            : ""
-        }`}
+        className={`station-container ${location === "library" || location === "modal-add"
+          ? "intro-outer"
+          : ""
+          }`}
       >
         <img src={station.imgUrl} />
         <section
-          className={`${
-            location === "library" || location === "modal-add"
-              ? "intro-inner"
-              : ""
-          }`}
+          className={`${location === "library" || location === "modal-add"
+            ? "intro-inner"
+            : ""
+            }`}
         >
           <span className="station-name">{station.name}</span>
           {location === "library" && station.type === "liked" && (
@@ -129,7 +118,7 @@ export const StationPreview = ({
 {
   /* <li
 onClick={onClickStation}
-onContextMenu={handleRightClick}
+onContextMenu={handleClick}
 className={`station-preview ${location}`}
 >
 {station.type === "liked" ? (
@@ -161,7 +150,7 @@ className={`station-preview ${location}`}
 
 // <li
 //   onClick={onClickStation}
-//   onContextMenu={handleRightClick}
+//   onContextMenu={handleClick}
 //   className="station-preview"
 // >
 //   {location === "library" && (isUserStation || isSavedStation) && (
