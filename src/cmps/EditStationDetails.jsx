@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { updateStationDetails } from "../store/actions/station.actions.js";
 import { onToggleModal } from "../store/actions/app.actions.js";
 import { ImgUploader } from "./ImgUploader.jsx";
+import { SvgIcon } from "./SvgIcon.jsx";
 
 export const EditStationDetails = ({ stationToEdit }) => {
   //console.log("stationToEdit:", stationToEdit);
@@ -39,7 +40,13 @@ export const EditStationDetails = ({ stationToEdit }) => {
 
   return (
     <div className="edit-station-details">
-      <span>Edit Details</span>
+      <section className="modal-header">
+        <span>Edit Details</span>
+        <span onClick={onToggleModal}>
+          <SvgIcon iconName="close" />
+        </span>
+      </section>
+
       <form onSubmit={onSubmitDetails}>
         <input
           className="fieldName"
@@ -49,7 +56,7 @@ export const EditStationDetails = ({ stationToEdit }) => {
           defaultValue={stationToEdit.name}
           onChange={handleChange}
         ></input>
-        <input
+        <textarea
           className="fieldDescription"
           name="description"
           type="textarea"
@@ -58,7 +65,7 @@ export const EditStationDetails = ({ stationToEdit }) => {
           placeholder="Description"
           defaultValue={stationToEdit.description}
           onChange={handleChange}
-        ></input>
+        ></textarea>
         {/* <input name="thumbnail" type="file" onChange={handleChange}></input> */}
         <span className="upload">
           {/* <img src={stationToEdit.imgUrl} /> */}
@@ -68,7 +75,7 @@ export const EditStationDetails = ({ stationToEdit }) => {
           />
         </span>
 
-        <button className="send">save</button>
+        <button className="send btn-type-4">save</button>
       </form>
     </div>
   );

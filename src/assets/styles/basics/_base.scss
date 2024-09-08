@@ -205,6 +205,15 @@ a.btn-type-2 i {  margin-top:5px;    } //strange but needed to align search in n
     }
 }
 
+// send in editDetails component
+.btn-type-4 {
+    @include btn;
+    background: $light-clr1;
+    color: $dark-clr2;
+    padding:15px;
+}
+
+
 //only icons - plus, more
 .icon-type-1 {
     &.big i {

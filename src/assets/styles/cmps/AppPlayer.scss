@@ -37,6 +37,11 @@
     grid-template-rows: repeat(2, auto);
     justify-content: start;
     align-items: center;
+
+
+    @include for-mobile-layout { 
+      justify-self: end;
+    }
 }
 
 

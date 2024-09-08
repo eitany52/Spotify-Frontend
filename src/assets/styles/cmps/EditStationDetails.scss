@@ -1,13 +1,27 @@
 .edit-station-details {
 
 
-   
+   padding:20px;
     display: grid;
     grid-template-columns: 10px 1fr 10px;
     grid-template-rows: auto 1fr;
     & > * {grid-area: 1 / 2;}
-    
 
+    & .modal-header {
+
+
+        display:grid;
+        grid-template-columns: 1fr auto;
+        
+
+        & span {
+            font-weight:bold;
+            font-size:2em;
+            margin-bottom:20px;
+        }
+    }
+   
+    
 
    & form {
     grid-row: 2 / 3;
@@ -18,14 +32,36 @@
     "img nme"
     "img des"
     "spc snd";
-    } 
+    gap:15px;
 
 
+
+    & input, & textarea {
+        background: $dark-clr5;
+        color: $light-clr1;
+        border:none;
+        border-radius:10px;
+        padding:10px;
+
+        // outline-width: 0;
+        outline-color: $dark-clr3;
+        // & :focus {
+        //     border:1px solid red;
+        // }
+    }
+
+
+    & button { margin: 0; }
+
+}
+
+    
     .fieldName {grid-area: nme;}
     .fieldDescription {grid-area: des;}
     .upload {grid-area: img;}
-    .send {grid-area: snd;}
+    .send {grid-area: snd; margin-left: 50%;}
 
+   
 
     & .upload {
         &  .upload-preview {
