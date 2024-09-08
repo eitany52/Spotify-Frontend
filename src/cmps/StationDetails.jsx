@@ -22,6 +22,7 @@ import { SongList } from "./SongList.jsx";
 import { AppHeader } from "../cmps/AppHeader";
 import ImageColorComponent from "../cmps/ImageColorComponent";
 import { useStation } from "../customHooks/useStation.js";
+import { useScreenCategory } from "../customHooks/useBreakpoint.js";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
 
 export function StationDetails() {
@@ -46,23 +47,39 @@ export function StationDetails() {
   const location = "station-details";
   const { handleClick } = useStation({ station, location });
 
+  const screenCategory = useScreenCategory();
+
   useEffect(() => {
-    loadStation(stationId)
-    return () => resetStation()
-  }, [stationId])
+    loadStation(stationId);
+    return () => resetStation();
+  }, [stationId]);
 
   // const [localSongs, setLocalSongs] = useState(songs);
   const [fontSize, setFontSize] = useState("1em");
   const containerRef = useRef(null);
+  const imgRef = useRef(null);
+
+  // useEffect(() => {
+  //   const isDemoOnly = isDemoStation(stationId);
+  //   if (!isDemoOnly) {
+  //     loadStation(stationId);
+  //   }
+  //   //loadStation(stationId);
+  // }, [stationId, stations, colors]);
 
   useEffect(() => {
+    console.log(1111111);
     const resizeFont = () => {
       const container = containerRef.current;
-      if (!container) return;
+      const img = imgRef.current;
+      if (!container || !img) return;
+      console.log(2222);
 
       let currentFontSize = 150; // Start with the initial font size
       const { width: maxWidth, height: maxHeight } =
         container.getBoundingClientRect();
+      console.log("maxWidth:", maxWidth);
+      console.log("maxHeight:", maxHeight);
 
       // Create a temporary element to measure text size
       const tempEl = document.createElement("span");
@@ -71,17 +88,18 @@ export function StationDetails() {
       tempEl.style.fontSize = `${currentFontSize}px`;
       tempEl.textContent = station.name;
       document.body.appendChild(tempEl);
-
+      console.log(33333);
       // Adjust font size until the text fits within the container
       while (
         (tempEl.getBoundingClientRect().width > maxWidth ||
           tempEl.getBoundingClientRect().height > maxHeight) &&
         currentFontSize > 0
       ) {
+        console.log(44444);
         currentFontSize -= 1;
         tempEl.style.fontSize = `${currentFontSize}px`;
       }
-
+      console.log(5555);
       document.body.removeChild(tempEl);
       setFontSize(currentFontSize);
     };
@@ -175,7 +193,7 @@ export function StationDetails() {
         </section>
         <section className="header full" style={{ ...style1 }}>
           <section className="intro-outer">
-            <img src={station.imgUrl} />
+            <img src={station.imgUrl} ref={imgRef} />
             <section className="intro-inner sb">
               <span>Playlist</span>
               {/* <h2>{station.name}</h2> */}
@@ -247,12 +265,14 @@ export function StationDetails() {
         </section>
 
         <section className="app-search-wrapper">
-          {isUserStation && station.type === "normal" && (
-            <AppSearch
-              onAddToStation={onToggleAddToStation}
-              isSongSavedAtStation={isSongSavedAtCurrentStation}
-            />
-          )}
+          {isUserStation &&
+            station.type === "normal" &&
+            screenCategory !== "mobile" && (
+              <AppSearch
+                onAddToStation={onToggleAddToStation}
+                isSongSavedAtStation={isSongSavedAtCurrentStation}
+              />
+            )}
         </section>
       </>
     </section>

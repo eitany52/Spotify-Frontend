@@ -4,6 +4,10 @@
     position: relative;
     // align-content: center;
 
+    @include for-mobile-layout {
+        grid-column: span 2;
+    }
+
     .search-form {
         display: grid;
         // grid-auto-flow: column;

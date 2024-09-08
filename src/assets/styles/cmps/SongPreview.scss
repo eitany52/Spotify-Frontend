@@ -31,9 +31,11 @@
       & .play {
         display: block;
       }
-      & .num {
-        display: none;
-      }
+     
+        & .num {
+          display: none;
+        }
+   
     }
 
     & .add {visibility: hidden;}
@@ -47,7 +49,8 @@
 
     @include for-mobile-layout {
 
-      &.number ,  &:hover .number{   display: none;    }
+      &.number {   display: none;    }
+      // &:hover .number {   display: none;    }
       
    
       & .more svg { transform: rotate(90deg);}
@@ -66,7 +69,10 @@
     align-items: center;
     padding: 0 10px;
 
-
+    @include for-mobile-layout {
+      grid-template-columns: 2fr 0fr 0fr 0fr;
+      padding: 0px;
+    }
 
     & .intro-outer {
 
@@ -99,6 +105,9 @@
     align-items: center;
     padding: 0 10px;
     margin: 4px 0;
+
+    
+
 
     & .add {
       visibility: hidden;

@@ -28,11 +28,6 @@ export function AppHeader({ backgroundColor = null }) {
     } else {
       setIsSearchDisplayed(false);
     }
-    // if (location.pathname === "/") {
-    //   setIsHomePageDisplayed(true);
-    // } else {
-    //   setIsHomePageDisplayed(false);
-    // }
   }
 
   function onGoToLoginSignup(location) {
@@ -40,8 +35,8 @@ export function AppHeader({ backgroundColor = null }) {
   }
 
   function onOpenUserModal(ev) {
-    const element = ev.currentTarget
-    const rect = element.getBoundingClientRect()
+    const element = ev.currentTarget;
+    const rect = element.getBoundingClientRect();
 
     onToggleModal({
       cmp: FloatingMenuUser,
@@ -58,18 +53,11 @@ export function AppHeader({ backgroundColor = null }) {
     });
   }
 
-
   const userLatter = user ? utilService.getFirstChar(user.fullname) : null;
   const darkenedBackground_50 = utilService.darkenColor(
     "rgba(173,152,151,1)",
     50
   );
-
-  //const darkenedBackground_50 = "rgba(255,5,5,1)";
-  // const darkenedBackground_50 =
-  //   backgroundColor === null
-  //     ? "rgba(255,255,255,1)"
-  //     : utilService.darkenColor(backgroundColor, 50);
 
   return (
     <header className="app-header" style={{ backgroundColor: backgroundColor }}>
@@ -96,9 +84,6 @@ export function AppHeader({ backgroundColor = null }) {
         </section>
         {user && (
           <section onClick={onOpenUserModal} className="user-info">
-            {/* <span>{backgroundColor} </span>
-            <span>{darkenedBackground_50} </span> */}
-
             <span style={{ backgroundColor: darkenedBackground_50 }}>
               <small
                 style={{

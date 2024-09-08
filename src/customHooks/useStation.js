@@ -1,6 +1,5 @@
 import { onToggleModal } from "../store/actions/app.actions.js";
 import { FloatingMenuStation } from "../cmps/FloatingMenuStation";
-import { useNavigate } from "react-router";
 import { EditStationDetails } from "../cmps/EditStationDetails";
 
 
@@ -8,10 +7,33 @@ import { EditStationDetails } from "../cmps/EditStationDetails";
 
 export const useStation = ({ station, location, onCreateEmptyStation }) => {
 
-  // const navigate = useNavigate();
-
   function handleClick(ev) {
     ev.preventDefault();
+    const element = ev.currentTarget;
+    const rect = element.getBoundingClientRect();
+    let style;
+    console.log('location:', location)
+    switch (location) {
+      case "library":
+        style = {
+          left: `${rect.left + 230}px`,
+          top: `${rect.top}px`
+        }
+        break
+      case "station-details":
+        style = {
+          left: `${rect.left + 50}px`,
+          top: `${rect.top + 20}px`
+        }
+        break;
+      case "main":
+        style = {
+          left: `${rect.left}px`,
+          top: `${rect.top + 20}px`
+        }
+        break;
+
+    }
     if (location === "modal-add" || location === "modal-more") return;
     onToggleModal({
       cmp: FloatingMenuStation,
@@ -37,10 +59,7 @@ export const useStation = ({ station, location, onCreateEmptyStation }) => {
           });
         },
       },
-      style: {
-        left: `${event.clientX}px`,
-        top: `${event.clientY}px`,
-      },
+      style
     });
   }
 

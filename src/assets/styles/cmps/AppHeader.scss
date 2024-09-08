@@ -9,6 +9,10 @@
     padding: 10px;
 
 
+    @include for-mobile-layout {
+        grid-column: span 2;
+    }
+
     .user-info {
         // background-color: $dark-clr2;
         // padding: 2px 8px;

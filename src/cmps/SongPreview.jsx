@@ -6,6 +6,7 @@ import { onToggleModal } from "../store/actions/app.actions.js";
 import { FloatingMenuSongAdd } from "./FloatingMenuSongAdd.jsx";
 import { FloatingMenuSong } from "./FloatingMenuSong.jsx";
 import { setCurrentSong, setPlayPause } from "../store/actions/station.actions";
+import { useScreenCategory } from "../customHooks/useBreakpoint.js";
 
 export function SongPreview({
   song,
@@ -22,6 +23,8 @@ export function SongPreview({
     (storeState) => storeState.stationModule.isPlaying
   );
 
+  const screenCategory = useScreenCategory();
+
   function playSong() {
     if (currentSong !== song) {
       setCurrentSong(song);
@@ -30,6 +33,9 @@ export function SongPreview({
   }
 
   function onOpenMoreOptionsModal(ev, song) {
+    const element = ev.currentTarget;
+    const rect = element.getBoundingClientRect();
+
     onToggleModal({
       cmp: FloatingMenuSong,
       props: {
@@ -40,13 +46,18 @@ export function SongPreview({
         class: "floating-menu-song",
       },
       style: {
-        left: `${ev.clientX - 300}px`,
-        top: `${ev.clientY - 200}px`,
+        // left: `${ev.clientX - 300}px`,
+        // top: `${ev.clientY - 200}px`,
+        left: `${rect.left - 220}px`,
+        top: `${rect.top - 100}px`,
       },
     });
   }
 
   function onOpenAddToStationModal(ev, song) {
+    const element = ev.currentTarget;
+    const rect = element.getBoundingClientRect();
+    // console.log("Add.......");
     onToggleModal({
       cmp: FloatingMenuSongAdd,
       props: {
@@ -57,8 +68,10 @@ export function SongPreview({
         class: "floating-menu-song-add",
       },
       style: {
-        left: `${ev.clientX - 300}px`,
-        top: `${ev.clientY - 200}px`,
+        // left: `${ev.clientX - 300}px`,
+        // top: `${ev.clientY - 200}px`,
+        left: `${rect.left - 280}px`,
+        top: `${rect.top - 100}px`,
       },
     });
   }
@@ -110,7 +123,9 @@ export function SongPreview({
       )}
 
       {/* col 3 album */}
-      {type === "search-at-station" && <section>album</section>}
+      {screenCategory !== "mobile" && type === "search-at-station" && (
+        <section>album</section>
+      )}
 
       {/* col 4 date */}
       {type === "station" && (
@@ -138,7 +153,9 @@ export function SongPreview({
       )}
 
       {/* col 6 duration */}
-      <span className="song-duration">{song.duration}</span>
+      {screenCategory !== "mobile" && (
+        <span className="song-duration">{song.duration}</span>
+      )}
 
       {/* col 7 more */}
       {/* need to be fix - more not working in search becuse function not exist*/}
@@ -152,7 +169,7 @@ export function SongPreview({
       )}
 
       {/* col 8 more */}
-      {type === "search-at-station" && (
+      {type === "search-at-station" && screenCategory !== "mobile" && (
         <button
           onClick={() => onAddToStation(song)}
           className="btn-type-3 center-item"

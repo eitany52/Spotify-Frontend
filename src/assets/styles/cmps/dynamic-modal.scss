@@ -1,9 +1,9 @@
 .modal-backdrop {
     position: fixed;
-    background-color: transparent;
+    background-color: rgba(16, 16, 16, 0.5);
     inset: 0;
-    z-index: 0;
-
+    z-index: 7;
+   
 }
 
 .modal-content {
@@ -16,9 +16,9 @@
     width: 25vw;
     height: fit-content;
     padding: 3px;
-    background: $dark-clr3;
+    background: $dark-clr4;
     color: white;
-    z-index: 3;
+    z-index: 8;
     border-radius: 5px;
     display: grid;
     // align-content: start;
@@ -93,8 +93,8 @@
 
     &.floating-edit-station-details {
         margin: auto;
-        width: 40vw;
-        min-width: 450px
+        width: 500px;
+       // max-width: 550px
     }
 
     &.floating-menu-station {

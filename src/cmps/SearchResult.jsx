@@ -7,6 +7,7 @@ import { StationList } from "./StationList";
 // import { stationService } from "../services/station";
 import { showErrorMsg } from "../services/event-bus.service";
 import { useSelector } from "react-redux";
+import { useScreenCategory } from "../customHooks/useBreakpoint";
 
 export const SearchResult = () => {
   const params = useParams();
@@ -14,7 +15,7 @@ export const SearchResult = () => {
   const { onAddToLikedSongs, isSongSavedAtSomeUserStation, onCreateEmptyStation } = useOutletContext()
   const homeStations = useSelector(storeState => storeState.stationModule.homeStations)
   // const [stationsByUserInput, setStationsByUserInput] = useState([]);
-
+  const screenCategory = useScreenCategory();
   useEffectUpdate(() => {
     loadSongs();
     // loadStationsByUserInput()
@@ -22,11 +23,11 @@ export const SearchResult = () => {
 
   async function loadSongs() {
     try {
-      const songs = await getSongsFromYoutube(params.userInput)
+      const songs = await getSongsFromYoutube(params.userInput);
       setSongs(songs);
     } catch (error) {
       console.log("Cannot load songs", error);
-      showErrorMsg("Failed to find songs")
+      showErrorMsg("Failed to find songs");
     }
   }
 
@@ -68,14 +69,17 @@ export const SearchResult = () => {
             <button className="btn-type-1">Genres</button>
           </div>
           <section className="search-result-container">
-            <section className="inner-grid">
-              <h2 className="top-res">Top result</h2>
-              <div className="top-result-container">
-                <img src={firstSongImg} />
-                {/* <h3>Hip-Hop</h3> */}
-                {/* <span>Genre</span> */}
-              </div>
-            </section>
+            {screenCategory !== "mobile" && (
+              <section className="inner-grid">
+                <h2 className="top-res">Top result</h2>
+                <div className="top-result-container">
+                  <img src={firstSongImg} />
+                  {/* <h3>Hip-Hop</h3> */}
+                  {/* <span>Genre</span> */}
+                </div>
+              </section>
+            )}
+
             <section className="inner-grid">
               <h2 className="songs">Songs</h2>
               <SongList

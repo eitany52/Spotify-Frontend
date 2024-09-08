@@ -11,6 +11,7 @@ import {
   setIsShuffle,
   setDisplayHideCard,
 } from "../store/actions/station.actions";
+import { useScreenCategory } from "../customHooks/useBreakpoint.js";
 
 // const origin = process.env.NODE_ENV === 'production' ?
 //  window.location.origin : "https://localhost:5173"
@@ -27,6 +28,8 @@ export const AppPlayer = () => {
 
   const { currentSong, isPlaying, station, isShuffle, displayCard } =
     stationModul;
+
+  const screenCategory = useScreenCategory();
 
   useEffect(() => {
     if (isSongLoaded) {
@@ -165,8 +168,8 @@ export const AppPlayer = () => {
     playerVars: {
       autoplay: 0,
       controls: 0,
-      origin: window.location.origin // מגדיר את המקור ל-URL הנוכחי של הדפדפן
-    }
+      origin: window.location.origin, // מגדיר את המקור ל-URL הנוכחי של הדפדפן
+    },
   };
 
   return (
@@ -190,7 +193,11 @@ export const AppPlayer = () => {
         <span>{currentSong.title}</span>
       </section>
 
-      <section className="control-pannel center-item">
+      <section
+        className={`control-pannel ${
+          screenCategory !== "mobile" ? "center-item" : ""
+        } `}
+      >
         <section className="controls">
           <span onClick={onShuffle} className="icon-type-2">
             {" "}
@@ -238,14 +245,14 @@ export const AppPlayer = () => {
               max={
                 currentSong.id
                   ? utilService.convertFormattedTimeToSeconds(
-                    currentSong.duration
-                  )
+                      currentSong.duration
+                    )
                   : "120"
               }
               value={currentTimeInSeconds}
               onChange={handleRangeChange}
-            // step="0.1"
-            // max={playerRef.current ? playerRef.current.getDuration() : 100}
+              // step="0.1"
+              // max={playerRef.current ? playerRef.current.getDuration() : 100}
             />
           </section>
           {currentSong.id && <span>{currentSong.duration}</span>}
