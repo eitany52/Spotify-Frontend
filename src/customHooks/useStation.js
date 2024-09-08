@@ -11,6 +11,39 @@ export const useStation = ({ station, stationId, location, onCreateEmptyStation 
     const navigate = useNavigate();
 
     function handleRightClick(event) {
+      const element = event.currentTarget;
+      const rect = element.getBoundingClientRect();
+      let style;
+      console.log('location:', location)
+      switch (location) {
+        case "library" :
+          style = { 
+            left: `${rect.left + 230}px`,
+           top: `${rect.top }px`
+          }
+        break
+        case "station-details" : 
+          style = {
+            left: `${rect.left + 50}px`,
+            top: `${rect.top + 20 }px`
+          }
+        break;
+        case "main" :
+          style = {  
+            left: `${rect.left}px`,
+            top: `${rect.top + 20 }px`
+          }
+        break;
+
+      }
+      // const style =  location === "library" ?  { 
+      //   left: `${rect.left + 230}px`,
+      //  top: `${rect.top }px`
+      // } : { 
+      //   left: `${rect.left + 50}px`,
+      //  top: `${rect.top + 20 }px`
+      // }
+
         if (location === "modal-add" || location === "modal-more") return;
         event.preventDefault();
         onToggleModal({
@@ -35,10 +68,7 @@ export const useStation = ({ station, stationId, location, onCreateEmptyStation 
               });
             },
           },
-          style: {
-            left: `${event.clientX}px`,
-            top: `${event.clientY}px`,
-          },
+          style: style,
         });
       }
     

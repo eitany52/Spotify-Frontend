@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { FastAverageColor } from "fast-average-color";
 
+const colorCache = {};
+
 const ImageColorComponent = ({ imageUrl, onColorChange }) => {
   useEffect(() => {
     const fac = new FastAverageColor();
+
+    const cachedColor = getCachedColor(imageUrl);
+    if (cachedColor) {
+      onColorChange(cachedColor);
+      return;
+    }
 
     const proxyUrl = "https://cors-anywhere.herokuapp.com/";
     const targetUrl = imageUrl;
@@ -23,10 +31,13 @@ const ImageColorComponent = ({ imageUrl, onColorChange }) => {
           fac
             .getColorAsync(img)
             .then((color) => {
-              onColorChange({
+              const colorData = {
                 backgroundColor: color.rgba,
                 color: color.isDark ? "#fff" : "#000",
-              });
+              };
+
+              setCachedColor(imageUrl, colorData);
+              onColorChange(colorData);
             })
             .catch((e) => {
               console.error(e);
@@ -37,6 +48,15 @@ const ImageColorComponent = ({ imageUrl, onColorChange }) => {
         console.error("Error fetching the image:", error);
       });
   }, [imageUrl]);
+
+  const getCachedColor = (imageUrl) => {
+    const cachedData = localStorage.getItem(imageUrl);
+    return cachedData ? JSON.parse(cachedData) : null;
+  };
+
+  const setCachedColor = (imageUrl, colorData) => {
+    localStorage.setItem(imageUrl, JSON.stringify(colorData));
+  };
 
   return (
     <div>

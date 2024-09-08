@@ -28,7 +28,7 @@ export function DynamicModal() {
   function onCloseModal() {
     onToggleModal(null);
   }
-  
+
   if (!modalData) return <></>;
 
   const Cmp = modalData?.cmp || (() => "");
@@ -36,9 +36,14 @@ export function DynamicModal() {
   // const style = modalData?.style || {};
   const style = screenCategory !== "mobile" && modalData ? modalData.style : {};
 
-  console.log(style);
+  // console.log(style);
+  // console.log(`${props.class}`);
+
   return (
     <>
+      {props.class === "floating-edit-station-details" && (
+        <section onClick={onCloseModal} className="modal-backdrop"></section>
+      )}
       {/* <section onClick={onCloseModal} className="modal-backdrop"></section> */}
       <section
         ref={modalRef}
