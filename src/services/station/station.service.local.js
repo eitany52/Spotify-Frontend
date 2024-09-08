@@ -20,7 +20,7 @@ export const stationService = {
     updateStationDetails, // =
     getDemoStations, // =
     // removeSongFromStation, // =
-    saveStationByUser, // =
+    addStationToLibrary, // =
     isLikedSongStation, // =
     // createEmptyStation,
     // getSongsFromYoutube,
@@ -190,7 +190,7 @@ function getDemoStations() {
 
 }
 
-async function saveStationByUser(station) {
+async function addStationToLibrary(station) {
 
     const stationToSave = {
         ...station, savedBy: [...station.savedBy, getLoggedInUser()._id]

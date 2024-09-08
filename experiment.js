@@ -112,3 +112,9 @@ function formatSongs(songs) {
 //     return songs
 //     // return searchRes[0].items.slice(0,4)
 // }
+
+
+const user = { id: "123", name: "Eitan" }
+const userAdmin = { id: "456", name: "Daniel" }
+
+console.log(null / 60);

@@ -13,6 +13,7 @@ export const FloatingMenuSongAdd = ({ song, onDone }) => {
   const stations = useSelector(
     (storeState) => storeState.stationModule.stations
   );
+  const currentStation = useSelector(storeState => storeState.stationModule.station)
   const [stationsToMark, setStationsToMark] = useState([]);
   const [stationsToAddSong, setStationsToAddSong] = useState([]);
   const [stationsToRemoveSong, setStationsToRemoveSong] = useState([]);
@@ -70,7 +71,7 @@ export const FloatingMenuSongAdd = ({ song, onDone }) => {
     }
   }
 
-  async function onToggleAddSongToStations(ev) {
+  async function onSaveChanges(ev) {
     ev.preventDefault();
     onDone();
     try {
@@ -79,7 +80,7 @@ export const FloatingMenuSongAdd = ({ song, onDone }) => {
       }
 
       for (const station of stationsToRemoveSong) {
-        await removeSongFromStation(station._id, song.id);
+        await removeSongFromStation(station._id, song.id, currentStation?._id);
       }
 
       showSuccessMsg("Changes saved");
@@ -97,7 +98,7 @@ export const FloatingMenuSongAdd = ({ song, onDone }) => {
 
   return (
     <form
-      onSubmit={onToggleAddSongToStations}
+      onSubmit={onSaveChanges}
       className="floating-menu-song-add"
     >
       {/* <ul> */}

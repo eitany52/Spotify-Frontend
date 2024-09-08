@@ -15,7 +15,6 @@ import {
   resetStation,
 } from "../store/actions/station.actions.js";
 
-// import { utilService } from "../services/util.service.js";
 import { utilService } from "../services/util.service.js";
 import { SvgIcon, AllIcons } from "./SvgIcon.jsx";
 import { AppSearch } from "./AppSearch.jsx";
@@ -23,13 +22,11 @@ import { SongList } from "./SongList.jsx";
 import { AppHeader } from "../cmps/AppHeader";
 import ImageColorComponent from "../cmps/ImageColorComponent";
 import { useStation } from "../customHooks/useStation.js";
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
 
 export function StationDetails() {
   const { stationId } = useParams();
   const station = useSelector((storeState) => storeState.stationModule.station);
-  const stations = useSelector(
-    (storeState) => storeState.stationModule.stations
-  );
   const isPlaying = useSelector(
     (storeState) => storeState.stationModule.isPlaying
   );
@@ -37,7 +34,7 @@ export function StationDetails() {
     (storeState) => storeState.stationModule.currentSong
   );
   const user = useSelector(storeState => storeState.userModule.user)
-  const { onAddToLikedSongs, isSongSavedAtSomeUserStation, isDemoStation } =
+  const { onAddToLikedSongs, isSongSavedAtSomeUserStation } =
     useOutletContext();
   const [colors, setColors] = useState({
     backgroundColor: "",
@@ -47,7 +44,7 @@ export function StationDetails() {
   const [style2, setStyle2] = useState(null);
 
   const location = "station-details";
-  const { handleRightClick } = useStation({ station, stationId, location });
+  const { handleClick } = useStation({ station, location });
 
   useEffect(() => {
     loadStation(stationId)
@@ -57,14 +54,6 @@ export function StationDetails() {
   // const [localSongs, setLocalSongs] = useState(songs);
   const [fontSize, setFontSize] = useState("1em");
   const containerRef = useRef(null);
-
-  // useEffect(() => {
-  //   const isDemoOnly = isDemoStation(stationId);
-  //   if (!isDemoOnly) {
-  //     loadStation(stationId);
-  //   }
-  //   //loadStation(stationId);
-  // }, [stationId, stations, colors]);
 
   useEffect(() => {
     const resizeFont = () => {
@@ -109,18 +98,19 @@ export function StationDetails() {
     return isSongSavedAtStation(station, song.id);
   }
 
-  function onToggleAddToStation(song) {
+  async function onToggleAddToStation(song) {
+    let isSongAdded = false
     try {
       if (isSongSavedAtCurrentStation(song)) {
-        removeSongFromStation(station._id, song.id);
+        await removeSongFromStation(station._id, song.id, station._id);
       } else {
-        addSongToStation(station._id, song);
+        await addSongToStation(station._id, song, station._id);
+        isSongAdded = true
       }
+      showSuccessMsg(`${isSongAdded ? "Added to" : "Removed from"}${station.name}`)
     } catch (err) {
-      console.log(
-        "Having issues with removing or saving the song to this station",
-        err
-      );
+      console.log("Cannot remove or save the song to this station", err)
+      showErrorMsg(`Failed to Add/Remove from ${station.name}`)
     }
   }
 
@@ -179,93 +169,92 @@ export function StationDetails() {
   return (
     <section className="station-details main-layout">
       {/* <AllIcons /> */}
-      {station && (
-        <>
-          <section className="app-header-continer full">
-            <AppHeader backgroundColor={colors.backgroundColor} />
-          </section>
-          <section className="header full" style={{ ...style1 }}>
-            <section className="intro-outer">
-              <img src={station.imgUrl} />
-              <section className="intro-inner sb">
-                <span>Playlist</span>
-                {/* <h2>{station.name}</h2> */}
-                <div
-                  ref={containerRef}
-                  style={{
-                    width: "100%",
-                    height: "150px",
-                  }}
-                >
-                  <h2 style={{ fontSize: `${fontSize}px`, margin: 0 }}>
-                    {station.name}
-                  </h2>
-                </div>
-                <h3>
-                  {station.createdBy.fullname} |{" "}
-                  {station.songs && station.songs.length} songs{" "}
-                </h3>
-              </section>
+      <>
+        <section className="app-header-continer full">
+          <AppHeader backgroundColor={colors.backgroundColor} />
+        </section>
+        <section className="header full" style={{ ...style1 }}>
+          <section className="intro-outer">
+            <img src={station.imgUrl} />
+            <section className="intro-inner sb">
+              <span>Playlist</span>
+              {/* <h2>{station.name}</h2> */}
+              <div
+                ref={containerRef}
+                style={{
+                  width: "100%",
+                  height: "150px",
+                }}
+              >
+                <h2 style={{ fontSize: `${fontSize}px`, margin: 0 }}>
+                  {station.name}
+                </h2>
+              </div>
+              <h3>
+                {station.createdBy.fullname} |{" "}
+                {station.songs && station.songs.length} songs{" "}
+              </h3>
             </section>
           </section>
-          <section className="station-details-play full" style={{ ...style2 }}>
-            {station.songs.length > 0 && (
-              <section onClick={playPauseStation} className="svg-big bigger">
-                {(!isPlaying ||
-                  (isPlaying && !isCurrentSongSavedAtStation)) && (
-                    <SvgIcon iconName="play" style="dark" />
-                  )}
-                {isPlaying && isCurrentSongSavedAtStation && (
-                  <SvgIcon iconName="pause" style="dark" />
+        </section>
+        <section className="station-details-play full" style={{ ...style2 }}>
+          {station.songs.length > 0 && (
+            <section onClick={playPauseStation} className="svg-big bigger">
+              {(!isPlaying ||
+                (isPlaying && !isCurrentSongSavedAtStation)) && (
+                  <SvgIcon iconName="play" style="dark" />
                 )}
-              </section>
-            )}
+              {isPlaying && isCurrentSongSavedAtStation && (
+                <SvgIcon iconName="pause" style="dark" />
+              )}
+            </section>
+          )}
+          {station.type === "normal" &&
             <section
               // onClick={() => {
               //   console.log("now you should open modal");
               // }}
-              onClick={handleRightClick}
+              onClick={handleClick}
               className="svg-big bigger regular-color"
             >
               <SvgIcon iconName="more" />
-            </section>
-          </section>
+            </section>}
+        </section>
 
-          <div
-            className="color-component "
-            style={{ width: "10px", height: "10px" }}
-          >
-            <ImageColorComponent
-              imageUrl={station.imgUrl}
-              onColorChange={handleColorChange}
+        <div
+          className="color-component "
+          style={{ width: "10px", height: "10px" }}
+        >
+          <ImageColorComponent
+            imageUrl={station.imgUrl}
+            onColorChange={handleColorChange}
+          />
+        </div>
+
+        <section>
+          <SongList
+            songs={station.songs}
+            onAddToStation={(song) =>
+              !isUserStation ? onAddToLikedSongs(song) : null
+            }
+            isSongSavedAtStation={(song) =>
+              !isUserStation ? isSongSavedAtSomeUserStation(song) : true
+            }
+            isUserStation={isUserStation}
+            type="station"
+            onDragEnd={onDragEnd}
+          />
+        </section>
+
+        <section className="app-search-wrapper">
+          {isUserStation && station.type === "normal" && (
+            <AppSearch
+              onAddToStation={onToggleAddToStation}
+              isSongSavedAtStation={isSongSavedAtCurrentStation}
             />
-          </div>
-
-          <section>
-            <SongList
-              songs={station.songs}
-              onAddToStation={(song) =>
-                !isUserStation ? onAddToLikedSongs(song) : null
-              }
-              isSongSavedAtStation={(song) =>
-                !isUserStation ? isSongSavedAtSomeUserStation(song) : true
-              }
-              isUserStation={isUserStation}
-              type="station"
-              onDragEnd={onDragEnd}
-            />
-          </section>
-
-          <section className="app-search-wrapper">
-            {isUserStation && station.type === "normal" && (
-              <AppSearch
-                onAddToStation={onToggleAddToStation}
-                isSongSavedAtStation={isSongSavedAtCurrentStation}
-              />
-            )}
-          </section>
-        </>
-      )}
+          )}
+        </section>
+      </>
     </section>
   );
 }

@@ -18,8 +18,6 @@ export function AppHeader({ backgroundColor = null }) {
   const location = useLocation();
   const navigate = useNavigate();
 
-  //   console.log("user", user);
-
   useEffect(() => {
     getLocation();
   }, [location]);
@@ -59,10 +57,9 @@ export function AppHeader({ backgroundColor = null }) {
       },
     });
   }
-  
+
 
   const userLatter = user ? utilService.getFirstChar(user.fullname) : null;
-  console.log(backgroundColor);
   const darkenedBackground_50 = utilService.darkenColor(
     "rgba(173,152,151,1)",
     50
@@ -76,89 +73,61 @@ export function AppHeader({ backgroundColor = null }) {
 
   return (
     <header className="app-header" style={{ backgroundColor: backgroundColor }}>
-      {
-        <>
-          <section>
-            {/* <button className=" btn-back icon-type-1 big">
+      <>
+        <section>
+          {/* <button className=" btn-back icon-type-1 big">
               <SvgIcon iconName={"back"} />
             </button>
             <button className=" btn-forward icon-type-1 big">
               <SvgIcon iconName={"forward"} />
             </button> */}
-            <button
-              className="btn-back icon-type-1 big"
-              onClick={() => navigate(-1)}
-            >
-              <SvgIcon iconName={"back"} />
-            </button>
-            <button
-              className="btn-forward icon-type-1 big"
-              onClick={() => navigate(1)}
-            >
-              <SvgIcon iconName={"forward"} />
-            </button>
-          </section>
-          {user && (
-            <section onClick={onOpenUserModal} className="user-info">
-              {/* <span>{backgroundColor} </span>
+          <button
+            className="btn-back icon-type-1 big"
+            onClick={() => navigate(-1)}
+          >
+            <SvgIcon iconName={"back"} />
+          </button>
+          <button
+            className="btn-forward icon-type-1 big"
+            onClick={() => navigate(1)}
+          >
+            <SvgIcon iconName={"forward"} />
+          </button>
+        </section>
+        {user && (
+          <section onClick={onOpenUserModal} className="user-info">
+            {/* <span>{backgroundColor} </span>
             <span>{darkenedBackground_50} </span> */}
 
-              <span style={{ backgroundColor: darkenedBackground_50 }}>
-                <small
-                  style={{
-                    backgroundColor: backgroundColor,
-                  }}
-                >
-                  {userLatter}
-                </small>
-              </span>
-            </section>
-          )}
-          {!user && (
-            <section className="btns-login-signup">
-              <button
-                onClick={() => onGoToLoginSignup("signup")}
-                className="btn-signup"
+            <span style={{ backgroundColor: darkenedBackground_50 }}>
+              <small
+                style={{
+                  backgroundColor: backgroundColor,
+                }}
               >
-                Sign up
-              </button>
-              <button
-                onClick={() => onGoToLoginSignup("login")}
-                className="btn-login"
-              >
-                Login
-              </button>
-            </section>
-          )}
-          {isSearchDisplayed && <AppSearch />}
-        </>
-
-        /* <nav>
-                <NavLink to="">Home 🏠</NavLink>
-                <NavLink to="about">About</NavLink>
-                <NavLink to="car">Cars</NavLink>
-                <NavLink to="chat">Chat</NavLink>
-                <NavLink to="review">Review</NavLink>
-                <NavLink to="board">Boards</NavLink>
-
-                {user &&
-                    <span className="user-info">
-                        <Link to={`user/${user._id}`}>
-                            {user.imgUrl && <img src={user.imgUrl} />}
-                            {user.fullname}
-                        </Link>
-                        <span className="score">{user.score?.toLocaleString()}</span>
-                        <button onClick={onLogout}>Logout</button>
-                    </span>
-                }
-                {!user &&
-                    <section className="user-info">
-                        <LoginSignup onLogin={onLogin} onSignup={onSignup} />
-                    </section>
-                }
-            </nav>
-            <h1>My App</h1> */
-      }
+                {userLatter}
+              </small>
+            </span>
+          </section>
+        )}
+        {!user && (
+          <section className="btns-login-signup">
+            <button
+              onClick={() => onGoToLoginSignup("signup")}
+              className="btn-signup"
+            >
+              Sign up
+            </button>
+            <button
+              onClick={() => onGoToLoginSignup("login")}
+              className="btn-login"
+            >
+              Login
+            </button>
+          </section>
+        )}
+        {isSearchDisplayed && <AppSearch />}
+      </>
     </header>
   );
 }
