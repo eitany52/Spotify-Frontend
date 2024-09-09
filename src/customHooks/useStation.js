@@ -29,6 +29,13 @@ export const useStation = ({ station, location, onCreateEmptyStation }) => {
           top: `${rect.top + 20}px`
         }
         break;
+      case "search":
+        style = {
+          left: `${rect.left}px`,
+          top: `${rect.top + 20}px`
+        }
+        break;
+
     }
     if (location === "modal-add" || location === "modal-more") return;
     onToggleModal({

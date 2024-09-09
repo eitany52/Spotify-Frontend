@@ -6,6 +6,11 @@
 
 
   
+  cursor: default; 
+  & :active {   cursor: grabbing;  }
+  & .song-name, & .play { cursor : pointer; }
+
+  
 
   &:hover {
     background-color: $dark-clr3;

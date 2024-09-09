@@ -34,7 +34,7 @@ export function StationDetails() {
   const currentSong = useSelector(
     (storeState) => storeState.stationModule.currentSong
   );
-  const user = useSelector(storeState => storeState.userModule.user)
+  const user = useSelector((storeState) => storeState.userModule.user);
   const { onAddToLikedSongs, isSongSavedAtSomeUserStation } =
     useOutletContext();
   const [colors, setColors] = useState({
@@ -117,18 +117,20 @@ export function StationDetails() {
   }
 
   async function onToggleAddToStation(song) {
-    let isSongAdded = false
+    let isSongAdded = false;
     try {
       if (isSongSavedAtCurrentStation(song)) {
         await removeSongFromStation(station._id, song.id, station._id);
       } else {
         await addSongToStation(station._id, song, station._id);
-        isSongAdded = true
+        isSongAdded = true;
       }
-      showSuccessMsg(`${isSongAdded ? "Added to" : "Removed from"}${station.name}`)
+      showSuccessMsg(
+        `${isSongAdded ? "Added to" : "Removed from"}${station.name}`
+      );
     } catch (err) {
-      console.log("Cannot remove or save the song to this station", err)
-      showErrorMsg(`Failed to Add/Remove from ${station.name}`)
+      console.log("Cannot remove or save the song to this station", err);
+      showErrorMsg(`Failed to Add/Remove from ${station.name}`);
     }
   }
 
@@ -193,7 +195,7 @@ export function StationDetails() {
         </section>
         <section className="header full" style={{ ...style1 }}>
           <section className="intro-outer">
-            <img src={station.imgUrl} ref={imgRef} />
+            <img src={station.imgUrl} ref={imgRef} style={{ width: "200px" }} />
             <section className="intro-inner sb">
               <span>Playlist</span>
               {/* <h2>{station.name}</h2> */}
@@ -218,16 +220,15 @@ export function StationDetails() {
         <section className="station-details-play full" style={{ ...style2 }}>
           {station.songs.length > 0 && (
             <section onClick={playPauseStation} className="svg-big bigger">
-              {(!isPlaying ||
-                (isPlaying && !isCurrentSongSavedAtStation)) && (
-                  <SvgIcon iconName="play" style="dark" />
-                )}
+              {(!isPlaying || (isPlaying && !isCurrentSongSavedAtStation)) && (
+                <SvgIcon iconName="play" style="dark" />
+              )}
               {isPlaying && isCurrentSongSavedAtStation && (
                 <SvgIcon iconName="pause" style="dark" />
               )}
             </section>
           )}
-          {station.type === "normal" &&
+          {station.type === "normal" && (
             <section
               // onClick={() => {
               //   console.log("now you should open modal");
@@ -236,7 +237,8 @@ export function StationDetails() {
               className="svg-big bigger regular-color"
             >
               <SvgIcon iconName="more" />
-            </section>}
+            </section>
+          )}
         </section>
 
         <div

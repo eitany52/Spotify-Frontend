@@ -35,6 +35,16 @@
     gap:15px;
 
 
+    @include for-mobile-layout { 
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, auto);
+        grid-template-areas:
+        "img"
+        "nme"
+        "des"
+        "snd";
+    }
+
 
     & input, & textarea {
         background: $dark-clr5;
@@ -61,6 +71,16 @@
     .upload {grid-area: img;}
     .send {grid-area: snd; margin-left: 50%;}
 
+
+    @include for-mobile-layout { 
+        // .fieldName {grid-area: nme;}
+        // .fieldDescription {grid-area: des;}
+        // .upload {grid-area: img;}
+        // .send {grid-area: snd; margin-left: 50%;}
+    
+   
+
+    }
    
 
     & .upload {
