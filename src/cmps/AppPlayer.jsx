@@ -194,9 +194,8 @@ export const AppPlayer = () => {
       </section>
 
       <section
-        className={`control-pannel ${
-          screenCategory !== "mobile" ? "center-item" : ""
-        } `}
+        className={`control-pannel ${screenCategory !== "mobile" ? "center-item" : ""
+          } `}
       >
         <section className="controls">
           <span onClick={onShuffle} className="icon-type-2">
@@ -245,14 +244,14 @@ export const AppPlayer = () => {
               max={
                 currentSong.id
                   ? utilService.convertFormattedTimeToSeconds(
-                      currentSong.duration
-                    )
+                    currentSong.duration
+                  )
                   : "120"
               }
-              value={currentTimeInSeconds}
+              value={currentTimeInSeconds || 0}
               onChange={handleRangeChange}
-              // step="0.1"
-              // max={playerRef.current ? playerRef.current.getDuration() : 100}
+            // step="0.1"
+            // max={playerRef.current ? playerRef.current.getDuration() : 100}
             />
           </section>
           {currentSong.id && <span>{currentSong.duration}</span>}
