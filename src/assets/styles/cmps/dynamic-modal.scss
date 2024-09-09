@@ -73,12 +73,26 @@
 
 
     &.floating-menu-song-add {
-        width: minmax(20vw, 200px);
+        width: 280px;
+        max-width:280px;
+
+        @include for-mobile-layout {
+            width: 100%;
+            max-width:100%;
+        }
+
     }
 
     &.floating-menu-song {
         align-items: start;
-        width: minmax(20vw, 200px);
+        width: 240px;
+        max-width:240px;
+
+        @include for-mobile-layout {
+            width: 100%;
+            max-width:100%;
+        }
+
     }
 
     &.floating-menu-user {
@@ -94,11 +108,23 @@
     &.floating-edit-station-details {
         margin: auto;
         width: 500px;
-       // max-width: 550px
+      
+        @include for-mobile-layout {
+            width: 100%;
+        }
+
+
     }
 
     &.floating-menu-station {
-        width: minmax(20vw, 250px);
+        width: 250px;
+        max-width:250px;
+
+
+        @include for-mobile-layout {
+            width: 100%;
+            max-width:100%;
+        }
     }
 
 

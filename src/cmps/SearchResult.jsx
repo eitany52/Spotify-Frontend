@@ -12,8 +12,14 @@ import { useScreenCategory } from "../customHooks/useBreakpoint";
 export const SearchResult = () => {
   const params = useParams();
   const [songs, setSongs] = useState(null);
-  const { onAddToLikedSongs, isSongSavedAtSomeUserStation, onCreateEmptyStation } = useOutletContext()
-  const homeStations = useSelector(storeState => storeState.stationModule.homeStations)
+  const {
+    onAddToLikedSongs,
+    isSongSavedAtSomeUserStation,
+    onCreateEmptyStation,
+  } = useOutletContext();
+  const homeStations = useSelector(
+    (storeState) => storeState.stationModule.homeStations
+  );
   // const [stationsByUserInput, setStationsByUserInput] = useState([]);
   const screenCategory = useScreenCategory();
   useEffectUpdate(() => {
@@ -45,17 +51,23 @@ export const SearchResult = () => {
   // }
 
   function filterStationsByUserInput() {
-    let stations = []
+    let stations = [];
     if (params.userInput) {
-      stations = homeStations.filter(station => station.tags.some(tag =>
-        tag.toLowerCase() === params.userInput.toLowerCase()))
+      stations = homeStations.filter((station) =>
+        station.tags.some(
+          (tag) => tag.toLowerCase() === params.userInput.toLowerCase()
+        )
+      );
     }
 
-    return stations
+    return stations;
   }
 
-  const stations = filterStationsByUserInput()
-  const firstSongImg = songs ? songs[0].imgUrl : null
+  const stations = filterStationsByUserInput();
+  const firstSongImg = songs ? songs[0].imgUrl : null;
+  const firstSongName = songs ? songs[0].title : "";
+  const firstSongArtist = songs ? songs[0].channelTitle : "";
+
   return (
     <div className="search-result">
       {/* <RecentSearches/> */}
@@ -74,8 +86,11 @@ export const SearchResult = () => {
                 <h2 className="top-res">Top result</h2>
                 <div className="top-result-container">
                   <img src={firstSongImg} />
-                  {/* <h3>Hip-Hop</h3> */}
-                  {/* <span>Genre</span> */}
+                  <span className="name">{firstSongName}</span>
+                  <section className="type">
+                    <span className="song">song</span>
+                    <span>{firstSongArtist}</span>
+                  </section>
                 </div>
               </section>
             )}
@@ -91,13 +106,16 @@ export const SearchResult = () => {
               />
             </section>
             <h2>Playlists result</h2>
-            {!!stations.length &&
+            {!!stations.length && (
               <StationList
                 stations={stations}
                 location="search"
-                onCreateEmptyStation={onCreateEmptyStation} />}
-            {!stations.length &&
-              <span className="span-no-results">No results</span>}
+                onCreateEmptyStation={onCreateEmptyStation}
+              />
+            )}
+            {!stations.length && (
+              <span className="span-no-results">No results</span>
+            )}
           </section>
         </>
       )}

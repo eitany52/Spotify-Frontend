@@ -116,7 +116,9 @@ export function SongPreview({
             <img src={songImg} />
           </div>
           <div className="intro-inner" onClick={playSong}>
-            <span className={`${isActive ? "active" : ""}`}>{songName}</span>
+            <span className={`song-name ${isActive ? "active" : ""}`}>
+              {songName}
+            </span>
             <span>{artistName}</span>
           </div>
         </section>
