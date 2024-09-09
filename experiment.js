@@ -117,4 +117,4 @@ function formatSongs(songs) {
 const user = { id: "123", name: "Eitan" }
 const userAdmin = { id: "456", name: "Daniel" }
 
-console.log(null / 60);
+console.log("3p" / 60);

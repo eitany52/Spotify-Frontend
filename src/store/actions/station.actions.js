@@ -2,6 +2,7 @@ import { stationService } from '../../services/station'
 import { store } from '../store'
 import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
 import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE, SET_SHUFFLE, DISPLAY_HIDE_CARD, SET_LIKED_SONGS_STATION, EXPEND_LIB, UNDO_UPDATE_STATION, SET_HOME_STATIONS, UPDATE_HOME_STATION } from '../reducers/station.reducer'
+import { getLoggedInUser } from './user.actions'
 
 export async function loadLibraryStations(filterBy) {
     try {
@@ -84,7 +85,7 @@ export async function addStationToLibrary(station, currentStationId) {
     try {
         const savedStation = await stationService.addStationToLibrary(station)
         store.dispatch({ type: ADD_STATION, savedStation })
-        store.dispatch({ type: UPDATE_HOME_STATION, updatedStation: savedStation })
+        updateHomeStation(savedStation)
         handleCurrentStationUpdate(savedStation, currentStationId)
     } catch (err) {
         console.log('Cannot add station to library', err)
@@ -96,12 +97,16 @@ export async function removeStationFromLibrary(station, currentStationId) {
     try {
         const removedStation = await stationService.removeStationFromLibrary(station)
         store.dispatch({ type: REMOVE_STATION, stationId: removedStation._id })
-        store.dispatch({ type: UPDATE_HOME_STATION, updatedStation: removedStation })
+        updateHomeStation(removedStation)
         handleCurrentStationUpdate(removedStation, currentStationId)
     } catch (err) {
         console.log('Cannot remove station from library', err)
         throw err
     }
+}
+
+export function updateHomeStation(updatedStation) {
+    store.dispatch({ type: UPDATE_HOME_STATION, updatedStation })
 }
 
 export function handleCurrentStationUpdate(updatedStation, currentStationId) {
@@ -157,6 +162,10 @@ export async function setNewSongOrder(station, songs) {
         console.log('Cannot reorder song to station', err)
         throw err
     }
+}
+
+export function updateStation(updatedStation) {
+    store.dispatch({ type: UPDATE_STATION, updatedStation })
 }
 
 export async function removeSongFromStation(stationId, songId, currentStationId) {

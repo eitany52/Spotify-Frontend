@@ -2,9 +2,6 @@ import { onToggleModal } from "../store/actions/app.actions.js";
 import { FloatingMenuStation } from "../cmps/FloatingMenuStation";
 import { EditStationDetails } from "../cmps/EditStationDetails";
 
-
-
-
 export const useStation = ({ station, location, onCreateEmptyStation }) => {
 
   function handleClick(ev) {
