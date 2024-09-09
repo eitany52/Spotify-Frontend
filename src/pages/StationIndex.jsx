@@ -18,8 +18,11 @@ import {
   loadLibraryStations as loadLibraryStations,
   setExpandLib,
   loadHomeStations,
+  updateHomeStation,
+  updateStation,
 } from "../store/actions/station.actions";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
+import { SOCKET_EVENT_SONG_ADDED, SOCKET_EVENT_STATION_SAVED, socketService } from "../services/socket.service";
 
 export const StationIndex = () => {
   const location = useLocation();
@@ -59,6 +62,22 @@ export const StationIndex = () => {
     }
     if (user) {
       loadLikedSongsStation();
+    }
+
+    socketService.on(SOCKET_EVENT_STATION_SAVED, ({ user, station }) => {
+      updateStation(station)
+      showSuccessMsg(`${user.name} saved your ${station.name} playlist`)
+    })
+
+    socketService.on(SOCKET_EVENT_SONG_ADDED, ({ user, station }) => {
+      updateStation(station)
+      updateHomeStation(station)
+      showSuccessMsg(`${user.name} added a song in ${station.name} playlist`)
+    })
+
+    return () => {
+      socketService.off(SOCKET_EVENT_STATION_SAVED)
+      socketService.off(SOCKET_EVENT_SONG_ADDED)
     }
   }, [user]);
 
@@ -103,10 +122,6 @@ export const StationIndex = () => {
     }
   }
 
-  // function setStationFromSearch(station) {
-  //   setStationFromDemo(station);
-  // }
-
   async function onCreateEmptyStation() {
     try {
       if (user) {
@@ -130,21 +145,6 @@ export const StationIndex = () => {
     const userStations = user ? getUserStations(libraryStations) : []
     return isSongSavedAtSomeStation(userStations, song.id);
   }
-
-  // function isDemoStation(stationId) {
-  //   const isInDemo = demoStations.some((_station) => {
-  //     return _station._id === stationId;
-  //   });
-
-  //   const isInStations = stations.some((_station) => {
-  //     return _station._id === stationId;
-  //   });
-  //   // console.log("isInDemo:", isInDemo);
-  //   // console.log("isInStations:", isInStations);
-  //   // console.log("is only demo:", isInDemo && !isInStations);
-  //   return isInDemo && !isInStations;
-  // }
-  console.log("StationIndex Rendered");
 
   return (
     <div
