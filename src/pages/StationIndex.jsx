@@ -20,15 +20,19 @@ import {
   loadHomeStations,
   updateHomeStation,
   updateStation,
+  getCmdUpdateHomeStation,
+  getCmdUpdateStation,
 } from "../store/actions/station.actions";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
-import { SOCKET_EVENT_SONG_ADDED, SOCKET_EVENT_STATION_SAVED, socketService } from "../services/socket.service";
+import { SOCKET_EVENT_SONG_ADDED, SOCKET_EVENT_STATION_SAVED, SOCKET_EVENT_STATION_UPDATED, socketService } from "../services/socket.service";
+import { useDispatch } from "react-redux";
 
 export const StationIndex = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const screenCategory = useScreenCategory();
   const [isHome, setHomeLib] = useState(true);
+  const dispatch = useDispatch()
 
   const [isSearchDisplayed, setIsSearchDisplayed] = useState(false);
   const [isHomePageDisplayed, setIsHomePageDisplayed] = useState(true);
@@ -64,18 +68,24 @@ export const StationIndex = () => {
       loadLikedSongsStation();
     }
 
+    // socketService.on(SOCKET_EVENT_STATION_UPDATED, station => {
+    //   dispatch(getCmdUpdateHomeStation(station))
+    //   dispatch(getCmdUpdateStation(station))
+    // })
+
     socketService.on(SOCKET_EVENT_STATION_SAVED, ({ user, station }) => {
       updateStation(station)
-      showSuccessMsg(`${user.name} saved your ${station.name} playlist`)
+      showSuccessMsg(`${user.fullname} saved your ${station.name} playlist`)
     })
 
     socketService.on(SOCKET_EVENT_SONG_ADDED, ({ user, station }) => {
       updateStation(station)
       updateHomeStation(station)
-      showSuccessMsg(`${user.name} added a song in ${station.name} playlist`)
+      showSuccessMsg(`${user.fullname} added a song in ${station.name} playlist`)
     })
 
     return () => {
+      socketService.off(SOCKET_EVENT_STATION_UPDATED)
       socketService.off(SOCKET_EVENT_STATION_SAVED)
       socketService.off(SOCKET_EVENT_SONG_ADDED)
     }

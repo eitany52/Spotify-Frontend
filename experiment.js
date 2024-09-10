@@ -1,3 +1,4 @@
+import { log } from 'console';
 import fs, { write } from 'fs'
 
 const API_KEY = 'AIzaSyCUE7BdmEO9uF_gWcV5yY5O3eqyINxdavo'
@@ -114,7 +115,7 @@ function formatSongs(songs) {
 // }
 
 
-const user = { id: "123", name: "Eitan" }
-const userAdmin = { id: "456", name: "Daniel" }
+// const user = { id: "123", name: "Eitan" }
+// const userAdmin = { id: "456", name: "Daniel" }
 
-console.log("3p" / 60);
+console.log(parseInt("sdfsdf"));

@@ -33,7 +33,7 @@ export async function login(credentials) {
     try {
         const user = await userService.login(credentials)
         store.dispatch({ type: SET_USER, user })
-        socketService.login(user)
+        socketService.login(user._id)
         return user
     } catch (err) {
         console.log('Cannot login', err)
@@ -45,7 +45,7 @@ export async function signup(credentials) {
     try {
         const user = await userService.signup(credentials)
         store.dispatch({ type: SET_USER, user })
-        socketService.login(user)
+        socketService.login(user._id)
         return user
     } catch (err) {
         console.log('Cannot signup', err)

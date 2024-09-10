@@ -13,6 +13,10 @@ import {
   setPlayPause,
   setNewSongOrder,
   resetStation,
+  updateStationDetails,
+  getCmdSetStation,
+  getCmdUpdateHomeStation,
+  getCmdUpdateStation,
 } from "../store/actions/station.actions.js";
 
 import { utilService } from "../services/util.service.js";
@@ -24,6 +28,8 @@ import ImageColorComponent from "../cmps/ImageColorComponent";
 import { useStation } from "../customHooks/useStation.js";
 import { useScreenCategory } from "../customHooks/useBreakpoint.js";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
+import { SOCKET_EMIT_USER_LEFT_STATION, SOCKET_EMIT_USER_WATCH_STATION, SOCKET_EVENT_STATION_UPDATED, socketService } from "../services/socket.service.js";
+import { useDispatch } from "react-redux";
 
 export function StationDetails() {
   const { stationId } = useParams();
@@ -48,10 +54,24 @@ export function StationDetails() {
   const { handleClick } = useStation({ station, location });
 
   const screenCategory = useScreenCategory();
+  const dispatch = useDispatch()
 
   useEffect(() => {
     loadStation(stationId);
-    return () => resetStation();
+
+    socketService.emit(SOCKET_EMIT_USER_WATCH_STATION, stationId)
+
+    socketService.on(SOCKET_EVENT_STATION_UPDATED, station => {
+      dispatch(getCmdSetStation(station))
+      dispatch(getCmdUpdateHomeStation(station))
+      dispatch(getCmdUpdateStation(station))
+    })
+
+    return () => {
+      resetStation();
+      socketService.emit(SOCKET_EMIT_USER_LEFT_STATION, stationId)
+      socketService.off(SOCKET_EVENT_STATION_UPDATED)
+    }
   }, [stationId]);
 
   // const [localSongs, setLocalSongs] = useState(songs);

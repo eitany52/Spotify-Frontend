@@ -11,7 +11,10 @@ export const SOCKET_EVENT_REVIEW_ABOUT_YOU = 'review-about-you'
 
 
 export const SOCKET_EVENT_STATION_SAVED = 'station-saved'
+export const SOCKET_EVENT_STATION_UPDATED = 'station-updated'
 export const SOCKET_EVENT_SONG_ADDED = 'song-added'
+export const SOCKET_EMIT_USER_WATCH_STATION = 'user-watch-station'
+export const SOCKET_EMIT_USER_LEFT_STATION = 'user-left-station'
 
 const SOCKET_EMIT_LOGIN = 'set-user-socket'
 const SOCKET_EMIT_LOGOUT = 'unset-user-socket'

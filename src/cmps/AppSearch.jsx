@@ -1,7 +1,4 @@
-// import { stationService } from "../services/station.service.local";
-// import { userService } from "../services/user.service.local";
 import { useEffect, useState } from "react";
-// import { loadStations, addStation } from "../store/actions/station.actions";
 import { SvgIcon } from "./SvgIcon";
 import { useLocation, useNavigate } from "react-router";
 import { getSongsFromYoutube } from "../store/actions/station.actions";
@@ -28,7 +25,7 @@ export const AppSearch = ({ onAddToStation, isSongSavedAtStation }) => {
   }, [userInput]);
 
   async function loadSongs() {
-    const songs = await getSongsFromYoutube(userInput)
+    const songs = await getSongsFromYoutube(userInput, 'search-at-station')
     setSongs(songs)
   }
 

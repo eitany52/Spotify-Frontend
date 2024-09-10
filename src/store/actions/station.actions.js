@@ -40,8 +40,8 @@ export async function loadStation(stationId) {
     }
 }
 
-export function getSongsFromYoutube(userInput) {
-    return stationService.getSongsFromYoutube(userInput)
+export function getSongsFromYoutube(userInput, location) {
+    return stationService.getSongsFromYoutube(userInput, location)
 }
 
 export async function createEmptyStation() {
@@ -271,20 +271,28 @@ export async function setExpandLib(libStatus) {
         throw err
     }
 }
-// export function setStationFromDemo(station) {
-//     try {
-//         store.dispatch({ type: SET_STATION, station })
-//     } catch (err) {
-//         console.log('Cannot load station from search', err)
-//         throw err
-//     }
-
-// }
+export function getCmdSetStation(station) {
+    return {
+        type: SET_STATION,
+        station
+    }
+}
+export function getCmdUpdateHomeStation(updatedStation) {
+    return {
+        type: UPDATE_HOME_STATION,
+        updatedStation
+    }
+}
+export function getCmdUpdateStation(updatedStation) {
+    return {
+        type: UPDATE_STATION,
+        updatedStation
+    }
+}
 
 export function formatSong(song) {
     return stationService.formatSong(song)
 }
-
 
 // export async function loadCars() {
 //     try {
