@@ -88,12 +88,10 @@ export function StationDetails() {
   // }, [stationId, stations, colors]);
 
   useEffect(() => {
-    console.log(1111111);
     const resizeFont = () => {
       const container = containerRef.current;
       const img = imgRef.current;
       if (!container || !img) return;
-      console.log(2222);
 
       let currentFontSize = 150; // Start with the initial font size
       const { width: maxWidth, height: maxHeight } =
@@ -108,18 +106,17 @@ export function StationDetails() {
       tempEl.style.fontSize = `${currentFontSize}px`;
       tempEl.textContent = station.name;
       document.body.appendChild(tempEl);
-      console.log(33333);
+
       // Adjust font size until the text fits within the container
       while (
         (tempEl.getBoundingClientRect().width > maxWidth ||
           tempEl.getBoundingClientRect().height > maxHeight) &&
         currentFontSize > 0
       ) {
-        console.log(44444);
         currentFontSize -= 1;
         tempEl.style.fontSize = `${currentFontSize}px`;
       }
-      console.log(5555);
+
       document.body.removeChild(tempEl);
       setFontSize(currentFontSize);
     };
@@ -219,17 +216,33 @@ export function StationDetails() {
             <section className="intro-inner sb">
               <span>Playlist</span>
               {/* <h2>{station.name}</h2> */}
-              <div
-                ref={containerRef}
-                style={{
-                  width: "100%",
-                  height: "150px",
-                }}
-              >
-                <h2 style={{ fontSize: `${fontSize}px`, margin: 0 }}>
-                  {station.name}
-                </h2>
-              </div>
+
+              {screenCategory !== "mobile" && (
+                <div
+                  ref={containerRef}
+                  style={{
+                    width: "100%",
+                    height: "150px",
+                  }}
+                >
+                  <h2 style={{ fontSize: `${fontSize}px`, margin: 0 }}>
+                    {station.name}
+                  </h2>
+                </div>
+              )}
+              {screenCategory === "mobile" && (
+                <div
+                  ref={containerRef}
+                  style={{
+                    width: "100%",
+                    height: "50px",
+                  }}
+                >
+                  <h2 style={{ fontSize: `${fontSize}px`, margin: 0 }}>
+                    {station.name}
+                  </h2>
+                </div>
+              )}
               <h3>
                 {station.createdBy.fullname} |{" "}
                 {station.songs && station.songs.length} songs{" "}
