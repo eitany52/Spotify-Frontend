@@ -14,9 +14,9 @@ export const FloatingMenuSongAdd = ({ song, onDone }) => {
     (storeState) => storeState.stationModule.stations
   );
   const currentStation = useSelector(storeState => storeState.stationModule.station)
-  const [stationsToMark, setStationsToMark] = useState([]);
-  const [stationsToAddSong, setStationsToAddSong] = useState([]);
-  const [stationsToRemoveSong, setStationsToRemoveSong] = useState([]);
+  const [stationsToMark, setStationsToMark] = useState([])
+  const [stationsToAddSong, setStationsToAddSong] = useState([])
+  const [stationsToRemoveSong, setStationsToRemoveSong] = useState([])
 
   useEffect(() => {
     initializeStationsToMark();
@@ -28,7 +28,7 @@ export const FloatingMenuSongAdd = ({ song, onDone }) => {
       if (isSongSavedAtStation(station, song.id)) {
         addStation(setStationsToMark, station);
       }
-    });
+    })
   }
 
   function onToggleMarkStation(station) {

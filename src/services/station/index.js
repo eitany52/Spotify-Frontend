@@ -48,9 +48,13 @@ function isSongSavedAtSomeStation(stations, songId) {
     return isSongSavedAtSomeStation
 }
 
-async function getSongsFromYoutube(userInput) {
+async function getSongsFromYoutube(userInput, location = '') {
     const searchTerm = userInput
-    let res = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&type=video&videoCategoryId=10&maxResults=4&key=${API_KEY}`)
+    let maxResults = 4
+    if (location === "search-at-station") {
+        maxResults = 15
+    }
+    let res = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&type=video&videoCategoryId=10&maxResults=${maxResults}&key=${API_KEY}`)
     let data = await res.json()
     let songs = data.items
     const songIds = _getSongIds(songs)

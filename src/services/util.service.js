@@ -133,6 +133,9 @@ function convertFormattedTimeToSeconds(formattedTime) {
 }
 
 function formatTime(timeInSeconds = 0) {
+    if (typeof timeInSeconds !== "number" || Number.isNaN(timeInSeconds)) {
+        timeInSeconds = 0
+    }
     const minutes = parseInt(timeInSeconds / 60, 10)
     const seconds = timeInSeconds % 60
     const formattedTime = `${minutes}:${seconds > 9 ? seconds : '0' + seconds}`
@@ -152,15 +155,15 @@ function createGradientColors(color) {
     const darkenedBackground_100 = 'rgba(18,18,18,1)';
     const gradientBackground2 = `linear-gradient( ${darkenedBackground_52}, ${darkenedBackground_100})`;
 
-    return { 
-        style1: { background: gradientBackground1},
-        style2: { background: gradientBackground2},
-        darken : darkenedBackground_52
+    return {
+        style1: { background: gradientBackground1 },
+        style2: { background: gradientBackground2 },
+        darken: darkenedBackground_52
     };
 }
 
 
 function getFirstChar(str) {
-    if (str.length === 0) return ''; 
-    return str.charAt(0).toUpperCase(); 
+    if (str.length === 0) return '';
+    return str.charAt(0).toUpperCase();
 }
