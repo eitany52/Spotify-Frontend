@@ -63,12 +63,6 @@ export function AppHeader({ backgroundColor = null }) {
     <header className="app-header" style={{ backgroundColor: backgroundColor }}>
       <>
         <section>
-          {/* <button className=" btn-back icon-type-1 big">
-              <SvgIcon iconName={"back"} />
-            </button>
-            <button className=" btn-forward icon-type-1 big">
-              <SvgIcon iconName={"forward"} />
-            </button> */}
           <button
             className="btn-back icon-type-1 big"
             onClick={() => navigate(-1)}

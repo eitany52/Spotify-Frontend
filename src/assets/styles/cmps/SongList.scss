@@ -15,6 +15,9 @@
 
 
     & .song-duration {
+      @include for-mobile-layout { 
+        visibility:hidden;
+      }
       &span {
         justify-self: end;
       }
@@ -30,14 +33,16 @@
 
     @include for-mobile-layout {
 
-      grid-template-columns: 0 1fr 0fr 0.3fr 0fr;
+      grid-template-columns: 0 1fr  0.1fr 0fr;
       // grid-template-columns: 0 1.2fr 0fr 0.1fr 0fr;
       padding: 5px 5px;
       & label:first-child  {display:none;}
       & label:nth-child(3)  {display:none;}
       & div:first-child .num {display:none;}
       & span.date {display:none;}
-      & span.add {display:none;}
+      // & span.add {display:none;}
+      & span.add {visibility:hidden;}
+
     }
   }
 
