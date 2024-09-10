@@ -1,6 +1,7 @@
 import { SongPreview } from "./SongPreview.jsx";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { SvgIcon } from "./SvgIcon.jsx";
+import { useScreenCategory } from "../customHooks/useBreakpoint.js";
 
 export const SongList = ({
   songs,
@@ -10,6 +11,8 @@ export const SongList = ({
   type,
   onDragEnd,
 }) => {
+  const screenCategory = useScreenCategory();
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="songs-list">
@@ -19,7 +22,9 @@ export const SongList = ({
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {type === "station" && songs.length ? (
+            {type === "station" &&
+            screenCategory !== "mobile" &&
+            songs.length ? (
               <li className="song-preview-station-grid">
                 <label>#</label>
                 <label>Title</label>

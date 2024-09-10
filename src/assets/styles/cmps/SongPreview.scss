@@ -70,7 +70,7 @@
 
   &.search-at-station {
     display: grid;
-    grid-template-columns: 2fr 1fr 0.5fr 0.2fr;
+    grid-template-columns: 2fr 1fr 0.5fr minmax(150px, 0.2fr);
     align-items: center;
     padding: 0 10px;
 
