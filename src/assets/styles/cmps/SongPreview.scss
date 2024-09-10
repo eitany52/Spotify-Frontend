@@ -111,8 +111,10 @@
     padding: 0 10px;
     margin: 4px 0;
 
-    
-
+    @include for-mobile-layout {
+      grid-template-columns: 2fr 0.2fr 0 0;
+    }
+     
 
     & .add {
       visibility: hidden;
