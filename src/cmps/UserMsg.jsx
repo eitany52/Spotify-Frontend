@@ -1,10 +1,5 @@
-import { eventBus, showSuccessMsg } from "../services/event-bus.service";
+import { eventBus } from "../services/event-bus.service";
 import { useState, useEffect, useRef } from "react";
-import {
-  socketService,
-  SOCKET_EVENT_REVIEW_ABOUT_YOU,
-} from "../services/socket.service";
-import { SvgIcon } from "./SvgIcon.jsx";
 
 export function UserMsg() {
   const [msg, setMsg] = useState(null);
@@ -21,13 +16,8 @@ export function UserMsg() {
       timeoutIdRef.current = setTimeout(closeMsg, 5000);
     });
 
-    socketService.on(SOCKET_EVENT_REVIEW_ABOUT_YOU, (review) => {
-      showSuccessMsg(`New review about me ${review.txt}`);
-    });
-
     return () => {
       unsubscribe();
-      socketService.off(SOCKET_EVENT_REVIEW_ABOUT_YOU);
     };
   }, []);
 
