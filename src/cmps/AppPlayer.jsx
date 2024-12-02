@@ -54,7 +54,7 @@ export const AppPlayer = () => {
         );
       }
     }, 1000);
-    return () => clearInterval(interval);
+    return () => clearInterval(interval)
   }, []);
 
   // const handleNextSong = () => {

@@ -237,10 +237,6 @@ export async function setPlayPause(ip) {
     }
 }
 
-
-
-
-
 export async function setIsShuffle(isShuffle) {
     try {
         // console.log('actions setIsShuffle:', isShuffle)
@@ -251,7 +247,6 @@ export async function setIsShuffle(isShuffle) {
     }
 }
 
-
 export async function setDisplayHideCard(cardStatus) {
     try {
         store.dispatch({ type: DISPLAY_HIDE_CARD, cardStatus })
@@ -260,8 +255,6 @@ export async function setDisplayHideCard(cardStatus) {
         throw err
     }
 }
-
-
 
 export async function setExpandLib(libStatus) {
     try {
@@ -293,141 +286,3 @@ export function getCmdUpdateStation(updatedStation) {
 export function formatSong(song) {
     return stationService.formatSong(song)
 }
-
-// export async function loadCars() {
-//     try {
-//         const cars = await stationService.query()
-//         console.log('Cars from DB:', cars)
-//         store.dispatch(getCmdSetCars(cars))
-//     } catch (err) {
-//         console.log('Cannot load cars', err)
-//         throw err
-//     }
-// }
-
-// export async function loadCar(carId) {
-//     try {
-//         const car = await stationService.getById(carId)
-//         console.log('Car from DB:', car)
-//         store.dispatch(getCmdSetCar(car))
-//     } catch (err) {
-//         console.log('Cannot load car', err)
-//         throw err
-//     }
-// }
-
-
-// export async function removeCar(carId) {
-//     try {
-//         await stationService.remove(carId)
-//         store.dispatch(getCmdRemoveCar(carId))
-//     } catch (err) {
-//         console.log('Cannot remove car', err)
-//         throw err
-//     }
-// }
-
-// export async function addCar(car) {
-//     try {
-//         const savedCar = await stationService.save(car)
-//         console.log('Added Car', savedCar)
-//         store.dispatch(getCmdAddCar(savedCar))
-//         return savedCar
-//     } catch (err) {
-//         console.log('Cannot add car', err)
-//         throw err
-//     }
-// }
-
-// export async function updateCar(car) {
-//     try {
-//         const savedCar = await stationService.save(car)
-//         console.log('Updated Car:', savedCar)
-//         store.dispatch(getCmdUpdateCar(savedCar))
-//         return savedCar
-//     } catch (err) {
-//         console.log('Cannot save car', err)
-//         throw err
-//     }
-// }
-
-// export async function addCarMsg(carId, txt) {
-//     try {
-//         const msg = await stationService.addCarMsg(carId, txt)
-//         console.log('Added Car message', msg)
-//         store.dispatch(getCmdAddCarMsg(msg))
-//         return msg
-//     } catch (err) {
-//         console.log('Cannot add car msg', err)
-//         throw err
-//     }
-// }
-
-// Command Creators:
-// function getCmdAddStation(station) {
-//     return {
-//         type: ADD_STATION,
-//         station
-//     }
-// }
-// function getCmdRemoveStation(stationId) {
-//     return {
-//         type: REMOVE_STATION,
-//         stationId
-//     }
-// }
-
-
-
-
-
-
-
-// function getCmdSetCars(cars) {
-//     return {
-//         type: SET_CARS,
-//         cars
-//     }
-// }
-// function getCmdSetCar(car) {
-//     return {
-//         type: SET_CAR,
-//         car
-//     }
-// }
-// function getCmdRemoveCar(carId) {
-//     return {
-//         type: REMOVE_CAR,
-//         carId
-//     }
-// }
-// function getCmdAddCar(car) {
-//     return {
-//         type: ADD_CAR,
-//         car
-//     }
-// }
-// function getCmdUpdateCar(car) {
-//     return {
-//         type: UPDATE_CAR,
-//         car
-//     }
-// }
-// function getCmdAddCarMsg(msg) {
-//     return {
-//         type: ADD_CAR_MSG,
-//         msg
-//     }
-// }
-
-// unitTestActions()
-// async function unitTestActions() {
-//     await loadCars()
-//     await addCar(stationService.getEmptyCar())
-//     await updateCar({
-//         _id: 'm1oC7',
-//         title: 'Car-Good',
-//     })
-//     await removeCar('m1oC7')
-//     // TODO unit test addCarMsg
-// }

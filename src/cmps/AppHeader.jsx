@@ -1,12 +1,7 @@
-import { Link, NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
-import { login, logout, signup } from "../store/actions/user.actions";
 import { utilService } from "../services/util.service.js";
-
-import { LoginSignup } from "../pages/LoginSignup.jsx";
 import { SvgIcon } from "../cmps/SvgIcon";
 import { AppSearch } from "../cmps/AppSearch";
 import { onToggleModal } from "../store/actions/app.actions.js";
