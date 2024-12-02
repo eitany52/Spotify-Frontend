@@ -14,19 +14,11 @@
 
 // Views
 @import "views/StationIndex";
-@import "views/AboutUs";
-@import "views/CarIndex";
-@import "views/ReviewIndex";
-@import "views/BoardIndex";
-@import "views/BoardDetails";
-@import "views/TaskDetails";
 @import "views/LoginSignup.scss";
-// @import "views/HomePage";
 
 // Components
 @import "cmps/UserDetails";
 @import "cmps/AppHeader";
-@import "cmps/AppFooter";
 @import "cmps/UserMsg";
 @import "cmps/StationPreview";
 @import "cmps/StationDetails";

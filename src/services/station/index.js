@@ -148,29 +148,6 @@ function getSubstringBeforePipe(str) {
     return str.substring(0, pipeIndex);
 }
 
-
-
-
-
-
-// function getDefaultFilter() {
-//     return { pageIdx: '', txt: '', severity: '' , labels: '', sortBy: '', sortDir: ''}
-// }
-
-
-// function getDefaultFilterSrcPrms(searchParams) {
-//     return {
-//         //pageIdx: searchParams.get('pageIdx') || '',
-//         txt: searchParams.get('txt') || '',
-//         severity: searchParams.get('severity') || '',
-//         labels:  searchParams.get('labels') || '',
-//         sortBy: searchParams.get('sortBy') || '',
-//         sortDir: searchParams.get('sortDir') || '',
-//         pageIdx: searchParams.get('pageIdx') ? +searchParams.get('pageIdx') : undefined
-//     }
-// }
-
-
 const service = VITE_LOCAL === 'true' ? local : remote
 
 export const stationService = {

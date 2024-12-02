@@ -1,7 +1,4 @@
-
-// import { storageService } from './async-storage.service'
 import { httpService } from '../http.service'
-import { utilService } from '../util.service'
 import { getLoggedInUser } from '../../store/actions/user.actions'
 
 export const stationService = {
@@ -10,14 +7,11 @@ export const stationService = {
     save,
     remove,
     addSongToStation,
-    // updateStationDetails,
     getUserLikedSongs,
     removeSongFromStation,
     addStationToLibrary,
     removeStationFromLibrary
     // reorderSongInStation,
-    // getEmptyCar,
-    // addCarMsg
 }
 window.ss = stationService
 
@@ -58,7 +52,7 @@ async function addSongToStation(stationId, song) {
         id: getLoggedInUser()._id,
         name: getLoggedInUser().name
     }
-    
+
     song.addedAt = Date.now()
     song.addedBy = user
     station.songs.push(song)
@@ -66,23 +60,6 @@ async function addSongToStation(stationId, song) {
 
     return station
 }
-
-
-// async function updateStationDetails(stationToSave) {
-
-//     // const station = await getById(stationToSave._id)
-
-//     // station.name = stationToSave.name;
-//     // station.description = stationToSave.description;
-//     // station.imgUrl = stationToSave.imgUrl;
-
-//     // Object.assign(station, stationToSave);
-
-//     await save(stationToSave)
-
-//     return stationToSave
-
-// }
 
 async function getUserLikedSongs() {
     const userLikedSongs = await httpService.get('station/user-liked-songs')
@@ -127,29 +104,6 @@ async function removeStationFromLibrary(station) {
     const removedStation = await save(stationToRemove, true)
     return removedStation
 }
-
-
-async function isLikedSongStation(stationId) {
-    const station = await getById(stationId)
-    const islikedSongsStation = (station.type === 'liked')
-    return islikedSongsStation
-}
-
-
-async function addCarMsg(carId, txt) {
-    const savedMsg = await httpService.post(`car/${carId}/msg`, { txt })
-    return savedMsg
-}
-
-
-function getEmptyCar() {
-    return {
-        vendor: 'Susita-' + utilService.makeId(),
-        price: utilService.getRandomIntInclusive(1000, 9000),
-        msgs: []
-    }
-}
-
 
 
 

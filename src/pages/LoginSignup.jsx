@@ -3,7 +3,7 @@ import { userService } from "../services/user.service"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import { useNavigate, useParams } from "react-router"
 import { login, signup } from "../store/actions/user.actions"
-import { AllIcons, SvgIcon } from "../cmps/SvgIcon"
+import { SvgIcon } from "../cmps/SvgIcon"
 import { Link } from "react-router-dom"
 
 export const LoginSignup = () => {

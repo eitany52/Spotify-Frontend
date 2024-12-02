@@ -92,31 +92,3 @@ export function stationReducer(state = initialState, action) {
     }
     return newState
 }
-
-// unitTestReducer()
-
-// function unitTestReducer() {
-//     var state = initialState
-//     const car1 = { _id: 'b101', vendor: 'Car ' + parseInt(Math.random() * 10), msgs: [] }
-//     const car2 = { _id: 'b102', vendor: 'Car ' + parseInt(Math.random() * 10), msgs: [] }
-
-//     state = carReducer(state, { type: SET_CARS, cars: [car1] })
-//     console.log('After SET_CARS:', state)
-
-//     state = carReducer(state, { type: ADD_CAR, car: car2 })
-//     console.log('After ADD_CAR:', state)
-
-//     state = carReducer(state, { type: UPDATE_CAR, car: { ...car2, vendor: 'Good' } })
-//     console.log('After UPDATE_CAR:', state)
-
-//     state = carReducer(state, { type: REMOVE_CAR, carId: car2._id })
-//     console.log('After REMOVE_CAR:', state)
-
-//     const msg = { id: 'm' + parseInt(Math.random() * 100), txt: 'Some msg' }
-//     state = carReducer(state, { type: ADD_CAR_MSG, carId: car1._id, msg })
-//     console.log('After ADD_CAR_MSG:', state)
-
-//     state = carReducer(state, { type: REMOVE_CAR, carId: car1._id })
-//     console.log('After REMOVE_CAR:', state)
-// }
-
