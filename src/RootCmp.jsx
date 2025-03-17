@@ -6,9 +6,7 @@ import { SearchResult } from "./cmps/SearchResult.jsx";
 import { DynamicModal } from "./cmps/DynamicModal";
 import { UserMsg } from "./cmps/UserMsg.jsx";
 import { LoginSignup } from "./pages/LoginSignup.jsx";
-import { ArtistDetails } from "./cmps/ArtistDetails";
-
-// Checked - All looks good.
+// import { ArtistDetails } from "./cmps/ArtistDetails";
 
 export function RootCmp() {
   return (

@@ -1,9 +1,9 @@
-import { createStore, combineReducers } from 'redux'
+import { legacy_createStore as createStore, combineReducers } from 'redux'
 
 import { stationReducer } from './reducers/station.reducer'
 import { userReducer } from './reducers/user.reducer'
 import { appReducer } from './reducers/app.reducer'
-import { systemReducer } from './reducers/system.reducer'
+// import { systemReducer } from './reducers/system.reducer'
 
 const rootReducer = combineReducers({
     stationModule: stationReducer,

@@ -1,11 +1,11 @@
-import { userService } from '../../services/user.service'
+import { userService } from '../../services/user.service.remote.js'
 import { socketService } from '../../services/socket.service'
 import { store } from '../store'
 
 import { showErrorMsg } from '../../services/event-bus.service'
-import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
 import { REMOVE_USER, SET_USER, SET_USERS, SET_WATCHED_USER } from '../reducers/user.reducer'
-import { SET_LIKED_SONGS_STATION, SET_STATION, SET_STATIONS } from '../reducers/station.reducer'
+import { SET_LIKED_SONGS_STATION, SET_STATIONS } from '../reducers/station.reducer'
+// import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
 
 export async function loadUsers() {
     try {

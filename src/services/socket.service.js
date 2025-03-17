@@ -1,5 +1,5 @@
 import io from 'socket.io-client'
-import { userService } from './user.service'
+import { userService } from './user.service.remote.js'
 
 export const SOCKET_EVENT_STATION_SAVED = 'station-saved'
 export const SOCKET_EVENT_STATION_UPDATED = 'station-updated'

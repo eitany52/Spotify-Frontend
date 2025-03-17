@@ -13,14 +13,14 @@ import {
   setPlayPause,
   setNewSongOrder,
   resetStation,
-  updateStationDetails,
+  // updateStationDetails,
   getCmdSetStation,
   getCmdUpdateHomeStation,
   getCmdUpdateStation,
 } from "../store/actions/station.actions.js";
 
 import { utilService } from "../services/util.service.js";
-import { SvgIcon, AllIcons } from "./SvgIcon.jsx";
+import { SvgIcon } from "./SvgIcon.jsx";
 import { AppSearch } from "./AppSearch.jsx";
 import { SongList } from "./SongList.jsx";
 import { AppHeader } from "../cmps/AppHeader";
@@ -137,9 +137,9 @@ export function StationDetails() {
     let isSongAdded = false;
     try {
       if (isSongSavedAtCurrentStation(song)) {
-        await removeSongFromStation(station._id, song.id, station._id);
+        await removeSongFromStation(station, song.id, station._id);
       } else {
-        await addSongToStation(station._id, song, station._id);
+        await addSongToStation(station, song, station._id);
         isSongAdded = true;
       }
       showSuccessMsg(

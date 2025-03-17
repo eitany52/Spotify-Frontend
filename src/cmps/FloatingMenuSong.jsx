@@ -22,7 +22,7 @@ export const FloatingMenuSong = ({ onDone, song }) => {
   function onRemoveSongFromStation() {
     onDone();
     try {
-      removeSongFromStation(currentStation._id, song.id, currentStation._id);
+      removeSongFromStation(currentStation, song.id, currentStation._id);
     } catch (err) {
       console.log("Having issues with removing song from station", err);
       showErrorMsg("Failed to Remove song");
@@ -42,9 +42,9 @@ export const FloatingMenuSong = ({ onDone, song }) => {
     let isSongAdded = false; // is song added or removed from liked songs station
     try {
       if (isSongSavedAtLikedSongs()) {
-        await removeSongFromStation(likedSongsStation._id, song.id, currentStation?._id);
+        await removeSongFromStation(likedSongsStation, song.id, currentStation?._id);
       } else {
-        await addSongToStation(likedSongsStation._id, song);
+        await addSongToStation(likedSongsStation, song);
         isSongAdded = true;
       }
       showSuccessMsg(
@@ -63,7 +63,7 @@ export const FloatingMenuSong = ({ onDone, song }) => {
     onDone();
     try {
       if (!isSongSavedAtStation(station, song.id)) {
-        await addSongToStation(station._id, song)
+        await addSongToStation(station, song)
         showSuccessMsg(`Added to ${station.name}`);
       } else {
         showErrorMsg(

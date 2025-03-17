@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import {
+  addSongToMultipleStations,
   addSongToStation,
   getUserStations,
   isSongSavedAtStation,
-  removeSongFromStation,
+  removeSongFromMultipleStations,
+  removeSongFromStation
 } from "../store/actions/station.actions.js";
 import { StationList } from "./StationList.jsx";
 import { useSelector } from "react-redux";
@@ -37,6 +39,12 @@ export const FloatingMenuSongAdd = ({ song, onDone }) => {
     } else {
       markStation(station)
     }
+    // If the user clicked the same station twice then we want to reset the change
+    if (isStationIncluded(stationsToAddSong, station._id) &&
+      isStationIncluded(stationsToRemoveSong, station._id)) {
+      removeStation(setStationsToAddSong, station._id)
+      removeStation(setStationsToRemoveSong, station._id)
+    }
   }
 
   function isStationIncluded(stations, stationId) {
@@ -55,39 +63,41 @@ export const FloatingMenuSongAdd = ({ song, onDone }) => {
 
   function unMarkStation(station) {
     removeStation(setStationsToMark, station._id)
-    if (isStationIncluded(stationsToAddSong, station._id)) {
-      removeStation(setStationsToAddSong, station._id)
-    } else {
-      addStation(setStationsToRemoveSong, station)
-    }
+    addStation(setStationsToRemoveSong, station)
   }
 
   function markStation(station) {
     addStation(setStationsToMark, station)
-    if (isStationIncluded(stationsToRemoveSong, station._id)) {
-      removeStation(setStationsToRemoveSong, station._id)
-    } else {
-      addStation(setStationsToAddSong, station)
-    }
+    addStation(setStationsToAddSong, station)
   }
 
   async function onSaveChanges(ev) {
     ev.preventDefault()
     onDone()
     try {
-      for (const station of stationsToAddSong) {
-        await addSongToStation(station._id, song)
-      }
-
-      for (const station of stationsToRemoveSong) {
-        await removeSongFromStation(station._id, song.id, currentStation?._id)
-      }
-
+      await handleStations(stationsToAddSong,
+        addSongToStation,
+        addSongToMultipleStations,
+        song)
+      await handleStations(stationsToRemoveSong,
+        removeSongFromStation,
+        removeSongFromMultipleStations,
+        song.id,
+        currentStation?._id)
       showSuccessMsg("Changes saved")
     } catch (err) {
       console.log("Having issues with adding/removing song", err)
       showErrorMsg("Failed to save changes")
     }
+  }
+
+  async function handleStations(stations,
+    handleSingleStation,
+    handleMultipleStations, ...args) {
+    if (stations.length === 1)
+      await handleSingleStation(stations[0], ...args)
+    else if (stations.length > 1)
+      await handleMultipleStations(stations, ...args)
   }
 
   function isStationToMark(stationId) {

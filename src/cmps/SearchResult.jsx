@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useOutletContext, useParams } from "react-router";
-import { getSongsFromYoutube } from "../store/actions/station.actions";
+import { getSongsFromYoutube } from "../store/actions/youtube.actions";
 import { useEffectUpdate } from "../customHooks/useEffectUpdate";
 import { SongList } from "./SongList";
 import { StationList } from "./StationList";
-// import { stationService } from "../services/station";
 import { showErrorMsg } from "../services/event-bus.service";
 import { useSelector } from "react-redux";
 import { useScreenCategory } from "../customHooks/useBreakpoint";
+// import { stationService } from "../services/station";
 
 export const SearchResult = () => {
   const params = useParams();

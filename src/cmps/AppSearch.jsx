@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { SvgIcon } from "./SvgIcon";
 import { useLocation, useNavigate } from "react-router";
-import { getSongsFromYoutube } from "../store/actions/station.actions";
+import { getSongsFromYoutube } from "../store/actions/youtube.actions";
 import { SongList } from "./SongList";
 
 export const AppSearch = ({ onAddToStation, isSongSavedAtStation }) => {
