@@ -1,8 +1,7 @@
 import { stationService } from '../../services/station'
 import { store } from '../store'
-import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
 import { ADD_STATION, REMOVE_STATION, UPDATE_STATION, SET_STATION, SET_STATIONS, SET_CURRENT_SONG, SET_PLAY_PAUSE, SET_SHUFFLE, DISPLAY_HIDE_CARD, SET_LIKED_SONGS_STATION, EXPEND_LIB, UNDO_UPDATE_STATION, SET_HOME_STATIONS, UPDATE_HOME_STATION } from '../reducers/station.reducer'
-import { getLoggedInUser } from './user.actions'
+// import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
 
 export async function loadLibraryStations(filterBy) {
     try {
@@ -40,10 +39,6 @@ export async function loadStation(stationId) {
     }
 }
 
-export function getSongsFromYoutube(userInput, location) {
-    return stationService.getSongsFromYoutube(userInput, location)
-}
-
 export async function createEmptyStation() {
     try {
         const station = stationService.createEmptyStation()
@@ -72,7 +67,6 @@ export async function loadLikedSongsStation() {
 export async function addStation(station) {
     try {
         const savedStation = await stationService.save(station)
-        console.log('Added Station', savedStation)
         store.dispatch({ type: ADD_STATION, savedStation })
         return savedStation
     } catch (err) {
@@ -133,9 +127,9 @@ export function isSongSavedAtSomeStation(stations, songId) {
     return stationService.isSongSavedAtSomeStation(stations, songId)
 }
 
-export async function addSongToStation(stationId, song, currentStationId) {
+export async function addSongToStation(station, song, currentStationId) {
     try {
-        const updatedStation = await stationService.addSongToStation(stationId, song)
+        const updatedStation = await stationService.addSongToStation(station, song)
         store.dispatch({ type: UPDATE_STATION, updatedStation })
         handleLikedSongsStationUpdate(updatedStation)
         handleCurrentStationUpdate(updatedStation, currentStationId)
@@ -145,12 +139,24 @@ export async function addSongToStation(stationId, song, currentStationId) {
     }
 }
 
+export async function addSongToMultipleStations(stations, song) {
+    try {
+        const updatedStations = await stationService.addSongToMultipleStations(stations, song)
+        updatedStations.forEach(updatedStation => {
+            store.dispatch({ type: UPDATE_STATION, updatedStation })
+            handleLikedSongsStationUpdate(updatedStation)
+        });
+    } catch (err) {
+        console.log("Cannot add song to stations", err);
+        throw err
+    }
+}
+
 function handleLikedSongsStationUpdate(updatedStation) {
     if (updatedStation.type === "liked") {
         store.dispatch({ type: SET_LIKED_SONGS_STATION, likedSongsStation: updatedStation })
     }
 }
-
 
 export async function setNewSongOrder(station, songs) {
     try {
@@ -168,14 +174,28 @@ export function updateStation(updatedStation) {
     store.dispatch({ type: UPDATE_STATION, updatedStation })
 }
 
-export async function removeSongFromStation(stationId, songId, currentStationId) {
+export async function removeSongFromStation(station, songId, currentStationId) {
     try {
-        const updatedStation = await stationService.removeSongFromStation(stationId, songId)
+        const updatedStation = await stationService.removeSongFromStation(station, songId)
         store.dispatch({ type: UPDATE_STATION, updatedStation })
         handleLikedSongsStationUpdate(updatedStation);
         handleCurrentStationUpdate(updatedStation, currentStationId)
     } catch (err) {
         console.log('Cannot remove song from station', err)
+        throw err
+    }
+}
+
+export async function removeSongFromMultipleStations(stations, songId, currentStationId) {
+    try {
+        const updatedStations = await stationService.removeSongFromMultipleStations(stations, songId)
+        updatedStations.forEach(updatedStation => {
+            store.dispatch({ type: UPDATE_STATION, updatedStation })
+            handleLikedSongsStationUpdate(updatedStation)
+            handleCurrentStationUpdate(updatedStation, currentStationId)
+        });
+    } catch (err) {
+        console.log("Cannot remove song from stations", err);
         throw err
     }
 }
@@ -189,7 +209,6 @@ export async function addUserLikedToStation(stationId, userId) {
         throw err
     }
 }
-
 
 export async function removeUserLikedFromStation(stationId, userId) {
     try {

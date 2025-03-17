@@ -13,16 +13,6 @@ export const DISPLAY_HIDE_CARD = 'DISPLAY_HIDE_CARD'
 export const EXPEND_LIB = 'EXPEND_LIB'
 export const UNDO_UPDATE_STATION = 'UNDO_UPDATE_STATION'
 
-
-//Checked - All looks good.
-
-
-// export const SET_CARS = 'SET_CARS'
-// export const UPDATE_CAR = 'UPDATE_CAR'
-// export const ADD_CAR_MSG = 'ADD_CAR_MSG'
-
-
-
 const initialState = {
     stations: [],
     homeStations: [],

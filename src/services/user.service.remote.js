@@ -1,9 +1,6 @@
-import { storageService } from './async-storage.service'
 import { httpService } from './http.service'
-import { utilService } from './util.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedInUser'
-// const STORAGE_KEY_LOGEDON_USER = 'logedon_user'
 
 export const userService = {
     login,
@@ -114,17 +111,3 @@ function getEmptyCredentials() {
         }
     )
 }
-
-
-// function getLoggedInUser() {
-//     return utilService.loadFromStorage(STORAGE_KEY_LOGEDON_USER)
-// }
-
-// ;(async ()=>{
-//     await userService.signup({fullname: 'Puki Norma', username: 'puki', password:'123',score: 10000, isAdmin: false})
-//     await userService.signup({fullname: 'Master Adminov', username: 'admin', password:'123', score: 10000, isAdmin: true})
-//     await userService.signup({fullname: 'Muki G', username: 'muki', password:'123', score: 10000})
-// })()
-
-
-
